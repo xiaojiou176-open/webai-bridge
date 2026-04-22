@@ -1,0 +1,16 @@
+title = "repo gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Don't trip on rendered hash files or repo-internal lockfiles"
+paths = [
+  '''docs/_generated/render_state\.json''',
+  '''.*\.lock$''',
+  '''package-lock\.json$''',
+  '''pnpm-lock\.yaml$''',
+  '''uv\.lock$''',
+  '''Cargo\.lock$''',
+  '''.*\.snap$''',
+]
