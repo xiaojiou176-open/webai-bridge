@@ -29,14 +29,14 @@ describe("Gemini BYOK live-proof branches", () => {
     );
 
     const result = await runGeminiLiveProof({
-      SWITCHYARD_GEMINI_API_KEY: "test-gemini-key",
+      WEBAI_BRIDGE_GEMINI_API_KEY: "test-gemini-key",
     });
 
     expect(result).toEqual(
       expect.objectContaining({
         status: "failure",
         reason: "invoke-failed",
-        envNameUsed: "SWITCHYARD_GEMINI_API_KEY",
+        envNameUsed: "WEBAI_BRIDGE_GEMINI_API_KEY",
         requestUrl: expect.stringContaining("key=%3Credacted%3E"),
       }),
     );
@@ -51,7 +51,7 @@ describe("Gemini BYOK live-proof branches", () => {
             candidates: [
               {
                 content: {
-                  parts: [{ text: "SWITCHYARD_GEMINI_LIVE_OK" }],
+                  parts: [{ text: "WEBAI_BRIDGE_GEMINI_LIVE_OK" }],
                 },
               },
             ],
@@ -67,20 +67,20 @@ describe("Gemini BYOK live-proof branches", () => {
     );
 
     const result = await runGeminiLiveProof({
-      SWITCHYARD_GEMINI_API_KEY: "test-gemini-key",
-      SWITCHYARD_GEMINI_BASE_URL: "https://proxy.internal",
+      WEBAI_BRIDGE_GEMINI_API_KEY: "test-gemini-key",
+      WEBAI_BRIDGE_GEMINI_BASE_URL: "https://proxy.internal",
     });
 
     expect(result).toEqual(
       expect.objectContaining({
         status: "success",
-        envNameUsed: "SWITCHYARD_GEMINI_API_KEY",
+        envNameUsed: "WEBAI_BRIDGE_GEMINI_API_KEY",
         baseUrl: "https://proxy.internal",
         baseUrlSource: "env",
-        baseUrlEnvName: "SWITCHYARD_GEMINI_BASE_URL",
+        baseUrlEnvName: "WEBAI_BRIDGE_GEMINI_BASE_URL",
         requestUrl:
           "https://proxy.internal/models/gemini-2.5-flash:generateContent?key=%3Credacted%3E",
-        responseText: "SWITCHYARD_GEMINI_LIVE_OK",
+        responseText: "WEBAI_BRIDGE_GEMINI_LIVE_OK",
       }),
     );
   });
@@ -101,7 +101,7 @@ describe("Gemini BYOK live-proof branches", () => {
       } as never);
 
     const result = await runGeminiLiveProof({
-      SWITCHYARD_GEMINI_API_KEY: "test-gemini-key",
+      WEBAI_BRIDGE_GEMINI_API_KEY: "test-gemini-key",
     });
 
     expect(result).toEqual(
@@ -136,7 +136,7 @@ describe("Gemini BYOK live-proof branches", () => {
 
     try {
       const result = await runGeminiLiveProof({
-        SWITCHYARD_GEMINI_API_KEY: "test-gemini-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "test-gemini-key",
       });
 
       expect(result).toEqual(
@@ -173,7 +173,7 @@ describe("Gemini BYOK live-proof branches", () => {
 
     try {
       const result = await runGeminiLiveProof({
-        SWITCHYARD_GEMINI_API_KEY: "test-gemini-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "test-gemini-key",
       });
 
       expect(result).toEqual(

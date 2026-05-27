@@ -1,12 +1,12 @@
 import {
-  createSwitchyardService,
-  type SwitchyardServiceOptions,
+  createWebaiBridgeService,
+  type WebaiBridgeServiceOptions,
 } from "../../../apps/service/src/index.js";
 
 const ISOLATED_E2E_RUNTIME_ENV: Record<string, string | undefined> = {
   OPENAI_API_KEY: undefined,
   ANTHROPIC_API_KEY: undefined,
-  SWITCHYARD_GEMINI_API_KEY: undefined,
+  WEBAI_BRIDGE_GEMINI_API_KEY: undefined,
   GEMINI_API_KEY: undefined,
   GOOGLE_API_KEY: undefined,
   XAI_API_KEY: undefined,
@@ -25,11 +25,11 @@ const ISOLATED_E2E_RUNTIME_ENV: Record<string, string | undefined> = {
   AWS_BEDROCK_BASE_URL: undefined,
 };
 
-const PORT_STATE_KEY = "__switchyardE2ePortState";
+const PORT_STATE_KEY = "__webai_bridgeE2ePortState";
 const E2E_PORT_BASE = 38_080;
 const E2E_PORT_BLOCK_SIZE = 200;
-const E2E_URL_PREFIX = "switchyard-e2e://service-";
-const inMemoryServices = new Map<string, ReturnType<typeof createSwitchyardService>>();
+const E2E_URL_PREFIX = "webai-bridge-e2e://service-";
+const inMemoryServices = new Map<string, ReturnType<typeof createWebaiBridgeService>>();
 
 function resolveWorkerOffset(): number {
   const rawValue =
@@ -62,8 +62,8 @@ function allocateE2EServicePort(): number {
   return port;
 }
 
-export function startSwitchyardE2EService(
-  options: SwitchyardServiceOptions = {},
+export function startWebaiBridgeE2EService(
+  options: WebaiBridgeServiceOptions = {},
 ) {
   const {
     runtimeEnv,
@@ -73,7 +73,7 @@ export function startSwitchyardE2EService(
   } = options;
   const port = options.port ?? allocateE2EServicePort();
   const baseUrl = `${E2E_URL_PREFIX}${port}`;
-  const service = createSwitchyardService({
+  const service = createWebaiBridgeService({
     ...rest,
     useLocalWebAuthStore: useLocalWebAuthStore ?? false,
     runtimeEnv: {
@@ -106,7 +106,7 @@ export function resolveInMemoryE2EService(url: string) {
   const service = inMemoryServices.get(baseUrl);
 
   if (!service) {
-    throw new Error(`No in-memory Switchyard E2E service registered for ${baseUrl}.`);
+    throw new Error(`No in-memory WebaiBridge E2E service registered for ${baseUrl}.`);
   }
 
   return {

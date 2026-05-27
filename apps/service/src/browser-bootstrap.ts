@@ -5,21 +5,21 @@ import { fileURLToPath } from "node:url";
 
 import type { WebProviderId } from "../../../packages/lanes/web/src/index.js";
 
-export const SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
-export const SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
-export const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
-export const SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME =
-  "SWITCHYARD_CHROME_USER_DATA_DIR";
-export const SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME =
-  "SWITCHYARD_CHROME_PROFILE_NAME";
-export const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR";
-export const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-export const SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL = "http://127.0.0.1:9338";
-export const SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL";
-export const SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE = "isolated-chrome-root";
+export const WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
+export const WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
+export const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
+export const WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_CHROME_USER_DATA_DIR";
+export const WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME =
+  "WEBAI_BRIDGE_CHROME_PROFILE_NAME";
+export const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR";
+export const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+export const WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL = "http://127.0.0.1:9338";
+export const WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL";
+export const WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE = "isolated-chrome-root";
 export const LEGACY_EXISTING_CHROME_PROFILE_MODE = "existing-chrome-profile";
 export const DEFAULT_ISOLATED_CHROME_PROFILE_DIRECTORY = "Profile 1";
 
@@ -101,12 +101,12 @@ export function normalizeWebAuthBrowserBootstrapMode(
     return value;
   }
 
-  if (value === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (value === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     return value;
   }
 
   if (value === LEGACY_EXISTING_CHROME_PROFILE_MODE) {
-    return SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE;
+    return WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE;
   }
 
   return undefined;
@@ -124,10 +124,10 @@ export function resolveConfiguredExistingChromeProfile(
   env: Record<string, string | undefined> = process.env,
 ): ExistingChromeProfileAttachOptions | undefined {
   const userDataDir =
-    env[SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME]?.trim() ||
-    env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME]?.trim();
+    env[WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME]?.trim();
   const profileName =
-    env[SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME]?.trim() || "switchyard";
+    env[WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME]?.trim() || "webai-bridge";
 
   if (!userDataDir) {
     return undefined;
@@ -170,7 +170,7 @@ function resolveBootstrapScriptPath(): string {
   }
 
   throw new Error(
-    "Switchyard could not locate scripts/bootstrap-web-auth-browser.mjs from the current runtime context.",
+    "WebaiBridge could not locate scripts/bootstrap-web-auth-browser.mjs from the current runtime context.",
   );
 }
 
@@ -244,7 +244,7 @@ export async function bootstrapLocalWebAuthBrowser(
       payload?.error?.message ||
         stderr ||
         stdout ||
-        `Switchyard failed to prepare the local onboarding browser for ${args.provider}.`,
+        `WebaiBridge failed to prepare the local onboarding browser for ${args.provider}.`,
     ) as WebAuthBrowserBootstrapFailure;
     error.code = payload?.error?.code;
     throw error;

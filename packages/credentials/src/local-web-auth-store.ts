@@ -12,7 +12,7 @@ import {
 } from "./model.js";
 import type { CredentialHealthFacts, CredentialState } from "./state.js";
 
-export const LOCAL_WEB_AUTH_STORE_ENV_NAME = "SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH";
+export const LOCAL_WEB_AUTH_STORE_ENV_NAME = "WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH";
 
 export type StoredWebArtifactState = "present" | "missing" | "derived";
 
@@ -94,16 +94,16 @@ export interface LocalWebAuthStore {
 }
 
 const STORED_RUNTIME_ROUTING_ENV_NAMES = new Set([
-  "SWITCHYARD_BROWSER_MODE",
-  "SWITCHYARD_CHROME_USER_DATA_DIR",
-  "SWITCHYARD_CHROME_PROFILE_NAME",
-  "SWITCHYARD_WEB_AUTH_ACTIVE_MODE",
-  "SWITCHYARD_WEB_AUTH_CDP_URL",
-  "SWITCHYARD_WEB_AUTH_USER_DATA_DIR",
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR",
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL",
-  "SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL",
-  "SWITCHYARD_WEB_GEMINI_CDP_URL",
+  "WEBAI_BRIDGE_BROWSER_MODE",
+  "WEBAI_BRIDGE_CHROME_USER_DATA_DIR",
+  "WEBAI_BRIDGE_CHROME_PROFILE_NAME",
+  "WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE",
+  "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
+  "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR",
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR",
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL",
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL",
+  "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
 ]);
 
 function shouldLoadStoredRuntimeEnvName(name: string): boolean {
@@ -158,7 +158,7 @@ export function resolveLocalWebAuthStorePath(
 
   if (!isPathInsideRoot(runtimeCacheRoot, resolvedPath)) {
     throw new Error(
-      `Switchyard local web auth store must stay inside ${runtimeCacheRoot}. Refusing ${resolvedPath}.`,
+      `WebaiBridge local web auth store must stay inside ${runtimeCacheRoot}. Refusing ${resolvedPath}.`,
     );
   }
 

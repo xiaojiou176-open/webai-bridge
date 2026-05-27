@@ -12,7 +12,7 @@ export function parseCliArgs(
   json: boolean;
 };
 
-export function runSwitchyardCli(
+export function runWebaiBridgeCli(
   options: {
     command?: string;
     provider?: string;

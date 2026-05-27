@@ -9,8 +9,8 @@ afterEach(() => {
 
 describe("Web real transport execution", () => {
   it("executes the ChatGPT real transport path with browser session materials", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -47,7 +47,7 @@ describe("Web real transport execution", () => {
       .mockResolvedValueOnce(
         new Response(
           [
-            'data: {"message":{"content":{"parts":["Switchyard ChatGPT real transport ok."]}}}',
+            'data: {"message":{"content":{"parts":["WebaiBridge ChatGPT real transport ok."]}}}',
             "data: [DONE]",
           ].join("\n"),
           {
@@ -66,7 +66,7 @@ describe("Web real transport execution", () => {
       {
         provider: "chatgpt",
         model: "gpt-4o",
-        input: "hello from switchyard",
+        input: "hello from webai-bridge",
       },
       {
         sessions: {
@@ -119,13 +119,13 @@ describe("Web real transport execution", () => {
         method: "POST",
       }),
     );
-    expect(result.outputText).toContain("Switchyard ChatGPT real transport ok.");
+    expect(result.outputText).toContain("WebaiBridge ChatGPT real transport ok.");
     expect(result.invoke.kind).toBe("real-transport");
   });
 
   it("falls back to ChatGPT browser DOM transport when the upstream auth token is invalidated", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -225,8 +225,8 @@ describe("Web real transport execution", () => {
   });
 
   it("normalizes ChatGPT SSE output down to the requested sentinel token", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -305,8 +305,8 @@ describe("Web real transport execution", () => {
 
   it("falls back to ChatGPT browser DOM transport when the HTTP transport stalls", async () => {
     vi.useFakeTimers();
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi.fn<typeof fetch>().mockImplementation(
       () => new Promise<Response>(() => undefined),
@@ -362,8 +362,8 @@ describe("Web real transport execution", () => {
           message: "Reply with exactly CHATGPT_OK_TIMEOUT and nothing else.",
         },
         expect.objectContaining({
-          SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=abc",
-          SWITCHYARD_WEB_CHATGPT_USER_AGENT: "SwitchyardTest/1.0",
+          WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=abc",
+          WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "WebaiBridgeTest/1.0",
         }),
       );
     } finally {
@@ -372,8 +372,8 @@ describe("Web real transport execution", () => {
   });
 
   it("executes the Claude real transport path with browser session materials", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE", "sessionKey=abc; anthropic-device-id=device-1");
-    vi.stubEnv("SWITCHYARD_WEB_CLAUDE_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE", "sessionKey=abc; anthropic-device-id=device-1");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -398,7 +398,7 @@ describe("Web real transport execution", () => {
       .mockResolvedValueOnce(
         new Response(
           [
-            'data: {"completion":"Switchyard Claude real transport ok."}',
+            'data: {"completion":"WebaiBridge Claude real transport ok."}',
             "data: [DONE]",
           ].join("\n"),
           {
@@ -417,7 +417,7 @@ describe("Web real transport execution", () => {
       {
         provider: "claude",
         model: "claude-sonnet-4-6",
-        input: "hello from switchyard",
+        input: "hello from webai-bridge",
       },
       {
         sessions: {
@@ -442,15 +442,15 @@ describe("Web real transport execution", () => {
         method: "GET",
       }),
     );
-    expect(result.outputText).toContain("Switchyard Claude real transport ok.");
+    expect(result.outputText).toContain("WebaiBridge Claude real transport ok.");
     expect(result.invoke.kind).toBe("real-transport");
   });
 
   it("executes the Grok and Qwen real transport paths with browser session materials", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE", "qwen_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE", "qwen_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -466,7 +466,7 @@ describe("Web real transport execution", () => {
       .mockResolvedValueOnce(
         new Response(
           [
-            'data: {"text":"Switchyard Grok real transport ok."}',
+            'data: {"text":"WebaiBridge Grok real transport ok."}',
             "data: [DONE]",
           ].join("\n"),
           {
@@ -487,7 +487,7 @@ describe("Web real transport execution", () => {
       .mockResolvedValueOnce(
         new Response(
           [
-            'data: {"text":"Switchyard Qwen real transport ok."}',
+            'data: {"text":"WebaiBridge Qwen real transport ok."}',
             "data: [DONE]",
           ].join("\n"),
           {
@@ -540,12 +540,12 @@ describe("Web real transport execution", () => {
     expect(qwenResult.ok).toBe(true);
 
     if (grokResult.ok) {
-      expect(grokResult.outputText).toContain("Switchyard Grok real transport ok.");
+      expect(grokResult.outputText).toContain("WebaiBridge Grok real transport ok.");
       expect(grokResult.invoke.kind).toBe("real-transport");
     }
 
     if (qwenResult.ok) {
-      expect(qwenResult.outputText).toContain("Switchyard Qwen real transport ok.");
+      expect(qwenResult.outputText).toContain("WebaiBridge Qwen real transport ok.");
       expect(qwenResult.invoke.kind).toBe("real-transport");
     }
 
@@ -566,8 +566,8 @@ describe("Web real transport execution", () => {
   });
 
   it("falls back to the Grok browser DOM transport when the HTTP transport stalls", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const invokeGrokTransport = vi
       .fn()
@@ -635,15 +635,15 @@ describe("Web real transport execution", () => {
         signal: expect.any(AbortSignal),
       }),
       expect.objectContaining({
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
       }),
     );
   });
 
   it("uses the Grok browser-session transport before falling back to DOM polling", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const invokeGrokTransport = vi
       .fn()
@@ -713,8 +713,8 @@ describe("Web real transport execution", () => {
   });
 
   it("uses the Grok browser-session transport when the HTTP transport is rejected as unauthorized", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const invokeGrokTransport = vi
       .fn()
@@ -781,8 +781,8 @@ describe("Web real transport execution", () => {
   it("fails closed when the Grok browser DOM fallback exceeds its timeout budget", async () => {
     vi.useFakeTimers();
     try {
-      vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
-      vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+      vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_session=abc");
+      vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
       const invokeGrokTransport = vi
         .fn()
@@ -862,8 +862,8 @@ describe("Web real transport execution", () => {
   });
 
   it("disables Qwen thinking mode for exact-response verification prompts", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE", "qwen_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE", "qwen_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -950,8 +950,8 @@ describe("Web real transport execution", () => {
   });
 
   it("falls back to the Qwen browser session transport when bootstrap is unauthorized", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE", "qwen_session=abc");
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE", "qwen_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const invokeQwenTransport = vi
       .fn()

@@ -12,7 +12,7 @@ describe("service env helpers", () => {
       (path: string) =>
         path.endsWith(`${process.cwd()}/.env.local`) ||
         path.endsWith(`${process.cwd()}/.env`) ||
-        path.endsWith("/Switchyard/.env.local"),
+        path.endsWith("/WebaiBridge/.env.local"),
     );
     const loadEnvFile = vi.fn();
 
@@ -41,13 +41,13 @@ describe("service env helpers", () => {
     );
 
     const sessions = loadProviderSessionsFromEnv({
-      SWITCHYARD_WEB_CHATGPT_STATE: "ready",
-      SWITCHYARD_WEB_CHATGPT_ACCOUNT_LABEL: "chatgpt:default",
-      SWITCHYARD_WEB_CHATGPT_SESSION_SOURCE: "chatgpt-browser-profile",
-      SWITCHYARD_WEB_CHATGPT_REFRESH_ELIGIBLE: "true",
-      SWITCHYARD_WEB_GEMINI_STATE: "unknown",
-      SWITCHYARD_WEB_QWEN_STATE: "expired",
-      SWITCHYARD_WEB_QWEN_REFRESH_ELIGIBLE: "false",
+      WEBAI_BRIDGE_WEB_CHATGPT_STATE: "ready",
+      WEBAI_BRIDGE_WEB_CHATGPT_ACCOUNT_LABEL: "chatgpt:default",
+      WEBAI_BRIDGE_WEB_CHATGPT_SESSION_SOURCE: "chatgpt-browser-profile",
+      WEBAI_BRIDGE_WEB_CHATGPT_REFRESH_ELIGIBLE: "true",
+      WEBAI_BRIDGE_WEB_GEMINI_STATE: "unknown",
+      WEBAI_BRIDGE_WEB_QWEN_STATE: "expired",
+      WEBAI_BRIDGE_WEB_QWEN_REFRESH_ELIGIBLE: "false",
     } as NodeJS.ProcessEnv);
 
     expect(sessions).toEqual({
@@ -62,8 +62,8 @@ describe("service env helpers", () => {
         refreshEligible: false,
       }),
     });
-    expect(loadServicePort({ SWITCHYARD_SERVICE_PORT: "4317" } as NodeJS.ProcessEnv)).toBe(4317);
-    expect(loadServicePort({ SWITCHYARD_SERVICE_PORT: "-1" } as NodeJS.ProcessEnv)).toBe(4010);
+    expect(loadServicePort({ WEBAI_BRIDGE_SERVICE_PORT: "4317" } as NodeJS.ProcessEnv)).toBe(4317);
+    expect(loadServicePort({ WEBAI_BRIDGE_SERVICE_PORT: "-1" } as NodeJS.ProcessEnv)).toBe(4010);
     expect(loadServicePort({} as NodeJS.ProcessEnv)).toBe(4010);
   });
 });

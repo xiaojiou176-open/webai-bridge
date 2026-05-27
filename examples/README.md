@@ -1,6 +1,6 @@
-# Switchyard Runnable Starter Mini-projects
+# WebaiBridge Runnable Starter Mini-projects
 
-这页可以先当成 `Switchyard` 的样板间入口。
+这页可以先当成 `WebaiBridge` 的样板间入口。
 
 说人话：
 
@@ -28,7 +28,7 @@
   - 目标：直接打一次 `/v1/runtime/invoke`
 - [examples/mcp-inspector/README.md](./mcp-inspector/README.md)
   - 最小 read-only MCP inspector
-  - 目标：连上 `pnpm run switchyard:mcp`，列出工具，再读一次 health
+  - 目标：连上 `pnpm run webai-bridge:mcp`，列出工具，再读一次 health
 - [examples/runtime-diagnostics/README.md](./runtime-diagnostics/README.md)
   - 最小 read-only diagnostics triage
   - 目标：一次性把 provider status / probe / remediation / support bundle 拉回来
@@ -50,12 +50,12 @@ pnpm run example:host-mcp
 
 默认会读：
 
-- `SWITCHYARD_RUNTIME_BASE_URL`
-- 或 `http://127.0.0.1:${SWITCHYARD_SERVICE_PORT || 4010}`
+- `WEBAI_BRIDGE_RUNTIME_BASE_URL`
+- 或 `http://127.0.0.1:${WEBAI_BRIDGE_SERVICE_PORT || 4010}`
 
 这些 starter 的共同前提也必须说清楚：
 
-- 你本机已经有一个可访问的 `Switchyard` runtime
+- 你本机已经有一个可访问的 `WebaiBridge` runtime
 - 你为目标 lane/provider 准备了自己合法拥有的凭证或登录态
 - 它们证明的是 **starter 能跑**，不是“平台会替你解决所有凭证问题”
 

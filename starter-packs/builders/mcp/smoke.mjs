@@ -13,12 +13,12 @@ const starter = exampleDocument.builderExamples[0];
 const baseUrl = resolveRuntimeBaseUrl();
 const transport = new StdioClientTransport({
   command: "pnpm",
-  args: ["run", "switchyard:mcp", "--", "--base-url", baseUrl],
+  args: ["run", "webai-bridge:mcp", "--", "--base-url", baseUrl],
   cwd: repoRoot,
   stderr: "pipe",
 });
 const client = new Client({
-  name: "switchyard-starter-pack-mcp",
+  name: "webai-bridge-starter-pack-mcp",
   version: "0.0.0",
 });
 

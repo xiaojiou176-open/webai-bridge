@@ -3,7 +3,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import type { GenerateTextRequest } from "../../sdk-client/src/index.js";
 import { CAPABILITY_IDS } from "../../../contracts/src/index.js";
 import {
-  SwitchyardContractError,
+  WebaiBridgeContractError,
 } from "../../../contracts/src/index.js";
 import type {
   CapabilityId,
@@ -34,7 +34,7 @@ import type {
 import type { WebLaneContext } from "../../../lanes/web/src/index.js";
 import { WebLoginLane } from "../../../lanes/web/src/index.js";
 import type { LaneId, ProviderId } from "../../../contracts/src/index.js";
-import type { SwitchyardRuntime } from "../../../kernel/src/index.js";
+import type { WebaiBridgeRuntime } from "../../../kernel/src/index.js";
 import {
   SERVICE_AUTH_PORTAL_METADATA,
   SERVICE_SURFACE_METADATA,
@@ -62,10 +62,10 @@ import {
   buildServiceRuntimeDoctorView,
 } from "./service-language.js";
 
-export interface SwitchyardHttpSurfaceOptions {
+export interface WebaiBridgeHttpSurfaceOptions {
   webLane: WebLoginLane;
   context?: WebLaneContext;
-  runtime?: SwitchyardRuntime;
+  runtime?: WebaiBridgeRuntime;
   invokeRuntime?: (args: {
     request: RuntimeRequest;
     body: Record<string, unknown>;
@@ -402,7 +402,7 @@ function normalizePolicyProfile(value: unknown): RuntimePolicyProfileId {
     return value;
   }
 
-  throw new SwitchyardContractError(
+  throw new WebaiBridgeContractError(
     "routing-failed",
     `Unknown policyProfile "${String(value)}". Supported values: reliability-first, official-api-first, web-ok, low-friction, strict-fail-closed.`,
   );
@@ -419,18 +419,18 @@ function normalizeRequestedCapabilities(value: unknown): CapabilityId[] {
   );
 }
 
-export class SwitchyardHttpSurface {
+export class WebaiBridgeHttpSurface {
   private readonly webLane: WebLoginLane;
   private readonly context: WebLaneContext;
-  private readonly runtime?: SwitchyardRuntime;
-  private readonly invokeRuntime?: SwitchyardHttpSurfaceOptions["invokeRuntime"];
-  private readonly resolvePreferredLane?: SwitchyardHttpSurfaceOptions["resolvePreferredLane"];
-  private readonly resolveCredentialStates?: SwitchyardHttpSurfaceOptions["resolveCredentialStates"];
-  private readonly resolvePolicyHints?: SwitchyardHttpSurfaceOptions["resolvePolicyHints"];
+  private readonly runtime?: WebaiBridgeRuntime;
+  private readonly invokeRuntime?: WebaiBridgeHttpSurfaceOptions["invokeRuntime"];
+  private readonly resolvePreferredLane?: WebaiBridgeHttpSurfaceOptions["resolvePreferredLane"];
+  private readonly resolveCredentialStates?: WebaiBridgeHttpSurfaceOptions["resolveCredentialStates"];
+  private readonly resolvePolicyHints?: WebaiBridgeHttpSurfaceOptions["resolvePolicyHints"];
   private readonly availablePolicyProfiles: readonly RuntimePolicyProfileId[];
   private readonly serviceName: string;
   private readonly ownerUserId: string;
-  private readonly byokClient?: SwitchyardHttpSurfaceOptions["byokClient"];
+  private readonly byokClient?: WebaiBridgeHttpSurfaceOptions["byokClient"];
   private readonly liveProofRunners: Partial<
     Record<WebProviderId, () => Promise<WebLiveProofResult>>
   >;
@@ -450,7 +450,7 @@ export class SwitchyardHttpSurface {
     >
   >;
 
-  constructor(options: SwitchyardHttpSurfaceOptions) {
+  constructor(options: WebaiBridgeHttpSurfaceOptions) {
     this.webLane = options.webLane;
     this.context = options.context ?? {};
     this.runtime = options.runtime;
@@ -465,7 +465,7 @@ export class SwitchyardHttpSurface {
       "low-friction",
       "strict-fail-closed",
     ];
-    this.serviceName = options.serviceName ?? "switchyard-service";
+    this.serviceName = options.serviceName ?? "webai-bridge-service";
     this.ownerUserId = options.ownerUserId ?? "local-user";
     this.byokClient = options.byokClient;
     this.liveProofRunners = options.liveProofRunners ?? {};
@@ -473,7 +473,7 @@ export class SwitchyardHttpSurface {
     this.acquisitionRunners = options.acquisitionRunners ?? {};
   }
 
-  private mapContractErrorStatus(error: SwitchyardContractError): number {
+  private mapContractErrorStatus(error: WebaiBridgeContractError): number {
     switch (error.diagnostic.code) {
       case "missing-credential":
       case "credential-invalid":
@@ -488,7 +488,7 @@ export class SwitchyardHttpSurface {
   }
 
   private renderContractErrorResponse(
-    error: SwitchyardContractError,
+    error: WebaiBridgeContractError,
     request?: RuntimeRequest,
     explicitLane?: "byok" | "web-login",
   ): SurfaceResponse {
@@ -1525,7 +1525,7 @@ export class SwitchyardHttpSurface {
           "diagnostic" in error &&
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code === "string"
         ) {
-          return this.renderContractErrorResponse(error as SwitchyardContractError);
+          return this.renderContractErrorResponse(error as WebaiBridgeContractError);
         }
 
         throw error;
@@ -1577,7 +1577,7 @@ export class SwitchyardHttpSurface {
           "diagnostic" in error &&
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code === "string"
         ) {
-          const contractError = error as SwitchyardContractError;
+          const contractError = error as WebaiBridgeContractError;
 
           return jsonResponse(this.mapContractErrorStatus(contractError), {
             surface: SERVICE_SURFACE_METADATA,
@@ -1620,7 +1620,7 @@ export class SwitchyardHttpSurface {
           "diagnostic" in error &&
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code === "string"
         ) {
-          return this.renderContractErrorResponse(error as SwitchyardContractError);
+          return this.renderContractErrorResponse(error as WebaiBridgeContractError);
         }
 
         throw error;
@@ -1811,7 +1811,7 @@ export class SwitchyardHttpSurface {
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code === "string"
         ) {
           return this.renderContractErrorResponse(
-            error as SwitchyardContractError,
+            error as WebaiBridgeContractError,
             undefined,
             "byok",
           );
@@ -1846,7 +1846,7 @@ export class SwitchyardHttpSurface {
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code ===
             "string"
         ) {
-          const contractError = error as SwitchyardContractError;
+          const contractError = error as WebaiBridgeContractError;
           return this.renderContractErrorResponse(contractError, runtimeRequest, "byok");
         }
 
@@ -1875,7 +1875,7 @@ export class SwitchyardHttpSurface {
           "diagnostic" in error &&
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code === "string"
         ) {
-          return this.renderContractErrorResponse(error as SwitchyardContractError);
+          return this.renderContractErrorResponse(error as WebaiBridgeContractError);
         }
 
         throw error;
@@ -1899,7 +1899,7 @@ export class SwitchyardHttpSurface {
           typeof (error as { diagnostic?: { code?: string } }).diagnostic?.code ===
             "string"
         ) {
-          const contractError = error as SwitchyardContractError;
+          const contractError = error as WebaiBridgeContractError;
           const webProviders = runtimeRequest?.providerId
             ? await this.webLane.authStatus(this.context)
             : [];
@@ -1966,7 +1966,7 @@ async function readJsonBody(req: IncomingMessage): Promise<unknown> {
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 
-export function createNodeHttpHandler(surface: SwitchyardHttpSurface) {
+export function createNodeHttpHandler(surface: WebaiBridgeHttpSurface) {
   return async (req: IncomingMessage, res: ServerResponse) => {
     const url = new URL(req.url ?? "/", "http://127.0.0.1");
 

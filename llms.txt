@@ -1,4 +1,4 @@
-Switchyard
+WebaiBridge
 
 Shared provider runtime for AI apps.
 

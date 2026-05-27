@@ -1,15 +1,15 @@
 {
-  "name": "@switchyard/consumer-claude-code",
+  "name": "@webai-bridge/consumer-claude-code",
   "version": "0.1.0",
-  "description": "Thin fail-closed Claude Code runtime bridge for Switchyard.",
+  "description": "Thin fail-closed Claude Code runtime bridge for WebaiBridge.",
   "license": "MIT",
-  "homepage": "https://xiaojiou176-open.github.io/Switchyard/compat/claude-code.md",
+  "homepage": "https://xiaojiou176-open.github.io/webai-bridge/compat/claude-code.md",
   "bugs": {
-    "url": "https://github.com/xiaojiou176-open/Switchyard/issues"
+    "url": "https://github.com/xiaojiou176-open/webai-bridge/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaojiou176-open/Switchyard.git",
+    "url": "https://github.com/xiaojiou176-open/webai-bridge.git",
     "directory": "packages/consumers/claude-code"
   },
   "type": "module",
@@ -32,7 +32,7 @@
     "access": "public"
   },
   "keywords": [
-    "switchyard",
+    "webai-bridge",
     "claude-code",
     "compat",
     "thin-adapter",

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { SwitchyardContractError } from "../../../packages/contracts/src/index.js";
+import { WebaiBridgeContractError } from "../../../packages/contracts/src/index.js";
 import {
   createProviderRegistry,
   dispatchLane,
@@ -90,21 +90,21 @@ describe("lane dispatch", () => {
   });
 
   it("throws explicit errors for missing inputs, incompatible preferred lanes, and capability mismatches", () => {
-    expect(() => dispatchLane(createRegistry(), {})).toThrowError(SwitchyardContractError);
+    expect(() => dispatchLane(createRegistry(), {})).toThrowError(WebaiBridgeContractError);
 
     expect(() =>
       dispatchLane(createRegistry(), {
         providerId: "chatgpt",
         preferredLane: "byok",
       }),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
 
     expect(() =>
       dispatchLane(createRegistry(), {
         providerId: "gemini",
         requiredCapabilities: ["tool-calling"],
       }),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 
   it("throws the right credential-driven error when the preferred lane is unusable", () => {
@@ -118,7 +118,7 @@ describe("lane dispatch", () => {
         },
       });
     } catch (error) {
-      expect((error as SwitchyardContractError).diagnostic.code).toBe("session-expired");
+      expect((error as WebaiBridgeContractError).diagnostic.code).toBe("session-expired");
       return;
     }
 
@@ -134,7 +134,7 @@ describe("lane dispatch", () => {
           "web-login": "user-action-required",
         },
       }),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
 
     try {
       dispatchLane(createRegistry(), {
@@ -145,7 +145,7 @@ describe("lane dispatch", () => {
         },
       });
     } catch (error) {
-      expect((error as SwitchyardContractError).diagnostic.code).toBe("credential-invalid");
+      expect((error as WebaiBridgeContractError).diagnostic.code).toBe("credential-invalid");
       return;
     }
 

@@ -1,4 +1,4 @@
-# Switchyard MCP Troubleshooting
+# WebaiBridge MCP Troubleshooting
 
 Use these checks before escalating.
 
@@ -10,9 +10,9 @@ Use these checks before escalating.
 
 ## 2. The provider looks empty
 
-- run `switchyard.providers.list`
+- run `webai-bridge.providers.list`
 - confirm you chose the right provider name
-- run `switchyard.provider.status` before asking for deeper diagnostics
+- run `webai-bridge.provider.status` before asking for deeper diagnostics
 
 ## 3. The answer sounds too strong
 

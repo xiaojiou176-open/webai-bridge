@@ -4,7 +4,7 @@ import {
   parseModelReference,
 } from '../../../packages/lanes/byok/src/index.js';
 import {
-  createSwitchyardSdk,
+  createWebaiBridgeSdk,
   gemini,
   openrouter,
   providers,
@@ -43,7 +43,7 @@ describe('BYOK model references', () => {
   });
 
   test('surfaces default and recommended model references through the SDK', () => {
-    const sdk = createSwitchyardSdk();
+    const sdk = createWebaiBridgeSdk();
 
     expect(sdk.getDefaultModel('gemini')?.id).toBe('gemini/gemini-2.5-flash');
     expect(sdk.getRecommendedModel('openai')?.id).toBe('openai/gpt-5-mini');

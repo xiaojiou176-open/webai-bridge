@@ -21,27 +21,27 @@ pnpm run example:mcp-inspector
 
 前提：
 
-- 本机已有可访问的 `Switchyard` runtime
+- 本机已有可访问的 `WebaiBridge` runtime
 - 你只是想做 read-only inspection，不是在找 write plane
 
 ## 可选环境变量
 
-- `SWITCHYARD_RUNTIME_BASE_URL`
-- `SWITCHYARD_SERVICE_PORT`
+- `WEBAI_BRIDGE_RUNTIME_BASE_URL`
+- `WEBAI_BRIDGE_SERVICE_PORT`
 
 ## 它默认会做什么
 
-1. 启动 `pnpm run switchyard:mcp`
+1. 启动 `pnpm run webai-bridge:mcp`
 2. 用真实 MCP client 连接 stdio
 3. 列出全部 tool names
-4. 调一次 `switchyard.runtime.health`
-5. 调一次 `switchyard.provider.doctor`
-6. 再调一次 `switchyard.catalog.mcp_tools`
+4. 调一次 `webai-bridge.runtime.health`
+5. 调一次 `webai-bridge.provider.doctor`
+6. 再调一次 `webai-bridge.catalog.mcp_tools`
 
 ## 它证明什么
 
 - 这条 MCP 面今天确实是可连接、可读取、可列工具的
-- `Switchyard` 的 read-only MCP truth 不是纯文档口号
+- `WebaiBridge` 的 read-only MCP truth 不是纯文档口号
 
 ## 它不证明什么
 

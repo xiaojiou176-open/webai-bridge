@@ -1,13 +1,13 @@
-# Switchyard Design Front Door
+# WebaiBridge Design Front Door
 
-This file is the single public front door for Switchyard design work.
+This file is the single public front door for WebaiBridge design work.
 
 It exists so future changes do not depend on chat memory or private taste before
 touching a governed surface.
 
 ## Product Truth
 
-Switchyard is a shared provider runtime for AI apps.
+WebaiBridge is a shared provider runtime for AI apps.
 
 It is not:
 
@@ -31,14 +31,14 @@ order:
 1. `DESIGN.md`
 2. `design-system/MASTER.md`
 3. the matching page master
-   - `design-system/switchyard-auth-portal/MASTER.md`
-   - `design-system/switchyard-debug-cockpit/MASTER.md`
+   - `design-system/webai-bridge-auth-portal/MASTER.md`
+   - `design-system/webai-bridge-debug-cockpit/MASTER.md`
 
 If a change does not fit this stack, update the governing contract first.
 
 ## Donor Boundary
 
-Switchyard uses a fixed donor boundary:
+WebaiBridge uses a fixed donor boundary:
 
 | Surface family | Primary donor posture | Allowed secondary | What it is for |
 | --- | --- | --- | --- |
@@ -67,7 +67,7 @@ These are the main surfaces currently under active design contract:
 
 Before landing a UI or public-surface change, answer all of these with `yes`:
 
-1. Does the page still tell the truth about what Switchyard is and is not?
+1. Does the page still tell the truth about what WebaiBridge is and is not?
 2. Does the surface still read like the right room: runtime shell, docs router,
    or utility chrome?
 3. Did the change stay inside the donor boundary already approved for that

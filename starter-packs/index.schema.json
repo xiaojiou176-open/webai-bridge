@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/starter-packs/index.schema.json",
-  "title": "Switchyard Starter Pack Index",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/starter-packs/index.schema.json",
+  "title": "WebaiBridge Starter Pack Index",
   "type": "object",
   "additionalProperties": false,
   "required": [

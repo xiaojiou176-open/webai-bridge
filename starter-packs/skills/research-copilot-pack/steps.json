@@ -1,7 +1,7 @@
 [
   "pnpm exec node starter-packs/skills/research-copilot-pack/smoke.mjs",
-  "pnpm run switchyard:cli -- surface-catalog --json",
-  "pnpm run switchyard:cli -- compat-targets --json",
-  "pnpm run switchyard:cli -- keyword-truth --json",
+  "pnpm run webai-bridge:cli -- surface-catalog --json",
+  "pnpm run webai-bridge:cli -- compat-targets --json",
+  "pnpm run webai-bridge:cli -- keyword-truth --json",
   "cat docs/public-surface-support-matrix.md"
 ]

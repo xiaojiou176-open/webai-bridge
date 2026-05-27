@@ -1,12 +1,12 @@
-# Switchyard Runtime Diagnostics Public Skill Packet
+# WebaiBridge Runtime Diagnostics Public Skill Packet
 
-This folder is the public, self-contained skill packet for Switchyard's
+This folder is the public, self-contained skill packet for WebaiBridge's
 read-only MCP runtime diagnostics lane.
 
 Use it when you want one portable skill folder that teaches an agent four
 things:
 
-- how to attach the current Switchyard MCP server
+- how to attach the current WebaiBridge MCP server
 - which read-only runtime and catalog tools are safe first
 - what one good first diagnostic loop looks like
 - which claims stay out of bounds until a real package, listing, or registry
@@ -42,7 +42,7 @@ things:
   mergeability; that is still not the same as `listed-live`
 - this packet stays secondary to the repo's primary runtime identity
 - repo-wide npm, official MCP Registry, and marketplace truth still follow the
-  top-level Switchyard distribution ledger
+  top-level WebaiBridge distribution ledger
 
 ## What this packet must not claim
 

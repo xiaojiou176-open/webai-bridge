@@ -228,8 +228,8 @@ export function createClaudeWebRuntime(): WebProviderRuntime {
         throw new Error("Missing Claude browser session material for real transport.");
       }
 
-      const cookieBundle = envValues.SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE;
-      const userAgent = envValues.SWITCHYARD_WEB_CLAUDE_USER_AGENT;
+      const cookieBundle = envValues.WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE;
+      const userAgent = envValues.WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT;
       const deviceId =
         parseCookieValue(cookieBundle, "anthropic-device-id") ?? crypto.randomUUID();
 
@@ -266,7 +266,7 @@ export function createClaudeWebRuntime(): WebProviderRuntime {
           "anthropic-device-id": deviceId,
         },
         body: JSON.stringify({
-          name: `Switchyard ${new Date().toISOString()}`,
+          name: `WebaiBridge ${new Date().toISOString()}`,
           uuid: crypto.randomUUID(),
         }),
       });

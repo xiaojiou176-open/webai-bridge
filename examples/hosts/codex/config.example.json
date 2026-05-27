@@ -1,7 +1,7 @@
 {
-  "name": "switchyard-codex-host-example",
-  "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-  "catalogCommand": "pnpm run switchyard:cli -- host-example --target codex --json",
+  "name": "webai-bridge-codex-host-example",
+  "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+  "catalogCommand": "pnpm run webai-bridge:cli -- host-example --target codex --json",
   "request": {
     "provider": "chatgpt",
     "lane": "web",

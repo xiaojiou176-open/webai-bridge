@@ -325,9 +325,9 @@ export function createChatgptWebRuntime(): WebProviderRuntime {
             method: "GET",
             headers: {
               accept: "application/json, text/plain, */*",
-              cookie: envValues.SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE,
+              cookie: envValues.WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE,
               referer: "https://chatgpt.com/",
-              "user-agent": envValues.SWITCHYARD_WEB_CHATGPT_USER_AGENT,
+              "user-agent": envValues.WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT,
             },
           });
 
@@ -348,9 +348,9 @@ export function createChatgptWebRuntime(): WebProviderRuntime {
 
           await warmChatgptConversation({
             accessToken,
-            cookieBundle: envValues.SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE,
+            cookieBundle: envValues.WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE,
             deviceId,
-            userAgent: envValues.SWITCHYARD_WEB_CHATGPT_USER_AGENT,
+            userAgent: envValues.WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT,
           });
 
           const body = {
@@ -381,9 +381,9 @@ export function createChatgptWebRuntime(): WebProviderRuntime {
             method: "POST",
             headers: buildChatgptBrowserLikeHeaders({
               accessToken,
-              cookieBundle: envValues.SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE,
+              cookieBundle: envValues.WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE,
               deviceId,
-              userAgent: envValues.SWITCHYARD_WEB_CHATGPT_USER_AGENT,
+              userAgent: envValues.WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT,
               accept: "text/event-stream",
             }),
             body: JSON.stringify(body),

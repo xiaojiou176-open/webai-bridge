@@ -1,4 +1,4 @@
-# Switchyard Service HTTP Reference
+# WebaiBridge Service HTTP Reference
 
 This page documents the current `service-first` HTTP surface.
 
@@ -24,7 +24,7 @@ This page documents the current `service-first` HTTP surface.
 
 ## Surface Role
 
-`Switchyard` 当前把 HTTP surface 定义为：
+`WebaiBridge` 当前把 HTTP surface 定义为：
 
 - `role = first-party-integration-entry`
 - `runtimeShape = runtime-first`

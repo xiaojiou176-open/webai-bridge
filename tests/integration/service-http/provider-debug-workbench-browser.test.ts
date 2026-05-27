@@ -37,7 +37,7 @@ describe("provider debug workbench browser interaction", () => {
           attachTarget: {
             cdpUrl: "http://127.0.0.1:9338",
             source: "runtime-env",
-            note: "This is the canonical browser attach target Switchyard will inspect next.",
+            note: "This is the canonical browser attach target WebaiBridge will inspect next.",
           },
           currentPage: {
             classification: "session-incomplete",

@@ -8,10 +8,10 @@
       "recommendedPack": "codex",
       "recommendedScenario": "codex-builder",
       "hostSurface": "Responses-style runtime helper",
-      "bestEntry": "pnpm run switchyard:cli -- host-playbook --target codex",
+      "bestEntry": "pnpm run webai-bridge:cli -- host-playbook --target codex",
       "firstSuccessGoal": "Send one text-only request from a Codex-shaped host into /v1/runtime/invoke without pretending tool or worktree parity.",
       "requiredInputs": [
-        "Switchyard service runtime base URL",
+        "WebaiBridge service runtime base URL",
         "Codex-side request text",
         "explicit provider/lane choice when the target provider is dual-lane"
       ],
@@ -44,9 +44,9 @@
         "full Codex support"
       ],
       "searchKeywords": [
-        "switchyard codex host integration",
-        "switchyard codex runtime helper",
-        "switchyard codex first success"
+        "webai-bridge codex host integration",
+        "webai-bridge codex runtime helper",
+        "webai-bridge codex first success"
       ]
     },
     {
@@ -55,10 +55,10 @@
       "recommendedPack": "claude-code",
       "recommendedScenario": "claude-code-builder",
       "hostSurface": "Message/runtime bridge",
-      "bestEntry": "pnpm run switchyard:cli -- host-playbook --target claude-code",
+      "bestEntry": "pnpm run webai-bridge:cli -- host-playbook --target claude-code",
       "firstSuccessGoal": "Adapt one Claude Code-style message payload into the current runtime invoke route without copying the terminal shell.",
       "requiredInputs": [
-        "Switchyard service runtime base URL",
+        "WebaiBridge service runtime base URL",
         "Claude Code-style message payload",
         "explicit target provider when multiple providers fit the same model family"
       ],
@@ -91,9 +91,9 @@
         "full Claude Code support"
       ],
       "searchKeywords": [
-        "switchyard claude code integration",
-        "switchyard claude code host bridge",
-        "switchyard claude code first success"
+        "webai-bridge claude code integration",
+        "webai-bridge claude code host bridge",
+        "webai-bridge claude code first success"
       ]
     },
     {
@@ -102,12 +102,12 @@
       "recommendedPack": "openclaw",
       "recommendedScenario": "openclaw-builder",
       "hostSurface": "Delegation-first runtime bridge",
-      "bestEntry": "pnpm run switchyard:cli -- host-playbook --target openclaw",
-      "firstSuccessGoal": "Wire one OpenClaw-style delegation request into Switchyard without importing the upstream product shell.",
+      "bestEntry": "pnpm run webai-bridge:cli -- host-playbook --target openclaw",
+      "firstSuccessGoal": "Wire one OpenClaw-style delegation request into WebaiBridge without importing the upstream product shell.",
       "requiredInputs": [
-        "Switchyard service runtime base URL",
+        "WebaiBridge service runtime base URL",
         "delegation-first request envelope",
-        "explicit agreement that operator/control-plane stays outside Switchyard"
+        "explicit agreement that operator/control-plane stays outside WebaiBridge"
       ],
       "setupSteps": [
         "Read the OpenClaw compat page and upstream relationship docs first.",
@@ -137,9 +137,9 @@
         "raw upstream fork"
       ],
       "searchKeywords": [
-        "switchyard openclaw integration",
-        "switchyard delegation bridge",
-        "switchyard openclaw host helper"
+        "webai-bridge openclaw integration",
+        "webai-bridge delegation bridge",
+        "webai-bridge openclaw host helper"
       ]
     },
     {
@@ -148,10 +148,10 @@
       "recommendedPack": "mcp",
       "recommendedScenario": "mcp-inspector",
       "hostSurface": "Read-only stdio MCP inspector",
-      "bestEntry": "pnpm run switchyard:cli -- host-playbook --target mcp",
-      "firstSuccessGoal": "Connect a local MCP client to the read-only Switchyard server, list tools, and read one runtime truth surface.",
+      "bestEntry": "pnpm run webai-bridge:cli -- host-playbook --target mcp",
+      "firstSuccessGoal": "Connect a local MCP client to the read-only WebaiBridge server, list tools, and read one runtime truth surface.",
       "requiredInputs": [
-        "Switchyard service runtime base URL",
+        "WebaiBridge service runtime base URL",
         "local MCP client that supports stdio transport",
         "read-only use case"
       ],
@@ -184,9 +184,9 @@
         "full Codex or Claude Code parity backend"
       ],
       "searchKeywords": [
-        "switchyard mcp host integration",
-        "switchyard read only mcp starter",
-        "switchyard mcp first success"
+        "webai-bridge mcp host integration",
+        "webai-bridge read only mcp starter",
+        "webai-bridge mcp first success"
       ]
     }
   ]

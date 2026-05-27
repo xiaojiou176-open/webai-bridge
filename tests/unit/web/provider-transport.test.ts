@@ -65,8 +65,8 @@ describe("provider transport helpers", () => {
       status: createReadyStatus("grok"),
       context: {
         env: {
-          SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-          SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+          WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+          WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
         },
       },
     });
@@ -119,8 +119,8 @@ describe("provider transport helpers", () => {
       status: createReadyStatus("grok"),
       context: {
         env: {
-          SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-          SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+          WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+          WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
         },
       },
     });
@@ -165,8 +165,8 @@ describe("provider transport helpers", () => {
       status: createReadyStatus("qwen"),
       context: {
         env: {
-          SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
-          SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+          WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
+          WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
         },
       },
     });
@@ -191,8 +191,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("qwen"),
         context: {
           env: {
-            SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
-            SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
+            WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -247,8 +247,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("grok"),
         context: {
           env: {
-            SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-            SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+            WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -277,8 +277,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("grok"),
         context: {
           env: {
-            SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-            SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+            WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -303,8 +303,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("grok"),
         context: {
           env: {
-            SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-            SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+            WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -329,8 +329,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("grok"),
         context: {
           env: {
-            SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-            SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+            WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -363,8 +363,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("qwen"),
         context: {
           env: {
-            SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
-            SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
+            WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -405,8 +405,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("qwen"),
         context: {
           env: {
-            SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
-            SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
+            WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),
@@ -437,8 +437,8 @@ describe("provider transport helpers", () => {
         status: createReadyStatus("qwen"),
         context: {
           env: {
-            SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
-            SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+            WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
+            WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
           },
         },
       }),

@@ -35,7 +35,7 @@ It exists to answer one practical question:
 
 ## Why This Order Exists
 
-`Switchyard` treats the auth portal as a local-first acquisition surface, not a
+`WebaiBridge` treats the auth portal as a local-first acquisition surface, not a
 control-plane product.
 
 So the healthier default is:

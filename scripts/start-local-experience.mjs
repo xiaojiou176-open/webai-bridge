@@ -37,11 +37,11 @@ function toPositivePort(value, fallback) {
 }
 
 export function resolveServicePort(env = process.env) {
-  return toPositivePort(env.SWITCHYARD_SERVICE_PORT, DEFAULT_SERVICE_PORT);
+  return toPositivePort(env.WEBAI_BRIDGE_SERVICE_PORT, DEFAULT_SERVICE_PORT);
 }
 
 export function resolveDocsPort(env = process.env) {
-  return toPositivePort(env.SWITCHYARD_DOCS_PORT, DEFAULT_DOCS_PORT);
+  return toPositivePort(env.WEBAI_BRIDGE_DOCS_PORT, DEFAULT_DOCS_PORT);
 }
 
 export function buildExperienceUrls({
@@ -221,12 +221,12 @@ export async function main({
 
   const serviceProcess = spawnImpl(
     "pnpm",
-    ["--filter", "@switchyard/app-service", "start"],
+    ["--filter", "@webai-bridge/app-service", "start"],
     {
       cwd: rootDir,
       env: {
         ...env,
-        SWITCHYARD_SERVICE_PORT: `${servicePort}`,
+        WEBAI_BRIDGE_SERVICE_PORT: `${servicePort}`,
       },
       stdio: "inherit",
     },

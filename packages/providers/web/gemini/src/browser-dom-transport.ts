@@ -14,11 +14,11 @@ import {
   urlPathStartsWithSegments,
 } from "../../shared/url-hosts.js";
 
-export const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
-export const GEMINI_WEB_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_GEMINI_CDP_URL";
+export const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
+export const GEMINI_WEB_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL";
 export const EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-export const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+export const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
 export const GEMINI_WEB_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
 export const GEMINI_WEB_DEFAULT_ISOLATED_CDP_URL = "http://127.0.0.1:9338";
 export const GEMINI_WEB_APP_URL = "https://gemini.google.com/app";
@@ -42,7 +42,7 @@ type ConnectOverCDP = (
 ) => ReturnType<typeof chromium.connectOverCDP>;
 
 function resolveGeminiBrowserCdpUrl(env: Record<string, string | undefined>) {
-  const browserMode = env[SWITCHYARD_BROWSER_MODE_ENV_NAME]?.trim();
+  const browserMode = env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]?.trim();
   const shouldUseIsolatedRoot =
     !browserMode ||
     browserMode === ISOLATED_CHROME_ROOT_MODE ||
@@ -274,7 +274,7 @@ async function assertGeminiWorkspaceReady(page: Page) {
 
   if (isGeminiHumanVerificationSnapshot(snapshot)) {
     throw new Error(
-      "Gemini attached browser is on Google's abnormal-traffic verification page, so human verification must be completed before Switchyard can invoke Gemini.",
+      "Gemini attached browser is on Google's abnormal-traffic verification page, so human verification must be completed before WebaiBridge can invoke Gemini.",
     );
   }
 
@@ -317,7 +317,7 @@ async function sendPrompt(page: Page, message: string) {
       return {
         ok: false,
         error:
-          "Gemini attached browser is showing a visible rate-limit gate, so Switchyard must stop before sending another prompt.",
+          "Gemini attached browser is showing a visible rate-limit gate, so WebaiBridge must stop before sending another prompt.",
       };
     }
 
@@ -330,7 +330,7 @@ async function sendPrompt(page: Page, message: string) {
       return {
         ok: false,
         error:
-          "Gemini attached browser is on Google's abnormal-traffic verification page, so human verification must be completed before Switchyard can invoke Gemini.",
+          "Gemini attached browser is on Google's abnormal-traffic verification page, so human verification must be completed before WebaiBridge can invoke Gemini.",
       };
     }
 
@@ -347,7 +347,7 @@ async function sendPrompt(page: Page, message: string) {
       return {
         ok: false,
         error:
-          "Gemini attached browser is on Google's CookieMismatch page, so the browser session must be repaired before Switchyard can invoke Gemini.",
+          "Gemini attached browser is on Google's CookieMismatch page, so the browser session must be repaired before WebaiBridge can invoke Gemini.",
       };
     }
 
@@ -360,7 +360,7 @@ async function sendPrompt(page: Page, message: string) {
       return {
         ok: false,
         error:
-          "Gemini attached browser is still on a Google sign-in screen, so the browser session must be completed before Switchyard can invoke Gemini.",
+          "Gemini attached browser is still on a Google sign-in screen, so the browser session must be completed before WebaiBridge can invoke Gemini.",
       };
     }
 

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { SwitchyardContractError } from '../../../packages/contracts/src/index';
+import { WebaiBridgeContractError } from '../../../packages/contracts/src/index';
 import {
   createProviderRegistry,
-  createSwitchyardRuntime
+  createWebaiBridgeRuntime
 } from '../../../packages/kernel/src/index';
 
 function createTestRegistry() {
@@ -48,7 +48,7 @@ function createTestRegistry() {
 describe('kernel registry and runtime skeleton', () => {
   it('assembles a provider registry and prepares a runtime invocation plan', () => {
     const registry = createTestRegistry();
-    const runtime = createSwitchyardRuntime({ registry });
+    const runtime = createWebaiBridgeRuntime({ registry });
 
     expect(registry.availableLanes('gemini')).toEqual(['byok', 'web-login']);
 
@@ -84,11 +84,11 @@ describe('kernel registry and runtime skeleton', () => {
           defaultModel: 'chatgpt/gpt-4.1-mini'
         }
       ])
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 
   it('raises explicit credential errors instead of silently flipping lanes', () => {
-    const runtime = createSwitchyardRuntime({ registry: createTestRegistry() });
+    const runtime = createWebaiBridgeRuntime({ registry: createTestRegistry() });
 
     expect(() =>
       runtime.prepareInvocation({
@@ -100,7 +100,7 @@ describe('kernel registry and runtime skeleton', () => {
           'web-login': 'missing'
         }
       })
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
 
     try {
       runtime.prepareInvocation({
@@ -113,13 +113,13 @@ describe('kernel registry and runtime skeleton', () => {
         }
       });
     } catch (error) {
-      expect((error as SwitchyardContractError).diagnostic.code).toBe('missing-credential');
+      expect((error as WebaiBridgeContractError).diagnostic.code).toBe('missing-credential');
     }
   });
 
   it('filters listed providers and emits a refreshable-degraded diagnostic when needed', () => {
     const registry = createTestRegistry();
-    const runtime = createSwitchyardRuntime({ registry });
+    const runtime = createWebaiBridgeRuntime({ registry });
 
     expect(runtime.listProviders({ laneId: 'web-login' })).toHaveLength(2);
 
@@ -142,7 +142,7 @@ describe('kernel registry and runtime skeleton', () => {
 
   it('dispatches execution through the configured lane executor after planning', async () => {
     const registry = createTestRegistry();
-    const runtime = createSwitchyardRuntime({ registry });
+    const runtime = createWebaiBridgeRuntime({ registry });
     const byokExecutor = {
       execute: ({ plan }: { plan: { selection: { laneId: string; providerId: string } } }) =>
         `${plan.selection.laneId}:${plan.selection.providerId}`,

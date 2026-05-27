@@ -1,4 +1,4 @@
-# Switchyard Host Example Foyer
+# WebaiBridge Host Example Foyer
 
 This page is the thin public wrapper for runnable host-local examples.
 
@@ -22,15 +22,15 @@ example assets.
 ## Read-Only Access
 
 ```bash
-pnpm run switchyard:cli -- host-examples
-pnpm run switchyard:cli -- host-examples-schema
-pnpm run switchyard:cli -- host-example --target codex
-pnpm run switchyard:cli -- host-example --target mcp
+pnpm run webai-bridge:cli -- host-examples
+pnpm run webai-bridge:cli -- host-examples-schema
+pnpm run webai-bridge:cli -- host-example --target codex
+pnpm run webai-bridge:cli -- host-example --target mcp
 ```
 
-- `switchyard.catalog.host_examples`
-- `switchyard.catalog.host_examples_schema`
-- `switchyard.catalog.host_example`
+- `webai-bridge.catalog.host_examples`
+- `webai-bridge.catalog.host_examples_schema`
+- `webai-bridge.catalog.host_example`
 
 ## Quick Pick
 

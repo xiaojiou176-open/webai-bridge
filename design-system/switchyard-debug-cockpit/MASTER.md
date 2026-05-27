@@ -1,4 +1,4 @@
-# Switchyard Debug Workbench Override
+# WebaiBridge Debug Workbench Override
 
 ## [Confirmed] Override Priority
 

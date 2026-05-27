@@ -1,9 +1,9 @@
-# Switchyard AGENTS.md
+# WebaiBridge AGENTS.md
 
 ## 文档目的
 
-这份文件是 `Switchyard` 仓的 repo 宪法。  
-它不是重复全局 `AGENTS.md`，而是把 **Switchyard 自己已经拍板的产品边界、上游关系、参考仓纪律、交付顺序** 固化下来，防止未来 Agent 再把项目做偏。
+这份文件是 `WebaiBridge` 仓的 repo 宪法。  
+它不是重复全局 `AGENTS.md`，而是把 **WebaiBridge 自己已经拍板的产品边界、上游关系、参考仓纪律、交付顺序** 固化下来，防止未来 Agent 再把项目做偏。
 
 如果根目录的其他说明、口头讨论、实现尝试与本文件冲突，以本文件和 `.agents/internal-docs/adr/`、`.agents/internal-docs/contracts/` 为准。
 
@@ -11,7 +11,7 @@
 
 ## 一句话定义
 
-> `Switchyard` 是一个面向 AI 产品开发者的共享 Provider Runtime。  
+> `WebaiBridge` 是一个面向 AI 产品开发者的共享 Provider Runtime。  
 > 它的目标不是做另一个聊天产品或 personal assistant，而是把终端用户已有的 AI 访问资格统一转成可被 AI 产品消费的共享内核。
 
 ---
@@ -34,7 +34,7 @@
 - `contracts` 决定语义和公开语言
 - `blueprints` 决定阶段和执行顺序
 - `product` 决定为什么存在、为谁服务
-- 参考仓和对话记录只能提供**依据**，不能直接覆盖 `Switchyard` 自己的合同
+- 参考仓和对话记录只能提供**依据**，不能直接覆盖 `WebaiBridge` 自己的合同
 
 ---
 
@@ -88,14 +88,14 @@
 
 ### 长期身份
 
-`Switchyard` 长期可以是 `Hybrid`：
+`WebaiBridge` 长期可以是 `Hybrid`：
 
 - `Provider Runtime`
 - `Agent Runtime`
 
 ### V1 实际身份
 
-`Switchyard V1` 实际只聚焦：
+`WebaiBridge V1` 实际只聚焦：
 
 > **共享 Provider Runtime**
 
@@ -109,7 +109,7 @@
 
 顺序固定为：
 
-1. 先做 `Switchyard` 自己的 kernel
+1. 先做 `WebaiBridge` 自己的 kernel
 2. 再做你的 3 个 repo 接入
 3. 再做 `Codex / Claude Code / OpenClaw`
 
@@ -335,7 +335,7 @@
 
 2. **只使用当前 repo 自己的浏览器和 profile**
    - 默认本地 credentialed 开发入口是**显式配置的真实 Chrome Profile**。
-   - 通过 `SWITCHYARD_CHROME_USER_DATA_DIR + SWITCHYARD_CHROME_PROFILE_NAME` 指向用户分配给当前 repo 的真实 Chrome Profile。
+   - 通过 `WEBAI_BRIDGE_CHROME_USER_DATA_DIR + WEBAI_BRIDGE_CHROME_PROFILE_NAME` 指向用户分配给当前 repo 的真实 Chrome Profile。
    - repo-local `managed-browser` 只保留成显式 fallback，不再是默认日常工位。
    - 不准混用其他 repo 的 L1 已经打开的浏览器、profile、CDP 端口、user-data-dir。
    - 不准因为“电脑上已经有个 Chrome 开着”就直接把它当成本 repo 的合法工作浏览器。
@@ -356,8 +356,8 @@
 5. **profile 与缓存不准堆积**
    - 不准无上限克隆 browser profile 到缓存里不清理。
    - repo 内部可清理运行时资产尽量统一进 `.runtime-cache/`。
-   - repo 外专属临时缓存只允许进入 `~/.cache/switchyard/`。
-   - 不准把 `web-login-live-proof-*`、support bundle、debug bundle、临时编译目录一直堆在 `.runtime-cache/` 或 `~/.cache/switchyard/` 里不管。
+   - repo 外专属临时缓存只允许进入 `~/.cache/webai-bridge/`。
+   - 不准把 `web-login-live-proof-*`、support bundle、debug bundle、临时编译目录一直堆在 `.runtime-cache/` 或 `~/.cache/webai-bridge/` 里不管。
    - 默认治理规则固定为：
      - `TTL = 7 days`
      - `maxBytes = 8 GiB`
@@ -392,10 +392,10 @@
 ### 当前 repo 的默认执行方式
 
 - 浏览器默认优先 `isolated-chrome-root`：
-  - `SWITCHYARD_CHROME_USER_DATA_DIR`
-  - `SWITCHYARD_CHROME_PROFILE_NAME`
+  - `WEBAI_BRIDGE_CHROME_USER_DATA_DIR`
+  - `WEBAI_BRIDGE_CHROME_PROFILE_NAME`
   - 当前 repo 的 canonical isolated-root CDP 端口 = `9338`
-- 默认 steady-state 根目录 = `~/.cache/switchyard/browser/chrome-user-data`
+- 默认 steady-state 根目录 = `~/.cache/webai-bridge/browser/chrome-user-data`
   - 这是 repo 专属独立 Chrome 根目录
   - steady-state 只保留一个 repo-owned 实例
   - 缺席则启动，存在则 attach，不 second-launch
@@ -404,14 +404,14 @@
   - 已在线 repo-owned 浏览器开登录页 = CDP `/json/new`
   - 不保留 detached child handle，不做后续 host kill
 - 默认 Chrome 根目录只允许在显式 `seed:isolated-chrome-root` / `reseed:isolated-chrome-root` 时读取。
-- `~/.cache/switchyard/browser/chrome-user-data` 是永久浏览器工位：
+- `~/.cache/webai-bridge/browser/chrome-user-data` 是永久浏览器工位：
   - 不属于 disposable cache
   - 不纳入 TTL / cap 自动清理
 - `managed-browser` 默认降级为 repo-local fallback：
-  - `.runtime-cache/switchyard-web-auth-browser`
+  - `.runtime-cache/webai-bridge-web-auth-browser`
 - 当前 repo 的本地运行时状态默认只允许落在：
   - `.runtime-cache/`
-  - `~/.cache/switchyard`
+  - `~/.cache/webai-bridge`
   - 受控的 repo-local support/debug bundles
 - 当前 repo 的 live / credentialed 脚本在 CI 环境里必须 fail-closed：
   - 不允许依赖本地 Profile
@@ -438,8 +438,8 @@
 
 ### 禁止事项
 
-- 不要把上游实现事实写成 `Switchyard` 的产品定义
-- 不要把上游目录结构当成 `Switchyard` 宪法
+- 不要把上游实现事实写成 `WebaiBridge` 的产品定义
+- 不要把上游目录结构当成 `WebaiBridge` 宪法
 - 不要把 future compat 偷渡成当前 V1 API 契约
 - 不要让 README 成为比 ADR 更高的真理源
 

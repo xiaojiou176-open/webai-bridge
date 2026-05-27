@@ -1,15 +1,15 @@
 {
-  "name": "@switchyard/consumer-openclaw",
+  "name": "@webai-bridge/consumer-openclaw",
   "version": "0.1.0",
-  "description": "Thin fail-closed OpenClaw delegation bridge for Switchyard.",
+  "description": "Thin fail-closed OpenClaw delegation bridge for WebaiBridge.",
   "license": "MIT",
-  "homepage": "https://xiaojiou176-open.github.io/Switchyard/compat/openclaw.md",
+  "homepage": "https://xiaojiou176-open.github.io/webai-bridge/compat/openclaw.md",
   "bugs": {
-    "url": "https://github.com/xiaojiou176-open/Switchyard/issues"
+    "url": "https://github.com/xiaojiou176-open/webai-bridge/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaojiou176-open/Switchyard.git",
+    "url": "https://github.com/xiaojiou176-open/webai-bridge.git",
     "directory": "packages/consumers/openclaw"
   },
   "type": "module",
@@ -32,7 +32,7 @@
     "access": "public"
   },
   "keywords": [
-    "switchyard",
+    "webai-bridge",
     "openclaw",
     "compat",
     "delegation",

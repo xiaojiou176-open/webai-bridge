@@ -20,7 +20,7 @@ describe("codex thin compat adapter", () => {
     );
 
     const adapter = createCodexCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: vi.fn() as unknown as typeof fetch,
     });
 
@@ -60,7 +60,7 @@ describe("codex thin compat adapter", () => {
     });
 
     const adapter = createCodexThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     });
 

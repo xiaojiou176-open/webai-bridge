@@ -6,12 +6,12 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 
 import {
-  createSwitchyardServiceClient,
-  type SwitchyardServiceClient,
-  type SwitchyardServiceClientOptions,
+  createWebaiBridgeServiceClient,
+  type WebaiBridgeServiceClient,
+  type WebaiBridgeServiceClientOptions,
 } from "../../sdk-client/src/index.js";
 
-export interface SwitchyardMcpCliOptions {
+export interface WebaiBridgeMcpCliOptions {
   baseUrl?: string;
 }
 
@@ -153,9 +153,9 @@ const mcpToolCatalogSchemaPath = resolve(
   "../../../../catalogs/mcp-tool-catalog.schema.json",
 );
 
-type SwitchyardProviderId = Parameters<SwitchyardServiceClient["providerStatus"]>[0];
+type WebaiBridgeProviderId = Parameters<WebaiBridgeServiceClient["providerStatus"]>[0];
 
-export interface SwitchyardMcpToolPayload {
+export interface WebaiBridgeMcpToolPayload {
   [key: string]: unknown;
   readOnly: true;
   command: string;
@@ -163,18 +163,18 @@ export interface SwitchyardMcpToolPayload {
   result: unknown;
 }
 
-type SwitchyardMcpToolDefinition = {
+type WebaiBridgeMcpToolDefinition = {
   readonly name: string;
   readonly description: string;
   readonly inputSchema?: Record<string, z.ZodTypeAny>;
   readonly execute: (
-    client: SwitchyardServiceClient,
+    client: WebaiBridgeServiceClient,
     args: Record<string, unknown> | undefined,
-  ) => Promise<SwitchyardMcpToolPayload>;
+  ) => Promise<WebaiBridgeMcpToolPayload>;
 };
 
 const PROVIDER_INPUT_SCHEMA = {
-  provider: z.string().trim().min(1).describe("Switchyard provider id."),
+  provider: z.string().trim().min(1).describe("WebaiBridge provider id."),
 };
 const TARGET_INPUT_SCHEMA = {
   target: z.string().trim().min(1).describe("Catalog target id."),
@@ -591,7 +591,7 @@ function buildPayload(
   command: string,
   result: unknown,
   provider?: string,
-): SwitchyardMcpToolPayload {
+): WebaiBridgeMcpToolPayload {
   return {
     readOnly: true,
     command,
@@ -603,23 +603,23 @@ function buildPayload(
 function requireProvider(
   args: Record<string, unknown> | undefined,
   toolName: string,
-): SwitchyardProviderId {
+): WebaiBridgeProviderId {
   const provider = typeof args?.provider === "string" ? args.provider.trim() : "";
 
   if (!provider) {
     throw new Error(`${toolName} requires a non-empty provider.`);
   }
 
-  return provider as SwitchyardProviderId;
+  return provider as WebaiBridgeProviderId;
 }
 
 async function providerSupportProjection(
-  client: SwitchyardServiceClient,
+  client: WebaiBridgeServiceClient,
   args: Record<string, unknown> | undefined,
   toolName: string,
   command: string,
   project: (
-    bundle: Awaited<ReturnType<SwitchyardServiceClient["providerSupportBundle"]>>,
+    bundle: Awaited<ReturnType<WebaiBridgeServiceClient["providerSupportBundle"]>>,
   ) => unknown,
 ) {
   const provider = requireProvider(args, toolName);
@@ -628,37 +628,37 @@ async function providerSupportProjection(
   return buildPayload(command, project(bundle), provider);
 }
 
-export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDefinition> = [
+export const WEBAI_BRIDGE_MCP_TOOL_DEFINITIONS: ReadonlyArray<WebaiBridgeMcpToolDefinition> = [
   {
-    name: "switchyard.runtime.bootstrap",
-    description: "Read the current Switchyard runtime bootstrap payload.",
+    name: "webai-bridge.runtime.bootstrap",
+    description: "Read the current WebaiBridge runtime bootstrap payload.",
     async execute(client) {
       return buildPayload("runtime-bootstrap", await client.bootstrap());
     },
   },
   {
-    name: "switchyard.providers.list",
-    description: "List the current Switchyard runtime provider catalog.",
+    name: "webai-bridge.providers.list",
+    description: "List the current WebaiBridge runtime provider catalog.",
     async execute(client) {
       return buildPayload("providers", await client.listProviders());
     },
   },
   {
-    name: "switchyard.runtime.health",
-    description: "Read the current Switchyard runtime health summary.",
+    name: "webai-bridge.runtime.health",
+    description: "Read the current WebaiBridge runtime health summary.",
     async execute(client) {
       return buildPayload("health", await client.health());
     },
   },
   {
-    name: "switchyard.runtime.doctor",
+    name: "webai-bridge.runtime.doctor",
     description: "Read the current aggregated runtime doctor receipt.",
     async execute(client) {
       return buildPayload("runtime-doctor", await client.runtimeDoctor());
     },
   },
   {
-    name: "switchyard.runtime.plan",
+    name: "webai-bridge.runtime.plan",
     description: "Read the current default task-centric runtime plan.",
     inputSchema: RUNTIME_PLAN_INPUT_SCHEMA,
     async execute(client, args) {
@@ -666,18 +666,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.auth.status",
-    description: "Read the current Switchyard auth-status summary.",
+    name: "webai-bridge.auth.status",
+    description: "Read the current WebaiBridge auth-status summary.",
     async execute(client) {
       return buildPayload("auth-status", await client.authStatus());
     },
   },
   {
-    name: "switchyard.provider.status",
+    name: "webai-bridge.provider.status",
     description: "Read the current provider runtime status for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.status");
+      const provider = requireProvider(args, "webai-bridge.provider.status");
       return buildPayload(
         "provider-status",
         await client.providerStatus(provider),
@@ -686,12 +686,12 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.doctor",
+    name: "webai-bridge.provider.doctor",
     description:
       "Read the unified provider doctor receipt for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.doctor");
+      const provider = requireProvider(args, "webai-bridge.provider.doctor");
       return buildPayload(
         "provider-doctor",
         await client.providerDoctor(provider),
@@ -700,11 +700,11 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.probe",
+    name: "webai-bridge.provider.probe",
     description: "Read the current provider probe result for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.probe");
+      const provider = requireProvider(args, "webai-bridge.provider.probe");
       return buildPayload(
         "provider-probe",
         await client.providerProbe(provider),
@@ -713,11 +713,11 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.remediation",
+    name: "webai-bridge.provider.remediation",
     description: "Read the current remediation summary for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.remediation");
+      const provider = requireProvider(args, "webai-bridge.provider.remediation");
       return buildPayload(
         "provider-remediation",
         await client.providerRemediation(provider),
@@ -726,11 +726,11 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.current_page",
+    name: "webai-bridge.provider.current_page",
     description: "Read the current captured page summary for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.current_page");
+      const provider = requireProvider(args, "webai-bridge.provider.current_page");
       return buildPayload(
         "provider-current-page",
         await client.providerCurrentPage(provider),
@@ -739,11 +739,11 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.current_console",
+    name: "webai-bridge.provider.current_console",
     description: "Read the current captured console summary for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.current_console");
+      const provider = requireProvider(args, "webai-bridge.provider.current_console");
       return buildPayload(
         "provider-current-console",
         await client.providerCurrentConsole(provider),
@@ -752,11 +752,11 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.current_network",
+    name: "webai-bridge.provider.current_network",
     description: "Read the current captured network summary for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.current_network");
+      const provider = requireProvider(args, "webai-bridge.provider.current_network");
       return buildPayload(
         "provider-current-network",
         await client.providerCurrentNetwork(provider),
@@ -765,67 +765,67 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.store_readiness",
+    name: "webai-bridge.provider.store_readiness",
     description: "Read the store-readiness slice from a provider support bundle.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     execute(client, args) {
       return providerSupportProjection(
         client,
         args,
-        "switchyard.provider.store_readiness",
+        "webai-bridge.provider.store_readiness",
         "provider-store-readiness",
         (bundle) => bundle.storeReadiness,
       );
     },
   },
   {
-    name: "switchyard.provider.live_readiness",
+    name: "webai-bridge.provider.live_readiness",
     description: "Read the live-readiness slice from a provider support bundle.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     execute(client, args) {
       return providerSupportProjection(
         client,
         args,
-        "switchyard.provider.live_readiness",
+        "webai-bridge.provider.live_readiness",
         "provider-live-readiness",
         (bundle) => bundle.liveReadiness,
       );
     },
   },
   {
-    name: "switchyard.provider.attach_target",
+    name: "webai-bridge.provider.attach_target",
     description: "Read the attach-target slice from a provider support bundle.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     execute(client, args) {
       return providerSupportProjection(
         client,
         args,
-        "switchyard.provider.attach_target",
+        "webai-bridge.provider.attach_target",
         "provider-attach-target",
         (bundle) => bundle.attachTarget,
       );
     },
   },
   {
-    name: "switchyard.provider.diagnose_ladder",
+    name: "webai-bridge.provider.diagnose_ladder",
     description: "Read the diagnose ladder slice from a provider support bundle.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     execute(client, args) {
       return providerSupportProjection(
         client,
         args,
-        "switchyard.provider.diagnose_ladder",
+        "webai-bridge.provider.diagnose_ladder",
         "provider-diagnose-ladder",
         (bundle) => bundle.diagnoseLadder,
       );
     },
   },
   {
-    name: "switchyard.provider.support_bundle",
+    name: "webai-bridge.provider.support_bundle",
     description: "Read the full support bundle for a single provider.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.support_bundle");
+      const provider = requireProvider(args, "webai-bridge.provider.support_bundle");
       return buildPayload(
         "provider-support-bundle",
         await client.providerSupportBundle(provider),
@@ -834,11 +834,11 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.provider.diagnose",
+    name: "webai-bridge.provider.diagnose",
     description: "Alias for the full provider support bundle used by diagnose-oriented tooling.",
     inputSchema: PROVIDER_INPUT_SCHEMA,
     async execute(client, args) {
-      const provider = requireProvider(args, "switchyard.provider.diagnose");
+      const provider = requireProvider(args, "webai-bridge.provider.diagnose");
       return buildPayload(
         "provider-diagnose",
         await client.providerDiagnose(provider),
@@ -847,21 +847,21 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.surface_catalog",
-    description: "Read the full machine-readable Switchyard outward surface catalog.",
+    name: "webai-bridge.catalog.surface_catalog",
+    description: "Read the full machine-readable WebaiBridge outward surface catalog.",
     async execute() {
       return buildPayload("surface-catalog", readPublicSurfaceCatalog());
     },
   },
   {
-    name: "switchyard.catalog.surface_catalog_schema",
+    name: "webai-bridge.catalog.surface_catalog_schema",
     description: "Read the JSON schema that validates the outward surface catalog.",
     async execute() {
       return buildPayload("surface-catalog-schema", readPublicSurfaceCatalogSchema());
     },
   },
   {
-    name: "switchyard.catalog.public_distribution_ledger",
+    name: "webai-bridge.catalog.public_distribution_ledger",
     description: "Read the machine-readable public distribution ledger.",
     async execute() {
       return buildPayload(
@@ -871,7 +871,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.public_distribution_ledger_schema",
+    name: "webai-bridge.catalog.public_distribution_ledger_schema",
     description: "Read the JSON schema for the public distribution ledger.",
     async execute() {
       return buildPayload(
@@ -881,7 +881,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.distribution_surfaces",
+    name: "webai-bridge.catalog.distribution_surfaces",
     description: "Read the current public distribution surface entries.",
     async execute() {
       return buildPayload(
@@ -891,25 +891,25 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.distribution_surface",
+    name: "webai-bridge.catalog.distribution_surface",
     description: "Read one public distribution surface record.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const catalog = readPublicDistributionLedger();
-      const target = requireTargetArg(args, "switchyard.catalog.distribution_surface");
+      const target = requireTargetArg(args, "webai-bridge.catalog.distribution_surface");
       return buildPayload(
         "distribution-surface",
         requireCatalogTarget(
           catalog.entries,
           target,
-          "switchyard.catalog.distribution_surface",
+          "webai-bridge.catalog.distribution_surface",
         ),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.provider_catalog",
+    name: "webai-bridge.catalog.provider_catalog",
     description: "Read the current provider runtime catalog.",
     async execute() {
       return buildPayload(
@@ -919,7 +919,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.provider_catalog_schema",
+    name: "webai-bridge.catalog.provider_catalog_schema",
     description: "Read the JSON schema for the provider runtime catalog.",
     async execute() {
       return buildPayload(
@@ -929,32 +929,32 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.provider_entry",
+    name: "webai-bridge.catalog.provider_entry",
     description: "Read one provider runtime record from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const catalog = readProviderRuntimeCatalog();
-      const target = requireTargetArg(args, "switchyard.catalog.provider_entry");
+      const target = requireTargetArg(args, "webai-bridge.catalog.provider_entry");
       return buildPayload(
         "provider-entry",
         requireProviderCatalogEntry(
           catalog.providers,
           target,
-          "switchyard.catalog.provider_entry",
+          "webai-bridge.catalog.provider_entry",
         ),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.compat_target_catalog",
+    name: "webai-bridge.catalog.compat_target_catalog",
     description: "Read the dedicated compat target catalog document.",
     async execute() {
       return buildPayload("compat-target-catalog", readCompatTargetCatalog());
     },
   },
   {
-    name: "switchyard.catalog.compat_target_catalog_schema",
+    name: "webai-bridge.catalog.compat_target_catalog_schema",
     description: "Read the dedicated compat target catalog schema.",
     async execute() {
       return buildPayload(
@@ -964,7 +964,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.compat_targets",
+    name: "webai-bridge.catalog.compat_targets",
     description: "Read the current compat target catalog.",
     async execute() {
       return buildPayload(
@@ -974,28 +974,28 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.compat_target",
+    name: "webai-bridge.catalog.compat_target",
     description: "Read one compat target record from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const catalog = readCompatTargetCatalog();
-      const target = requireTargetArg(args, "switchyard.catalog.compat_target");
+      const target = requireTargetArg(args, "webai-bridge.catalog.compat_target");
       return buildPayload(
         "compat-target",
-        requireCatalogTarget(catalog.targets, target, "switchyard.catalog.compat_target"),
+        requireCatalogTarget(catalog.targets, target, "webai-bridge.catalog.compat_target"),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.builder_kit_catalog",
+    name: "webai-bridge.catalog.builder_kit_catalog",
     description: "Read the dedicated builder kit catalog document.",
     async execute() {
       return buildPayload("builder-kit-catalog", readBuilderKitCatalog());
     },
   },
   {
-    name: "switchyard.catalog.builder_kit_catalog_schema",
+    name: "webai-bridge.catalog.builder_kit_catalog_schema",
     description: "Read the dedicated builder kit catalog schema.",
     async execute() {
       return buildPayload(
@@ -1005,7 +1005,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_kits",
+    name: "webai-bridge.catalog.builder_kits",
     description: "Read the current builder kit starter catalog.",
     async execute() {
       return buildPayload(
@@ -1015,28 +1015,28 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_kit",
+    name: "webai-bridge.catalog.builder_kit",
     description: "Read one builder kit starter recipe from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const catalog = readBuilderKitCatalog();
-      const target = requireTargetArg(args, "switchyard.catalog.builder_kit");
+      const target = requireTargetArg(args, "webai-bridge.catalog.builder_kit");
       return buildPayload(
         "builder-kit",
-        requireCatalogTarget(catalog.kits, target, "switchyard.catalog.builder_kit"),
+        requireCatalogTarget(catalog.kits, target, "webai-bridge.catalog.builder_kit"),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.skill_pack_catalog",
+    name: "webai-bridge.catalog.skill_pack_catalog",
     description: "Read the dedicated skill pack catalog document.",
     async execute() {
       return buildPayload("skill-pack-catalog", readSkillPackCatalog());
     },
   },
   {
-    name: "switchyard.catalog.skill_pack_catalog_schema",
+    name: "webai-bridge.catalog.skill_pack_catalog_schema",
     description: "Read the dedicated skill pack catalog schema.",
     async execute() {
       return buildPayload(
@@ -1046,7 +1046,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.skill_packs",
+    name: "webai-bridge.catalog.skill_packs",
     description: "Read the current skills pack starter catalog.",
     async execute() {
       return buildPayload(
@@ -1056,18 +1056,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.skill_pack",
+    name: "webai-bridge.catalog.skill_pack",
     description: "Read one skills pack starter recipe from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const catalog = readSkillPackCatalog();
-      const target = requireTargetArg(args, "switchyard.catalog.skill_pack");
+      const target = requireTargetArg(args, "webai-bridge.catalog.skill_pack");
       return buildPayload(
         "skill-pack",
         requireIdEntry(
           catalog.packs,
           target,
-          "switchyard.catalog.skill_pack",
+          "webai-bridge.catalog.skill_pack",
           "skill pack",
         ),
         undefined,
@@ -1075,7 +1075,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.host_playbooks",
+    name: "webai-bridge.catalog.host_playbooks",
     description: "Read the current host integration playbooks.",
     async execute() {
       return buildPayload(
@@ -1085,7 +1085,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.host_playbooks_schema",
+    name: "webai-bridge.catalog.host_playbooks_schema",
     description: "Read the JSON schema for host integration playbooks.",
     async execute() {
       return buildPayload(
@@ -1095,25 +1095,25 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.host_playbook",
+    name: "webai-bridge.catalog.host_playbook",
     description: "Read one host integration playbook.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const playbooks = readHostIntegrationPlaybooks();
-      const target = requireTargetArg(args, "switchyard.catalog.host_playbook");
+      const target = requireTargetArg(args, "webai-bridge.catalog.host_playbook");
       return buildPayload(
         "host-playbook",
         requireHostPlaybook(
           playbooks,
           target,
-          "switchyard.catalog.host_playbook",
+          "webai-bridge.catalog.host_playbook",
         ),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.host_examples",
+    name: "webai-bridge.catalog.host_examples",
     description: "Read the current host integration examples.",
     async execute() {
       return buildPayload(
@@ -1123,7 +1123,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.host_examples_schema",
+    name: "webai-bridge.catalog.host_examples_schema",
     description: "Read the JSON schema for host integration examples.",
     async execute() {
       return buildPayload(
@@ -1133,25 +1133,25 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.host_example",
+    name: "webai-bridge.catalog.host_example",
     description: "Read one host integration example.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const examples = readHostIntegrationExamples();
-      const target = requireTargetArg(args, "switchyard.catalog.host_example");
+      const target = requireTargetArg(args, "webai-bridge.catalog.host_example");
       return buildPayload(
         "host-example",
         requireHostExample(
           examples,
           target,
-          "switchyard.catalog.host_example",
+          "webai-bridge.catalog.host_example",
         ),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.builder_journeys",
+    name: "webai-bridge.catalog.builder_journeys",
     description: "Read the current builder journey index.",
     async execute() {
       return buildPayload(
@@ -1161,7 +1161,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_journeys_schema",
+    name: "webai-bridge.catalog.builder_journeys_schema",
     description: "Read the JSON schema for the builder journey index.",
     async execute() {
       return buildPayload(
@@ -1171,18 +1171,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_journey",
+    name: "webai-bridge.catalog.builder_journey",
     description: "Read one builder journey record.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const journeys = readBuilderJourneys();
-      const target = requireTargetArg(args, "switchyard.catalog.builder_journey");
+      const target = requireTargetArg(args, "webai-bridge.catalog.builder_journey");
       return buildPayload(
         "builder-journey",
         requireIdEntry(
           journeys.journeys,
           target,
-          "switchyard.catalog.builder_journey",
+          "webai-bridge.catalog.builder_journey",
           "builder journey",
         ),
         undefined,
@@ -1190,7 +1190,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_intent_router",
+    name: "webai-bridge.catalog.builder_intent_router",
     description: "Read the current builder intent router.",
     async execute() {
       return buildPayload(
@@ -1200,7 +1200,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_intent_router_schema",
+    name: "webai-bridge.catalog.builder_intent_router_schema",
     description: "Read the JSON schema for the builder intent router.",
     async execute() {
       return buildPayload(
@@ -1210,18 +1210,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_intent",
+    name: "webai-bridge.catalog.builder_intent",
     description: "Read one builder intent router entry.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const router = readBuilderIntentRouter();
-      const target = requireTargetArg(args, "switchyard.catalog.builder_intent");
+      const target = requireTargetArg(args, "webai-bridge.catalog.builder_intent");
       return buildPayload(
         "builder-intent",
         requireIdEntry(
           router.intents,
           target,
-          "switchyard.catalog.builder_intent",
+          "webai-bridge.catalog.builder_intent",
           "builder intent",
         ),
         undefined,
@@ -1229,7 +1229,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.keyword_truth",
+    name: "webai-bridge.catalog.keyword_truth",
     description: "Read the current discoverability keyword truth table.",
     async execute() {
       return buildPayload(
@@ -1239,7 +1239,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.keyword_truth_schema",
+    name: "webai-bridge.catalog.keyword_truth_schema",
     description: "Read the JSON schema for the keyword truth table.",
     async execute() {
       return buildPayload(
@@ -1249,18 +1249,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.keyword_entry",
+    name: "webai-bridge.catalog.keyword_entry",
     description: "Read one keyword truth entry.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const keywordTruth = readKeywordTruth();
-      const target = requireTargetArg(args, "switchyard.catalog.keyword_entry");
+      const target = requireTargetArg(args, "webai-bridge.catalog.keyword_entry");
       return buildPayload(
         "keyword-entry",
         requireIdEntry(
           keywordTruth.entries,
           target,
-          "switchyard.catalog.keyword_entry",
+          "webai-bridge.catalog.keyword_entry",
           "keyword truth entry",
         ),
         undefined,
@@ -1268,7 +1268,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_manifests",
+    name: "webai-bridge.catalog.starter_manifests",
     description: "Read the current starter manifest template catalog.",
     async execute() {
       return buildPayload(
@@ -1278,7 +1278,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_manifests_schema",
+    name: "webai-bridge.catalog.starter_manifests_schema",
     description: "Read the JSON schema for starter manifest templates.",
     async execute() {
       return buildPayload(
@@ -1288,7 +1288,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_examples",
+    name: "webai-bridge.catalog.starter_examples",
     description: "Read the current starter example catalog.",
     async execute() {
       return buildPayload(
@@ -1298,7 +1298,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_examples_schema",
+    name: "webai-bridge.catalog.starter_examples_schema",
     description: "Read the JSON schema for starter manifest examples.",
     async execute() {
       return buildPayload(
@@ -1308,7 +1308,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_index",
+    name: "webai-bridge.catalog.starter_pack_index",
     description: "Read the machine-readable starter pack index.",
     async execute() {
       return buildPayload(
@@ -1318,7 +1318,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_index_schema",
+    name: "webai-bridge.catalog.starter_pack_index_schema",
     description: "Read the JSON schema for the starter pack index.",
     async execute() {
       return buildPayload(
@@ -1328,7 +1328,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_entry",
+    name: "webai-bridge.catalog.starter_pack_entry",
     description: "Read one starter pack entry from the current index.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
@@ -1336,19 +1336,19 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
         builderPacks: Array<{ target: string } & Record<string, unknown>>;
         skillPacks: Array<{ id: string } & Record<string, unknown>>;
       };
-      const target = requireTargetArg(args, "switchyard.catalog.starter_pack_entry");
+      const target = requireTargetArg(args, "webai-bridge.catalog.starter_pack_entry");
       return buildPayload(
         "starter-pack-entry",
         requireStarterPackEntry(
           indexDocument,
           target,
-          "switchyard.catalog.starter_pack_entry",
+          "webai-bridge.catalog.starter_pack_entry",
         ),
       );
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_chooser",
+    name: "webai-bridge.catalog.starter_pack_chooser",
     description: "Read the machine-readable starter pack chooser.",
     async execute() {
       return buildPayload(
@@ -1358,7 +1358,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_chooser_schema",
+    name: "webai-bridge.catalog.starter_pack_chooser_schema",
     description: "Read the JSON schema for the starter pack chooser.",
     async execute() {
       return buildPayload(
@@ -1368,25 +1368,25 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_scenario",
+    name: "webai-bridge.catalog.starter_pack_scenario",
     description: "Read one starter pack chooser scenario.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const chooser = readStarterPackChooser();
-      const target = requireTargetArg(args, "switchyard.catalog.starter_pack_scenario");
+      const target = requireTargetArg(args, "webai-bridge.catalog.starter_pack_scenario");
       return buildPayload(
         "starter-pack-scenario",
         requireIdEntry(
           chooser.scenarios,
           target,
-          "switchyard.catalog.starter_pack_scenario",
+          "webai-bridge.catalog.starter_pack_scenario",
           "starter pack scenario",
         ),
       );
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_comparison",
+    name: "webai-bridge.catalog.starter_pack_comparison",
     description: "Read the machine-readable starter pack comparison matrix.",
     async execute() {
       return buildPayload(
@@ -1396,7 +1396,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_comparison_schema",
+    name: "webai-bridge.catalog.starter_pack_comparison_schema",
     description: "Read the JSON schema for the starter pack comparison matrix.",
     async execute() {
       return buildPayload(
@@ -1406,18 +1406,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.starter_pack_filter",
+    name: "webai-bridge.catalog.starter_pack_filter",
     description: "Read one starter pack comparison filter group.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const comparison = readStarterPackComparison();
-      const target = requireTargetArg(args, "switchyard.catalog.starter_pack_filter");
+      const target = requireTargetArg(args, "webai-bridge.catalog.starter_pack_filter");
       return buildPayload(
         "starter-pack-filter",
         requireIdEntry(
           comparison.filters,
           target,
-          "switchyard.catalog.starter_pack_filter",
+          "webai-bridge.catalog.starter_pack_filter",
           "starter pack filter",
         ),
         undefined,
@@ -1425,54 +1425,54 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.builder_template",
+    name: "webai-bridge.catalog.builder_template",
     description: "Read one builder template manifest from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const templates = readStarterManifestTemplates();
-      const target = requireTargetArg(args, "switchyard.catalog.builder_template");
+      const target = requireTargetArg(args, "webai-bridge.catalog.builder_template");
       return buildPayload(
         "builder-template",
         requireCatalogTarget(
           templates.builderTemplates,
           target,
-          "switchyard.catalog.builder_template",
+          "webai-bridge.catalog.builder_template",
         ),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.builder_example",
+    name: "webai-bridge.catalog.builder_example",
     description: "Read one builder example payload from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const examples = readStarterManifestExamples();
-      const target = requireTargetArg(args, "switchyard.catalog.builder_example");
+      const target = requireTargetArg(args, "webai-bridge.catalog.builder_example");
       return buildPayload(
         "builder-example",
         requireCatalogTarget(
           examples.builderExamples,
           target,
-          "switchyard.catalog.builder_example",
+          "webai-bridge.catalog.builder_example",
         ),
         undefined,
       );
     },
   },
   {
-    name: "switchyard.catalog.skill_template",
+    name: "webai-bridge.catalog.skill_template",
     description: "Read one skill template manifest from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const templates = readStarterManifestTemplates();
-      const target = requireTargetArg(args, "switchyard.catalog.skill_template");
+      const target = requireTargetArg(args, "webai-bridge.catalog.skill_template");
       return buildPayload(
         "skill-template",
         requireIdEntry(
           templates.skillTemplates,
           target,
-          "switchyard.catalog.skill_template",
+          "webai-bridge.catalog.skill_template",
           "skill template",
         ),
         undefined,
@@ -1480,18 +1480,18 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.skill_example",
+    name: "webai-bridge.catalog.skill_example",
     description: "Read one skill example payload from the current catalog.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
       const examples = readStarterManifestExamples();
-      const target = requireTargetArg(args, "switchyard.catalog.skill_example");
+      const target = requireTargetArg(args, "webai-bridge.catalog.skill_example");
       return buildPayload(
         "skill-example",
         requireIdEntry(
           examples.skillExamples,
           target,
-          "switchyard.catalog.skill_example",
+          "webai-bridge.catalog.skill_example",
           "skill example",
         ),
         undefined,
@@ -1499,14 +1499,14 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.mcp_status",
+    name: "webai-bridge.catalog.mcp_status",
     description: "Read the current MCP truth block from the outward surface catalog.",
     async execute() {
       return buildPayload("mcp-status", readPublicSurfaceCatalog().mcp);
     },
   },
   {
-    name: "switchyard.catalog.mcp_tools",
+    name: "webai-bridge.catalog.mcp_tools",
     description: "Read the current MCP tool inventory from the dedicated MCP tool catalog.",
     async execute() {
       return buildPayload(
@@ -1516,7 +1516,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.mcp_tool_catalog",
+    name: "webai-bridge.catalog.mcp_tool_catalog",
     description: "Read the dedicated MCP tool catalog.",
     async execute() {
       return buildPayload(
@@ -1526,7 +1526,7 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.mcp_tool_catalog_schema",
+    name: "webai-bridge.catalog.mcp_tool_catalog_schema",
     description: "Read the JSON schema for the dedicated MCP tool catalog.",
     async execute() {
       return buildPayload(
@@ -1536,17 +1536,17 @@ export const SWITCHYARD_MCP_TOOL_DEFINITIONS: ReadonlyArray<SwitchyardMcpToolDef
     },
   },
   {
-    name: "switchyard.catalog.mcp_tool",
+    name: "webai-bridge.catalog.mcp_tool",
     description: "Read one MCP tool catalog entry.",
     inputSchema: TARGET_INPUT_SCHEMA,
     async execute(_client, args) {
-      const target = requireTargetArg(args, "switchyard.catalog.mcp_tool");
+      const target = requireTargetArg(args, "webai-bridge.catalog.mcp_tool");
       return buildPayload(
         "mcp-tool",
         requireNamedToolEntry(
           readMcpToolCatalog().tools,
           target,
-          "switchyard.catalog.mcp_tool",
+          "webai-bridge.catalog.mcp_tool",
         ),
       );
     },
@@ -1563,18 +1563,18 @@ export function resolveMcpBaseUrl(
     return stripTrailingSlashes(override);
   }
 
-  const envBaseUrl = env.SWITCHYARD_RUNTIME_BASE_URL?.trim();
+  const envBaseUrl = env.WEBAI_BRIDGE_RUNTIME_BASE_URL?.trim();
 
   if (envBaseUrl) {
     return stripTrailingSlashes(envBaseUrl);
   }
 
-  const port = env.SWITCHYARD_SERVICE_PORT?.trim() || "4010";
+  const port = env.WEBAI_BRIDGE_SERVICE_PORT?.trim() || "4010";
   return `http://127.0.0.1:${port}`;
 }
 
-export function parseMcpArgs(argv = process.argv.slice(2)): SwitchyardMcpCliOptions {
-  const options: SwitchyardMcpCliOptions = {};
+export function parseMcpArgs(argv = process.argv.slice(2)): WebaiBridgeMcpCliOptions {
+  const options: WebaiBridgeMcpCliOptions = {};
 
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -1600,12 +1600,12 @@ export function parseMcpArgs(argv = process.argv.slice(2)): SwitchyardMcpCliOpti
   return options;
 }
 
-export async function runSwitchyardMcpTool(
+export async function runWebaiBridgeMcpTool(
   toolName: string,
   args: Record<string, unknown> | undefined,
-  client: SwitchyardServiceClient,
+  client: WebaiBridgeServiceClient,
 ) {
-  const definition = SWITCHYARD_MCP_TOOL_DEFINITIONS.find(
+  const definition = WEBAI_BRIDGE_MCP_TOOL_DEFINITIONS.find(
     (candidate) => candidate.name === toolName,
   );
 
@@ -1616,11 +1616,11 @@ export async function runSwitchyardMcpTool(
   return definition.execute(client, args);
 }
 
-export function registerSwitchyardReadonlyMcpTools(
+export function registerWebaiBridgeReadonlyMcpTools(
   server: Pick<McpServer, "registerTool">,
-  client: SwitchyardServiceClient,
+  client: WebaiBridgeServiceClient,
 ) {
-  for (const definition of SWITCHYARD_MCP_TOOL_DEFINITIONS) {
+  for (const definition of WEBAI_BRIDGE_MCP_TOOL_DEFINITIONS) {
     server.registerTool(
       definition.name,
       {
@@ -1647,25 +1647,25 @@ export function registerSwitchyardReadonlyMcpTools(
   }
 }
 
-export interface SwitchyardMcpServerOptions
-  extends SwitchyardServiceClientOptions {
+export interface WebaiBridgeMcpServerOptions
+  extends WebaiBridgeServiceClientOptions {
   serverName?: string;
   serverVersion?: string;
 }
 
-export function createSwitchyardMcpServer(
-  options: SwitchyardMcpServerOptions,
+export function createWebaiBridgeMcpServer(
+  options: WebaiBridgeMcpServerOptions,
 ) {
-  const client = createSwitchyardServiceClient(options);
+  const client = createWebaiBridgeServiceClient(options);
   const server = new McpServer(
     {
-      name: options.serverName ?? "switchyard-readonly-mcp",
+      name: options.serverName ?? "webai-bridge-readonly-mcp",
       version: options.serverVersion ?? "0.1.0",
     },
     {},
   );
 
-  registerSwitchyardReadonlyMcpTools(server, client);
+  registerWebaiBridgeReadonlyMcpTools(server, client);
 
   return {
     server,
@@ -1673,10 +1673,10 @@ export function createSwitchyardMcpServer(
   };
 }
 
-export async function runSwitchyardMcpStdioServer(
-  options: SwitchyardMcpServerOptions,
+export async function runWebaiBridgeMcpStdioServer(
+  options: WebaiBridgeMcpServerOptions,
 ) {
-  const { server, client } = createSwitchyardMcpServer(options);
+  const { server, client } = createWebaiBridgeMcpServer(options);
   const transport = new StdioServerTransport();
 
   await server.connect(transport);

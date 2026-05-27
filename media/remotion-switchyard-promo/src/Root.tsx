@@ -1,22 +1,22 @@
 import React from "react";
 import { Composition, Still } from "remotion";
 
-import { SwitchyardPromo, SwitchyardPromoPoster } from "./SwitchyardPromo";
+import { WebaiBridgePromo, WebaiBridgePromoPoster } from "./WebaiBridgePromo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        id="SwitchyardPromo"
-        component={SwitchyardPromo}
+        id="WebaiBridgePromo"
+        component={WebaiBridgePromo}
         width={1920}
         height={1080}
         fps={30}
         durationInFrames={20 * 30}
       />
       <Still
-        id="SwitchyardPromoPoster"
-        component={SwitchyardPromoPoster}
+        id="WebaiBridgePromoPoster"
+        component={WebaiBridgePromoPoster}
         width={1920}
         height={1080}
       />

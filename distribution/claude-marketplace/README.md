@@ -1,6 +1,6 @@
-# Switchyard Claude-Compatible Companion Bundle
+# WebaiBridge Claude-Compatible Companion Bundle
 
-这不是 `Switchyard` 的主产品身份。
+这不是 `WebaiBridge` 的主产品身份。
 它更像一块已经裁好的“转接板”：
 
 - 对 Claude Code 来说，它是 **marketplace-compatible companion bundle**
@@ -18,7 +18,7 @@
 
 它不是：
 
-- Switchyard 的 primary repo identity
+- WebaiBridge 的 primary repo identity
 - official marketplace listing
 - release-published package
 - full Claude Code parity

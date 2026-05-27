@@ -6,9 +6,9 @@
       "id": "runtime-diagnostics-pack",
       "status": "partial",
       "routeSummary": "One route card that ties the diagnostics skill pack to the exact CLI and MCP truth surfaces it already depends on.",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack",
-      "catalogCommand": "pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack --json",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack",
+      "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack --json",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "packPath": "starter-packs/skills/runtime-diagnostics-pack",
       "packFiles": [
         "starter-packs/skills/runtime-diagnostics-pack/README.md",
@@ -17,15 +17,15 @@
         "starter-packs/skills/runtime-diagnostics-pack/smoke.mjs"
       ],
       "recommendedCliCommands": [
-        "pnpm run switchyard:cli -- provider-status --provider chatgpt --json",
-        "pnpm run switchyard:cli -- provider-diagnose --provider chatgpt --json",
-        "pnpm run switchyard:cli -- provider-support-bundle --provider chatgpt --json"
+        "pnpm run webai-bridge:cli -- provider-status --provider chatgpt --json",
+        "pnpm run webai-bridge:cli -- provider-diagnose --provider chatgpt --json",
+        "pnpm run webai-bridge:cli -- provider-support-bundle --provider chatgpt --json"
       ],
       "recommendedMcpTools": [
-        "switchyard.catalog.skill_pack",
-        "switchyard.provider.status",
-        "switchyard.provider.diagnose",
-        "switchyard.provider.support_bundle"
+        "webai-bridge.catalog.skill_pack",
+        "webai-bridge.provider.status",
+        "webai-bridge.provider.diagnose",
+        "webai-bridge.provider.support_bundle"
       ],
       "recommendedDocs": [
         "docs/mcp.md",
@@ -54,9 +54,9 @@
       "id": "docs-seo-sync-pack",
       "status": "partial",
       "routeSummary": "One route card that ties the docs/SEO truth-sync pack to the exact read-only catalog and keyword surfaces it should use.",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack",
-      "catalogCommand": "pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack --json",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack",
+      "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack --json",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "packPath": "starter-packs/skills/docs-seo-sync-pack",
       "packFiles": [
         "starter-packs/skills/docs-seo-sync-pack/README.md",
@@ -65,14 +65,14 @@
         "starter-packs/skills/docs-seo-sync-pack/smoke.mjs"
       ],
       "recommendedCliCommands": [
-        "pnpm run switchyard:cli -- surface-catalog --json",
-        "pnpm run switchyard:cli -- keyword-truth --json",
-        "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json"
+        "pnpm run webai-bridge:cli -- surface-catalog --json",
+        "pnpm run webai-bridge:cli -- keyword-truth --json",
+        "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json"
       ],
       "recommendedMcpTools": [
-        "switchyard.catalog.skill_pack",
-        "switchyard.catalog.surface_catalog",
-        "switchyard.catalog.keyword_truth"
+        "webai-bridge.catalog.skill_pack",
+        "webai-bridge.catalog.surface_catalog",
+        "webai-bridge.catalog.keyword_truth"
       ],
       "recommendedDocs": [
         "docs/mcp.md",
@@ -100,9 +100,9 @@
       "id": "chat-app-runtime-pack",
       "status": "planned",
       "routeSummary": "One route card that ties a chat-app runtime starter to the current service/runtime truth surfaces without promising a full chat product shell.",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target chat-app-runtime-pack",
-      "catalogCommand": "pnpm run switchyard:cli -- skill-pack --target chat-app-runtime-pack --json",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target chat-app-runtime-pack",
+      "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack --target chat-app-runtime-pack --json",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "packPath": "starter-packs/skills/chat-app-runtime-pack",
       "packFiles": [
         "starter-packs/skills/chat-app-runtime-pack/README.md",
@@ -111,15 +111,15 @@
         "starter-packs/skills/chat-app-runtime-pack/smoke.mjs"
       ],
       "recommendedCliCommands": [
-        "pnpm run switchyard:cli -- runtime-doctor --json",
-        "pnpm run switchyard:cli -- runtime-plan --json",
-        "pnpm run switchyard:cli -- provider-catalog --json"
+        "pnpm run webai-bridge:cli -- runtime-doctor --json",
+        "pnpm run webai-bridge:cli -- runtime-plan --json",
+        "pnpm run webai-bridge:cli -- provider-catalog --json"
       ],
       "recommendedMcpTools": [
-        "switchyard.catalog.skill_pack",
-        "switchyard.runtime.doctor",
-        "switchyard.runtime.plan",
-        "switchyard.catalog.provider_catalog"
+        "webai-bridge.catalog.skill_pack",
+        "webai-bridge.runtime.doctor",
+        "webai-bridge.runtime.plan",
+        "webai-bridge.catalog.provider_catalog"
       ],
       "recommendedDocs": [
         "docs/api/service-http-reference.md",
@@ -147,9 +147,9 @@
       "id": "research-copilot-pack",
       "status": "planned",
       "routeSummary": "One route card that ties a research copilot starter to truth surfaces first so synthesis stays human-reviewed and fail-closed.",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack",
-      "catalogCommand": "pnpm run switchyard:cli -- skill-pack --target research-copilot-pack --json",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack",
+      "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack --target research-copilot-pack --json",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "packPath": "starter-packs/skills/research-copilot-pack",
       "packFiles": [
         "starter-packs/skills/research-copilot-pack/README.md",
@@ -158,15 +158,15 @@
         "starter-packs/skills/research-copilot-pack/smoke.mjs"
       ],
       "recommendedCliCommands": [
-        "pnpm run switchyard:cli -- surface-catalog --json",
-        "pnpm run switchyard:cli -- compat-targets --json",
-        "pnpm run switchyard:cli -- keyword-truth --json"
+        "pnpm run webai-bridge:cli -- surface-catalog --json",
+        "pnpm run webai-bridge:cli -- compat-targets --json",
+        "pnpm run webai-bridge:cli -- keyword-truth --json"
       ],
       "recommendedMcpTools": [
-        "switchyard.catalog.skill_pack",
-        "switchyard.catalog.surface_catalog",
-        "switchyard.catalog.compat_targets",
-        "switchyard.catalog.keyword_truth"
+        "webai-bridge.catalog.skill_pack",
+        "webai-bridge.catalog.surface_catalog",
+        "webai-bridge.catalog.compat_targets",
+        "webai-bridge.catalog.keyword_truth"
       ],
       "recommendedDocs": [
         "docs/public-surface-support-matrix.md",
@@ -194,9 +194,9 @@
       "id": "compare-runtime-pack",
       "status": "planned",
       "routeSummary": "One route card that ties compare-first runtime selection to the existing starter-pack comparison and filter truth instead of auto-picking a winner.",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack",
-      "catalogCommand": "pnpm run switchyard:cli -- skill-pack --target compare-runtime-pack --json",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack",
+      "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack --target compare-runtime-pack --json",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "packPath": "starter-packs/skills/compare-runtime-pack",
       "packFiles": [
         "starter-packs/skills/compare-runtime-pack/README.md",
@@ -205,14 +205,14 @@
         "starter-packs/skills/compare-runtime-pack/smoke.mjs"
       ],
       "recommendedCliCommands": [
-        "pnpm run switchyard:cli -- starter-pack-comparison --json",
-        "pnpm run switchyard:cli -- starter-pack-filter --target thin-runtime-bridges",
-        "pnpm run switchyard:cli -- starter-pack-filter --target read-only-truth"
+        "pnpm run webai-bridge:cli -- starter-pack-comparison --json",
+        "pnpm run webai-bridge:cli -- starter-pack-filter --target thin-runtime-bridges",
+        "pnpm run webai-bridge:cli -- starter-pack-filter --target read-only-truth"
       ],
       "recommendedMcpTools": [
-        "switchyard.catalog.skill_pack",
-        "switchyard.catalog.starter_pack_comparison",
-        "switchyard.catalog.starter_pack_filter"
+        "webai-bridge.catalog.skill_pack",
+        "webai-bridge.catalog.starter_pack_comparison",
+        "webai-bridge.catalog.starter_pack_filter"
       ],
       "recommendedDocs": [
         "docs/starter-pack-chooser.md",
@@ -240,9 +240,9 @@
       "id": "byok-first-safe-pack",
       "status": "planned",
       "routeSummary": "One route card that keeps a BYOK-first starter grounded in provider truth and safe invoke planning before any web-login expansion.",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target byok-first-safe-pack",
-      "catalogCommand": "pnpm run switchyard:cli -- skill-pack --target byok-first-safe-pack --json",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target byok-first-safe-pack",
+      "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack --target byok-first-safe-pack --json",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "packPath": "starter-packs/skills/byok-first-safe-pack",
       "packFiles": [
         "starter-packs/skills/byok-first-safe-pack/README.md",
@@ -251,15 +251,15 @@
         "starter-packs/skills/byok-first-safe-pack/smoke.mjs"
       ],
       "recommendedCliCommands": [
-        "pnpm run switchyard:cli -- provider-catalog --json",
-        "pnpm run switchyard:cli -- runtime-plan --json",
-        "pnpm run switchyard:cli -- runtime-doctor --json"
+        "pnpm run webai-bridge:cli -- provider-catalog --json",
+        "pnpm run webai-bridge:cli -- runtime-plan --json",
+        "pnpm run webai-bridge:cli -- runtime-doctor --json"
       ],
       "recommendedMcpTools": [
-        "switchyard.catalog.skill_pack",
-        "switchyard.catalog.provider_catalog",
-        "switchyard.runtime.plan",
-        "switchyard.runtime.doctor"
+        "webai-bridge.catalog.skill_pack",
+        "webai-bridge.catalog.provider_catalog",
+        "webai-bridge.runtime.plan",
+        "webai-bridge.runtime.doctor"
       ],
       "recommendedDocs": [
         "docs/api/sdk-quickstart.md",

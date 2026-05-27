@@ -5,10 +5,10 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 import { buildAuthPortalShellModel } from "../../../apps/auth-portal/src/index.js";
-import { SwitchyardContractError } from "../../../packages/contracts/src/index.js";
+import { WebaiBridgeContractError } from "../../../packages/contracts/src/index.js";
 import {
-  createSwitchyardService,
-  type SwitchyardServiceOptions,
+  createWebaiBridgeService,
+  type WebaiBridgeServiceOptions,
 } from "../../../apps/service/src/index.js";
 import {
   createCredentialOwner,
@@ -20,35 +20,35 @@ import {
   buildServiceProviderAuthView,
   buildServiceProviderRouteRefs,
   buildServiceProviderRuntimeView,
-  SwitchyardHttpSurface,
+  WebaiBridgeHttpSurface,
 } from "../../../packages/surfaces/http/src/index.js";
 import {
   getInvokeProofExpectation,
   runWebLoginLiveVerification,
 } from "../../../scripts/verify-web-login-live.mjs";
 
-type TestService = ReturnType<typeof createSwitchyardService>;
+type TestService = ReturnType<typeof createWebaiBridgeService>;
 
 const ISOLATED_RUNTIME_ENV: Record<string, string | undefined> = {
-  SWITCHYARD_GEMINI_API_KEY: undefined,
+  WEBAI_BRIDGE_GEMINI_API_KEY: undefined,
   GEMINI_API_KEY: undefined,
   GOOGLE_API_KEY: undefined,
-  SWITCHYARD_WEB_AUTH_CDP_URL: undefined,
-  SWITCHYARD_WEB_GEMINI_CDP_URL: undefined,
-  SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: undefined,
-  SWITCHYARD_WEB_CHATGPT_USER_AGENT: undefined,
-  SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: undefined,
-  SWITCHYARD_WEB_GEMINI_USER_AGENT: undefined,
-  SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE: undefined,
-  SWITCHYARD_WEB_CLAUDE_USER_AGENT: undefined,
-  SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: undefined,
-  SWITCHYARD_WEB_GROK_USER_AGENT: undefined,
-  SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: undefined,
-  SWITCHYARD_WEB_QWEN_USER_AGENT: undefined,
+  WEBAI_BRIDGE_WEB_AUTH_CDP_URL: undefined,
+  WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: undefined,
+  WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: undefined,
+  WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: undefined,
+  WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: undefined,
+  WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: undefined,
+  WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE: undefined,
+  WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT: undefined,
+  WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: undefined,
+  WEBAI_BRIDGE_WEB_GROK_USER_AGENT: undefined,
+  WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: undefined,
+  WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: undefined,
 };
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 
-function createTestService(options: SwitchyardServiceOptions = {}): TestService {
+function createTestService(options: WebaiBridgeServiceOptions = {}): TestService {
   const {
     runtimeEnv,
     liveProofEnv,
@@ -56,7 +56,7 @@ function createTestService(options: SwitchyardServiceOptions = {}): TestService 
     ...rest
   } = options;
 
-  return createSwitchyardService({
+  return createWebaiBridgeService({
     ...rest,
     useLocalWebAuthStore: useLocalWebAuthStore ?? false,
     runtimeEnv: {
@@ -131,7 +131,7 @@ function createMockWebLane(
   } as unknown as WebLoginLane;
 }
 
-describe("Switchyard HTTP surface", () => {
+describe("WebaiBridge HTTP surface", () => {
   it("exposes browser debug support routes with honest console and network statuses", async () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
@@ -304,7 +304,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9",
       },
       providerSessions: {
         chatgpt: {
@@ -456,7 +456,7 @@ describe("Switchyard HTTP surface", () => {
 
     expect(bootstrapResponse.status).toBe(200);
     expect(bootstrapPayload.surface.runtimeShape).toBe("runtime-first");
-    expect(bootstrapPayload.bootstrap.serviceName).toBe("switchyard-service");
+    expect(bootstrapPayload.bootstrap.serviceName).toBe("webai-bridge-service");
     expect(bootstrapPayload.bootstrap.routeCatalog.bootstrap).toBe("/v1/runtime/bootstrap");
     expect(bootstrapPayload.bootstrap.routeCatalog.providerProbeTemplate).toBe(
       "/v1/runtime/providers/{providerId}/probe",
@@ -914,7 +914,7 @@ describe("Switchyard HTTP surface", () => {
 
   it("folds repeated browser-inspection failures into a detailed diagnostics tray", async () => {
     const repeatedDiagnostic =
-      "Switchyard could not inspect the attached browser: browserType.connectOverCDP: connect ECONNREFUSED 127.0.0.1:9338";
+      "WebaiBridge could not inspect the attached browser: browserType.connectOverCDP: connect ECONNREFUSED 127.0.0.1:9338";
     const service = createTestService({
       useLocalWebAuthStore: false,
       providerSessions: {
@@ -1005,7 +1005,7 @@ describe("Switchyard HTTP surface", () => {
             "Restore the ChatGPT attach target before rerunning the live gate.",
           persistenceAudit: {
             workspaceClassification: "attach-failed",
-            summary: "Switchyard could not attach to the current ChatGPT browser seat.",
+            summary: "WebaiBridge could not attach to the current ChatGPT browser seat.",
             pageUrl: "https://chatgpt.com/",
             pageTitle: "ChatGPT",
           },
@@ -1039,7 +1039,7 @@ describe("Switchyard HTTP surface", () => {
             status: "unavailable",
             classification: undefined,
             diagnostic:
-              "Switchyard could not inspect the current ChatGPT browser seat during this test window.",
+              "WebaiBridge could not inspect the current ChatGPT browser seat during this test window.",
           },
           currentConsole: {
             status: "unavailable",
@@ -1105,11 +1105,11 @@ describe("Switchyard HTTP surface", () => {
           summary: "ChatGPT auth session endpoint returned authenticated session metadata.",
           envStatus: [
             {
-              name: "SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE",
+              name: "WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE",
               present: true,
             },
             {
-              name: "SWITCHYARD_WEB_CHATGPT_USER_AGENT",
+              name: "WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT",
               present: true,
             },
           ],
@@ -1199,8 +1199,8 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=runtime-env",
-        SWITCHYARD_WEB_CHATGPT_USER_AGENT: "SwitchyardRuntimeEnv/1.0",
+        WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=runtime-env",
+        WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "WebaiBridgeRuntimeEnv/1.0",
       },
       liveProofFetch,
       providerSessions: {
@@ -1270,7 +1270,7 @@ describe("Switchyard HTTP surface", () => {
             supported: true,
             loginUrl: "https://chatgpt.com",
             instructions: "Switch to the managed onboarding browser, complete the ChatGPT sign-in, then return here and click Capture Session.",
-            summary: "Switchyard started the managed ChatGPT onboarding browser.",
+            summary: "WebaiBridge started the managed ChatGPT onboarding browser.",
             availableModes: [
               {
                 id: "managed-browser",
@@ -1282,15 +1282,15 @@ describe("Switchyard HTTP surface", () => {
             ],
             browserTarget: {
               kind: "managed-onboarding-browser",
-              label: "Switchyard onboarding browser",
-              summary: "Let Switchyard manage a dedicated local onboarding browser for sign-in and capture.",
+              label: "WebaiBridge onboarding browser",
+              summary: "Let WebaiBridge manage a dedicated local onboarding browser for sign-in and capture.",
             },
             captureRequest: {
               mode: "managed-browser",
             },
             runtimeEnv: {
-              SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "managed-browser",
-              SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+              WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "managed-browser",
+              WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
             },
             browser: {
               status: "started",
@@ -1303,10 +1303,10 @@ describe("Switchyard HTTP surface", () => {
               cdpUrl: "http://127.0.0.1:39222",
               browserTarget: {
                 kind: "managed-onboarding-browser",
-                label: "Switchyard onboarding browser",
-                summary: "Let Switchyard manage a dedicated local onboarding browser for sign-in and capture.",
+                label: "WebaiBridge onboarding browser",
+                summary: "Let WebaiBridge manage a dedicated local onboarding browser for sign-in and capture.",
               },
-              summary: "Switchyard started its dedicated local onboarding browser for chatgpt and opened https://chatgpt.com.",
+              summary: "WebaiBridge started its dedicated local onboarding browser for chatgpt and opened https://chatgpt.com.",
             },
           }),
           capture: async () => ({
@@ -1329,14 +1329,14 @@ describe("Switchyard HTTP surface", () => {
             ],
             browserTarget: {
               kind: "managed-onboarding-browser",
-              label: "Switchyard onboarding browser",
-              summary: "Let Switchyard manage a dedicated local onboarding browser for sign-in and capture.",
+              label: "WebaiBridge onboarding browser",
+              summary: "Let WebaiBridge manage a dedicated local onboarding browser for sign-in and capture.",
             },
-            storePath: "/tmp/switchyard-chatgpt-store.json",
+            storePath: "/tmp/webai-bridge-chatgpt-store.json",
             runtimeEnv: {
-              SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "managed-browser",
-              SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=stored",
-              SWITCHYARD_WEB_CHATGPT_USER_AGENT: "SwitchyardStored/1.0",
+              WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "managed-browser",
+              WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=stored",
+              WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "WebaiBridgeStored/1.0",
             },
             session: {
               state: "ready",
@@ -1359,7 +1359,7 @@ describe("Switchyard HTTP surface", () => {
 
     expect(portalResponse.status).toBe(200);
     expect(portalResponse.headers.get("content-type")).toContain("text/html");
-    expect(portalHtml).toContain("Switchyard Web/Login Access");
+    expect(portalHtml).toContain("WebaiBridge Web/Login Access");
     expect(portalHtml).toContain("Skip to main content");
     expect(portalHtml).toContain("Inspect current browser");
     expect(portalHtml).toContain("/v1/runtime/providers/{providerId}/acquisition/start");
@@ -1432,7 +1432,7 @@ describe("Switchyard HTTP surface", () => {
       expect.objectContaining({
         status: "success",
         mode: "managed-browser",
-        storePath: "/tmp/switchyard-chatgpt-store.json",
+        storePath: "/tmp/webai-bridge-chatgpt-store.json",
       }),
     );
     expect(capturePayload.auth).toEqual(
@@ -1496,8 +1496,8 @@ describe("Switchyard HTTP surface", () => {
               supported: true,
               loginUrl: "https://chatgpt.com",
               instructions:
-                "Switch to the isolated Switchyard Chrome window, confirm ChatGPT is signed in there, then return and click Capture Session.",
-              summary: "Switchyard attached or launched the isolated Chrome root.",
+                "Switch to the isolated WebaiBridge Chrome window, confirm ChatGPT is signed in there, then return and click Capture Session.",
+              summary: "WebaiBridge attached or launched the isolated Chrome root.",
               availableModes: [
                 {
                   id: "isolated-chrome-root",
@@ -1517,20 +1517,20 @@ describe("Switchyard HTTP surface", () => {
               browserTarget: {
                 kind: "isolated-chrome-root",
                 label: "Isolated Chrome root",
-                summary: "Reuse Switchyard's dedicated Chrome root and single repo-owned profile for login and capture.",
+                summary: "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile for login and capture.",
               },
               captureRequest: {
                 mode: "isolated-chrome-root",
                 existingChromeProfile: {
-                  userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+                  userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
                   cdpUrl: "http://127.0.0.1:9338",
                 },
               },
               runtimeEnv: {
-                SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-                SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
-                SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
-                SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+                WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+                WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
+                WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+                WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
               },
               cdpUrl: "http://127.0.0.1:9338",
               browser: {
@@ -1542,14 +1542,14 @@ describe("Switchyard HTTP surface", () => {
                 loginUrl: "https://chatgpt.com",
                 loginOpened: true,
                 cdpUrl: "http://127.0.0.1:9338",
-                userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+                userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
                 browserTarget: {
                   kind: "isolated-chrome-root",
                   label: "Isolated Chrome root",
                   summary:
-                    "Reuse Switchyard's dedicated Chrome root and single repo-owned profile for login and capture.",
+                    "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile for login and capture.",
                 },
-                summary: "Switchyard attached or launched the isolated Chrome root.",
+                summary: "WebaiBridge attached or launched the isolated Chrome root.",
               },
             };
           },
@@ -1583,16 +1583,16 @@ describe("Switchyard HTTP surface", () => {
               browserTarget: {
                 kind: "isolated-chrome-root",
                 label: "Isolated Chrome root",
-                summary: "Reuse Switchyard's dedicated Chrome root and single repo-owned profile for login and capture.",
+                summary: "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile for login and capture.",
               },
-              storePath: "/tmp/switchyard-chatgpt-existing-profile-store.json",
+              storePath: "/tmp/webai-bridge-chatgpt-existing-profile-store.json",
               runtimeEnv: {
-                SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-                SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
-                SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
-                SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
-                SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=stored",
-                SWITCHYARD_WEB_CHATGPT_USER_AGENT: "SwitchyardStored/1.0",
+                WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+                WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
+                WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+                WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+                WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=stored",
+                WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "WebaiBridgeStored/1.0",
               },
               session: {
                 state: "ready",
@@ -1617,7 +1617,7 @@ describe("Switchyard HTTP surface", () => {
       {
         mode: "existing-chrome-profile",
         existingChromeProfile: {
-          userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+          userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
         },
       },
     );
@@ -1638,7 +1638,7 @@ describe("Switchyard HTTP surface", () => {
       expect.objectContaining({
         mode: "existing-chrome-profile",
         existingChromeProfile: expect.objectContaining({
-          userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+          userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
         }),
       }),
     );
@@ -1650,7 +1650,7 @@ describe("Switchyard HTTP surface", () => {
         captureRequest: expect.objectContaining({
           mode: "isolated-chrome-root",
           existingChromeProfile: expect.objectContaining({
-            userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+            userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
             cdpUrl: "http://127.0.0.1:9338",
           }),
         }),
@@ -1703,16 +1703,16 @@ describe("Switchyard HTTP surface", () => {
   it("prefers stored acquisition material over env fallback inside verify:web-login-live", async () => {
     const chatgptExpectation = getInvokeProofExpectation("chatgpt");
     const storeEnv = {
-      SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: join(
+      WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: join(
         REPO_ROOT,
         ".runtime-cache",
         "temp",
         "verify-web-login-live.store.json",
       ),
-      SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=env-fallback",
-      SWITCHYARD_WEB_CHATGPT_USER_AGENT: "EnvFallback/1.0",
+      WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=env-fallback",
+      WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "EnvFallback/1.0",
     };
-    rmSync(storeEnv.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
+    rmSync(storeEnv.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
 
     upsertStoredWebProviderSession(
       {
@@ -1726,8 +1726,8 @@ describe("Switchyard HTTP surface", () => {
           "openai-access-token": "present",
         },
         runtimeEnv: {
-          SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=stored-preferred",
-          SWITCHYARD_WEB_CHATGPT_USER_AGENT: "StoredPreferred/1.0",
+          WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_session=stored-preferred",
+          WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "StoredPreferred/1.0",
         },
         updatedAt: "2026-03-29T23:00:00.000Z",
         source: "local-auth-portal",
@@ -1757,7 +1757,7 @@ describe("Switchyard HTTP surface", () => {
         return new Response(
           JSON.stringify({
             user: {
-              email: "stored@switchyard.test",
+              email: "stored@webai-bridge.test",
             },
             accessToken: "stored-access-token",
           }),
@@ -1826,7 +1826,7 @@ describe("Switchyard HTTP surface", () => {
       "https://chatgpt.com/backend-api/conversation",
     ]);
 
-    rmSync(storeEnv.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
+    rmSync(storeEnv.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
   }, 45_000);
 
   it("serves a BYOK invoke through the shared runtime entrypoint when lane=byok", async () => {
@@ -1837,7 +1837,7 @@ describe("Switchyard HTTP surface", () => {
         candidates: [
           {
             content: {
-              parts: [{ text: "SWITCHYARD_BYOK_OK" }],
+              parts: [{ text: "WEBAI_BRIDGE_BYOK_OK" }],
             },
           },
         ],
@@ -1847,7 +1847,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       liveProofFetch: fetchSpy as typeof fetch,
     });
@@ -1855,7 +1855,7 @@ describe("Switchyard HTTP surface", () => {
     const response = await postSurface(service, "/v1/runtime/invoke", {
       provider: "gemini",
       model: "gemini-2.5-flash",
-      input: "Reply with exactly SWITCHYARD_BYOK_OK",
+      input: "Reply with exactly WEBAI_BRIDGE_BYOK_OK",
       lane: "byok",
     });
 
@@ -1870,7 +1870,7 @@ describe("Switchyard HTTP surface", () => {
     expect(payload.lane).toBe("byok");
     expect(payload.provider).toBe("gemini");
     expect(payload.model).toBe("gemini-2.5-flash");
-    expect(payload.text).toBe("SWITCHYARD_BYOK_OK");
+    expect(payload.text).toBe("WEBAI_BRIDGE_BYOK_OK");
   });
 
   it("exposes BYOK provider discovery through the service frontdoor", async () => {
@@ -1915,7 +1915,7 @@ describe("Switchyard HTTP surface", () => {
         candidates: [
           {
             content: {
-              parts: [{ text: "SWITCHYARD_KERNEL_BYOK_OK" }],
+              parts: [{ text: "WEBAI_BRIDGE_KERNEL_BYOK_OK" }],
             },
           },
         ],
@@ -1925,7 +1925,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       liveProofFetch: fetchSpy as typeof fetch,
     });
@@ -1933,7 +1933,7 @@ describe("Switchyard HTTP surface", () => {
     const response = await postSurface(service, "/v1/runtime/invoke", {
       provider: "gemini",
       model: "gemini-2.5-flash",
-      input: "Reply with exactly SWITCHYARD_KERNEL_BYOK_OK",
+      input: "Reply with exactly WEBAI_BRIDGE_KERNEL_BYOK_OK",
     });
 
     const payload = (await response.json()) as {
@@ -1947,7 +1947,7 @@ describe("Switchyard HTTP surface", () => {
     expect(payload.lane).toBe("byok");
     expect(payload.provider).toBe("gemini");
     expect(payload.model).toBe("gemini-2.5-flash");
-    expect(payload.text).toBe("SWITCHYARD_KERNEL_BYOK_OK");
+    expect(payload.text).toBe("WEBAI_BRIDGE_KERNEL_BYOK_OK");
   });
 
   it("keeps dual-lane providers on BYOK when the web lane exists but is not currently usable", async () => {
@@ -1958,7 +1958,7 @@ describe("Switchyard HTTP surface", () => {
         candidates: [
           {
             content: {
-              parts: [{ text: "SWITCHYARD_BYOK_RECOVERY_OK" }],
+              parts: [{ text: "WEBAI_BRIDGE_BYOK_RECOVERY_OK" }],
             },
           },
         ],
@@ -1968,7 +1968,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       providerSessions: {
         gemini: {
@@ -1984,7 +1984,7 @@ describe("Switchyard HTTP surface", () => {
     const response = await postSurface(service, "/v1/runtime/invoke", {
       provider: "gemini",
       model: "gemini-2.5-flash",
-      input: "Reply with exactly SWITCHYARD_BYOK_RECOVERY_OK",
+      input: "Reply with exactly WEBAI_BRIDGE_BYOK_RECOVERY_OK",
     });
 
     const payload = (await response.json()) as {
@@ -1998,14 +1998,14 @@ describe("Switchyard HTTP surface", () => {
     expect(payload.lane).toBe("byok");
     expect(payload.provider).toBe("gemini");
     expect(payload.model).toBe("gemini-2.5-flash");
-    expect(payload.text).toBe("SWITCHYARD_BYOK_RECOVERY_OK");
+    expect(payload.text).toBe("WEBAI_BRIDGE_BYOK_RECOVERY_OK");
   });
 
   it("exposes a runtime dispatch plan route with lane readiness and selected lane truth", async () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       providerSessions: {
         gemini: {
@@ -2062,7 +2062,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       providerSessions: {
         gemini: {
@@ -2144,7 +2144,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       providerSessions: {
         gemini: {
@@ -2228,7 +2228,7 @@ describe("Switchyard HTTP surface", () => {
     expect(payload.doctor.alignment.runtimeCanInvoke).toBe(true);
     expect(payload.doctor.alignment.remediationState).toBe("configured");
     expect(payload.doctor.receipt.recommendedCliCommands).toContain(
-      "pnpm run switchyard:cli -- provider-doctor --provider gemini --json",
+      "pnpm run webai-bridge:cli -- provider-doctor --provider gemini --json",
     );
   });
 
@@ -2236,7 +2236,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       providerSessions: {
         chatgpt: {
@@ -2367,7 +2367,7 @@ describe("Switchyard HTTP surface", () => {
             expect.objectContaining({
               id: "inspect-provider-doctor",
               cliCommand:
-                "pnpm run switchyard:cli -- provider-doctor --provider claude --json",
+                "pnpm run webai-bridge:cli -- provider-doctor --provider claude --json",
             }),
           ]),
         }),
@@ -2395,7 +2395,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_OPENAI_API_KEY: "openai-test-key",
+        WEBAI_BRIDGE_OPENAI_API_KEY: "openai-test-key",
         OPENAI_API_KEY: "openai-test-key",
       },
       providerSessions: {
@@ -2476,7 +2476,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_OPENAI_API_KEY: "openai-test-key",
+        WEBAI_BRIDGE_OPENAI_API_KEY: "openai-test-key",
         OPENAI_API_KEY: "openai-test-key",
       },
       providerSessions: {
@@ -2556,7 +2556,7 @@ describe("Switchyard HTTP surface", () => {
         candidates: [
           {
             content: {
-              parts: [{ text: "SWITCHYARD_BYOK_ALIAS_OK" }],
+              parts: [{ text: "WEBAI_BRIDGE_BYOK_ALIAS_OK" }],
             },
           },
         ],
@@ -2566,7 +2566,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       liveProofFetch: fetchSpy as typeof fetch,
     });
@@ -2574,7 +2574,7 @@ describe("Switchyard HTTP surface", () => {
     const response = await postSurface(service, "/v1/runtime/byok/invoke", {
       provider: "gemini",
       model: "gemini-2.5-flash",
-      input: "Reply with exactly SWITCHYARD_BYOK_ALIAS_OK",
+      input: "Reply with exactly WEBAI_BRIDGE_BYOK_ALIAS_OK",
     });
 
     const payload = (await response.json()) as {
@@ -2597,7 +2597,7 @@ describe("Switchyard HTTP surface", () => {
     expect(payload.lane).toBe("byok");
     expect(payload.provider).toBe("gemini");
     expect(payload.model).toBe("gemini-2.5-flash");
-    expect(payload.text).toBe("SWITCHYARD_BYOK_ALIAS_OK");
+    expect(payload.text).toBe("WEBAI_BRIDGE_BYOK_ALIAS_OK");
     expect(payload.receipt).toEqual(
       expect.objectContaining({
         policyProfile: "low-friction",
@@ -2615,7 +2615,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
     });
 
@@ -2642,7 +2642,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "",
         GEMINI_API_KEY: "",
         GOOGLE_API_KEY: "",
       },
@@ -2667,7 +2667,7 @@ describe("Switchyard HTTP surface", () => {
   });
 
   it("fails closed on the explicit BYOK route when no BYOK client is configured", async () => {
-    const surface = new SwitchyardHttpSurface({
+    const surface = new WebaiBridgeHttpSurface({
       webLane: createMockWebLane(),
     });
 
@@ -2687,11 +2687,11 @@ describe("Switchyard HTTP surface", () => {
   });
 
   it("maps runtime contract errors on the explicit BYOK route to structured responses", async () => {
-    const surface = new SwitchyardHttpSurface({
+    const surface = new WebaiBridgeHttpSurface({
       webLane: createMockWebLane(),
       runtime: {} as never,
       invokeRuntime: async () => {
-        throw new SwitchyardContractError(
+        throw new WebaiBridgeContractError(
           "missing-credential",
           "Missing credential for gemini.",
         );
@@ -2714,7 +2714,7 @@ describe("Switchyard HTTP surface", () => {
   });
 
   it("passes through pre-rendered runtime responses on the generic invoke route", async () => {
-    const surface = new SwitchyardHttpSurface({
+    const surface = new WebaiBridgeHttpSurface({
       webLane: createMockWebLane(),
       runtime: {} as never,
       invokeRuntime: async () => ({
@@ -2770,11 +2770,11 @@ describe("Switchyard HTTP surface", () => {
   });
 
   it("maps runtime contract errors on the generic invoke route to structured responses", async () => {
-    const surface = new SwitchyardHttpSurface({
+    const surface = new WebaiBridgeHttpSurface({
       webLane: createMockWebLane(),
       runtime: {} as never,
       invokeRuntime: async () => {
-        throw new SwitchyardContractError(
+        throw new WebaiBridgeContractError(
           "provider-unavailable",
           "Provider is currently unavailable.",
         );
@@ -2805,7 +2805,7 @@ describe("Switchyard HTTP surface", () => {
         candidates: [
           {
             content: {
-              parts: [{ text: "SWITCHYARD_RECEIPT_OK" }],
+              parts: [{ text: "WEBAI_BRIDGE_RECEIPT_OK" }],
             },
           },
         ],
@@ -2815,7 +2815,7 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       liveProofFetch: fetchSpy as typeof fetch,
     });
@@ -2823,7 +2823,7 @@ describe("Switchyard HTTP surface", () => {
     const response = await postSurface(service, "/v1/runtime/invoke", {
       provider: "gemini",
       model: "gemini-2.5-flash",
-      input: "Reply with exactly SWITCHYARD_RECEIPT_OK",
+      input: "Reply with exactly WEBAI_BRIDGE_RECEIPT_OK",
       policyProfile: "official-api-first",
     });
 
@@ -2865,7 +2865,7 @@ describe("Switchyard HTTP surface", () => {
 
     expect(response.status).toBe(200);
     expect(payload.lane).toBe("byok");
-    expect(payload.text).toBe("SWITCHYARD_RECEIPT_OK");
+    expect(payload.text).toBe("WEBAI_BRIDGE_RECEIPT_OK");
     expect(payload.receipt).toEqual(
       expect.objectContaining({
         policyProfile: "official-api-first",
@@ -2896,7 +2896,7 @@ describe("Switchyard HTTP surface", () => {
             expect.objectContaining({
               id: "inspect-provider-doctor",
               cliCommand:
-                "pnpm run switchyard:cli -- provider-doctor --provider gemini --json",
+                "pnpm run webai-bridge:cli -- provider-doctor --provider gemini --json",
             }),
           ]),
         }),
@@ -2932,12 +2932,12 @@ describe("Switchyard HTTP surface", () => {
     const service = createTestService({
       useLocalWebAuthStore: false,
       runtimeEnv: {
-        SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt-cookie",
-        SWITCHYARD_WEB_CHATGPT_USER_AGENT: "chatgpt-agent",
-        SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "gemini-cookie",
-        SWITCHYARD_WEB_GEMINI_USER_AGENT: "gemini-agent",
-        SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen-cookie",
-        SWITCHYARD_WEB_QWEN_USER_AGENT: "qwen-agent",
+        WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt-cookie",
+        WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "chatgpt-agent",
+        WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "gemini-cookie",
+        WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "gemini-agent",
+        WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen-cookie",
+        WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "qwen-agent",
       },
       providerSessions: {
         chatgpt: {

@@ -93,7 +93,7 @@ export default defineConfig({
         'tests/unit/byok/gemini-baseline.test.ts',
         'tests/unit/byok/gemini-live-proof-branches.test.ts',
         'tests/unit/byok/service-client.test.ts',
-        'tests/unit/web/switchyard-cli.test.ts'
+        'tests/unit/web/webai-bridge-cli.test.ts'
       ]),
       createProject('surface-mcp', [
         'tests/unit/mcp/*.test.ts'

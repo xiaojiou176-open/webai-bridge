@@ -5,9 +5,9 @@ import {
   buildStoredWebRuntimeEnv,
 } from "../../../packages/credentials/src/index.js";
 import type { WebProviderId, WebSessionSnapshot } from "../../../packages/lanes/web/src/index.js";
-import { createSwitchyardSdkClient } from "../../../packages/surfaces/sdk-client/src/index.js";
+import { createWebaiBridgeSdkClient } from "../../../packages/surfaces/sdk-client/src/index.js";
 import {
-  SwitchyardHttpSurface,
+  WebaiBridgeHttpSurface,
   createNodeHttpHandler,
   buildServiceRouteCatalog,
   type ServiceRuntimeRouteCatalog,
@@ -42,7 +42,7 @@ import {
 
 loadLocalEnvFiles();
 
-export interface SwitchyardServiceOptions {
+export interface WebaiBridgeServiceOptions {
   providerSessions?: Partial<Record<WebProviderId, Partial<WebSessionSnapshot>>>;
   runtimeEnv?: Record<string, string | undefined>;
   liveProofRunners?: Partial<Record<WebProviderId, WebLiveProofRunner>>;
@@ -56,7 +56,7 @@ export interface SwitchyardServiceOptions {
   useLocalWebAuthStore?: boolean;
 }
 
-export interface StartedSwitchyardService {
+export interface StartedWebaiBridgeService {
   server: Server;
   port: number;
   baseUrl: string;
@@ -125,22 +125,22 @@ function deriveRuntimeRoutingEnvFromProviderSessions(
   const derivedUserDataDir = provenance.userDataDir?.trim();
   const derivedProfileName = provenance.profileName?.trim();
 
-  nextEnv.SWITCHYARD_BROWSER_MODE ??= "isolated-chrome-root";
-  nextEnv.SWITCHYARD_WEB_AUTH_ACTIVE_MODE ??= "isolated-chrome-root";
+  nextEnv.WEBAI_BRIDGE_BROWSER_MODE ??= "isolated-chrome-root";
+  nextEnv.WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE ??= "isolated-chrome-root";
 
   if (derivedCdpUrl) {
-    nextEnv.SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL ??= derivedCdpUrl;
-    nextEnv.SWITCHYARD_WEB_AUTH_CDP_URL ??= derivedCdpUrl;
-    nextEnv.SWITCHYARD_WEB_GEMINI_CDP_URL ??= derivedCdpUrl;
+    nextEnv.WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL ??= derivedCdpUrl;
+    nextEnv.WEBAI_BRIDGE_WEB_AUTH_CDP_URL ??= derivedCdpUrl;
+    nextEnv.WEBAI_BRIDGE_WEB_GEMINI_CDP_URL ??= derivedCdpUrl;
   }
 
   if (derivedUserDataDir) {
-    nextEnv.SWITCHYARD_CHROME_USER_DATA_DIR ??= derivedUserDataDir;
-    nextEnv.SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR ??= derivedUserDataDir;
+    nextEnv.WEBAI_BRIDGE_CHROME_USER_DATA_DIR ??= derivedUserDataDir;
+    nextEnv.WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR ??= derivedUserDataDir;
   }
 
   if (derivedProfileName) {
-    nextEnv.SWITCHYARD_CHROME_PROFILE_NAME ??= derivedProfileName;
+    nextEnv.WEBAI_BRIDGE_CHROME_PROFILE_NAME ??= derivedProfileName;
   }
 
   return nextEnv;
@@ -151,7 +151,7 @@ function applyRuntimeBrowserModeToProviderSessions(
   runtimeEnv: Record<string, string | undefined>,
 ): Partial<Record<WebProviderId, Partial<WebSessionSnapshot>>> {
   const activeMode =
-    runtimeEnv.SWITCHYARD_BROWSER_MODE ?? runtimeEnv.SWITCHYARD_WEB_AUTH_ACTIVE_MODE;
+    runtimeEnv.WEBAI_BRIDGE_BROWSER_MODE ?? runtimeEnv.WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE;
 
   if (activeMode !== "isolated-chrome-root") {
     return providerSessions;
@@ -184,7 +184,7 @@ function applyRuntimeBrowserModeToProviderSessions(
   return nextSessions;
 }
 
-export function createSwitchyardService(options: SwitchyardServiceOptions = {}) {
+export function createWebaiBridgeService(options: WebaiBridgeServiceOptions = {}) {
   const shouldUseLocalWebAuthStore = options.useLocalWebAuthStore !== false;
   const storedProviderSessions = shouldUseLocalWebAuthStore
     ? (buildStoredWebProviderSessions(process.env) as Partial<
@@ -223,7 +223,7 @@ export function createSwitchyardService(options: SwitchyardServiceOptions = {}) 
     providerSessions,
     runtimeEnv,
   );
-  const byokClient = createSwitchyardSdkClient({
+  const byokClient = createWebaiBridgeSdkClient({
     env: runtimeEnv,
     fetch: options.liveProofFetch,
   });
@@ -241,7 +241,7 @@ export function createSwitchyardService(options: SwitchyardServiceOptions = {}) 
           webRegistry: lane.registry,
         })
       : undefined;
-  const surface = new SwitchyardHttpSurface({
+  const surface = new WebaiBridgeHttpSurface({
     webLane: lane,
     context,
     runtime,
@@ -331,10 +331,10 @@ export function createSwitchyardService(options: SwitchyardServiceOptions = {}) 
   };
 }
 
-export async function startSwitchyardService(
-  options: SwitchyardServiceOptions = {},
-): Promise<StartedSwitchyardService> {
-  const app = createSwitchyardService(options);
+export async function startWebaiBridgeService(
+  options: WebaiBridgeServiceOptions = {},
+): Promise<StartedWebaiBridgeService> {
+  const app = createWebaiBridgeService(options);
   const server = createServer(app.handler);
   const requestedPort = options.port ?? 0;
 
@@ -373,8 +373,8 @@ export async function startSwitchyardService(
 }
 
 export function startFromProcessEnv() {
-  return startSwitchyardService({
+  return startWebaiBridgeService({
     port: loadServicePort(process.env),
-    serviceName: "switchyard-local-service",
+    serviceName: "webai-bridge-local-service",
   });
 }

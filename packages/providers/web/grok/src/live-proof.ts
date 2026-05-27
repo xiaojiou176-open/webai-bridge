@@ -9,15 +9,15 @@ import {
 import { urlHostnameMatches } from "../../shared/url-hosts.js";
 
 export const GROK_WEB_LIVE_PROOF_ENV_NAMES = [
-  "SWITCHYARD_WEB_GROK_COOKIE_BUNDLE",
-  "SWITCHYARD_WEB_GROK_USER_AGENT",
+  "WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE",
+  "WEBAI_BRIDGE_WEB_GROK_USER_AGENT",
 ] as const;
 
 export const GROK_WEB_LIVE_PROOF_URL = "https://grok.com";
-const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
+const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
 const EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
 const GROK_WEB_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
 const GROK_WEB_DEFAULT_ISOLATED_CDP_URL = "http://127.0.0.1:9338";
 const LIVE_PROOF_RERUN_COMMAND = "pnpm exec node scripts/verify-web-login-live.mjs --provider grok";
@@ -67,7 +67,7 @@ const GROK_LOGGED_OUT_MARKERS = [
 ] as const;
 
 function resolveGrokLiveProofCdpUrl(env: Record<string, string | undefined>) {
-  const browserMode = env[SWITCHYARD_BROWSER_MODE_ENV_NAME]?.trim();
+  const browserMode = env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]?.trim();
 
   return (
     env[SHARED_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
@@ -334,8 +334,8 @@ export async function runGrokBrowserWorkspaceProof(
   const envStatus = collectLiveProofEnvStatus(GROK_WEB_LIVE_PROOF_ENV_NAMES, env);
 
   if (
-    !env.SWITCHYARD_WEB_GROK_COOKIE_BUNDLE?.trim() ||
-    !env.SWITCHYARD_WEB_GROK_USER_AGENT?.trim()
+    !env.WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE?.trim() ||
+    !env.WEBAI_BRIDGE_WEB_GROK_USER_AGENT?.trim()
   ) {
     return {
       status: "external-blocker",
@@ -425,8 +425,8 @@ export async function runGrokWebLiveProof(
       buildHeaders(resolvedEnv) {
         return {
           accept: "text/html,application/xhtml+xml",
-          cookie: resolvedEnv.SWITCHYARD_WEB_GROK_COOKIE_BUNDLE,
-          "user-agent": resolvedEnv.SWITCHYARD_WEB_GROK_USER_AGENT,
+          cookie: resolvedEnv.WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE,
+          "user-agent": resolvedEnv.WEBAI_BRIDGE_WEB_GROK_USER_AGENT,
         };
       },
       validate({ html, response }) {

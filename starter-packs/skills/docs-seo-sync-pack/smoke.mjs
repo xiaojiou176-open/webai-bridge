@@ -20,6 +20,6 @@ printJson({
   catalogVersion: catalog.catalogVersion,
   publicSurfaceCount: catalog.publicSurfaces.length,
   compatTargetCount: catalog.compatTargets.length,
-  keywordTruthHasSwitchyard: keywordTruth.includes("Switchyard"),
+  keywordTruthHasWebaiBridge: keywordTruth.includes("WebaiBridge"),
   supportMatrixHasPartial: supportMatrix.includes("`partial`"),
 });

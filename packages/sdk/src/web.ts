@@ -22,14 +22,14 @@ import { createClaudeWebRuntime } from "../../providers/web/claude/src/index.js"
 import { createGrokWebRuntime } from "../../providers/web/grok/src/index.js";
 import { createQwenWebRuntime } from "../../providers/web/qwen/src/index.js";
 
-export interface SwitchyardWebSdkOptions {
+export interface WebaiBridgeWebSdkOptions {
   providerSessions?: Partial<Record<WebProviderId, Partial<WebSessionSnapshot>>>;
   runtimeEnv?: Record<string, string | undefined>;
   useLocalWebAuthStore?: boolean;
   now?: WebLaneContext["now"];
 }
 
-export interface SwitchyardWebSdk {
+export interface WebaiBridgeWebSdk {
   readonly lane: WebLoginLane;
   readonly registry: WebProviderRegistry;
   readonly context: WebLaneContext;
@@ -41,7 +41,7 @@ export interface SwitchyardWebSdk {
 }
 
 function normalizeProviderSessions(
-  providerSessions: SwitchyardWebSdkOptions["providerSessions"] = {},
+  providerSessions: WebaiBridgeWebSdkOptions["providerSessions"] = {},
 ): WebLaneContext["sessions"] {
   const normalized: WebLaneContext["sessions"] = {};
 
@@ -106,9 +106,9 @@ export function createDefaultWebRegistry() {
   ]);
 }
 
-export function createSwitchyardWebSdk(
-  options: SwitchyardWebSdkOptions = {},
-): SwitchyardWebSdk {
+export function createWebaiBridgeWebSdk(
+  options: WebaiBridgeWebSdkOptions = {},
+): WebaiBridgeWebSdk {
   const shouldUseLocalWebAuthStore = options.useLocalWebAuthStore !== false;
   const storedProviderSessions = shouldUseLocalWebAuthStore
     ? (buildStoredWebProviderSessions(process.env) as Partial<

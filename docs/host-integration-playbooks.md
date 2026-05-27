@@ -1,4 +1,4 @@
-# Switchyard Builder Integration Hub
+# WebaiBridge Builder Integration Hub
 
 This page is the thin public handoff once you already know the route.
 
@@ -23,19 +23,19 @@ builder handoff narrow and coordinated.
 ## Read-Only Access
 
 ```bash
-pnpm run switchyard:cli -- host-playbooks
-pnpm run switchyard:cli -- host-playbooks-schema
-pnpm run switchyard:cli -- host-playbook --target codex
-pnpm run switchyard:cli -- host-playbook --target mcp
-pnpm run switchyard:cli -- skill-pack-routes
-pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack
+pnpm run webai-bridge:cli -- host-playbooks
+pnpm run webai-bridge:cli -- host-playbooks-schema
+pnpm run webai-bridge:cli -- host-playbook --target codex
+pnpm run webai-bridge:cli -- host-playbook --target mcp
+pnpm run webai-bridge:cli -- skill-pack-routes
+pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack
 ```
 
-- `switchyard.catalog.host_playbooks`
-- `switchyard.catalog.host_playbooks_schema`
-- `switchyard.catalog.host_playbook`
-- `switchyard.catalog.skill_packs`
-- `switchyard.catalog.skill_pack`
+- `webai-bridge.catalog.host_playbooks`
+- `webai-bridge.catalog.host_playbooks_schema`
+- `webai-bridge.catalog.host_playbook`
+- `webai-bridge.catalog.skill_packs`
+- `webai-bridge.catalog.skill_pack`
 
 ## If You Picked A Builder Pack
 
@@ -57,12 +57,12 @@ If the chooser already landed on a skill pack, this is the honest next step:
 
 | Skill pack | CLI handoff | MCP handoff | Use this when... |
 | --- | --- | --- | --- |
-| `runtime-diagnostics-pack` | `pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack` | `switchyard.catalog.skill_pack --target runtime-diagnostics-pack` | you need the exact read-only provider triage surfaces first |
-| `docs-seo-sync-pack` | `pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack` | `switchyard.catalog.skill_pack --target docs-seo-sync-pack` | you need surface-catalog plus keyword-truth handoff first |
-| `chat-app-runtime-pack` | `pnpm run switchyard:cli -- skill-pack-route --target chat-app-runtime-pack` | `switchyard.catalog.skill_pack --target chat-app-runtime-pack` | you want a service-first chat runtime bridge starter without promoting a full chat shell |
-| `research-copilot-pack` | `pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack` | `switchyard.catalog.skill_pack --target research-copilot-pack` | you want truth-surface grounding before any research synthesis or outward claim |
-| `compare-runtime-pack` | `pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack` | `switchyard.catalog.skill_pack --target compare-runtime-pack` | you need compare-first route selection without auto-picking a winner |
-| `byok-first-safe-pack` | `pnpm run switchyard:cli -- skill-pack-route --target byok-first-safe-pack` | `switchyard.catalog.skill_pack --target byok-first-safe-pack` | you want BYOK-first invoke planning before widening into Web/Login reality work |
+| `runtime-diagnostics-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack` | `webai-bridge.catalog.skill_pack --target runtime-diagnostics-pack` | you need the exact read-only provider triage surfaces first |
+| `docs-seo-sync-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack` | `webai-bridge.catalog.skill_pack --target docs-seo-sync-pack` | you need surface-catalog plus keyword-truth handoff first |
+| `chat-app-runtime-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target chat-app-runtime-pack` | `webai-bridge.catalog.skill_pack --target chat-app-runtime-pack` | you want a service-first chat runtime bridge starter without promoting a full chat shell |
+| `research-copilot-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack` | `webai-bridge.catalog.skill_pack --target research-copilot-pack` | you want truth-surface grounding before any research synthesis or outward claim |
+| `compare-runtime-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack` | `webai-bridge.catalog.skill_pack --target compare-runtime-pack` | you need compare-first route selection without auto-picking a winner |
+| `byok-first-safe-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target byok-first-safe-pack` | `webai-bridge.catalog.skill_pack --target byok-first-safe-pack` | you want BYOK-first invoke planning before widening into Web/Login reality work |
 
 These route cards do **not** upgrade support claims. They only keep the pack,
 CLI, and MCP entrypoints aligned.

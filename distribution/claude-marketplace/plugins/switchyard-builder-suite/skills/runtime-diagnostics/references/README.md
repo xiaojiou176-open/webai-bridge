@@ -1,4 +1,4 @@
-# Switchyard Runtime Diagnostics Packet References
+# WebaiBridge Runtime Diagnostics Packet References
 
 This folder keeps the public packet self-contained.
 

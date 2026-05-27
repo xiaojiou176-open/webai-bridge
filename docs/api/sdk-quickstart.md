@@ -1,4 +1,4 @@
-# Switchyard SDK Quickstart
+# WebaiBridge SDK Quickstart
 
 This quickstart focuses on what is committed today.
 
@@ -25,16 +25,16 @@ Source anchors:
 在 monorepo 内部，当前通常直接从工作区包导入。
 
 ```ts
-import { createSwitchyardSdk } from "@switchyard/sdk";
-import { createSwitchyardServiceClient } from "@switchyard/sdk";
+import { createWebaiBridgeSdk } from "@webai-bridge/sdk";
+import { createWebaiBridgeServiceClient } from "@webai-bridge/sdk";
 ```
 
 ## BYOK Example
 
 ```ts
-import { createSwitchyardSdk } from "@switchyard/sdk";
+import { createWebaiBridgeSdk } from "@webai-bridge/sdk";
 
-const sdk = createSwitchyardSdk();
+const sdk = createWebaiBridgeSdk();
 
 const result = await sdk.generateText({
   model: "gemini/gemini-2.5-flash",
@@ -51,9 +51,9 @@ if (result.ok) {
 ## Service Client Example
 
 ```ts
-import { createSwitchyardServiceClient } from "@switchyard/sdk";
+import { createWebaiBridgeServiceClient } from "@webai-bridge/sdk";
 
-const client = createSwitchyardServiceClient({
+const client = createWebaiBridgeServiceClient({
   baseUrl: "http://127.0.0.1:4010",
 });
 
@@ -127,9 +127,9 @@ const invoke = await client.invoke({
 ## Web Runtime SDK Example
 
 ```ts
-import { createSwitchyardWebSdk } from "@switchyard/sdk";
+import { createWebaiBridgeWebSdk } from "@webai-bridge/sdk";
 
-const web = createSwitchyardWebSdk({
+const web = createWebaiBridgeWebSdk({
   useLocalWebAuthStore: true,
 });
 

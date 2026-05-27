@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/provider-web-gemini",
+  "name": "@webai-bridge/provider-web-gemini",
   "private": true,
   "type": "module",
   "dependencies": {

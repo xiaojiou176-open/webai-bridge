@@ -8,7 +8,7 @@ import {
 describe("OpenClaw thin compat adapter", () => {
   it("exposes runtime delegation metadata without product-shell inheritance", () => {
     const adapter = createOpenclawThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: vi.fn() as typeof fetch,
     });
 
@@ -33,7 +33,7 @@ describe("OpenClaw thin compat adapter", () => {
               runtimeShape: "runtime-first",
             },
             bootstrap: {
-              serviceName: "switchyard-service",
+              serviceName: "webai-bridge-service",
               lane: "web",
               consumption: "service-first",
               routeCatalog: {
@@ -117,7 +117,7 @@ describe("OpenClaw thin compat adapter", () => {
               },
               receipt: {
                 recommendedCliCommands: [
-                  "pnpm run switchyard:cli -- provider-doctor --provider chatgpt --json",
+                  "pnpm run webai-bridge:cli -- provider-doctor --provider chatgpt --json",
                 ],
               },
             },
@@ -135,7 +135,7 @@ describe("OpenClaw thin compat adapter", () => {
     });
 
     const adapter = createOpenclawThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as typeof fetch,
     });
 
@@ -172,7 +172,7 @@ describe("OpenClaw thin compat adapter", () => {
           lane: "web",
         }),
         runtimeRoutes: expect.objectContaining({
-          dispatchPlan: "http://switchyard.test/v1/runtime/dispatch-plan",
+          dispatchPlan: "http://webai-bridge.test/v1/runtime/dispatch-plan",
         }),
       }),
     );
@@ -250,7 +250,7 @@ describe("OpenClaw thin compat adapter", () => {
     });
 
     const adapter = createOpenclawThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as typeof fetch,
     });
     const result = await adapter.delegateTurn({
@@ -274,7 +274,7 @@ describe("OpenClaw thin compat adapter", () => {
 
   it("stays fail-closed when a dual-lane provider omits the lane in the builder preview", () => {
     const adapter = createOpenclawThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: vi.fn() as typeof fetch,
     });
 

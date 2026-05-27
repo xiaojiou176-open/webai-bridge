@@ -1,4 +1,4 @@
-# Install And Attach Switchyard MCP
+# Install And Attach WebaiBridge MCP
 
 Use the current repo-native MCP path first.
 
@@ -7,25 +7,25 @@ Use the current repo-native MCP path first.
 1. Clone the public repository:
 
 ```bash
-git clone https://github.com/xiaojiou176-open/Switchyard.git
-cd Switchyard
+git clone https://github.com/xiaojiou176-open/webai-bridge.git
+cd WebaiBridge
 pnpm install
 ```
 
 2. Start the read-only MCP surface:
 
 ```bash
-pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010
+pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010
 ```
 
 Before loading the host config snippets in this folder, replace
-`/ABSOLUTE/PATH/TO/SWITCHYARD` with the real path to your local clone.
+`/ABSOLUTE/PATH/TO/WEBAI_BRIDGE` with the real path to your local clone.
 
 3. Verify the surface:
 
 ```bash
 pnpm run test:mcp:smoke
-pnpm run switchyard:cli -- mcp-tools --json
+pnpm run webai-bridge:cli -- mcp-tools --json
 ```
 
 ## Current truthful install mode

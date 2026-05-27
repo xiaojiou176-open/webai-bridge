@@ -10,17 +10,17 @@ import {
   resolvePersistentCookieDbPath,
 } from "../../../scripts/browser-session-coherence.mjs";
 
-const TEST_SWITCHYARD_ROOT = join(
+const TEST_WEBAI_BRIDGE_ROOT = join(
   homedir(),
   ".cache",
-  "switchyard",
+  "webai-bridge",
   "tests",
   "chatgpt-root",
 );
 const ALLOWED_ISOLATED_ROOT = join(
   homedir(),
   ".cache",
-  "switchyard",
+  "webai-bridge",
   "tests",
   "isolated-chrome-root",
 );
@@ -37,11 +37,11 @@ describe("browser session coherence helpers", () => {
       "chatgpt",
       {
         mode: "isolated-chrome-root",
-        existingProfileDir: TEST_SWITCHYARD_ROOT,
+        existingProfileDir: TEST_WEBAI_BRIDGE_ROOT,
         existingProfileDirectory: "Profile 1",
       },
       {
-        cookieDbPath: join(TEST_SWITCHYARD_ROOT, "Profile 1", "Cookies"),
+        cookieDbPath: join(TEST_WEBAI_BRIDGE_ROOT, "Profile 1", "Cookies"),
         assumeCookieDbExists: true,
         sqliteRunner: () => ({
           status: 0,
@@ -57,7 +57,7 @@ describe("browser session coherence helpers", () => {
     expect(audit).toEqual(
       expect.objectContaining({
         available: true,
-        cookieDbPath: join(TEST_SWITCHYARD_ROOT, "Profile 1", "Cookies"),
+        cookieDbPath: join(TEST_WEBAI_BRIDGE_ROOT, "Profile 1", "Cookies"),
         matchedCookieNames: expect.arrayContaining([
           "__Secure-next-auth.session-token.0",
           "__Secure-next-auth.session-token.1",
@@ -108,8 +108,8 @@ describe("browser session coherence helpers", () => {
     const currentProvenance = buildBrowserCaptureProvenance({
       mode: "isolated-chrome-root",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -134,7 +134,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -180,8 +180,8 @@ describe("browser session coherence helpers", () => {
     const provenance = buildBrowserCaptureProvenance({
       mode: "existing-chrome-profile",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338/",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -191,7 +191,7 @@ describe("browser session coherence helpers", () => {
       browserMode: "isolated-chrome-root",
       userDataDir: ALLOWED_ISOLATED_ROOT,
       profileDirectory: "Profile 1",
-      profileName: "switchyard",
+      profileName: "webai-bridge",
       cdpUrl: "http://127.0.0.1:9338/",
       capturedAt: "2026-04-05T00:00:00.000Z",
     });
@@ -201,8 +201,8 @@ describe("browser session coherence helpers", () => {
     const currentProvenance = buildBrowserCaptureProvenance({
       mode: "isolated-chrome-root",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -213,8 +213,8 @@ describe("browser session coherence helpers", () => {
         state: "ready",
         acquisitionMode: "managed-browser",
         runtimeEnv: {
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
-          SWITCHYARD_WEB_AUTH_USER_DATA_DIR: LEGACY_MANAGED_ROOT,
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+          WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR: LEGACY_MANAGED_ROOT,
         },
         artifactStates: {
           "next-auth-session-token": "present",
@@ -226,7 +226,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -273,8 +273,8 @@ describe("browser session coherence helpers", () => {
     const currentProvenance = buildBrowserCaptureProvenance({
       mode: "isolated-chrome-root",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -294,7 +294,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -342,8 +342,8 @@ describe("browser session coherence helpers", () => {
     const currentProvenance = buildBrowserCaptureProvenance({
       mode: "isolated-chrome-root",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -363,7 +363,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -411,8 +411,8 @@ describe("browser session coherence helpers", () => {
     const currentProvenance = buildBrowserCaptureProvenance({
       mode: "isolated-chrome-root",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -433,7 +433,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -475,8 +475,8 @@ describe("browser session coherence helpers", () => {
     const currentProvenance = buildBrowserCaptureProvenance({
       mode: "isolated-chrome-root",
       env: {
-        SWITCHYARD_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: ALLOWED_ISOLATED_ROOT,
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       cdpUrl: "http://127.0.0.1:9338",
       capturedAt: "2026-04-05T00:00:00.000Z",
@@ -496,7 +496,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -548,7 +548,7 @@ describe("browser session coherence helpers", () => {
         browserMode: "isolated-chrome-root",
         userDataDir: ALLOWED_ISOLATED_ROOT,
         profileDirectory: "Profile 1",
-        profileName: "switchyard",
+        profileName: "webai-bridge",
         cdpUrl: "http://127.0.0.1:9338",
         capturedAt: "2026-04-05T00:00:00.000Z",
       },
@@ -556,7 +556,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {
@@ -607,7 +607,7 @@ describe("browser session coherence helpers", () => {
         browserMode: "isolated-chrome-root",
         userDataDir: ALLOWED_ISOLATED_ROOT,
         profileDirectory: "Profile 1",
-        profileName: "switchyard",
+        profileName: "webai-bridge",
         cdpUrl: "http://127.0.0.1:9338",
         capturedAt: "2026-04-05T00:00:00.000Z",
       },
@@ -615,7 +615,7 @@ describe("browser session coherence helpers", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: ALLOWED_ISOLATED_ROOT,
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       browserEvidence: {

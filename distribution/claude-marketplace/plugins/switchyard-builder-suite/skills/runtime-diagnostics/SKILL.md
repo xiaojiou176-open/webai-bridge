@@ -1,6 +1,6 @@
-# Switchyard Runtime Diagnostics
+# WebaiBridge Runtime Diagnostics
 
-Teach the agent how to install, connect, and use Switchyard's read-only MCP
+Teach the agent how to install, connect, and use WebaiBridge's read-only MCP
 runtime diagnostics surface.
 
 ## Use this skill when
@@ -11,7 +11,7 @@ runtime diagnostics surface.
 
 ## What this packet teaches
 
-- how to attach the current Switchyard MCP server
+- how to attach the current WebaiBridge MCP server
 - which runtime and catalog tools are safe first
 - how to separate internal blockers from external blockers
 - how to keep claims grounded in `partial`, `read-only`, and `package-ready`

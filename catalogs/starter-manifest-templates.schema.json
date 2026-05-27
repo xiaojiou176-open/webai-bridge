@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/starter-manifest-templates.schema.json",
-  "title": "Switchyard Starter Manifest Templates",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/starter-manifest-templates.schema.json",
+  "title": "WebaiBridge Starter Manifest Templates",
   "type": "object",
   "additionalProperties": false,
   "required": [

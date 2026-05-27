@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   createProviderRegistry,
   resolveModelReference,
-  SwitchyardContractError,
+  WebaiBridgeContractError,
 } from "../../../packages/kernel/src/index.js";
 
 describe("model resolution", () => {
@@ -52,7 +52,7 @@ describe("model resolution", () => {
         providerId: "chatgpt",
         modelReference: "gemini/gemini-2.5-flash",
       }),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 
   it("falls back to the recommended model when a lane entry has no default model", () => {
@@ -94,7 +94,7 @@ describe("model resolution", () => {
       resolveModelReference(registry, {
         providerId: "chatgpt",
       }),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 
   it("throws when a requested lane has neither a default nor a recommended model", () => {
@@ -111,6 +111,6 @@ describe("model resolution", () => {
         providerId: "grok",
         laneId: "web-login",
       }),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 });

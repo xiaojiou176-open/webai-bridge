@@ -14,8 +14,8 @@ const surfaceCatalog = readRepoJson("catalogs/public-surface-catalog.json");
 const compatCatalog = readRepoJson("catalogs/compat-target-catalog.json");
 const keywordTruth = readRepoJson("catalogs/discoverability-keyword-truth.json");
 const supportMatrix = readRepoText("docs/public-surface-support-matrix.md");
-const switchyardKeyword =
-  keywordTruth.entries.find((entry) => entry.term === "Switchyard") ?? null;
+const webai-bridgeKeyword =
+  keywordTruth.entries.find((entry) => entry.term === "WebaiBridge") ?? null;
 
 printJson({
   starterPackId: "research-copilot-pack",
@@ -24,6 +24,6 @@ printJson({
   publicSurfaceCount: surfaceCatalog.publicSurfaces.length,
   compatTargetCount: compatCatalog.targets.length,
   keywordEntryCount: keywordTruth.entries.length,
-  switchyardKeywordTruth: switchyardKeyword?.truthStatus ?? null,
+  webai-bridgeKeywordTruth: webai-bridgeKeyword?.truthStatus ?? null,
   supportMatrixHasPartialLabel: supportMatrix.includes("`partial`"),
 });

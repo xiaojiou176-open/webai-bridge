@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/provider-web-grok",
+  "name": "@webai-bridge/provider-web-grok",
   "private": true,
   "type": "module",
   "scripts": {

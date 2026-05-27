@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 
 const EXPLICIT_BROWSER_ENV_KEYS = [
   "PLAYWRIGHT_CHROMIUM_EXECUTABLE",
-  "SWITCHYARD_TEST_BROWSER_PATH",
+  "WEBAI_BRIDGE_TEST_BROWSER_PATH",
 ] as const;
 
 function commandExists(command: string): string | undefined {
@@ -73,7 +73,7 @@ export function resolveChromiumExecutablePath(env = process.env): string {
   }
 
   throw new Error(
-    "Unable to find a local Chrome/Chromium executable. Set PLAYWRIGHT_CHROMIUM_EXECUTABLE or SWITCHYARD_TEST_BROWSER_PATH.",
+    "Unable to find a local Chrome/Chromium executable. Set PLAYWRIGHT_CHROMIUM_EXECUTABLE or WEBAI_BRIDGE_TEST_BROWSER_PATH.",
   );
 }
 

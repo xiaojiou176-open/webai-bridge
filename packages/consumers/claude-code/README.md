@@ -1,6 +1,6 @@
-# @switchyard/consumer-claude-code
+# @webai-bridge/consumer-claude-code
 
-`@switchyard/consumer-claude-code` 是 `Switchyard` 给 `Claude Code` 风格消息流准备的 **thin compat adapter**。
+`@webai-bridge/consumer-claude-code` 是 `WebaiBridge` 给 `Claude Code` 风格消息流准备的 **thin compat adapter**。
 
 一句最重要的人话：
 
@@ -16,7 +16,7 @@
 ## What It Does
 
 - 接住 Claude Code 风格的 message payload
-- 转成 `Switchyard` runtime invoke 请求
+- 转成 `WebaiBridge` runtime invoke 请求
 - 对 terminal / approval / tool plane 继续 fail-closed
 
 ## What It Does Not Claim
@@ -47,7 +47,7 @@
 ## Local Workspace Usage
 
 ```ts
-import { createClaudeCodeCompatAdapter } from "@switchyard/consumer-claude-code";
+import { createClaudeCodeCompatAdapter } from "@webai-bridge/consumer-claude-code";
 
 const adapter = createClaudeCodeCompatAdapter({
   baseUrl: "http://127.0.0.1:4010",

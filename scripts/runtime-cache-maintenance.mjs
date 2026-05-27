@@ -13,12 +13,12 @@ import { fileURLToPath } from "node:url";
 
 import {
   resolveConfiguredChromeProfile,
-  resolveSwitchyardCacheMaxBytes,
-  resolveSwitchyardCacheRoots,
-  resolveSwitchyardCacheTtlDays,
-  SWITCHYARD_CACHE_MAX_BYTES_ENV_NAME,
-  SWITCHYARD_CACHE_TTL_DAYS_ENV_NAME,
-  SWITCHYARD_EXTERNAL_CACHE_ROOT_ENV_NAME,
+  resolveWebaiBridgeCacheMaxBytes,
+  resolveWebaiBridgeCacheRoots,
+  resolveWebaiBridgeCacheTtlDays,
+  WEBAI_BRIDGE_CACHE_MAX_BYTES_ENV_NAME,
+  WEBAI_BRIDGE_CACHE_TTL_DAYS_ENV_NAME,
+  WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT_ENV_NAME,
 } from "./runtime-policy.mjs";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
@@ -26,7 +26,7 @@ export const repoRoot = resolve(scriptDir, "..");
 export const runtimeCacheRoot = join(repoRoot, ".runtime-cache");
 export const managedBrowserProfileDir = join(
   runtimeCacheRoot,
-  "switchyard-web-auth-browser",
+  "webai-bridge-web-auth-browser",
 );
 export const browserDebugDir = join(runtimeCacheRoot, "browser-debug");
 export const browserDebugBundlesDir = join(browserDebugDir, "bundles");
@@ -36,7 +36,7 @@ export const runtimeTempDir = join(runtimeCacheRoot, "temp");
 const MANAGED_BROWSER_PORTS = ["39222", "9338"];
 const PROTECTED_BUNDLE_COUNT = 20;
 const KNOWN_CATEGORY_NAMES = new Set([
-  "switchyard-web-auth-browser",
+  "webai-bridge-web-auth-browser",
   "browser-debug",
   "browser-support",
   "temp",
@@ -108,21 +108,21 @@ const OTHER_RUNTIME_CACHE_RULES = [
   {
     category: "disposable-generated",
     label: "verify-web-login-test-state",
-    match: (name) => name.startsWith("switchyard-verify-web-login-test-"),
+    match: (name) => name.startsWith("webai-bridge-verify-web-login-test-"),
     priority: 12,
     reason: "cleanup-verify-web-login-test-state",
   },
   {
     category: "disposable-generated",
     label: "store-preserve-snapshot",
-    match: (name) => name.startsWith("switchyard-store-preserve-"),
+    match: (name) => name.startsWith("webai-bridge-store-preserve-"),
     priority: 13,
     reason: "cleanup-store-preserve-snapshot",
   },
   {
     category: "disposable-generated",
     label: "chatgpt-writeback-snapshot",
-    match: (name) => name.startsWith("switchyard-chatgpt-ready-writeback-"),
+    match: (name) => name.startsWith("webai-bridge-chatgpt-ready-writeback-"),
     priority: 13,
     reason: "cleanup-chatgpt-writeback-snapshot",
   },
@@ -247,12 +247,12 @@ function runCommand(command, args) {
 }
 
 function resolveMaintenancePaths(customRepoRoot = repoRoot, env = process.env) {
-  const roots = resolveSwitchyardCacheRoots(customRepoRoot, env);
+  const roots = resolveWebaiBridgeCacheRoots(customRepoRoot, env);
   return {
     ...roots,
     managedBrowserProfileDir: join(
       roots.runtimeCacheRoot,
-      "switchyard-web-auth-browser",
+      "webai-bridge-web-auth-browser",
     ),
     browserDebugBundlesDir: join(
       roots.runtimeCacheRoot,
@@ -261,8 +261,8 @@ function resolveMaintenancePaths(customRepoRoot = repoRoot, env = process.env) {
     ),
     browserSupportDir: join(roots.runtimeCacheRoot, "browser-support"),
     runtimeTempDir: join(roots.runtimeCacheRoot, "temp"),
-    cacheTtlDays: resolveSwitchyardCacheTtlDays(env),
-    cacheMaxBytes: resolveSwitchyardCacheMaxBytes(env),
+    cacheTtlDays: resolveWebaiBridgeCacheTtlDays(env),
+    cacheMaxBytes: resolveWebaiBridgeCacheMaxBytes(env),
     userOwnedChromeProfile: resolveConfiguredChromeProfile(env),
   };
 }
@@ -426,7 +426,7 @@ function inspectManagedBrowserProcesses(baseRoot, profilePath) {
   }
 
   const profileName =
-    profilePath.split(/[\\/]/).at(-1) ?? "switchyard-web-auth-browser";
+    profilePath.split(/[\\/]/).at(-1) ?? "webai-bridge-web-auth-browser";
   const blockedReasons = [];
 
   for (const rawLine of result.stdout.split("\n")) {
@@ -891,16 +891,16 @@ export function buildRuntimeCacheMaintenancePayload(options = {}) {
     entries,
     cachePolicy: {
       ttlDays: paths.cacheTtlDays,
-      ttlSource: env[SWITCHYARD_CACHE_TTL_DAYS_ENV_NAME]?.trim()
-        ? SWITCHYARD_CACHE_TTL_DAYS_ENV_NAME
+      ttlSource: env[WEBAI_BRIDGE_CACHE_TTL_DAYS_ENV_NAME]?.trim()
+        ? WEBAI_BRIDGE_CACHE_TTL_DAYS_ENV_NAME
         : "default",
       maxBytes: paths.cacheMaxBytes,
       maxBytesHuman: formatBytes(paths.cacheMaxBytes),
-      maxBytesSource: env[SWITCHYARD_CACHE_MAX_BYTES_ENV_NAME]?.trim()
-        ? SWITCHYARD_CACHE_MAX_BYTES_ENV_NAME
+      maxBytesSource: env[WEBAI_BRIDGE_CACHE_MAX_BYTES_ENV_NAME]?.trim()
+        ? WEBAI_BRIDGE_CACHE_MAX_BYTES_ENV_NAME
         : "default",
-      externalCacheRootSource: env[SWITCHYARD_EXTERNAL_CACHE_ROOT_ENV_NAME]?.trim()
-        ? SWITCHYARD_EXTERNAL_CACHE_ROOT_ENV_NAME
+      externalCacheRootSource: env[WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT_ENV_NAME]?.trim()
+        ? WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT_ENV_NAME
         : "default",
       sharedToolCaches: SHARED_TOOL_CACHES,
     },
@@ -1021,7 +1021,7 @@ function padCell(value, width) {
 
 export function renderRuntimeCacheMaintenancePayload(payload) {
   const lines = [
-    `Switchyard runtime cache maintenance (${payload.command}${payload.apply ? " apply" : payload.command === "cleanup" ? " dry-run" : ""})`,
+    `WebaiBridge runtime cache maintenance (${payload.command}${payload.apply ? " apply" : payload.command === "cleanup" ? " dry-run" : ""})`,
     "",
     `repo-local runtime root : ${payload.runtimeCacheRoot}`,
     `external cache root    : ${payload.externalCacheRoot}`,

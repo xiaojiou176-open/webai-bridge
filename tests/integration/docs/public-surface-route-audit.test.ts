@@ -11,55 +11,55 @@ const publicSurfaceCases = [
     label: "frontdoor-root",
     path: "/",
     expectedContentType: "text/html",
-    expectedSnippet: "Switchyard Docs Front Door",
+    expectedSnippet: "WebaiBridge Docs Front Door",
   },
   {
     label: "docs-atlas",
     path: "/README.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Public Docs",
+    expectedSnippet: "WebaiBridge Public Docs",
   },
   {
     label: "first-success",
     path: "/first-success.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Default First Success",
+    expectedSnippet: "WebaiBridge Default First Success",
   },
   {
     label: "proof-pack",
     path: "/public-proof-pack.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Public Proof Pack",
+    expectedSnippet: "WebaiBridge Public Proof Pack",
   },
   {
     label: "distribution-ledger",
     path: "/public-distribution-ledger.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Public Distribution Ledger",
+    expectedSnippet: "WebaiBridge Public Distribution Ledger",
   },
   {
     label: "support-matrix",
     path: "/public-surface-support-matrix.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Public Surface Support Matrix",
+    expectedSnippet: "WebaiBridge Public Surface Support Matrix",
   },
   {
     label: "api-reference",
     path: "/api/service-http-reference.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Service HTTP Reference",
+    expectedSnippet: "WebaiBridge Service HTTP Reference",
   },
   {
     label: "sdk-quickstart",
     path: "/api/sdk-quickstart.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard SDK Quickstart",
+    expectedSnippet: "WebaiBridge SDK Quickstart",
   },
   {
     label: "mcp-readonly-server",
     path: "/api/mcp-readonly-server.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Read-only MCP Server",
+    expectedSnippet: "WebaiBridge Read-only MCP Server",
   },
   {
     label: "web-login-acquisition",
@@ -71,7 +71,7 @@ const publicSurfaceCases = [
     label: "error-diagnostics",
     path: "/api/error-diagnostics-reference.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Error and Diagnostics Reference",
+    expectedSnippet: "WebaiBridge Error and Diagnostics Reference",
   },
   {
     label: "openapi",
@@ -83,109 +83,109 @@ const publicSurfaceCases = [
     label: "codex-compat",
     path: "/compat/codex.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard for Codex",
+    expectedSnippet: "WebaiBridge for Codex",
   },
   {
     label: "claude-code-compat",
     path: "/compat/claude-code.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard for Claude Code",
+    expectedSnippet: "WebaiBridge for Claude Code",
   },
   {
     label: "openclaw-compat",
     path: "/compat/openclaw.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard for OpenClaw",
+    expectedSnippet: "WebaiBridge for OpenClaw",
   },
   {
     label: "mcp-frontdoor",
     path: "/mcp.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard MCP Status",
+    expectedSnippet: "WebaiBridge MCP Status",
   },
   {
     label: "compat-hub",
     path: "/compat/README.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Compatibility Matrix",
+    expectedSnippet: "WebaiBridge Compatibility Matrix",
   },
   {
     label: "30-second-overview",
     path: "/media/30-second-overview.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard 30-Second Overview",
+    expectedSnippet: "WebaiBridge 30-Second Overview",
   },
   {
     label: "media-shelf",
     path: "/media/README.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Media Shelf",
+    expectedSnippet: "WebaiBridge Media Shelf",
   },
   {
     label: "bootstrap-runbook",
     path: "/runbooks/dev-bootstrap.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Dev Bootstrap",
+    expectedSnippet: "WebaiBridge Dev Bootstrap",
   },
   {
     label: "faq",
     path: "/faq.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard FAQ",
+    expectedSnippet: "WebaiBridge FAQ",
   },
   {
     label: "glossary",
     path: "/glossary.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Glossary",
+    expectedSnippet: "WebaiBridge Glossary",
   },
   {
     label: "i18n",
     path: "/i18n.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Public Language Strategy",
+    expectedSnippet: "WebaiBridge Public Language Strategy",
   },
   {
     label: "host-playbooks",
     path: "/host-integration-playbooks.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Builder Integration Hub",
+    expectedSnippet: "WebaiBridge Builder Integration Hub",
   },
   {
     label: "host-examples",
     path: "/host-integration-examples.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Host Example Foyer",
+    expectedSnippet: "WebaiBridge Host Example Foyer",
   },
   {
     label: "provider-runtime-catalog",
     path: "/provider-runtime-catalog.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Provider Runtime Directory",
+    expectedSnippet: "WebaiBridge Provider Runtime Directory",
   },
   {
     label: "public-surface-catalog",
     path: "/public-surface-catalog.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Public Surface Catalog",
+    expectedSnippet: "WebaiBridge Public Surface Catalog",
   },
   {
     label: "starter-pack-chooser",
     path: "/starter-pack-chooser.md",
     expectedContentType: "text/markdown",
-    expectedSnippet: "Switchyard Starter Pack Chooser",
+    expectedSnippet: "WebaiBridge Starter Pack Chooser",
   },
   {
     label: "viewer-first-success",
     path: "/viewer.html?doc=first-success.md",
     expectedContentType: "text/html",
-    expectedSnippet: "Switchyard Docs Viewer",
+    expectedSnippet: "WebaiBridge Docs Viewer",
   },
   {
     label: "viewer-docs-atlas",
     path: "/viewer.html?doc=README.md",
     expectedContentType: "text/html",
-    expectedSnippet: "Switchyard Docs Viewer",
+    expectedSnippet: "WebaiBridge Docs Viewer",
   },
 ] as const;
 
@@ -201,8 +201,8 @@ describe("public surface route audit", () => {
         port: 4185,
       });
 
-      const tempRoot = mkdtempSync(resolve(tmpdir(), "switchyard-public-surface-"));
-      const projectRoot = resolve(tempRoot, "Switchyard");
+      const tempRoot = mkdtempSync(resolve(tmpdir(), "webai-bridge-public-surface-"));
+      const projectRoot = resolve(tempRoot, "WebaiBridge");
       symlinkSync(repoRoot, projectRoot, "dir");
 
       const projectSiteServer = await startDocsStaticServer({
@@ -235,7 +235,7 @@ describe("public surface route audit", () => {
           );
           await checkPath(
             "http://127.0.0.1:4186",
-            `/Switchyard${testCase.path === "/" ? "/" : testCase.path}`,
+            `/WebaiBridge${testCase.path === "/" ? "/" : testCase.path}`,
             testCase.expectedContentType,
             testCase.expectedSnippet,
           );

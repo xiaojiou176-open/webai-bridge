@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/app-service",
+  "name": "@webai-bridge/app-service",
   "private": true,
   "type": "module",
   "dependencies": {

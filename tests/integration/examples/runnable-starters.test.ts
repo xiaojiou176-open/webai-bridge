@@ -60,7 +60,7 @@ describe("runnable starter mini-projects", () => {
 
     try {
       const output = await runExample("examples/runtime-bridge/invoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
       });
 
       expect(output).toEqual(
@@ -148,7 +148,7 @@ describe("runnable starter mini-projects", () => {
 
     try {
       const output = await runExample("examples/runtime-diagnostics/check.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
       });
 
       expect(output).toEqual(
@@ -206,14 +206,14 @@ describe("runnable starter mini-projects", () => {
 
       try {
         const output = await runExample("examples/mcp-inspector/smoke.mjs", {
-          SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+          WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
         });
 
         expect(output.starter).toBe("read-only-mcp-inspector");
         expect(output.availableTools).toEqual(
           expect.arrayContaining([
-            "switchyard.runtime.health",
-            "switchyard.catalog.mcp_tools",
+            "webai-bridge.runtime.health",
+            "webai-bridge.catalog.mcp_tools",
           ]),
         );
         expect(output.runtimeHealth).toEqual(
@@ -268,13 +268,13 @@ describe("runnable starter mini-projects", () => {
     try {
       const baseUrl = `http://127.0.0.1:${address.port}`;
       const codex = await runExample("examples/hosts/codex/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: baseUrl,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: baseUrl,
       });
       const claudeCode = await runExample("examples/hosts/claude-code/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: baseUrl,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: baseUrl,
       });
       const openclaw = await runExample("examples/hosts/openclaw/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: baseUrl,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: baseUrl,
       });
 
       expect(codex).toEqual(
@@ -282,7 +282,7 @@ describe("runnable starter mini-projects", () => {
           starter: "host-example-codex",
           target: "codex",
           response: expect.objectContaining({ ok: true }),
-          bestEntry: "pnpm run switchyard:cli -- host-example --target codex",
+          bestEntry: "pnpm run webai-bridge:cli -- host-example --target codex",
         }),
       );
       expect(claudeCode).toEqual(
@@ -290,7 +290,7 @@ describe("runnable starter mini-projects", () => {
           starter: "host-example-claude-code",
           target: "claude-code",
           response: expect.objectContaining({ ok: true }),
-          bestEntry: "pnpm run switchyard:cli -- host-example --target claude-code",
+          bestEntry: "pnpm run webai-bridge:cli -- host-example --target claude-code",
         }),
       );
       expect(openclaw).toEqual(
@@ -298,7 +298,7 @@ describe("runnable starter mini-projects", () => {
           starter: "host-example-openclaw",
           target: "openclaw",
           response: expect.objectContaining({ ok: true }),
-          bestEntry: "pnpm run switchyard:cli -- host-example --target openclaw",
+          bestEntry: "pnpm run webai-bridge:cli -- host-example --target openclaw",
         }),
       );
 
@@ -341,15 +341,15 @@ describe("runnable starter mini-projects", () => {
 
       try {
         const output = await runExample("examples/hosts/mcp/smoke.mjs", {
-          SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+          WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
         });
 
         expect(output.starter).toBe("host-example-mcp");
         expect(output.target).toBe("mcp");
         expect(output.availableTools).toEqual(
           expect.arrayContaining([
-            "switchyard.runtime.health",
-            "switchyard.catalog.host_examples",
+            "webai-bridge.runtime.health",
+            "webai-bridge.catalog.host_examples",
           ]),
         );
         expect(output.toolResult).toEqual(
@@ -358,7 +358,7 @@ describe("runnable starter mini-projects", () => {
           }),
         );
         expect(output.bestEntry).toBe(
-          "pnpm run switchyard:cli -- host-example --target mcp",
+          "pnpm run webai-bridge:cli -- host-example --target mcp",
         );
         expect(requests).toContain("GET /v1/runtime/health");
       } finally {

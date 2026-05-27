@@ -12,7 +12,7 @@ import { tmpdir } from "node:os";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 function createWorkspace() {
-  const workspaceRoot = mkdtempSync(join(tmpdir(), "switchyard-runtime-cache-"));
+  const workspaceRoot = mkdtempSync(join(tmpdir(), "webai-bridge-runtime-cache-"));
   mkdirSync(join(workspaceRoot, ".runtime-cache"), {
     recursive: true,
   });
@@ -22,17 +22,17 @@ function createWorkspace() {
 function createMaintenanceEnv(workspaceRoot: string) {
   const externalCacheRoot = join(
     tmpdir(),
-    `switchyard-external-cache-${workspaceRoot.split("/").at(-1) ?? "test"}`,
+    `webai-bridge-external-cache-${workspaceRoot.split("/").at(-1) ?? "test"}`,
   );
 
   return {
-    SWITCHYARD_EXTERNAL_CACHE_ROOT: externalCacheRoot,
-    SWITCHYARD_CHROME_USER_DATA_DIR: join(
+    WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT: externalCacheRoot,
+    WEBAI_BRIDGE_CHROME_USER_DATA_DIR: join(
       externalCacheRoot,
       "browser",
       "chrome-user-data",
     ),
-    SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+    WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
   };
 }
 
@@ -82,7 +82,7 @@ describe("runtime-cache maintenance script", () => {
     const workspaceRoot = createWorkspace();
     writeRuntimeCacheFile(
       workspaceRoot,
-      ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+      ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
       "browser",
     );
     createBundle(workspaceRoot, "chatgpt-001");
@@ -156,7 +156,7 @@ describe("runtime-cache maintenance script", () => {
 
       const rendered = renderRuntimeCacheMaintenancePayload(payload);
       expect(rendered).toContain("category");
-      expect(rendered).toContain(".runtime-cache/switchyard-web-auth-browser");
+      expect(rendered).toContain(".runtime-cache/webai-bridge-web-auth-browser");
       expect(JSON.parse(JSON.stringify(payload)).entries).toHaveLength(7);
     } finally {
       rmSync(workspaceRoot, {
@@ -198,7 +198,7 @@ describe("runtime-cache maintenance script", () => {
     const workspaceRoot = createWorkspace();
     writeRuntimeCacheFile(
       workspaceRoot,
-      ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+      ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
       "browser",
     );
     writeRuntimeCacheFile(
@@ -218,12 +218,12 @@ describe("runtime-cache maintenance script", () => {
     );
     const readyWritebackPath = createTransientRuntimeWorkspace(
       workspaceRoot,
-      "switchyard-chatgpt-ready-writeback-",
+      "webai-bridge-chatgpt-ready-writeback-",
       "local-web-auth-store.json",
     );
     const storePreservePath = createTransientRuntimeWorkspace(
       workspaceRoot,
-      "switchyard-store-preserve-",
+      "webai-bridge-store-preserve-",
       "verify-web-login-live.store.json",
     );
 
@@ -280,7 +280,7 @@ describe("runtime-cache maintenance script", () => {
         existsSync(
           join(
             workspaceRoot,
-            ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+            ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
           ),
         ),
       ).toBe(true);
@@ -296,7 +296,7 @@ describe("runtime-cache maintenance script", () => {
     const workspaceRoot = createWorkspace();
     writeRuntimeCacheFile(
       workspaceRoot,
-      ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+      ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
       "browser",
     );
     writeRuntimeCacheFile(
@@ -321,7 +321,7 @@ describe("runtime-cache maintenance script", () => {
     );
     const verifyWorkspacePath = createTransientRuntimeWorkspace(
       workspaceRoot,
-      "switchyard-verify-web-login-test-",
+      "webai-bridge-verify-web-login-test-",
       "local-web-auth-store.json",
     );
 
@@ -358,7 +358,7 @@ describe("runtime-cache maintenance script", () => {
         existsSync(
           join(
             workspaceRoot,
-            ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+            ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
           ),
         ),
       ).toBe(true);
@@ -377,7 +377,7 @@ describe("runtime-cache maintenance script", () => {
     const workspaceRoot = createWorkspace();
     writeRuntimeCacheFile(
       workspaceRoot,
-      ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+      ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
       "browser",
     );
     writeRuntimeCacheFile(
@@ -431,7 +431,7 @@ describe("runtime-cache maintenance script", () => {
         existsSync(
           join(
             workspaceRoot,
-            ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+            ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
           ),
         ),
       ).toBe(true);
@@ -447,7 +447,7 @@ describe("runtime-cache maintenance script", () => {
     const workspaceRoot = createWorkspace();
     writeRuntimeCacheFile(
       workspaceRoot,
-      ".runtime-cache/switchyard-web-auth-browser/Default/Preferences",
+      ".runtime-cache/webai-bridge-web-auth-browser/Default/Preferences",
       "browser",
     );
     writeRuntimeCacheFile(
@@ -494,7 +494,7 @@ describe("runtime-cache maintenance script", () => {
         ),
       ).toBe(true);
       expect(
-        existsSync(join(workspaceRoot, ".runtime-cache/switchyard-web-auth-browser")),
+        existsSync(join(workspaceRoot, ".runtime-cache/webai-bridge-web-auth-browser")),
       ).toBe(false);
       expect(existsSync(join(workspaceRoot, ".runtime-cache/temp"))).toBe(false);
     } finally {

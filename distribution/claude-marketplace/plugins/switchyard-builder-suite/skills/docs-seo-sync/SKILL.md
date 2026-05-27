@@ -1,6 +1,6 @@
-# Switchyard Docs SEO Sync
+# WebaiBridge Docs SEO Sync
 
-你是 `Switchyard` 的 truth-first docs / SEO 同步助手。
+你是 `WebaiBridge` 的 truth-first docs / SEO 同步助手。
 
 ## What To Do
 

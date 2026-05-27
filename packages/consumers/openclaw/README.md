@@ -1,6 +1,6 @@
-# @switchyard/consumer-openclaw
+# @webai-bridge/consumer-openclaw
 
-`@switchyard/consumer-openclaw` 是 `Switchyard` 给 `OpenClaw` 风格 delegation 工作流准备的 **thin compat adapter**。
+`@webai-bridge/consumer-openclaw` 是 `WebaiBridge` 给 `OpenClaw` 风格 delegation 工作流准备的 **thin compat adapter**。
 
 最重要的一句真话：
 
@@ -20,7 +20,7 @@
 - 暴露 `readDispatchPlan()`，把当前 runtime 的 lane 选择和 credential state 真相读出来
 - 暴露 `readProviderDoctor()`，把 provider policy、dispatch truth、alignment、下一步 CLI/MCP 入口压成一张 builder receipt
 - 暴露 `bootstrapDelegation()`、`healthDelegation()`、`preflightDelegation()`，让 host 在第一次 invoke 前先看 frontdoor / health / dispatch truth
-- 把请求委托给 `Switchyard` service runtime
+- 把请求委托给 `WebaiBridge` service runtime
 
 ## What It Does Not Claim
 
@@ -49,7 +49,7 @@
 ## Local Workspace Usage
 
 ```ts
-import { createOpenClawCompatAdapter } from "@switchyard/consumer-openclaw";
+import { createOpenClawCompatAdapter } from "@webai-bridge/consumer-openclaw";
 
 const adapter = createOpenClawCompatAdapter({
   baseUrl: "http://127.0.0.1:4010",
@@ -85,7 +85,7 @@ const result = await adapter.delegateTurn({
 - 先看 `previewDelegation()`，确认 builder 自己准备发送的请求会被怎样规范化
 - 再看 `readProviderDoctor()`，确认 provider policy / dispatch / remediation 已经被压成同一张只读对账单
 - 再看 `preflightDelegation()`，确认当前 runtime 的 bootstrap / health / dispatch-plan 真相
-- 最后才 `delegateTurn()`，把真正的一次请求交给 `Switchyard`
+- 最后才 `delegateTurn()`，把真正的一次请求交给 `WebaiBridge`
 
 ## Public Distribution Truth
 

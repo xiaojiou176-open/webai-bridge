@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/lane-byok",
+  "name": "@webai-bridge/lane-byok",
   "version": "0.1.0",
   "private": true,
   "type": "module",

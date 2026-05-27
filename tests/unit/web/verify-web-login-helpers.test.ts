@@ -443,11 +443,11 @@ describe("verify-web-login helper branches", () => {
     const runtimeCacheRoot = join(process.cwd(), ".runtime-cache");
     mkdirSync(runtimeCacheRoot, { recursive: true });
     const workspaceRoot = mkdtempSync(
-      join(runtimeCacheRoot, "switchyard-store-preserve-"),
+      join(runtimeCacheRoot, "webai-bridge-store-preserve-"),
     );
     const storePath = join(workspaceRoot, "verify-web-login-live.store.json");
     const env = {
-      SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: storePath,
+      WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: storePath,
     };
 
     writeFileSync(
@@ -463,15 +463,15 @@ describe("verify-web-login helper branches", () => {
               accountLabel: "gemini:local-browser",
               sessionSource: "gemini-google-oauth",
               runtimeEnv: {
-                SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "cookie-bundle",
-                SWITCHYARD_WEB_GEMINI_USER_AGENT: "ua",
-                SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+                WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "cookie-bundle",
+                WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "ua",
+                WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
               },
               captureProvenance: {
                 browserMode: "isolated-chrome-root",
-                userDataDir: "/tmp/switchyard-browser",
+                userDataDir: "/tmp/webai-bridge-browser",
                 profileDirectory: "Profile 1",
-                profileName: "switchyard",
+                profileName: "webai-bridge",
                 cdpUrl: "http://127.0.0.1:9338",
                 capturedAt: "2026-04-05T00:00:00.000Z",
               },
@@ -479,9 +479,9 @@ describe("verify-web-login helper branches", () => {
                 source: "capture",
                 checkedAt: "2026-04-05T00:00:00.000Z",
                 browserMode: "isolated-chrome-root",
-                userDataDir: "/tmp/switchyard-browser",
+                userDataDir: "/tmp/webai-bridge-browser",
                 profileDirectory: "Profile 1",
-                profileName: "switchyard",
+                profileName: "webai-bridge",
                 cdpUrl: "http://127.0.0.1:9338",
                 workspaceReady: true,
                 summary: "capture ok",
@@ -501,8 +501,8 @@ describe("verify-web-login helper branches", () => {
       expect.objectContaining({
         providerId: "gemini",
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "cookie-bundle",
-          SWITCHYARD_WEB_GEMINI_USER_AGENT: "ua",
+          WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "cookie-bundle",
+          WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "ua",
         }),
         captureProvenance: expect.objectContaining({
           browserMode: "isolated-chrome-root",
@@ -524,8 +524,8 @@ describe("verify-web-login helper branches", () => {
         state: "user-action-required",
         degradedReason: "needs fresh capture",
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "cookie-bundle",
-          SWITCHYARD_WEB_GEMINI_USER_AGENT: "ua",
+          WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "cookie-bundle",
+          WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "ua",
         }),
         captureProvenance: expect.objectContaining({
           browserMode: "isolated-chrome-root",

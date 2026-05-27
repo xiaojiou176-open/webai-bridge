@@ -2,8 +2,8 @@ schema_version: 1
 artifact: public-skill-listing-manifest
 
 skill:
-  name: switchyard-runtime-diagnostics
-  display_name: Switchyard Runtime Diagnostics
+  name: webai-bridge-runtime-diagnostics
+  display_name: WebaiBridge Runtime Diagnostics
   version: 1.0.0
   entrypoint: SKILL.md
   package_shape: skill-folder
@@ -12,18 +12,18 @@ registry_targets:
   clawhub:
     status: listed-live
     package_shape: skill-folder
-    listing_url: https://www.clawhub.ai/skills/switchyard-runtime-diagnostics
+    listing_url: https://www.clawhub.ai/skills/webai-bridge-runtime-diagnostics
     note: Task-supplied 2026-04-11 external read-back found a live ClawHub page for this packet, but the host also showed a negative safety/trust warning. Treat that as packet-scoped host truth, not repo-wide acceptance.
-    submit_via: clawhub publish . --slug switchyard-runtime-diagnostics --name "Switchyard Runtime Diagnostics" --version 1.0.0 --tags switchyard,mcp,diagnostics,runtime,read-only
+    submit_via: clawhub publish . --slug webai-bridge-runtime-diagnostics --name "WebaiBridge Runtime Diagnostics" --version 1.0.0 --tags webai-bridge,mcp,diagnostics,runtime,read-only
   openhands-extensions:
     status: review-pending
     package_shape: skill-folder
     submission_url: https://github.com/OpenHands/extensions/pull/161
     note: Task-supplied 2026-04-11 external read-back found PR #161 open with review still pending and mergeability blocked. Treat this as an external review receipt, not a live listing.
-    submit_via: submit this folder as skills/switchyard-runtime-diagnostics/ in OpenHands/extensions
+    submit_via: submit this folder as skills/webai-bridge-runtime-diagnostics/ in OpenHands/extensions
 
 boundaries:
-  product_identity: Read-only Switchyard runtime diagnostics and catalog routing through the repo-native MCP surface.
+  product_identity: Read-only WebaiBridge runtime diagnostics and catalog routing through the repo-native MCP surface.
   canonical_repo_version: 0.1.0
   official_listing_state: secondary-packet-clawhub-live-openhands-review-pending
   listing_scope: Secondary packet only; does not upgrade repo-wide npm, official MCP Registry, or repo-wide marketplace truth.

@@ -1,10 +1,10 @@
-# Switchyard Media Shelf
+# WebaiBridge Media Shelf
 
-This shelf keeps the **public-facing promo and presentation assets** for Switchyard.
+This shelf keeps the **public-facing promo and presentation assets** for WebaiBridge.
 
 Use it after the front door has already answered the core questions:
 
-- what Switchyard is
+- what WebaiBridge is
 - what is already proved
 - what a new builder should try next
 
@@ -15,7 +15,7 @@ Then come here when you want a faster visual pass or a presentation-ready asset.
 | Asset | Type | Use it when | Open |
 | --- | --- | --- | --- |
 | 30-second overview | text brief | you need the fastest product sentence | [Open](./30-second-overview.md) |
-| Remotion promo package | programmable video source | you want the current promo source and render path | [Open](../../media/remotion-switchyard-promo/README.md) |
+| Remotion promo package | programmable video source | you want the current promo source and render path | [Open](../../media/remotion-webai-bridge-promo/README.md) |
 
 ## Current Media Truth
 

@@ -1,4 +1,4 @@
-# Switchyard Host Example: Codex
+# WebaiBridge Host Example: Codex
 
 这个 example 的目标很窄：
 
@@ -6,7 +6,7 @@
 
 它适合：
 
-- 想把文本请求转交给 `Switchyard` runtime
+- 想把文本请求转交给 `WebaiBridge` runtime
 - 想快速看到 host-local config 大概长什么样
 
 它不适合：

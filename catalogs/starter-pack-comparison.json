@@ -176,7 +176,7 @@
   "comparisons": [
     {
       "id": "codex-builder",
-      "label": "Build a Codex helper that forwards text requests into Switchyard",
+      "label": "Build a Codex helper that forwards text requests into WebaiBridge",
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "codex",
@@ -185,7 +185,7 @@
       "readOnly": false,
       "needsRuntimeInvoke": true,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target codex",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target codex",
       "smokeCommand": "pnpm run starter-pack:codex",
       "copyReadyPackPath": "starter-packs/builders/codex",
       "compareAgainst": [
@@ -220,7 +220,7 @@
     },
     {
       "id": "claude-code-builder",
-      "label": "Build a Claude Code-style message bridge into Switchyard",
+      "label": "Build a Claude Code-style message bridge into WebaiBridge",
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "claude-code",
@@ -229,7 +229,7 @@
       "readOnly": false,
       "needsRuntimeInvoke": true,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target claude-code",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target claude-code",
       "smokeCommand": "pnpm run starter-pack:claude-code",
       "copyReadyPackPath": "starter-packs/builders/claude-code",
       "compareAgainst": [
@@ -274,7 +274,7 @@
       "readOnly": false,
       "needsRuntimeInvoke": true,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target openclaw",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target openclaw",
       "smokeCommand": "pnpm run starter-pack:openclaw",
       "copyReadyPackPath": "starter-packs/builders/openclaw",
       "compareAgainst": [
@@ -289,7 +289,7 @@
       ],
       "bestWhen": [
         "You need a delegation-first request envelope.",
-        "You want the upstream-informed runtime path while keeping Switchyard's product boundary intact."
+        "You want the upstream-informed runtime path while keeping WebaiBridge's product boundary intact."
       ],
       "avoidWhen": [
         "You need operator or control-plane parity.",
@@ -308,7 +308,7 @@
     },
     {
       "id": "mcp-inspector",
-      "label": "Expose Switchyard runtime truth through a read-only MCP inspector",
+      "label": "Expose WebaiBridge runtime truth through a read-only MCP inspector",
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "mcp",
@@ -317,7 +317,7 @@
       "readOnly": true,
       "needsRuntimeInvoke": false,
       "needsMcpTransport": true,
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target mcp",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target mcp",
       "smokeCommand": "pnpm run starter-pack:mcp",
       "copyReadyPackPath": "starter-packs/builders/mcp",
       "compareAgainst": [
@@ -362,7 +362,7 @@
       "readOnly": true,
       "needsRuntimeInvoke": false,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack",
       "smokeCommand": "pnpm run starter-pack:runtime-diagnostics-pack",
       "copyReadyPackPath": "starter-packs/skills/runtime-diagnostics-pack",
       "compareAgainst": [
@@ -406,7 +406,7 @@
       "readOnly": true,
       "needsRuntimeInvoke": false,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack",
       "smokeCommand": "pnpm run starter-pack:docs-seo-sync-pack",
       "copyReadyPackPath": "starter-packs/skills/docs-seo-sync-pack",
       "compareAgainst": [
@@ -449,7 +449,7 @@
       "readOnly": false,
       "needsRuntimeInvoke": true,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target chat-app-runtime-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target chat-app-runtime-pack",
       "smokeCommand": "pnpm run starter-pack:chat-app-runtime-pack",
       "copyReadyPackPath": "starter-packs/skills/chat-app-runtime-pack",
       "compareAgainst": [
@@ -493,7 +493,7 @@
       "readOnly": true,
       "needsRuntimeInvoke": false,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack",
       "smokeCommand": "pnpm run starter-pack:research-copilot-pack",
       "copyReadyPackPath": "starter-packs/skills/research-copilot-pack",
       "compareAgainst": [
@@ -537,7 +537,7 @@
       "readOnly": true,
       "needsRuntimeInvoke": false,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack",
       "smokeCommand": "pnpm run starter-pack:compare-runtime-pack",
       "copyReadyPackPath": "starter-packs/skills/compare-runtime-pack",
       "compareAgainst": [
@@ -581,7 +581,7 @@
       "readOnly": false,
       "needsRuntimeInvoke": true,
       "needsMcpTransport": false,
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target byok-first-safe-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target byok-first-safe-pack",
       "smokeCommand": "pnpm run starter-pack:byok-first-safe-pack",
       "copyReadyPackPath": "starter-packs/skills/byok-first-safe-pack",
       "compareAgainst": [

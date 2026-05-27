@@ -1,4 +1,4 @@
-# Switchyard Code of Conduct
+# WebaiBridge Code of Conduct
 
 This project expects respectful, truth-first collaboration.
 

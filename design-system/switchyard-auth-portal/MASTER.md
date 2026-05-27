@@ -1,4 +1,4 @@
-# Switchyard Auth Portal Override
+# WebaiBridge Auth Portal Override
 
 ## [Confirmed] Override Priority
 
@@ -8,7 +8,7 @@ If this file conflicts with the root master, the root master wins.
 
 ## [Confirmed] Surface Contract
 
-This page is the Switchyard front desk, not a product showcase.
+This page is the WebaiBridge front desk, not a product showcase.
 
 It must answer:
 

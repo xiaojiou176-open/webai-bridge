@@ -4,8 +4,8 @@
   "exampleShape": "delegated-runtime-helper",
   "example": {
     "name": "openclaw-runtime-helper-example",
-    "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-    "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target openclaw --json",
+    "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+    "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target openclaw --json",
     "request": {
       "model": "chatgpt/gpt-4o",
       "lane": "web",

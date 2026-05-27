@@ -604,7 +604,7 @@ const WEB_ACQUISITION_MODES = [
     id: "isolated-chrome-root",
     label: "Use Isolated Chrome Root",
     description:
-      "Reuse Switchyard's dedicated Chrome root and single repo-owned profile for login and capture.",
+      "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile for login and capture.",
     advanced: true,
     default: true,
   },
@@ -612,7 +612,7 @@ const WEB_ACQUISITION_MODES = [
     id: "managed-browser",
     label: "Managed Browser",
     description:
-      "Let Switchyard launch or reattach its dedicated fallback onboarding browser for login and capture.",
+      "Let WebaiBridge launch or reattach its dedicated fallback onboarding browser for login and capture.",
     advanced: false,
     default: false,
   },
@@ -1058,8 +1058,8 @@ export function buildServiceProviderPolicyView(args: {
         args.providerId as ProviderStatusView["provider"],
         args.baseUrl,
       ).doctor,
-      cliCommand: `pnpm run switchyard:cli -- provider-doctor --provider ${args.providerId} --json`,
-      mcpTool: "switchyard.provider.doctor",
+      cliCommand: `pnpm run webai-bridge:cli -- provider-doctor --provider ${args.providerId} --json`,
+      mcpTool: "webai-bridge.provider.doctor",
       providerCatalogTarget,
     },
   };
@@ -1097,23 +1097,23 @@ export function buildServiceProviderDoctorReceipt(args: {
   hasDiagnose: boolean;
 }): ServiceProviderDoctorReceiptView {
   const recommendedCliCommands = [
-    `pnpm run switchyard:cli -- provider-doctor --provider ${args.providerId} --json`,
-    `pnpm run switchyard:cli -- provider-entry --target ${args.policy.doctorEntryPoints.providerCatalogTarget}`,
+    `pnpm run webai-bridge:cli -- provider-doctor --provider ${args.providerId} --json`,
+    `pnpm run webai-bridge:cli -- provider-entry --target ${args.policy.doctorEntryPoints.providerCatalogTarget}`,
   ];
 
   if (args.hasDiagnose) {
     recommendedCliCommands.push(
-      `pnpm run switchyard:cli -- provider-diagnose --provider ${args.providerId} --json`,
+      `pnpm run webai-bridge:cli -- provider-diagnose --provider ${args.providerId} --json`,
     );
   }
 
   const recommendedMcpTools = [
-    "switchyard.provider.doctor",
-    "switchyard.catalog.provider_entry",
+    "webai-bridge.provider.doctor",
+    "webai-bridge.catalog.provider_entry",
   ];
 
   if (args.hasDiagnose) {
-    recommendedMcpTools.push("switchyard.provider.diagnose");
+    recommendedMcpTools.push("webai-bridge.provider.diagnose");
   }
 
   const remediationWorkflow = buildServiceRemediationWorkflow({
@@ -1157,15 +1157,15 @@ export function buildServiceRemediationWorkflow(args: {
     {
       id: "inspect-provider-doctor",
       label: "Inspect the provider doctor first.",
-      cliCommand: `pnpm run switchyard:cli -- provider-doctor --provider ${args.providerId} --json`,
-      mcpTool: "switchyard.provider.doctor",
+      cliCommand: `pnpm run webai-bridge:cli -- provider-doctor --provider ${args.providerId} --json`,
+      mcpTool: "webai-bridge.provider.doctor",
       route: args.doctorRoute,
     },
     {
       id: "review-runtime-plan",
       label: "Review the runtime planner before changing route or lane assumptions.",
-      cliCommand: "pnpm run switchyard:cli -- runtime-plan --json",
-      mcpTool: "switchyard.runtime.plan",
+      cliCommand: "pnpm run webai-bridge:cli -- runtime-plan --json",
+      mcpTool: "webai-bridge.runtime.plan",
       route: args.runtimePlanRoute,
     },
   ];
@@ -1177,11 +1177,11 @@ export function buildServiceRemediationWorkflow(args: {
         ? "Inspect diagnose evidence before retrying the provider."
         : "Inspect the provider remediation surface before retrying the provider.",
       cliCommand: args.hasDiagnose
-        ? `pnpm run switchyard:cli -- provider-diagnose --provider ${args.providerId} --json`
-        : `pnpm run switchyard:cli -- provider-remediation --provider ${args.providerId} --json`,
+        ? `pnpm run webai-bridge:cli -- provider-diagnose --provider ${args.providerId} --json`
+        : `pnpm run webai-bridge:cli -- provider-remediation --provider ${args.providerId} --json`,
       mcpTool: args.hasDiagnose
-        ? "switchyard.provider.diagnose"
-        : "switchyard.provider.remediation",
+        ? "webai-bridge.provider.diagnose"
+        : "webai-bridge.provider.remediation",
       route: args.remediationRoute,
     });
   } else {
@@ -1403,14 +1403,14 @@ export function buildServiceProviderDebugSupportView(
       runtimeReadiness: provider.runtimeReadiness,
       validationState: provider.session.validationState,
       note:
-        'Stored session materials describe what Switchyard has in the local store. They do not guarantee that the currently attached browser page is live-ready.',
+        'Stored session materials describe what WebaiBridge has in the local store. They do not guarantee that the currently attached browser page is live-ready.',
     },
     captureProvenance: provider.session.captureProvenance,
     persistenceAudit: provider.session.persistenceAudit,
     liveReadiness: {
       status: 'unknown',
       diagnostic:
-        'No live page inspection runner is registered for this provider, so Switchyard will not pretend to know the current browser page state.',
+        'No live page inspection runner is registered for this provider, so WebaiBridge will not pretend to know the current browser page state.',
     },
     attachTarget: {
       label: 'No attach target',
@@ -1422,19 +1422,19 @@ export function buildServiceProviderDebugSupportView(
     currentPage: {
       status: 'unavailable',
       diagnostic:
-        'Switchyard does not have a live page snapshot for this provider yet.',
+        'WebaiBridge does not have a live page snapshot for this provider yet.',
     },
     currentConsole: {
       status: 'unavailable',
       entries: [],
       diagnostic:
-        'Switchyard does not buffer detached-browser console history yet, so current-console remains fail-closed.',
+        'WebaiBridge does not buffer detached-browser console history yet, so current-console remains fail-closed.',
     },
     currentNetwork: {
       status: 'unavailable',
       entries: [],
       diagnostic:
-        'Switchyard does not have a current network snapshot for this provider yet.',
+        'WebaiBridge does not have a current network snapshot for this provider yet.',
     },
     diagnoseLadder: [
       {
@@ -1446,7 +1446,7 @@ export function buildServiceProviderDebugSupportView(
         id: 'check-attach-target',
         status: 'blocked',
         summary:
-          'Resolve or reattach the canonical browser target first; without it, Switchyard cannot compare store-ready against live-ready.',
+          'Resolve or reattach the canonical browser target first; without it, WebaiBridge cannot compare store-ready against live-ready.',
       },
       {
         id: 'inspect-current-page',

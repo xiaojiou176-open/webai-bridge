@@ -3,512 +3,512 @@
   "catalogVersion": 1,
   "tools": [
     {
-      "name": "switchyard.runtime.bootstrap",
-      "title": "Switchyard Runtime Bootstrap",
+      "name": "webai-bridge.runtime.bootstrap",
+      "title": "WebaiBridge Runtime Bootstrap",
       "providerScoped": false,
       "route": "/v1/runtime/bootstrap",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.providers.list",
-      "title": "List Switchyard Providers",
+      "name": "webai-bridge.providers.list",
+      "title": "List WebaiBridge Providers",
       "providerScoped": false,
       "route": "/v1/runtime/providers",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.runtime.health",
-      "title": "Switchyard Runtime Health",
+      "name": "webai-bridge.runtime.health",
+      "title": "WebaiBridge Runtime Health",
       "providerScoped": false,
       "route": "/v1/runtime/health",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.runtime.doctor",
-      "title": "Switchyard Runtime Doctor",
+      "name": "webai-bridge.runtime.doctor",
+      "title": "WebaiBridge Runtime Doctor",
       "providerScoped": false,
       "route": "/v1/runtime/doctor",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.runtime.plan",
-      "title": "Switchyard Runtime Plan",
+      "name": "webai-bridge.runtime.plan",
+      "title": "WebaiBridge Runtime Plan",
       "providerScoped": false,
       "route": "/v1/runtime/plan",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.auth.status",
-      "title": "Switchyard Auth Status",
+      "name": "webai-bridge.auth.status",
+      "title": "WebaiBridge Auth Status",
       "providerScoped": false,
       "route": "/v1/runtime/auth-status",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.status",
-      "title": "Switchyard Provider Status",
+      "name": "webai-bridge.provider.status",
+      "title": "WebaiBridge Provider Status",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/status",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.doctor",
-      "title": "Switchyard Provider Doctor",
+      "name": "webai-bridge.provider.doctor",
+      "title": "WebaiBridge Provider Doctor",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/doctor",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.probe",
-      "title": "Switchyard Provider Probe",
+      "name": "webai-bridge.provider.probe",
+      "title": "WebaiBridge Provider Probe",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/probe",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.remediation",
-      "title": "Switchyard Provider Remediation",
+      "name": "webai-bridge.provider.remediation",
+      "title": "WebaiBridge Provider Remediation",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/remediation",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.current_page",
-      "title": "Switchyard Provider Current Page",
+      "name": "webai-bridge.provider.current_page",
+      "title": "WebaiBridge Provider Current Page",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/current-page",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.current_console",
-      "title": "Switchyard Provider Current Console",
+      "name": "webai-bridge.provider.current_console",
+      "title": "WebaiBridge Provider Current Console",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/current-console",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.current_network",
-      "title": "Switchyard Provider Current Network",
+      "name": "webai-bridge.provider.current_network",
+      "title": "WebaiBridge Provider Current Network",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/current-network",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.store_readiness",
-      "title": "Switchyard Provider Store Readiness",
+      "name": "webai-bridge.provider.store_readiness",
+      "title": "WebaiBridge Provider Store Readiness",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/support-bundle",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.live_readiness",
-      "title": "Switchyard Provider Live Readiness",
+      "name": "webai-bridge.provider.live_readiness",
+      "title": "WebaiBridge Provider Live Readiness",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/support-bundle",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.attach_target",
-      "title": "Switchyard Provider Attach Target",
+      "name": "webai-bridge.provider.attach_target",
+      "title": "WebaiBridge Provider Attach Target",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/support-bundle",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.diagnose_ladder",
-      "title": "Switchyard Provider Diagnose Ladder",
+      "name": "webai-bridge.provider.diagnose_ladder",
+      "title": "WebaiBridge Provider Diagnose Ladder",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/support-bundle",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.support_bundle",
-      "title": "Switchyard Provider Support Bundle",
+      "name": "webai-bridge.provider.support_bundle",
+      "title": "WebaiBridge Provider Support Bundle",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/support-bundle",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.provider.diagnose",
-      "title": "Switchyard Provider Diagnose Snapshot",
+      "name": "webai-bridge.provider.diagnose",
+      "title": "WebaiBridge Provider Diagnose Snapshot",
       "providerScoped": true,
       "route": "/v1/runtime/providers/:provider/debug/support-bundle",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.surface_catalog",
-      "title": "Switchyard Surface Catalog",
+      "name": "webai-bridge.catalog.surface_catalog",
+      "title": "WebaiBridge Surface Catalog",
       "providerScoped": false,
       "route": "catalogs/public-surface-catalog.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.surface_catalog_schema",
-      "title": "Switchyard Surface Catalog Schema",
+      "name": "webai-bridge.catalog.surface_catalog_schema",
+      "title": "WebaiBridge Surface Catalog Schema",
       "providerScoped": false,
       "route": "catalogs/public-surface-catalog.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.provider_catalog",
-      "title": "Switchyard Provider Catalog",
+      "name": "webai-bridge.catalog.provider_catalog",
+      "title": "WebaiBridge Provider Catalog",
       "providerScoped": false,
       "route": "catalogs/provider-runtime-catalog.json#providers",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.provider_catalog_schema",
-      "title": "Switchyard Provider Catalog Schema",
+      "name": "webai-bridge.catalog.provider_catalog_schema",
+      "title": "WebaiBridge Provider Catalog Schema",
       "providerScoped": false,
       "route": "catalogs/provider-runtime-catalog.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.provider_entry",
-      "title": "Switchyard Provider Entry",
+      "name": "webai-bridge.catalog.provider_entry",
+      "title": "WebaiBridge Provider Entry",
       "providerScoped": false,
       "route": "catalogs/provider-runtime-catalog.json#providers[providerId:lane]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.compat_target_catalog",
-      "title": "Switchyard Compat Target Catalog",
+      "name": "webai-bridge.catalog.compat_target_catalog",
+      "title": "WebaiBridge Compat Target Catalog",
       "providerScoped": false,
       "route": "catalogs/compat-target-catalog.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.compat_target_catalog_schema",
-      "title": "Switchyard Compat Target Catalog Schema",
+      "name": "webai-bridge.catalog.compat_target_catalog_schema",
+      "title": "WebaiBridge Compat Target Catalog Schema",
       "providerScoped": false,
       "route": "catalogs/compat-target-catalog.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.compat_targets",
-      "title": "Switchyard Compat Targets",
+      "name": "webai-bridge.catalog.compat_targets",
+      "title": "WebaiBridge Compat Targets",
       "providerScoped": false,
       "route": "catalogs/compat-target-catalog.json#targets",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.compat_target",
-      "title": "Switchyard Compat Target",
+      "name": "webai-bridge.catalog.compat_target",
+      "title": "WebaiBridge Compat Target",
       "providerScoped": false,
       "route": "catalogs/compat-target-catalog.json#targets[target]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_kit_catalog",
-      "title": "Switchyard Builder Kit Catalog",
+      "name": "webai-bridge.catalog.builder_kit_catalog",
+      "title": "WebaiBridge Builder Kit Catalog",
       "providerScoped": false,
       "route": "catalogs/builder-kit-catalog.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_kit_catalog_schema",
-      "title": "Switchyard Builder Kit Catalog Schema",
+      "name": "webai-bridge.catalog.builder_kit_catalog_schema",
+      "title": "WebaiBridge Builder Kit Catalog Schema",
       "providerScoped": false,
       "route": "catalogs/builder-kit-catalog.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_kits",
-      "title": "Switchyard Builder Kits",
+      "name": "webai-bridge.catalog.builder_kits",
+      "title": "WebaiBridge Builder Kits",
       "providerScoped": false,
       "route": "catalogs/builder-kit-catalog.json#kits",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_kit",
-      "title": "Switchyard Builder Kit",
+      "name": "webai-bridge.catalog.builder_kit",
+      "title": "WebaiBridge Builder Kit",
       "providerScoped": false,
       "route": "catalogs/builder-kit-catalog.json#kits[target]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.skill_pack_catalog",
-      "title": "Switchyard Skill Pack Catalog",
+      "name": "webai-bridge.catalog.skill_pack_catalog",
+      "title": "WebaiBridge Skill Pack Catalog",
       "providerScoped": false,
       "route": "catalogs/skill-pack-catalog.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.skill_pack_catalog_schema",
-      "title": "Switchyard Skill Pack Catalog Schema",
+      "name": "webai-bridge.catalog.skill_pack_catalog_schema",
+      "title": "WebaiBridge Skill Pack Catalog Schema",
       "providerScoped": false,
       "route": "catalogs/skill-pack-catalog.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.skill_packs",
-      "title": "Switchyard Skill Packs",
+      "name": "webai-bridge.catalog.skill_packs",
+      "title": "WebaiBridge Skill Packs",
       "providerScoped": false,
       "route": "catalogs/skill-pack-catalog.json#packs",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.skill_pack",
-      "title": "Switchyard Skill Pack",
+      "name": "webai-bridge.catalog.skill_pack",
+      "title": "WebaiBridge Skill Pack",
       "providerScoped": false,
       "route": "catalogs/skill-pack-catalog.json#packs[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.host_playbooks",
-      "title": "Switchyard Host Playbooks",
+      "name": "webai-bridge.catalog.host_playbooks",
+      "title": "WebaiBridge Host Playbooks",
       "providerScoped": false,
       "route": "catalogs/host-integration-playbooks.json#playbooks",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.host_playbooks_schema",
-      "title": "Switchyard Host Playbooks Schema",
+      "name": "webai-bridge.catalog.host_playbooks_schema",
+      "title": "WebaiBridge Host Playbooks Schema",
       "providerScoped": false,
       "route": "catalogs/host-integration-playbooks.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.host_playbook",
-      "title": "Switchyard Host Playbook",
+      "name": "webai-bridge.catalog.host_playbook",
+      "title": "WebaiBridge Host Playbook",
       "providerScoped": false,
       "route": "catalogs/host-integration-playbooks.json#playbooks[host]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.host_examples",
-      "title": "Switchyard Host Examples",
+      "name": "webai-bridge.catalog.host_examples",
+      "title": "WebaiBridge Host Examples",
       "providerScoped": false,
       "route": "examples/hosts/index.json#hostExamples",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.host_examples_schema",
-      "title": "Switchyard Host Examples Schema",
+      "name": "webai-bridge.catalog.host_examples_schema",
+      "title": "WebaiBridge Host Examples Schema",
       "providerScoped": false,
       "route": "examples/hosts/index.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.host_example",
-      "title": "Switchyard Host Example",
+      "name": "webai-bridge.catalog.host_example",
+      "title": "WebaiBridge Host Example",
       "providerScoped": false,
       "route": "examples/hosts/index.json#hostExamples[target]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_journeys",
-      "title": "Switchyard Builder Journeys",
+      "name": "webai-bridge.catalog.builder_journeys",
+      "title": "WebaiBridge Builder Journeys",
       "providerScoped": false,
       "route": "catalogs/builder-journeys.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_journeys_schema",
-      "title": "Switchyard Builder Journeys Schema",
+      "name": "webai-bridge.catalog.builder_journeys_schema",
+      "title": "WebaiBridge Builder Journeys Schema",
       "providerScoped": false,
       "route": "catalogs/builder-journeys.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_journey",
-      "title": "Switchyard Builder Journey",
+      "name": "webai-bridge.catalog.builder_journey",
+      "title": "WebaiBridge Builder Journey",
       "providerScoped": false,
       "route": "catalogs/builder-journeys.json#journeys[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_intent_router",
-      "title": "Switchyard Builder Intent Router",
+      "name": "webai-bridge.catalog.builder_intent_router",
+      "title": "WebaiBridge Builder Intent Router",
       "providerScoped": false,
       "route": "catalogs/builder-intent-router.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_intent_router_schema",
-      "title": "Switchyard Builder Intent Router Schema",
+      "name": "webai-bridge.catalog.builder_intent_router_schema",
+      "title": "WebaiBridge Builder Intent Router Schema",
       "providerScoped": false,
       "route": "catalogs/builder-intent-router.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_intent",
-      "title": "Switchyard Builder Intent Entry",
+      "name": "webai-bridge.catalog.builder_intent",
+      "title": "WebaiBridge Builder Intent Entry",
       "providerScoped": false,
       "route": "catalogs/builder-intent-router.json#intents[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.keyword_truth",
-      "title": "Switchyard Keyword Truth",
+      "name": "webai-bridge.catalog.keyword_truth",
+      "title": "WebaiBridge Keyword Truth",
       "providerScoped": false,
       "route": "catalogs/discoverability-keyword-truth.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.keyword_truth_schema",
-      "title": "Switchyard Keyword Truth Schema",
+      "name": "webai-bridge.catalog.keyword_truth_schema",
+      "title": "WebaiBridge Keyword Truth Schema",
       "providerScoped": false,
       "route": "catalogs/discoverability-keyword-truth.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.keyword_entry",
-      "title": "Switchyard Keyword Truth Entry",
+      "name": "webai-bridge.catalog.keyword_entry",
+      "title": "WebaiBridge Keyword Truth Entry",
       "providerScoped": false,
       "route": "catalogs/discoverability-keyword-truth.json#entries[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_manifests",
-      "title": "Switchyard Starter Manifests",
+      "name": "webai-bridge.catalog.starter_manifests",
+      "title": "WebaiBridge Starter Manifests",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-templates.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_manifests_schema",
-      "title": "Switchyard Starter Manifest Schema",
+      "name": "webai-bridge.catalog.starter_manifests_schema",
+      "title": "WebaiBridge Starter Manifest Schema",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-templates.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_examples",
-      "title": "Switchyard Starter Examples",
+      "name": "webai-bridge.catalog.starter_examples",
+      "title": "WebaiBridge Starter Examples",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-examples.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_examples_schema",
-      "title": "Switchyard Starter Example Schema",
+      "name": "webai-bridge.catalog.starter_examples_schema",
+      "title": "WebaiBridge Starter Example Schema",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-examples.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_index",
-      "title": "Switchyard Starter Pack Index",
+      "name": "webai-bridge.catalog.starter_pack_index",
+      "title": "WebaiBridge Starter Pack Index",
       "providerScoped": false,
       "route": "starter-packs/index.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_index_schema",
-      "title": "Switchyard Starter Pack Index Schema",
+      "name": "webai-bridge.catalog.starter_pack_index_schema",
+      "title": "WebaiBridge Starter Pack Index Schema",
       "providerScoped": false,
       "route": "starter-packs/index.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_entry",
-      "title": "Switchyard Starter Pack Entry",
+      "name": "webai-bridge.catalog.starter_pack_entry",
+      "title": "WebaiBridge Starter Pack Entry",
       "providerScoped": false,
       "route": "starter-packs/index.json#builderPacks[target]|skillPacks[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_chooser",
-      "title": "Switchyard Starter Pack Chooser",
+      "name": "webai-bridge.catalog.starter_pack_chooser",
+      "title": "WebaiBridge Starter Pack Chooser",
       "providerScoped": false,
       "route": "catalogs/starter-pack-chooser.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_chooser_schema",
-      "title": "Switchyard Starter Pack Chooser Schema",
+      "name": "webai-bridge.catalog.starter_pack_chooser_schema",
+      "title": "WebaiBridge Starter Pack Chooser Schema",
       "providerScoped": false,
       "route": "catalogs/starter-pack-chooser.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_scenario",
-      "title": "Switchyard Starter Pack Scenario",
+      "name": "webai-bridge.catalog.starter_pack_scenario",
+      "title": "WebaiBridge Starter Pack Scenario",
       "providerScoped": false,
       "route": "catalogs/starter-pack-chooser.json#scenarios[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_comparison",
-      "title": "Switchyard Starter Pack Comparison",
+      "name": "webai-bridge.catalog.starter_pack_comparison",
+      "title": "WebaiBridge Starter Pack Comparison",
       "providerScoped": false,
       "route": "catalogs/starter-pack-comparison.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_comparison_schema",
-      "title": "Switchyard Starter Pack Comparison Schema",
+      "name": "webai-bridge.catalog.starter_pack_comparison_schema",
+      "title": "WebaiBridge Starter Pack Comparison Schema",
       "providerScoped": false,
       "route": "catalogs/starter-pack-comparison.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.starter_pack_filter",
-      "title": "Switchyard Starter Pack Filter",
+      "name": "webai-bridge.catalog.starter_pack_filter",
+      "title": "WebaiBridge Starter Pack Filter",
       "providerScoped": false,
       "route": "catalogs/starter-pack-comparison.json#filters[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_template",
-      "title": "Switchyard Builder Template",
+      "name": "webai-bridge.catalog.builder_template",
+      "title": "WebaiBridge Builder Template",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-templates.json#builderTemplates[target]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.builder_example",
-      "title": "Switchyard Builder Example",
+      "name": "webai-bridge.catalog.builder_example",
+      "title": "WebaiBridge Builder Example",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-examples.json#builderExamples[target]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.skill_template",
-      "title": "Switchyard Skill Template",
+      "name": "webai-bridge.catalog.skill_template",
+      "title": "WebaiBridge Skill Template",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-templates.json#skillTemplates[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.skill_example",
-      "title": "Switchyard Skill Example",
+      "name": "webai-bridge.catalog.skill_example",
+      "title": "WebaiBridge Skill Example",
       "providerScoped": false,
       "route": "catalogs/starter-manifest-examples.json#skillExamples[id]",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.mcp_status",
-      "title": "Switchyard MCP Status",
+      "name": "webai-bridge.catalog.mcp_status",
+      "title": "WebaiBridge MCP Status",
       "providerScoped": false,
       "route": "catalogs/public-surface-catalog.json#mcp",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.mcp_tools",
-      "title": "Switchyard MCP Tools",
+      "name": "webai-bridge.catalog.mcp_tools",
+      "title": "WebaiBridge MCP Tools",
       "providerScoped": false,
       "route": "catalogs/mcp-tool-catalog.json#tools",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.mcp_tool_catalog",
-      "title": "Switchyard MCP Tool Catalog",
+      "name": "webai-bridge.catalog.mcp_tool_catalog",
+      "title": "WebaiBridge MCP Tool Catalog",
       "providerScoped": false,
       "route": "catalogs/mcp-tool-catalog.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.mcp_tool_catalog_schema",
-      "title": "Switchyard MCP Tool Catalog Schema",
+      "name": "webai-bridge.catalog.mcp_tool_catalog_schema",
+      "title": "WebaiBridge MCP Tool Catalog Schema",
       "providerScoped": false,
       "route": "catalogs/mcp-tool-catalog.schema.json",
       "readOnlyHint": true
     },
     {
-      "name": "switchyard.catalog.mcp_tool",
-      "title": "Switchyard MCP Tool Entry",
+      "name": "webai-bridge.catalog.mcp_tool",
+      "title": "WebaiBridge MCP Tool Entry",
       "providerScoped": false,
       "route": "catalogs/mcp-tool-catalog.json#tools[name]",
       "readOnlyHint": true

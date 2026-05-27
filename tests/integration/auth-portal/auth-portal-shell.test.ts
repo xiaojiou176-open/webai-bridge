@@ -83,7 +83,7 @@ describe('auth portal shell', () => {
 
     const html = renderAuthPortalShell(model);
 
-    expect(html).toContain('Switchyard Web/Login Access');
+    expect(html).toContain('WebaiBridge Web/Login Access');
     expect(html).toContain('Local-first Web/Login access');
     expect(html).toContain('No shared credential pool');
     expect(html).toContain('Skip to main content');
@@ -381,7 +381,7 @@ describe('auth portal shell', () => {
         requiredUserAction: 'Restore the ChatGPT attach target before rerunning the live gate.',
         persistenceAudit: {
           workspaceClassification: 'attach-failed',
-          summary: 'Switchyard could not attach to the current ChatGPT browser seat.',
+          summary: 'WebaiBridge could not attach to the current ChatGPT browser seat.',
           pageUrl: 'https://chatgpt.com/',
           pageTitle: 'ChatGPT'
         }

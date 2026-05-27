@@ -16,7 +16,7 @@
             "mcp-inspector"
           ],
           "why": [
-            "Choose a builder pack when you are wiring another tool or local helper into Switchyard.",
+            "Choose a builder pack when you are wiring another tool or local helper into WebaiBridge.",
             "Builder packs are the narrow path for thin compat helpers and read-only runtime inspection."
           ]
         },
@@ -44,7 +44,7 @@
       "options": [
         {
           "id": "codex-text-bridge",
-          "label": "Bridge Codex-style text requests into the Switchyard runtime",
+          "label": "Bridge Codex-style text requests into the WebaiBridge runtime",
           "recommendedScenarios": [
             "codex-builder"
           ],
@@ -71,7 +71,7 @@
             "openclaw-builder"
           ],
           "why": [
-            "The OpenClaw pack keeps the delegation shape while leaving operator and product-shell semantics outside Switchyard.",
+            "The OpenClaw pack keeps the delegation shape while leaving operator and product-shell semantics outside WebaiBridge.",
             "It is the honest pack when you want runtime delegation, not a raw upstream fork."
           ]
         },
@@ -158,11 +158,11 @@
   "scenarios": [
     {
       "id": "codex-builder",
-      "label": "Build a Codex helper that forwards text requests into Switchyard",
+      "label": "Build a Codex helper that forwards text requests into WebaiBridge",
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "codex",
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target codex",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target codex",
       "whyThisPack": [
         "Use the Codex pack when your first need is a text-only runtime bridge.",
         "This pack already points at the narrow landed adapter instead of inventing a new compat story."
@@ -187,9 +187,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard codex starter",
-        "switchyard codex helper",
-        "switchyard responses runtime bridge"
+        "webai-bridge codex starter",
+        "webai-bridge codex helper",
+        "webai-bridge responses runtime bridge"
       ],
       "safeClaims": [
         "partial Codex compatibility",
@@ -204,11 +204,11 @@
     },
     {
       "id": "claude-code-builder",
-      "label": "Build a Claude Code-style message bridge into Switchyard",
+      "label": "Build a Claude Code-style message bridge into WebaiBridge",
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "claude-code",
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target claude-code",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target claude-code",
       "whyThisPack": [
         "Use the Claude Code pack when your first need is a message/runtime bridge.",
         "This pack keeps terminal, approval, and tool claims fail-closed."
@@ -233,9 +233,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard claude code starter",
-        "switchyard claude code gateway helper",
-        "switchyard message runtime bridge"
+        "webai-bridge claude code starter",
+        "webai-bridge claude code gateway helper",
+        "webai-bridge message runtime bridge"
       ],
       "safeClaims": [
         "partial Claude Code compatibility",
@@ -255,14 +255,14 @@
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "openclaw",
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target openclaw",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target openclaw",
       "whyThisPack": [
         "Use the OpenClaw pack when your first need is delegation-first runtime bridging.",
         "This pack preserves the runtime delegation shape without importing operator or product-shell baggage."
       ],
       "bestWhen": [
         "You need a delegation-first request envelope.",
-        "You want the upstream-informed runtime path while keeping Switchyard's product boundary intact."
+        "You want the upstream-informed runtime path while keeping WebaiBridge's product boundary intact."
       ],
       "avoidWhen": [
         "You need operator or control-plane parity.",
@@ -279,9 +279,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard openclaw starter",
-        "switchyard delegation bridge",
-        "switchyard openclaw compat helper"
+        "webai-bridge openclaw starter",
+        "webai-bridge delegation bridge",
+        "webai-bridge openclaw compat helper"
       ],
       "safeClaims": [
         "partial OpenClaw compatibility",
@@ -296,11 +296,11 @@
     },
     {
       "id": "mcp-inspector",
-      "label": "Expose Switchyard runtime truth through a read-only MCP inspector",
+      "label": "Expose WebaiBridge runtime truth through a read-only MCP inspector",
       "status": "partial",
       "starterKind": "builder",
       "recommendedPack": "mcp",
-      "bestEntry": "pnpm run switchyard:cli -- builder-kit --target mcp",
+      "bestEntry": "pnpm run webai-bridge:cli -- builder-kit --target mcp",
       "whyThisPack": [
         "Use the MCP pack when your first need is read-only runtime inspection over stdio tools.",
         "This pack already matches the landed partial MCP surface without pretending it can invoke or automate browsers."
@@ -325,9 +325,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard mcp starter",
-        "switchyard read only mcp server",
-        "switchyard runtime inspector"
+        "webai-bridge mcp starter",
+        "webai-bridge read only mcp server",
+        "webai-bridge runtime inspector"
       ],
       "safeClaims": [
         "partial read-only MCP surface",
@@ -347,7 +347,7 @@
       "status": "partial",
       "starterKind": "skill",
       "recommendedPack": "runtime-diagnostics-pack",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack",
       "whyThisPack": [
         "Use this skill pack when you need a bounded incident recipe built on support-bundle truth.",
         "It stays read-only and is already shaped around readiness, remediation, and attach-target evidence."
@@ -371,9 +371,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard runtime diagnostics pack",
-        "switchyard provider triage starter",
-        "switchyard support bundle skill pack"
+        "webai-bridge runtime diagnostics pack",
+        "webai-bridge provider triage starter",
+        "webai-bridge support bundle skill pack"
       ],
       "safeClaims": [
         "read-only diagnostics pack",
@@ -393,7 +393,7 @@
       "status": "partial",
       "starterKind": "skill",
       "recommendedPack": "docs-seo-sync-pack",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack",
       "whyThisPack": [
         "Use this pack when you need docs or discoverability sync while keeping support claims truthful.",
         "It already assumes human review before outward publishing and keeps launch automation out of scope."
@@ -417,9 +417,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard docs seo sync pack",
-        "switchyard discoverability starter",
-        "switchyard truthful seo helper"
+        "webai-bridge docs seo sync pack",
+        "webai-bridge discoverability starter",
+        "webai-bridge truthful seo helper"
       ],
       "safeClaims": [
         "truth-sync starter",
@@ -438,13 +438,13 @@
       "status": "partial",
       "starterKind": "skill",
       "recommendedPack": "chat-app-runtime-pack",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target chat-app-runtime-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target chat-app-runtime-pack",
       "whyThisPack": [
         "Use this pack when you already have a chat-shaped host and need the service-first runtime bridge before expanding the product shell.",
         "The first handoff already points at runtime doctor, runtime plan, and provider truth instead of inventing a new shell contract."
       ],
       "bestWhen": [
-        "You want a chat-oriented starter that begins at the Switchyard runtime layer.",
+        "You want a chat-oriented starter that begins at the WebaiBridge runtime layer.",
         "You need a front-door use-case pack that stays smaller than a full chat product scaffold."
       ],
       "avoidWhen": [
@@ -463,9 +463,9 @@
         "starter-packs/skills/chat-app-runtime-pack/README.md"
       ],
       "searchKeywords": [
-        "switchyard chat app runtime pack",
-        "switchyard chat runtime starter",
-        "switchyard service first chat bridge"
+        "webai-bridge chat app runtime pack",
+        "webai-bridge chat runtime starter",
+        "webai-bridge service first chat bridge"
       ],
       "safeClaims": [
         "chat-app runtime scaffold",
@@ -484,7 +484,7 @@
       "status": "partial",
       "starterKind": "skill",
       "recommendedPack": "research-copilot-pack",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack",
       "whyThisPack": [
         "Use this pack when you want a research-shaped starter that reads truth surfaces before synthesizing anything outward-facing.",
         "It keeps human review and truthful support labels in the loop instead of widening into autonomous research."
@@ -509,9 +509,9 @@
         "starter-packs/skills/research-copilot-pack/README.md"
       ],
       "searchKeywords": [
-        "switchyard research copilot pack",
-        "switchyard truth grounded research starter",
-        "switchyard research handoff pack"
+        "webai-bridge research copilot pack",
+        "webai-bridge truth grounded research starter",
+        "webai-bridge research handoff pack"
       ],
       "safeClaims": [
         "research copilot scaffold",
@@ -530,7 +530,7 @@
       "status": "partial",
       "starterKind": "skill",
       "recommendedPack": "compare-runtime-pack",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack",
       "whyThisPack": [
         "Use this pack when your first job is comparing starter routes and constraints instead of auto-selecting a winner.",
         "It turns the comparison catalog into a front-door worksheet you can review before committing to a host path."
@@ -555,9 +555,9 @@
         "starter-packs/skills/compare-runtime-pack/README.md"
       ],
       "searchKeywords": [
-        "switchyard compare runtime pack",
-        "switchyard compare starter routes",
-        "switchyard runtime selection worksheet"
+        "webai-bridge compare runtime pack",
+        "webai-bridge compare starter routes",
+        "webai-bridge runtime selection worksheet"
       ],
       "safeClaims": [
         "compare-first scaffold",
@@ -576,7 +576,7 @@
       "status": "partial",
       "starterKind": "skill",
       "recommendedPack": "byok-first-safe-pack",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack-route --target byok-first-safe-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack-route --target byok-first-safe-pack",
       "whyThisPack": [
         "Use this pack when you want provider truth and safe invoke planning before expanding into heavier Web/Login recovery work.",
         "The route keeps BYOK and Web/Login boundaries explicit instead of smearing them into one starter."
@@ -601,9 +601,9 @@
         "starter-packs/skills/byok-first-safe-pack/README.md"
       ],
       "searchKeywords": [
-        "switchyard byok first safe pack",
-        "switchyard byok runtime starter",
-        "switchyard safe invoke planning"
+        "webai-bridge byok first safe pack",
+        "webai-bridge byok runtime starter",
+        "webai-bridge safe invoke planning"
       ],
       "safeClaims": [
         "BYOK-first scaffold",

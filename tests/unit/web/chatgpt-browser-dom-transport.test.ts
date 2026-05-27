@@ -48,8 +48,8 @@ describe("ChatGPT browser DOM transport", () => {
         message: "Reply with exactly CHATGPT_OK_COOKIE_SYNC and nothing else.",
       },
       {
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
-        SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE:
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+        WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE:
           "__Secure-next-auth.session-token=abc123; cf_clearance=def456",
       },
       connectOverCDP,

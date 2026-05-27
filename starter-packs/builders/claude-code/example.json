@@ -8,8 +8,8 @@
       "exampleShape": "message-runtime-helper",
       "example": {
         "name": "claude-code-runtime-helper-example",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target claude-code --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target claude-code --json",
         "request": {
           "provider": "claude",
           "model": "claude-sonnet-4-6",

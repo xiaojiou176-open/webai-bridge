@@ -18,12 +18,12 @@ if (!starter) {
 const baseUrl = resolveRuntimeBaseUrl();
 const transport = new StdioClientTransport({
   command: "pnpm",
-  args: ["run", "switchyard:mcp", "--", "--base-url", baseUrl],
+  args: ["run", "webai-bridge:mcp", "--", "--base-url", baseUrl],
   cwd: repoRoot,
   stderr: "pipe",
 });
 const client = new Client({
-  name: "switchyard-mcp-inspector-starter",
+  name: "webai-bridge-mcp-inspector-starter",
   version: "0.0.0",
 });
 
@@ -32,16 +32,16 @@ try {
 
   const tools = await client.listTools();
   const runtimeHealth = await client.callTool({
-    name: "switchyard.runtime.health",
+    name: "webai-bridge.runtime.health",
   });
   const providerDoctor = await client.callTool({
-    name: "switchyard.provider.doctor",
+    name: "webai-bridge.provider.doctor",
     arguments: {
       provider: "chatgpt",
     },
   });
   const catalogTools = await client.callTool({
-    name: "switchyard.catalog.mcp_tools",
+    name: "webai-bridge.catalog.mcp_tools",
   });
 
   printJson({

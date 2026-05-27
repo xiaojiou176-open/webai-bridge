@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/lanes-web",
+  "name": "@webai-bridge/lanes-web",
   "private": true,
   "type": "module",
   "scripts": {

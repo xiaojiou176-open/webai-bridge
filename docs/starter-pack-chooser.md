@@ -1,4 +1,4 @@
-# Switchyard Starter Pack Chooser
+# WebaiBridge Starter Pack Chooser
 
 If the only sentence in your head is:
 
@@ -23,22 +23,22 @@ into a cleaner first decision.
 ## Read-Only Access
 
 ```bash
-pnpm run switchyard:cli -- starter-pack-chooser
-pnpm run switchyard:cli -- starter-pack-chooser-schema
-pnpm run switchyard:cli -- starter-pack-scenario --target codex-builder
-pnpm run switchyard:cli -- starter-pack-scenario --target docs-seo-sync-skill
-pnpm run switchyard:cli -- starter-pack-scenario --target chat-app-runtime-skill
+pnpm run webai-bridge:cli -- starter-pack-chooser
+pnpm run webai-bridge:cli -- starter-pack-chooser-schema
+pnpm run webai-bridge:cli -- starter-pack-scenario --target codex-builder
+pnpm run webai-bridge:cli -- starter-pack-scenario --target docs-seo-sync-skill
+pnpm run webai-bridge:cli -- starter-pack-scenario --target chat-app-runtime-skill
 ```
 
-- `switchyard.catalog.starter_pack_chooser`
-- `switchyard.catalog.starter_pack_chooser_schema`
-- `switchyard.catalog.starter_pack_scenario`
+- `webai-bridge.catalog.starter_pack_chooser`
+- `webai-bridge.catalog.starter_pack_chooser_schema`
+- `webai-bridge.catalog.starter_pack_scenario`
 
 ## Quick Pick
 
 | If your first job is... | Choose this pack | Why | Do not expect |
 | --- | --- | --- | --- |
-| Bridge Codex-style text requests into Switchyard | `codex` | thin Responses-style runtime bridge | tool execution parity / MCP parity / worktree parity |
+| Bridge Codex-style text requests into WebaiBridge | `codex` | thin Responses-style runtime bridge | tool execution parity / MCP parity / worktree parity |
 | Bridge Claude Code-style message payloads | `claude-code` | thin message/runtime bridge | terminal shell parity / approval parity / tool parity |
 | Keep OpenClaw-style delegation without copying the product shell | `openclaw` | delegation-first bridge with product boundary intact | operator parity / product-shell parity |
 | Inspect runtime truth through MCP | `mcp` | read-only runtime inspector over stdio | execution brain / write plane |
@@ -94,10 +94,10 @@ first job, it is a legitimate first-row route:
 
 | Use case | Pick this pack | First handoff after choosing |
 | --- | --- | --- |
-| Service-first chat runtime bridge | `chat-app-runtime-pack` | `pnpm run switchyard:cli -- skill-pack-route --target chat-app-runtime-pack` |
-| Truth-grounded research copilot | `research-copilot-pack` | `pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack` |
-| Compare-first runtime or pack selection | `compare-runtime-pack` | `pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack` |
-| BYOK-first safe invoke planning | `byok-first-safe-pack` | `pnpm run switchyard:cli -- skill-pack-route --target byok-first-safe-pack` |
+| Service-first chat runtime bridge | `chat-app-runtime-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target chat-app-runtime-pack` |
+| Truth-grounded research copilot | `research-copilot-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack` |
+| Compare-first runtime or pack selection | `compare-runtime-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack` |
+| BYOK-first safe invoke planning | `byok-first-safe-pack` | `pnpm run webai-bridge:cli -- skill-pack-route --target byok-first-safe-pack` |
 
 Once you pick one of these packs, move to
 [docs/host-integration-playbooks.md](./host-integration-playbooks.md) for the

@@ -140,7 +140,7 @@ const IdentityScene: React.FC = () => {
               color: palette.accent,
             }}
           >
-            Switchyard
+            WebaiBridge
           </div>
           <h1 style={{ ...sceneTitleStyle, marginTop: 26 }}>
             One shared provider runtime for AI apps.
@@ -510,7 +510,7 @@ const ClosingScene: React.FC = () => {
                 lineHeight: 1.15,
               }}
             >
-              xiaojiou176-open.github.io/Switchyard/
+              xiaojiou176-open.github.io/webai-bridge/
             </p>
           </div>
           <div
@@ -547,7 +547,7 @@ const ClosingScene: React.FC = () => {
   );
 };
 
-export const SwitchyardPromo: React.FC = () => {
+export const WebaiBridgePromo: React.FC = () => {
   return (
     <AbsoluteFill style={gradientBackdrop(0)}>
       <Sequence from={0} durationInFrames={sceneDurations.identity}>
@@ -572,7 +572,7 @@ export const SwitchyardPromo: React.FC = () => {
   );
 };
 
-export const SwitchyardPromoPoster: React.FC = () => {
+export const WebaiBridgePromoPoster: React.FC = () => {
   return (
     <AbsoluteFill style={gradientBackdrop(0)}>
       <AbsoluteFill
@@ -605,7 +605,7 @@ export const SwitchyardPromoPoster: React.FC = () => {
               Shared provider runtime
             </div>
             <h1 style={{ ...sceneTitleStyle, marginTop: 28 }}>
-              Switchyard
+              WebaiBridge
             </h1>
             <p style={{ ...sceneBodyStyle, marginTop: 20 }}>
               One service-first runtime for AI apps.
@@ -645,7 +645,7 @@ export const SwitchyardPromoPoster: React.FC = () => {
                 color: palette.ink,
               }}
             >
-              xiaojiou176-open.github.io/Switchyard/
+              xiaojiou176-open.github.io/webai-bridge/
             </p>
           </div>
         </div>

@@ -19,7 +19,7 @@ describe("runtime policy path guards", () => {
   it("rejects isolated chrome roots outside allowed artifact roots", () => {
     expect(() =>
       resolveIsolatedChromeUserDataDir({
-        SWITCHYARD_CHROME_USER_DATA_DIR: "/etc/switchyard-profile",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: "/etc/webai-bridge-profile",
       }),
     ).toThrow(/must stay inside one of/u);
   });
@@ -27,17 +27,17 @@ describe("runtime policy path guards", () => {
   it("rejects source chrome roots outside trusted browser filesystem roots", () => {
     expect(() =>
       resolveSourceChromeProfileSelection({
-        SWITCHYARD_SOURCE_CHROME_USER_DATA_DIR: "/etc/switchyard-source-profile",
+        WEBAI_BRIDGE_SOURCE_CHROME_USER_DATA_DIR: "/etc/webai-bridge-source-profile",
       }),
     ).toThrow(/must stay inside one of/u);
   });
 
   it("accepts isolated browser roots under the system temp directory", () => {
-    const candidate = join(tmpdir(), "switchyard-tests", "isolated-browser-root");
+    const candidate = join(tmpdir(), "webai-bridge-tests", "isolated-browser-root");
 
     expect(
       resolveIsolatedChromeUserDataDir({
-        SWITCHYARD_CHROME_USER_DATA_DIR: candidate,
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR: candidate,
       }),
     ).toBe(resolve(candidate));
   });
@@ -57,12 +57,12 @@ describe("runtime policy path guards", () => {
   it("accepts positive integer cache policy overrides from env", () => {
     expect(
       resolveCacheTtlDays({
-        SWITCHYARD_CACHE_TTL_DAYS: "14",
+        WEBAI_BRIDGE_CACHE_TTL_DAYS: "14",
       }),
     ).toBe(14);
     expect(
       resolveCacheMaxBytes({
-        SWITCHYARD_CACHE_MAX_BYTES: `${9 * 1024 * 1024 * 1024}`,
+        WEBAI_BRIDGE_CACHE_MAX_BYTES: `${9 * 1024 * 1024 * 1024}`,
       }),
     ).toBe(9 * 1024 * 1024 * 1024);
   });
@@ -70,45 +70,45 @@ describe("runtime policy path guards", () => {
   it("falls back to defaults when cache policy overrides are empty, invalid, or non-positive", () => {
     expect(
       resolveCacheTtlDays({
-        SWITCHYARD_CACHE_TTL_DAYS: "0",
+        WEBAI_BRIDGE_CACHE_TTL_DAYS: "0",
       }),
     ).toBe(7);
     expect(
       resolveCacheTtlDays({
-        SWITCHYARD_CACHE_TTL_DAYS: "not-a-number",
+        WEBAI_BRIDGE_CACHE_TTL_DAYS: "not-a-number",
       }),
     ).toBe(7);
     expect(
       resolveCacheMaxBytes({
-        SWITCHYARD_CACHE_MAX_BYTES: "-1",
+        WEBAI_BRIDGE_CACHE_MAX_BYTES: "-1",
       }),
     ).toBe(8 * 1024 * 1024 * 1024);
     expect(
       resolveCacheMaxBytes({
-        SWITCHYARD_CACHE_MAX_BYTES: "",
+        WEBAI_BRIDGE_CACHE_MAX_BYTES: "",
       }),
     ).toBe(8 * 1024 * 1024 * 1024);
   });
 
   it("expands a tilde-based external cache root outside the repo worktree", () => {
-    const repoRoot = "/tmp/switchyard-repo";
+    const repoRoot = "/tmp/webai-bridge-repo";
     const resolved = resolveExternalCacheRoot(
       {
-        SWITCHYARD_EXTERNAL_CACHE_ROOT: "~/.cache/switchyard-tests",
+        WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT: "~/.cache/webai-bridge-tests",
       },
       repoRoot,
     );
 
-    expect(resolved.endsWith("/.cache/switchyard-tests")).toBe(true);
+    expect(resolved.endsWith("/.cache/webai-bridge-tests")).toBe(true);
   });
 
   it("rejects external cache roots that point back inside the repo", () => {
-    const repoRoot = "/tmp/switchyard-repo";
+    const repoRoot = "/tmp/webai-bridge-repo";
 
     expect(() =>
       resolveExternalCacheRoot(
         {
-          SWITCHYARD_EXTERNAL_CACHE_ROOT: `${repoRoot}/.runtime-cache/external`,
+          WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT: `${repoRoot}/.runtime-cache/external`,
         },
         repoRoot,
       ),
@@ -118,16 +118,16 @@ describe("runtime policy path guards", () => {
   it("accepts child paths inside allowed roots and rejects outsiders", () => {
     expect(
       assertPathInsideAllowedRoots(
-        "/tmp/switchyard-safe/cache/profile",
-        ["/tmp/switchyard-safe", "/tmp/other-root"],
+        "/tmp/webai-bridge-safe/cache/profile",
+        ["/tmp/webai-bridge-safe", "/tmp/other-root"],
         "browser root",
       ),
-    ).toBe("/tmp/switchyard-safe/cache/profile");
+    ).toBe("/tmp/webai-bridge-safe/cache/profile");
 
     expect(() =>
       assertPathInsideAllowedRoots(
-        "/etc/switchyard-profile",
-        ["/tmp/switchyard-safe"],
+        "/etc/webai-bridge-profile",
+        ["/tmp/webai-bridge-safe"],
         "browser root",
       ),
     ).toThrow(/must stay inside one of/u);
@@ -138,27 +138,27 @@ describe("runtime policy path guards", () => {
     expect(resolveCredentialedBrowserMode({ CI: "true" })).toBe("managed-browser");
     expect(
       resolveCredentialedBrowserMode({
-        SWITCHYARD_BROWSER_MODE: "existing-browser-session",
+        WEBAI_BRIDGE_BROWSER_MODE: "existing-browser-session",
       }),
     ).toBe("existing-browser-session");
     expect(
       resolveCredentialedBrowserMode({
-        SWITCHYARD_BROWSER_MODE: "existing-chrome-profile",
+        WEBAI_BRIDGE_BROWSER_MODE: "existing-chrome-profile",
       }),
     ).toBe("isolated-chrome-root");
     expect(
       resolveCredentialedBrowserMode({
-        SWITCHYARD_BROWSER_MODE: "not-a-real-mode",
+        WEBAI_BRIDGE_BROWSER_MODE: "not-a-real-mode",
       }),
     ).toBe("isolated-chrome-root");
   });
 
   it("uses the documented default isolated profile display name unless overridden", () => {
-    expect(resolveIsolatedChromeProfileDisplayName({})).toBe("switchyard");
+    expect(resolveIsolatedChromeProfileDisplayName({})).toBe("webai-bridge");
     expect(
       resolveIsolatedChromeProfileDisplayName({
-        SWITCHYARD_CHROME_PROFILE_NAME: "Switchyard QA",
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "WebaiBridge QA",
       }),
-    ).toBe("Switchyard QA");
+    ).toBe("WebaiBridge QA");
   });
 });

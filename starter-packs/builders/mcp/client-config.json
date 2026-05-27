@@ -2,7 +2,7 @@
   "command": "pnpm",
   "args": [
     "run",
-    "switchyard:mcp",
+    "webai-bridge:mcp",
     "--",
     "--base-url",
     "http://127.0.0.1:4010"

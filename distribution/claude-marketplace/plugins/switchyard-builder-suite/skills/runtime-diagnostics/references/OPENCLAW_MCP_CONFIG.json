@@ -1,16 +1,16 @@
 {
   "mcp": {
     "servers": {
-      "switchyard": {
+      "webai-bridge": {
         "command": "pnpm",
         "args": [
           "run",
-          "switchyard:mcp",
+          "webai-bridge:mcp",
           "--",
           "--base-url",
           "http://127.0.0.1:4010"
         ],
-        "cwd": "/ABSOLUTE/PATH/TO/SWITCHYARD"
+        "cwd": "/ABSOLUTE/PATH/TO/WEBAI_BRIDGE"
       }
     }
   }

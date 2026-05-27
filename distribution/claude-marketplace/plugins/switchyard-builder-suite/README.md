@@ -1,4 +1,4 @@
-# switchyard-builder-suite
+# webai-bridge-builder-suite
 
 这个 bundle 当前提供两类 **truth-first** skills：
 

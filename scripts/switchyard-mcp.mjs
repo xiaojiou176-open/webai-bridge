@@ -1,3 +1,3 @@
-import { runSwitchyardMcpCli } from "../packages/surfaces/mcp/src/cli.ts";
+import { runWebaiBridgeMcpCli } from "../packages/surfaces/mcp/src/cli.ts";
 
-await runSwitchyardMcpCli(process.argv.slice(2));
+await runWebaiBridgeMcpCli(process.argv.slice(2));

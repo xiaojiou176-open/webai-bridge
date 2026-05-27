@@ -1,6 +1,6 @@
-# Switchyard Public Surface Catalog
+# WebaiBridge Public Surface Catalog
 
-This page is the thin human-readable hub for Switchyard's machine-readable
+This page is the thin human-readable hub for WebaiBridge's machine-readable
 public truth.
 
 Think of it as:
@@ -53,18 +53,18 @@ for provider ids, lanes, and stability targets.
 ## Read-Only Access
 
 ```bash
-pnpm run switchyard:cli -- surface-catalog
-pnpm run switchyard:cli -- surface-catalog-schema
-pnpm run switchyard:cli -- public-distribution-ledger
-pnpm run switchyard:cli -- public-distribution-ledger-schema
-pnpm run switchyard:cli -- compat-target-catalog
-pnpm run switchyard:cli -- builder-kit-catalog
-pnpm run switchyard:cli -- skill-pack-catalog
-pnpm run switchyard:cli -- provider-catalog
-pnpm run switchyard:cli -- provider-entry --target gemini:web-login
-pnpm run switchyard:cli -- builder-intent-router
-pnpm run switchyard:cli -- keyword-truth
-pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010
+pnpm run webai-bridge:cli -- surface-catalog
+pnpm run webai-bridge:cli -- surface-catalog-schema
+pnpm run webai-bridge:cli -- public-distribution-ledger
+pnpm run webai-bridge:cli -- public-distribution-ledger-schema
+pnpm run webai-bridge:cli -- compat-target-catalog
+pnpm run webai-bridge:cli -- builder-kit-catalog
+pnpm run webai-bridge:cli -- skill-pack-catalog
+pnpm run webai-bridge:cli -- provider-catalog
+pnpm run webai-bridge:cli -- provider-entry --target gemini:web-login
+pnpm run webai-bridge:cli -- builder-intent-router
+pnpm run webai-bridge:cli -- keyword-truth
+pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010
 ```
 
 These commands exist so that plugin/build tooling can consume current truth
@@ -74,18 +74,18 @@ without hard-coding it.
 
 The same catalog truth is readable from the read-only MCP surface:
 
-- `switchyard.catalog.surface_catalog`
-- `switchyard.catalog.public_distribution_ledger`
-- `switchyard.catalog.compat_target_catalog`
-- `switchyard.catalog.provider_catalog`
-- `switchyard.catalog.provider_entry`
-- `switchyard.catalog.builder_kit_catalog`
-- `switchyard.catalog.skill_pack_catalog`
-- `switchyard.catalog.builder_journeys`
-- `switchyard.catalog.builder_intent_router`
-- `switchyard.catalog.keyword_truth`
-- `switchyard.catalog.mcp_status`
-- `switchyard.catalog.mcp_tools`
+- `webai-bridge.catalog.surface_catalog`
+- `webai-bridge.catalog.public_distribution_ledger`
+- `webai-bridge.catalog.compat_target_catalog`
+- `webai-bridge.catalog.provider_catalog`
+- `webai-bridge.catalog.provider_entry`
+- `webai-bridge.catalog.builder_kit_catalog`
+- `webai-bridge.catalog.skill_pack_catalog`
+- `webai-bridge.catalog.builder_journeys`
+- `webai-bridge.catalog.builder_intent_router`
+- `webai-bridge.catalog.keyword_truth`
+- `webai-bridge.catalog.mcp_status`
+- `webai-bridge.catalog.mcp_tools`
 
 ## Builder Routes
 

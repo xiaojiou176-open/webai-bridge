@@ -1,8 +1,8 @@
-# Switchyard Host Integration Examples
+# WebaiBridge Host Integration Examples
 
 这里可以先理解成：
 
-> **把 `Switchyard` 接进具体 host 的最小接线板，而且现在每块板子都能自己亮一下灯。**
+> **把 `WebaiBridge` 接进具体 host 的最小接线板，而且现在每块板子都能自己亮一下灯。**
 
 和现有几个入口的关系是：
 
@@ -24,7 +24,7 @@
 如果你不想只看 config 长相，而是想让 host example 真的跑一次最小 first success：
 
 - 先在另一个终端启动本地 runtime：`pnpm run start:service-local`
-- 如果 runtime 不在默认 `127.0.0.1:4010`，先设置 `SWITCHYARD_RUNTIME_BASE_URL`
+- 如果 runtime 不在默认 `127.0.0.1:4010`，先设置 `WEBAI_BRIDGE_RUNTIME_BASE_URL`
 - `pnpm run example:host-codex`
 - `pnpm run example:host-claude-code`
 - `pnpm run example:host-openclaw`

@@ -153,7 +153,7 @@ function getDebugTruthFocus(debug: ServiceProviderDebugSupportView): DebugTruthF
           eyebrow: "Owner action first",
           summary: requiredUserAction,
           detail:
-            "Switchyard already knows this is an end-user blocker. Finish that action first, then rerun the provider live gate for fresh proof.",
+            "WebaiBridge already knows this is an end-user blocker. Finish that action first, then rerun the provider live gate for fresh proof.",
           runtimeSummary:
             "Runtime use is still blocked on an explicit end-user action. Do not treat reruns as the primary fix until that action is complete.",
         };
@@ -287,7 +287,7 @@ function renderEvidenceStack(
           `<section class="section">
             <header class="section-header">
               <h2>Current browser evidence</h2>
-              <p>The safest way to reason about a web-login provider is: first what Switchyard stored, then what the current browser page actually shows.</p>
+              <p>The safest way to reason about a web-login provider is: first what WebaiBridge stored, then what the current browser page actually shows.</p>
             </header>
             <div class="section-grid">
               <article class="section-card">
@@ -321,7 +321,7 @@ function renderEvidenceStack(
           `<section class="section">
             <header class="section-header">
               <h2>Current console and network</h2>
-              <p>These are evidence surfaces, not vanity metrics. Empty entries mean Switchyard did not see fresh events during this inspection window, not that the provider is automatically healthy.</p>
+              <p>These are evidence surfaces, not vanity metrics. Empty entries mean WebaiBridge did not see fresh events during this inspection window, not that the provider is automatically healthy.</p>
             </header>
             <div class="section-grid">
               <article class="section-card">

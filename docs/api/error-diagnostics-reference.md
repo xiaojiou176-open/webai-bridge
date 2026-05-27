@@ -1,4 +1,4 @@
-# Switchyard Error and Diagnostics Reference
+# WebaiBridge Error and Diagnostics Reference
 
 ## What This Page Covers
 
@@ -87,7 +87,7 @@
 
 ## Why Diagnostics Matter
 
-`Switchyard` 的目标不是“出错时糊成一句 failed”。
+`WebaiBridge` 的目标不是“出错时糊成一句 failed”。
 
 它要尽量把这些区别讲清楚：
 

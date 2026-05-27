@@ -1,6 +1,6 @@
-# Switchyard Remotion Promo
+# WebaiBridge Remotion Promo
 
-This is a standalone Remotion package for a short Switchyard promo video.
+This is a standalone Remotion package for a short WebaiBridge promo video.
 
 It stays outside the main workspace on purpose:
 
@@ -12,7 +12,7 @@ It stays outside the main workspace on purpose:
 
 The current cut is a short product-facing promo:
 
-1. Switchyard is a shared provider runtime for AI apps.
+1. WebaiBridge is a shared provider runtime for AI apps.
 2. It unifies `BYOK + Web/Login` into one service-first runtime.
 3. It ships truth-first docs, partial read-only MCP, and thin compat bridges.
 4. It stays fail-closed on claims: package-ready is not listed-live.

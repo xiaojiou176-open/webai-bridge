@@ -1,19 +1,19 @@
 {
-  "name": "switchyard-mcp-host-example",
-  "catalogCommand": "pnpm run switchyard:cli -- host-example --target mcp --json",
-  "startupCommand": "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
+  "name": "webai-bridge-mcp-host-example",
+  "catalogCommand": "pnpm run webai-bridge:cli -- host-example --target mcp --json",
+  "startupCommand": "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
   "clientConfig": {
     "command": "pnpm",
     "args": [
       "run",
-      "switchyard:mcp",
+      "webai-bridge:mcp",
       "--",
       "--base-url",
       "http://127.0.0.1:4010"
     ]
   },
   "firstToolCall": {
-    "name": "switchyard.runtime.health",
+    "name": "webai-bridge.runtime.health",
     "arguments": {}
   },
   "safeClaims": [

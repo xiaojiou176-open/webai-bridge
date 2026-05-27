@@ -8,9 +8,9 @@ afterEach(() => {
 
 describe("Qwen browser-session transport", () => {
   it("reuses an existing Qwen tab and extracts SSE text from the browser-session fallback", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE", "qwen_cookie=1");
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_USER_AGENT", "SwitchyardTest/1.0");
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:9338");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE", "qwen_cookie=1");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_USER_AGENT", "WebaiBridgeTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:9338");
 
     const evaluate = vi.fn().mockResolvedValue({
       ok: true,
@@ -70,9 +70,9 @@ describe("Qwen browser-session transport", () => {
   });
 
   it("ignores deceptive non-Qwen tabs and opens a fresh Qwen page instead", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE", "qwen_cookie=1");
-    vi.stubEnv("SWITCHYARD_WEB_QWEN_USER_AGENT", "SwitchyardTest/1.0");
-    vi.stubEnv("SWITCHYARD_BROWSER_MODE", "isolated-chrome-root");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE", "qwen_cookie=1");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_QWEN_USER_AGENT", "WebaiBridgeTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_BROWSER_MODE", "isolated-chrome-root");
 
     const misleadingPage = {
       url: () => "https://evil.example/qwen.ai/session",

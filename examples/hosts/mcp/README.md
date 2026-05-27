@@ -1,4 +1,4 @@
-# Switchyard Host Example: MCP
+# WebaiBridge Host Example: MCP
 
 这个 example 的目标是：
 
@@ -6,7 +6,7 @@
 
 它适合：
 
-- 想把 `Switchyard` read-only MCP surface 接进本地 client
+- 想把 `WebaiBridge` read-only MCP surface 接进本地 client
 - 想快速知道 client config 和第一条 tool call 长什么样
 
 它不适合：

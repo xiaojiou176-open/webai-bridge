@@ -1,7 +1,7 @@
 {
-  "name": "switchyard-openclaw-host-example",
-  "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-  "catalogCommand": "pnpm run switchyard:cli -- host-example --target openclaw --json",
+  "name": "webai-bridge-openclaw-host-example",
+  "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+  "catalogCommand": "pnpm run webai-bridge:cli -- host-example --target openclaw --json",
   "request": {
     "provider": "chatgpt",
     "lane": "web",

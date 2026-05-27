@@ -73,9 +73,9 @@ export function normalizeInvokeRequest(request) {
 
 function buildRuntimeUnavailableError(baseUrl, path, error) {
   const help = [
-    `Switchyard runtime is not reachable at ${formatRuntimeHelpUrl(baseUrl, path)}.`,
+    `WebaiBridge runtime is not reachable at ${formatRuntimeHelpUrl(baseUrl, path)}.`,
     `Start the local runtime first: ${LOCAL_SERVICE_START_COMMAND}`,
-    "Or point the example at another runtime with SWITCHYARD_RUNTIME_BASE_URL=http://host:port",
+    "Or point the example at another runtime with WEBAI_BRIDGE_RUNTIME_BASE_URL=http://host:port",
   ].join(" ");
   const wrapped = new Error(help);
   Object.assign(wrapped, {

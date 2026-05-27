@@ -20,30 +20,30 @@ beforeEach(() => {
   vi.resetAllMocks();
 });
 
-describe("switchyard CLI starter", () => {
+describe("webai-bridge CLI starter", () => {
   it("resolves baseUrl from explicit flag, env override, and default port", async () => {
     const { resolveCliBaseUrl } = await import(
-      "../../../scripts/switchyard-cli.mjs"
+      "../../../scripts/webai-bridge-cli.mjs"
     );
 
     expect(
       resolveCliBaseUrl(
         {
-          SWITCHYARD_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
-          SWITCHYARD_SERVICE_PORT: "7777",
+          WEBAI_BRIDGE_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
+          WEBAI_BRIDGE_SERVICE_PORT: "7777",
         },
         "http://127.0.0.1:5555/",
       ),
     ).toBe("http://127.0.0.1:5555");
     expect(
       resolveCliBaseUrl({
-        SWITCHYARD_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
-        SWITCHYARD_SERVICE_PORT: "7777",
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
+        WEBAI_BRIDGE_SERVICE_PORT: "7777",
       }),
     ).toBe("http://127.0.0.1:9999");
     expect(
       resolveCliBaseUrl({
-        SWITCHYARD_SERVICE_PORT: "7777",
+        WEBAI_BRIDGE_SERVICE_PORT: "7777",
       }),
     ).toBe("http://127.0.0.1:7777");
   });
@@ -93,17 +93,17 @@ describe("switchyard CLI starter", () => {
       diagnoseLadder: [{ id: "check-store", status: "completed" }],
     });
 
-    const { runSwitchyardCli } = await import("../../../scripts/switchyard-cli.mjs");
+    const { runWebaiBridgeCli } = await import("../../../scripts/webai-bridge-cli.mjs");
 
-    const providers = await runSwitchyardCli(
+    const providers = await runWebaiBridgeCli(
       { command: "providers" },
       client,
     );
-    const runtimeDoctor = await runSwitchyardCli(
+    const runtimeDoctor = await runWebaiBridgeCli(
       { command: "runtime-doctor" },
       client,
     );
-    const runtimePlan = await runSwitchyardCli(
+    const runtimePlan = await runWebaiBridgeCli(
       {
         command: "runtime-plan",
         policyProfile: "official-api-first",
@@ -114,31 +114,31 @@ describe("switchyard CLI starter", () => {
       },
       client,
     );
-    const doctor = await runSwitchyardCli(
+    const doctor = await runWebaiBridgeCli(
       { command: "provider-doctor", provider: "chatgpt" },
       client,
     );
-    const supportBundle = await runSwitchyardCli(
+    const supportBundle = await runWebaiBridgeCli(
       { command: "provider-support-bundle", provider: "chatgpt" },
       client,
     );
-    const diagnose = await runSwitchyardCli(
+    const diagnose = await runWebaiBridgeCli(
       { command: "provider-diagnose", provider: "chatgpt" },
       client,
     );
-    const attachTarget = await runSwitchyardCli(
+    const attachTarget = await runWebaiBridgeCli(
       { command: "provider-attach-target", provider: "chatgpt" },
       client,
     );
-    const storeReadiness = await runSwitchyardCli(
+    const storeReadiness = await runWebaiBridgeCli(
       { command: "provider-store-readiness", provider: "chatgpt" },
       client,
     );
-    const liveReadiness = await runSwitchyardCli(
+    const liveReadiness = await runWebaiBridgeCli(
       { command: "provider-live-readiness", provider: "chatgpt" },
       client,
     );
-    const diagnoseLadder = await runSwitchyardCli(
+    const diagnoseLadder = await runWebaiBridgeCli(
       { command: "provider-diagnose-ladder", provider: "chatgpt" },
       client,
     );
@@ -251,15 +251,15 @@ describe("switchyard CLI starter", () => {
   });
 
   it("rejects provider-scoped commands when provider is missing", async () => {
-    const { runSwitchyardCli } = await import("../../../scripts/switchyard-cli.mjs");
+    const { runWebaiBridgeCli } = await import("../../../scripts/webai-bridge-cli.mjs");
 
     await expect(
-      runSwitchyardCli({ command: "provider-status" }, client),
+      runWebaiBridgeCli({ command: "provider-status" }, client),
     ).rejects.toThrow("provider-status requires --provider <providerId>");
   });
 
   it("parses separators, provider flags, and json/base-url flags", async () => {
-    const { parseCliArgs } = await import("../../../scripts/switchyard-cli.mjs");
+    const { parseCliArgs } = await import("../../../scripts/webai-bridge-cli.mjs");
 
     expect(
       parseCliArgs([
@@ -311,9 +311,9 @@ describe("switchyard CLI starter", () => {
   });
 
   it("returns machine-readable outward catalogs for plugin and skills builders", async () => {
-    const { runSwitchyardCli } = await import("../../../scripts/switchyard-cli.mjs");
+    const { runWebaiBridgeCli } = await import("../../../scripts/webai-bridge-cli.mjs");
 
-    await expect(runSwitchyardCli({ command: "surface-catalog" }, client)).resolves.toEqual(
+    await expect(runWebaiBridgeCli({ command: "surface-catalog" }, client)).resolves.toEqual(
       expect.objectContaining({
         command: "surface-catalog",
         result: expect.objectContaining({
@@ -370,11 +370,11 @@ describe("switchyard CLI starter", () => {
       }),
     );
 
-    await expect(runSwitchyardCli({ command: "surface-catalog-schema" }, client)).resolves.toEqual(
+    await expect(runWebaiBridgeCli({ command: "surface-catalog-schema" }, client)).resolves.toEqual(
       expect.objectContaining({
         command: "surface-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard Public Surface Catalog",
+          title: "WebaiBridge Public Surface Catalog",
           required: expect.arrayContaining([
             "publicSurfaces",
             "compatTargets",
@@ -387,7 +387,7 @@ describe("switchyard CLI starter", () => {
     );
 
     await expect(
-      runSwitchyardCli({ command: "public-distribution-ledger" }, client),
+      runWebaiBridgeCli({ command: "public-distribution-ledger" }, client),
     ).resolves.toEqual({
       command: "public-distribution-ledger",
       result: expect.objectContaining({
@@ -405,11 +405,11 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "public-distribution-ledger-schema" }, client),
+      runWebaiBridgeCli({ command: "public-distribution-ledger-schema" }, client),
     ).resolves.toEqual({
       command: "public-distribution-ledger-schema",
       result: expect.objectContaining({
-        title: "Switchyard Public Distribution Ledger",
+        title: "WebaiBridge Public Distribution Ledger",
         required: expect.arrayContaining([
           "ledgerVersion",
           "entries",
@@ -418,7 +418,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "distribution-surfaces" }, client),
+      runWebaiBridgeCli({ command: "distribution-surfaces" }, client),
     ).resolves.toEqual({
       command: "distribution-surfaces",
       result: expect.arrayContaining([
@@ -430,7 +430,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "distribution-surface", target: "mcp" },
         client,
       ),
@@ -444,7 +444,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "compat-targets" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "compat-targets" }, client)).resolves.toEqual({
       command: "compat-targets",
       result: expect.arrayContaining([
         expect.objectContaining({ target: "codex" }),
@@ -453,7 +453,7 @@ describe("switchyard CLI starter", () => {
       ]),
     });
 
-    await expect(runSwitchyardCli({ command: "compat-target-catalog" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "compat-target-catalog" }, client)).resolves.toEqual({
       command: "compat-target-catalog",
       result: expect.objectContaining({
         targets: expect.arrayContaining([
@@ -465,11 +465,11 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "compat-target-catalog-schema" }, client),
+      runWebaiBridgeCli({ command: "compat-target-catalog-schema" }, client),
     ).resolves.toEqual({
       command: "compat-target-catalog-schema",
       result: expect.objectContaining({
-        title: "Switchyard Compat Target Catalog",
+        title: "WebaiBridge Compat Target Catalog",
         required: expect.arrayContaining([
           "catalogVersion",
           "targets",
@@ -477,7 +477,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "builder-kits" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "builder-kits" }, client)).resolves.toEqual({
       command: "builder-kits",
       result: expect.arrayContaining([
         expect.objectContaining({
@@ -493,7 +493,7 @@ describe("switchyard CLI starter", () => {
       ]),
     });
 
-    await expect(runSwitchyardCli({ command: "builder-kit-catalog" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "builder-kit-catalog" }, client)).resolves.toEqual({
       command: "builder-kit-catalog",
       result: expect.objectContaining({
         kits: expect.arrayContaining([
@@ -506,11 +506,11 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "builder-kit-catalog-schema" }, client),
+      runWebaiBridgeCli({ command: "builder-kit-catalog-schema" }, client),
     ).resolves.toEqual({
       command: "builder-kit-catalog-schema",
       result: expect.objectContaining({
-        title: "Switchyard Builder Kit Catalog",
+        title: "WebaiBridge Builder Kit Catalog",
         required: expect.arrayContaining([
           "catalogVersion",
           "kits",
@@ -519,7 +519,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "compat-target", target: "codex" },
         client,
       ),
@@ -534,7 +534,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "builder-kit", target: "mcp" },
         client,
       ),
@@ -552,7 +552,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "skill-pack-catalog" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "skill-pack-catalog" }, client)).resolves.toEqual({
       command: "skill-pack-catalog",
       result: expect.objectContaining({
         packs: expect.arrayContaining([
@@ -563,11 +563,11 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "skill-pack-catalog-schema" }, client),
+      runWebaiBridgeCli({ command: "skill-pack-catalog-schema" }, client),
     ).resolves.toEqual({
       command: "skill-pack-catalog-schema",
       result: expect.objectContaining({
-        title: "Switchyard Skill Pack Catalog",
+        title: "WebaiBridge Skill Pack Catalog",
         required: expect.arrayContaining([
           "catalogVersion",
           "packs",
@@ -575,7 +575,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "skill-packs" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "skill-packs" }, client)).resolves.toEqual({
       command: "skill-packs",
       result: expect.arrayContaining([
         expect.objectContaining({
@@ -592,7 +592,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "skill-pack", target: "runtime-diagnostics-pack" },
         client,
       ),
@@ -609,22 +609,22 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "skill-pack-routes" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "skill-pack-routes" }, client)).resolves.toEqual({
       command: "skill-pack-routes",
       result: expect.objectContaining({
         routes: expect.arrayContaining([
           expect.objectContaining({
             id: "runtime-diagnostics-pack",
-            bestEntry: "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack",
+            bestEntry: "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack",
             recommendedMcpTools: expect.arrayContaining([
-              "switchyard.catalog.skill_pack",
-              "switchyard.provider.diagnose",
+              "webai-bridge.catalog.skill_pack",
+              "webai-bridge.provider.diagnose",
             ]),
           }),
           expect.objectContaining({
             id: "docs-seo-sync-pack",
             recommendedCliCommands: expect.arrayContaining([
-              "pnpm run switchyard:cli -- keyword-truth --json",
+              "pnpm run webai-bridge:cli -- keyword-truth --json",
             ]),
           }),
         ]),
@@ -632,11 +632,11 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "skill-pack-routes-schema" }, client),
+      runWebaiBridgeCli({ command: "skill-pack-routes-schema" }, client),
     ).resolves.toEqual({
       command: "skill-pack-routes-schema",
       result: expect.objectContaining({
-        title: "Switchyard Skill Pack Routes",
+        title: "WebaiBridge Skill Pack Routes",
         required: expect.arrayContaining([
           "routeVersion",
           "routes",
@@ -645,7 +645,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "skill-pack-route", target: "runtime-diagnostics-pack" },
         client,
       ),
@@ -656,17 +656,17 @@ describe("switchyard CLI starter", () => {
         id: "runtime-diagnostics-pack",
         packPath: "starter-packs/skills/runtime-diagnostics-pack",
         recommendedCliCommands: expect.arrayContaining([
-          "pnpm run switchyard:cli -- provider-status --provider chatgpt --json",
-          "pnpm run switchyard:cli -- provider-support-bundle --provider chatgpt --json",
+          "pnpm run webai-bridge:cli -- provider-status --provider chatgpt --json",
+          "pnpm run webai-bridge:cli -- provider-support-bundle --provider chatgpt --json",
         ]),
         recommendedMcpTools: expect.arrayContaining([
-          "switchyard.catalog.skill_pack",
-          "switchyard.provider.support_bundle",
+          "webai-bridge.catalog.skill_pack",
+          "webai-bridge.provider.support_bundle",
         ]),
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "host-playbooks" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "host-playbooks" }, client)).resolves.toEqual({
       command: "host-playbooks",
       result: expect.arrayContaining([
         expect.objectContaining({
@@ -681,10 +681,10 @@ describe("switchyard CLI starter", () => {
       ]),
     });
 
-    await expect(runSwitchyardCli({ command: "host-playbooks-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "host-playbooks-schema" }, client)).resolves.toEqual({
       command: "host-playbooks-schema",
       result: expect.objectContaining({
-        title: "Switchyard Host Integration Playbooks",
+        title: "WebaiBridge Host Integration Playbooks",
         required: expect.arrayContaining([
           "playbookVersion",
           "playbooks",
@@ -693,7 +693,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "host-playbook", target: "codex" }, client),
+      runWebaiBridgeCli({ command: "host-playbook", target: "codex" }, client),
     ).resolves.toEqual({
       command: "host-playbook",
       target: "codex",
@@ -704,7 +704,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "host-examples" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "host-examples" }, client)).resolves.toEqual({
       command: "host-examples",
       result: expect.arrayContaining([
         expect.objectContaining({
@@ -722,10 +722,10 @@ describe("switchyard CLI starter", () => {
       ]),
     });
 
-    await expect(runSwitchyardCli({ command: "host-examples-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "host-examples-schema" }, client)).resolves.toEqual({
       command: "host-examples-schema",
       result: expect.objectContaining({
-        title: "Switchyard Host Integration Examples",
+        title: "WebaiBridge Host Integration Examples",
         required: expect.arrayContaining([
           "indexVersion",
           "hostExamples",
@@ -734,20 +734,20 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "host-example", target: "mcp" }, client),
+      runWebaiBridgeCli({ command: "host-example", target: "mcp" }, client),
     ).resolves.toEqual({
       command: "host-example",
       target: "mcp",
       result: expect.objectContaining({
         target: "mcp",
         hostShape: "stdio-client-config",
-        bestEntry: "pnpm run switchyard:cli -- host-example --target mcp",
+        bestEntry: "pnpm run webai-bridge:cli -- host-example --target mcp",
         smokeCommand: "pnpm run example:host-mcp",
         firstSuccessCheck: expect.any(String),
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "builder-journeys" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "builder-journeys" }, client)).resolves.toEqual({
       command: "builder-journeys",
       result: expect.objectContaining({
         journeys: expect.arrayContaining([
@@ -757,10 +757,10 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "builder-journeys-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "builder-journeys-schema" }, client)).resolves.toEqual({
       command: "builder-journeys-schema",
       result: expect.objectContaining({
-        title: "Switchyard Builder Journeys",
+        title: "WebaiBridge Builder Journeys",
         required: expect.arrayContaining([
           "journeyVersion",
           "journeys",
@@ -769,7 +769,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "builder-journey", target: "codex-first-success" }, client),
+      runWebaiBridgeCli({ command: "builder-journey", target: "codex-first-success" }, client),
     ).resolves.toEqual({
       command: "builder-journey",
       target: "codex-first-success",
@@ -780,7 +780,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "builder-intent-router" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "builder-intent-router" }, client)).resolves.toEqual({
       command: "builder-intent-router",
       result: expect.objectContaining({
         intents: expect.arrayContaining([
@@ -790,10 +790,10 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "builder-intent-router-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "builder-intent-router-schema" }, client)).resolves.toEqual({
       command: "builder-intent-router-schema",
       result: expect.objectContaining({
-        title: "Switchyard Builder Intent Router",
+        title: "WebaiBridge Builder Intent Router",
         required: expect.arrayContaining([
           "routerVersion",
           "intents",
@@ -802,36 +802,36 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "builder-intent", target: "support-truth" }, client),
+      runWebaiBridgeCli({ command: "builder-intent", target: "support-truth" }, client),
     ).resolves.toEqual({
       command: "builder-intent",
       target: "support-truth",
       result: expect.objectContaining({
         id: "support-truth",
-        firstHopCli: "pnpm run switchyard:cli -- surface-catalog",
+        firstHopCli: "pnpm run webai-bridge:cli -- surface-catalog",
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "keyword-truth" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "keyword-truth" }, client)).resolves.toEqual({
       command: "keyword-truth",
       result: expect.objectContaining({
         entries: expect.arrayContaining([
           expect.objectContaining({
-            id: "switchyard-shared-provider-runtime",
+            id: "webai-bridge-shared-provider-runtime",
             truthStatus: "claimable-now",
           }),
           expect.objectContaining({
-            id: "switchyard-mcp",
+            id: "webai-bridge-mcp",
             truthStatus: "partial-with-label",
           }),
         ]),
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "keyword-truth-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "keyword-truth-schema" }, client)).resolves.toEqual({
       command: "keyword-truth-schema",
       result: expect.objectContaining({
-        title: "Switchyard Keyword Truth Table",
+        title: "WebaiBridge Keyword Truth Table",
         required: expect.arrayContaining([
           "keywordVersion",
           "entries",
@@ -840,12 +840,12 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "keyword-entry", target: "switchyard-mcp" }, client),
+      runWebaiBridgeCli({ command: "keyword-entry", target: "webai-bridge-mcp" }, client),
     ).resolves.toEqual({
       command: "keyword-entry",
-      target: "switchyard-mcp",
+      target: "webai-bridge-mcp",
       result: expect.objectContaining({
-        id: "switchyard-mcp",
+        id: "webai-bridge-mcp",
         truthStatus: "partial-with-label",
         requiredLabels: expect.arrayContaining([
           "partial",
@@ -854,7 +854,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "provider-catalog" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "provider-catalog" }, client)).resolves.toEqual({
       command: "provider-catalog",
       result: expect.arrayContaining([
         expect.objectContaining({
@@ -872,10 +872,10 @@ describe("switchyard CLI starter", () => {
       ]),
     });
 
-    await expect(runSwitchyardCli({ command: "provider-catalog-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "provider-catalog-schema" }, client)).resolves.toEqual({
       command: "provider-catalog-schema",
       result: expect.objectContaining({
-        title: "Switchyard Provider Runtime Catalog",
+        title: "WebaiBridge Provider Runtime Catalog",
         required: expect.arrayContaining([
           "catalogVersion",
           "providers",
@@ -884,7 +884,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "provider-entry", target: "chatgpt" },
         client,
       ),
@@ -902,13 +902,13 @@ describe("switchyard CLI starter", () => {
         }),
         doctorEntryPoints: expect.objectContaining({
           cliCommand:
-            "pnpm run switchyard:cli -- provider-doctor --provider chatgpt --json",
+            "pnpm run webai-bridge:cli -- provider-doctor --provider chatgpt --json",
         }),
       }),
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "provider-entry", target: "gemini:web-login" },
         client,
       ),
@@ -925,7 +925,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-manifests" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-manifests" }, client)).resolves.toEqual({
       command: "starter-manifests",
       result: expect.objectContaining({
         builderTemplates: expect.any(Array),
@@ -933,10 +933,10 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-manifests-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-manifests-schema" }, client)).resolves.toEqual({
       command: "starter-manifests-schema",
       result: expect.objectContaining({
-        title: "Switchyard Starter Manifest Templates",
+        title: "WebaiBridge Starter Manifest Templates",
         required: expect.arrayContaining([
           "manifestVersion",
           "builderTemplates",
@@ -945,7 +945,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-examples" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-examples" }, client)).resolves.toEqual({
       command: "starter-examples",
       result: expect.objectContaining({
         builderExamples: expect.any(Array),
@@ -953,10 +953,10 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-examples-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-examples-schema" }, client)).resolves.toEqual({
       command: "starter-examples-schema",
       result: expect.objectContaining({
-        title: "Switchyard Starter Manifest Examples",
+        title: "WebaiBridge Starter Manifest Examples",
         required: expect.arrayContaining([
           "exampleVersion",
           "builderExamples",
@@ -965,7 +965,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-pack-index" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-pack-index" }, client)).resolves.toEqual({
       command: "starter-pack-index",
       result: expect.objectContaining({
         builderPacks: expect.arrayContaining([
@@ -977,10 +977,10 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-pack-index-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-pack-index-schema" }, client)).resolves.toEqual({
       command: "starter-pack-index-schema",
       result: expect.objectContaining({
-        title: "Switchyard Starter Pack Index",
+        title: "WebaiBridge Starter Pack Index",
         required: expect.arrayContaining([
           "indexVersion",
           "builderPacks",
@@ -990,7 +990,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "starter-pack-entry", target: "codex" },
         client,
       ),
@@ -1005,7 +1005,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "starter-pack-entry", target: "runtime-diagnostics-pack" },
         client,
       ),
@@ -1019,7 +1019,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-pack-chooser" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-pack-chooser" }, client)).resolves.toEqual({
       command: "starter-pack-chooser",
       result: expect.objectContaining({
         questions: expect.any(Array),
@@ -1037,11 +1037,11 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "starter-pack-chooser-schema" }, client),
+      runWebaiBridgeCli({ command: "starter-pack-chooser-schema" }, client),
     ).resolves.toEqual({
       command: "starter-pack-chooser-schema",
       result: expect.objectContaining({
-        title: "Switchyard Starter Pack Chooser",
+        title: "WebaiBridge Starter Pack Chooser",
         required: expect.arrayContaining([
           "chooserVersion",
           "questions",
@@ -1051,7 +1051,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "starter-pack-scenario", target: "codex-builder" },
         client,
       ),
@@ -1065,7 +1065,7 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-pack-comparison" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-pack-comparison" }, client)).resolves.toEqual({
       command: "starter-pack-comparison",
       result: expect.objectContaining({
         filters: expect.arrayContaining([
@@ -1079,10 +1079,10 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "starter-pack-comparison-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "starter-pack-comparison-schema" }, client)).resolves.toEqual({
       command: "starter-pack-comparison-schema",
       result: expect.objectContaining({
-        title: "Switchyard Starter Pack Comparison",
+        title: "WebaiBridge Starter Pack Comparison",
         required: expect.arrayContaining([
           "comparisonVersion",
           "filters",
@@ -1092,7 +1092,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "starter-pack-filter", target: "read-only-truth" },
         client,
       ),
@@ -1114,7 +1114,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "builder-template", target: "mcp" },
         client,
       ),
@@ -1129,7 +1129,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "builder-example", target: "mcp" },
         client,
       ),
@@ -1143,7 +1143,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "skill-template", target: "runtime-diagnostics-pack" },
         client,
       ),
@@ -1157,7 +1157,7 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli(
+      runWebaiBridgeCli(
         { command: "skill-example", target: "runtime-diagnostics-pack" },
         client,
       ),
@@ -1170,65 +1170,65 @@ describe("switchyard CLI starter", () => {
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "mcp-status" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "mcp-status" }, client)).resolves.toEqual({
       command: "mcp-status",
       result: expect.objectContaining({
         status: "partial",
         readOnly: true,
         serverTransport: true,
-        startupCommand: "pnpm run switchyard:mcp",
+        startupCommand: "pnpm run webai-bridge:mcp",
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "mcp-tools" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "mcp-tools" }, client)).resolves.toEqual({
       command: "mcp-tools",
       result: expect.arrayContaining([
         expect.objectContaining({
-          name: "switchyard.runtime.health",
+          name: "webai-bridge.runtime.health",
           readOnlyHint: true,
         }),
         expect.objectContaining({
-          name: "switchyard.provider.support_bundle",
+          name: "webai-bridge.provider.support_bundle",
           providerScoped: true,
         }),
         expect.objectContaining({
-          name: "switchyard.catalog.starter_pack_chooser",
+          name: "webai-bridge.catalog.starter_pack_chooser",
           readOnlyHint: true,
         }),
         expect.objectContaining({
-          name: "switchyard.catalog.host_playbooks",
+          name: "webai-bridge.catalog.host_playbooks",
           readOnlyHint: true,
         }),
         expect.objectContaining({
-          name: "switchyard.catalog.host_examples",
+          name: "webai-bridge.catalog.host_examples",
           readOnlyHint: true,
         }),
         expect.objectContaining({
-          name: "switchyard.catalog.keyword_truth",
+          name: "webai-bridge.catalog.keyword_truth",
           readOnlyHint: true,
         }),
         expect.objectContaining({
-          name: "switchyard.catalog.builder_intent_router",
+          name: "webai-bridge.catalog.builder_intent_router",
           readOnlyHint: true,
         }),
       ]),
     });
 
-    await expect(runSwitchyardCli({ command: "mcp-tool-catalog" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "mcp-tool-catalog" }, client)).resolves.toEqual({
       command: "mcp-tool-catalog",
       result: expect.objectContaining({
         tools: expect.arrayContaining([
-          expect.objectContaining({ name: "switchyard.runtime.health" }),
-          expect.objectContaining({ name: "switchyard.catalog.compat_target_catalog" }),
-          expect.objectContaining({ name: "switchyard.catalog.mcp_tool_catalog" }),
+          expect.objectContaining({ name: "webai-bridge.runtime.health" }),
+          expect.objectContaining({ name: "webai-bridge.catalog.compat_target_catalog" }),
+          expect.objectContaining({ name: "webai-bridge.catalog.mcp_tool_catalog" }),
         ]),
       }),
     });
 
-    await expect(runSwitchyardCli({ command: "mcp-tool-catalog-schema" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "mcp-tool-catalog-schema" }, client)).resolves.toEqual({
       command: "mcp-tool-catalog-schema",
       result: expect.objectContaining({
-        title: "Switchyard MCP Tool Catalog",
+        title: "WebaiBridge MCP Tool Catalog",
         required: expect.arrayContaining([
           "catalogVersion",
           "tools",
@@ -1237,98 +1237,98 @@ describe("switchyard CLI starter", () => {
     });
 
     await expect(
-      runSwitchyardCli({ command: "mcp-tool", target: "switchyard.runtime.health" }, client),
+      runWebaiBridgeCli({ command: "mcp-tool", target: "webai-bridge.runtime.health" }, client),
     ).resolves.toEqual({
       command: "mcp-tool",
-      target: "switchyard.runtime.health",
+      target: "webai-bridge.runtime.health",
       result: expect.objectContaining({
-        name: "switchyard.runtime.health",
+        name: "webai-bridge.runtime.health",
         route: "/v1/runtime/health",
       }),
     });
 
     await expect(
-      runSwitchyardCli({ command: "mcp-tool", target: "mystery.tool" }, client),
+      runWebaiBridgeCli({ command: "mcp-tool", target: "mystery.tool" }, client),
     ).rejects.toThrow('Unknown MCP tool "mystery.tool"');
   });
 
   it("rejects unknown compat targets", async () => {
-    const { runSwitchyardCli } = await import("../../../scripts/switchyard-cli.mjs");
+    const { runWebaiBridgeCli } = await import("../../../scripts/webai-bridge-cli.mjs");
 
     await expect(
-      runSwitchyardCli({ command: "compat-target", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "compat-target", target: "mystery" }, client),
     ).rejects.toThrow('Unknown compat target "mystery"');
   });
 
   it("rejects unknown builder kits", async () => {
-    const { runSwitchyardCli } = await import("../../../scripts/switchyard-cli.mjs");
+    const { runWebaiBridgeCli } = await import("../../../scripts/webai-bridge-cli.mjs");
 
     await expect(
-      runSwitchyardCli({ command: "builder-kit", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "builder-kit", target: "mystery" }, client),
     ).rejects.toThrow('Unknown builder kit "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "skill-pack", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "skill-pack", target: "mystery" }, client),
     ).rejects.toThrow('Unknown skill pack "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "skill-pack-route", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "skill-pack-route", target: "mystery" }, client),
     ).rejects.toThrow('Unknown skill pack route "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "provider-entry", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "provider-entry", target: "mystery" }, client),
     ).rejects.toThrow('Unknown provider entry "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "provider-entry", target: "gemini" }, client),
+      runWebaiBridgeCli({ command: "provider-entry", target: "gemini" }, client),
     ).rejects.toThrow('Ambiguous provider entry "gemini"');
 
     await expect(
-      runSwitchyardCli({ command: "provider-entry", target: "gemini:web-login:bogus" }, client),
+      runWebaiBridgeCli({ command: "provider-entry", target: "gemini:web-login:bogus" }, client),
     ).rejects.toThrow('Invalid provider entry "gemini:web-login:bogus"');
 
     await expect(
-      runSwitchyardCli({ command: "builder-template", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "builder-template", target: "mystery" }, client),
     ).rejects.toThrow('Unknown builder template "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "skill-template", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "skill-template", target: "mystery" }, client),
     ).rejects.toThrow('Unknown skill template "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "builder-example", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "builder-example", target: "mystery" }, client),
     ).rejects.toThrow('Unknown builder example "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "skill-example", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "skill-example", target: "mystery" }, client),
     ).rejects.toThrow('Unknown skill example "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "host-playbook", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "host-playbook", target: "mystery" }, client),
     ).rejects.toThrow('Unknown host playbook "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "host-example", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "host-example", target: "mystery" }, client),
     ).rejects.toThrow('Unknown host example "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "starter-pack-scenario", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "starter-pack-scenario", target: "mystery" }, client),
     ).rejects.toThrow('Unknown starter pack scenario "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "starter-pack-filter", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "starter-pack-filter", target: "mystery" }, client),
     ).rejects.toThrow('Unknown starter pack filter "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "builder-journey", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "builder-journey", target: "mystery" }, client),
     ).rejects.toThrow('Unknown builder journey "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "keyword-entry", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "keyword-entry", target: "mystery" }, client),
     ).rejects.toThrow('Unknown keyword truth entry "mystery"');
 
     await expect(
-      runSwitchyardCli({ command: "builder-intent", target: "mystery" }, client),
+      runWebaiBridgeCli({ command: "builder-intent", target: "mystery" }, client),
     ).rejects.toThrow('Unknown builder intent "mystery"');
   });
 
@@ -1348,83 +1348,83 @@ describe("switchyard CLI starter", () => {
       diagnoseLadder: [{ id: "repair-session", status: "recommended" }],
     });
 
-    const { runSwitchyardCli, renderCliPayload } = await import(
-      "../../../scripts/switchyard-cli.mjs"
+    const { runWebaiBridgeCli, renderCliPayload } = await import(
+      "../../../scripts/webai-bridge-cli.mjs"
     );
 
-    await expect(runSwitchyardCli({ command: "health" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "health" }, client)).resolves.toEqual({
       command: "health",
       result: { totals: { total: 5 } },
     });
-    await expect(runSwitchyardCli({ command: "auth-status" }, client)).resolves.toEqual({
+    await expect(runWebaiBridgeCli({ command: "auth-status" }, client)).resolves.toEqual({
       command: "auth-status",
       result: { blockingCount: 1 },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-status", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-status", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-status",
       provider: "chatgpt",
       result: { providerId: "chatgpt" },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-probe", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-probe", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-probe",
       provider: "chatgpt",
       result: { providerId: "chatgpt", liveProof: null },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-remediation", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-remediation", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-remediation",
       provider: "chatgpt",
       result: { providerId: "chatgpt", remediation: [] },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-current-page", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-current-page", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-current-page",
       provider: "chatgpt",
       result: { status: "captured" },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-current-console", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-current-console", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-current-console",
       provider: "chatgpt",
       result: { status: "unavailable" },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-current-network", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-current-network", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-current-network",
       provider: "chatgpt",
       result: { status: "limited" },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-store-readiness", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-store-readiness", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-store-readiness",
       provider: "chatgpt",
       result: { runtimeReadiness: "degraded" },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-live-readiness", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-live-readiness", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-live-readiness",
       provider: "chatgpt",
       result: { status: "live-blocked" },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-attach-target", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-attach-target", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-attach-target",
       provider: "chatgpt",
       result: { available: true },
     });
     await expect(
-      runSwitchyardCli({ command: "provider-diagnose-ladder", provider: "chatgpt" }, client),
+      runWebaiBridgeCli({ command: "provider-diagnose-ladder", provider: "chatgpt" }, client),
     ).resolves.toEqual({
       command: "provider-diagnose-ladder",
       provider: "chatgpt",
@@ -1448,7 +1448,7 @@ describe("switchyard CLI starter", () => {
     }));
 
     const { createReadonlyCliClient } = await import(
-      "../../../scripts/switchyard-cli.mjs"
+      "../../../scripts/webai-bridge-cli.mjs"
     );
     const readonlyClient = createReadonlyCliClient({
       baseUrl: "http://127.0.0.1:4010",
@@ -1577,7 +1577,7 @@ describe("switchyard CLI starter", () => {
     }));
 
     const { createReadonlyCliClient } = await import(
-      "../../../scripts/switchyard-cli.mjs"
+      "../../../scripts/webai-bridge-cli.mjs"
     );
     const readonlyClient = createReadonlyCliClient({
       baseUrl: "http://127.0.0.1:4010/",
@@ -1681,26 +1681,26 @@ describe("switchyard CLI starter", () => {
   });
 
   it("rejects unknown commands and malformed CLI args", async () => {
-    const { parseCliArgs, runSwitchyardCli } = await import(
-      "../../../scripts/switchyard-cli.mjs"
+    const { parseCliArgs, runWebaiBridgeCli } = await import(
+      "../../../scripts/webai-bridge-cli.mjs"
     );
 
     expect(() => parseCliArgs(["--weird"])).toThrow("Unknown argument");
-    await expect(runSwitchyardCli({ command: "weird" }, client)).rejects.toThrow(
+    await expect(runWebaiBridgeCli({ command: "weird" }, client)).rejects.toThrow(
       'Unsupported command "weird"',
     );
   });
 
   it("covers the main execution path with a client override", async () => {
-    const { runSwitchyardCliMain } = await import(
-      "../../../scripts/switchyard-cli.mjs"
+    const { runWebaiBridgeCliMain } = await import(
+      "../../../scripts/webai-bridge-cli.mjs"
     );
 
-    const output = await runSwitchyardCliMain(
+    const output = await runWebaiBridgeCliMain(
       ["providers", "--base-url=http://127.0.0.1:5555"],
       {
-        SWITCHYARD_RUNTIME_BASE_URL: "http://127.0.0.1:9999",
-        SWITCHYARD_SERVICE_PORT: "4010",
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: "http://127.0.0.1:9999",
+        WEBAI_BRIDGE_SERVICE_PORT: "4010",
       },
       {
         listProviders: async () => [{ providerId: "chatgpt" }],

@@ -30,7 +30,7 @@ beforeEach(() => {
   vi.resetAllMocks();
 });
 
-describe("switchyard MCP surface", () => {
+describe("webai-bridge MCP surface", () => {
   it("resolves baseUrl from explicit flag, env override, and default port", async () => {
     const { resolveMcpBaseUrl } = await import(
       "../../../packages/surfaces/mcp/src/index.js"
@@ -39,21 +39,21 @@ describe("switchyard MCP surface", () => {
     expect(
       resolveMcpBaseUrl(
         {
-          SWITCHYARD_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
-          SWITCHYARD_SERVICE_PORT: "7777",
+          WEBAI_BRIDGE_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
+          WEBAI_BRIDGE_SERVICE_PORT: "7777",
         },
         "http://127.0.0.1:5555/",
       ),
     ).toBe("http://127.0.0.1:5555");
     expect(
       resolveMcpBaseUrl({
-        SWITCHYARD_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
-        SWITCHYARD_SERVICE_PORT: "7777",
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: "http://127.0.0.1:9999/",
+        WEBAI_BRIDGE_SERVICE_PORT: "7777",
       }),
     ).toBe("http://127.0.0.1:9999");
     expect(
       resolveMcpBaseUrl({
-        SWITCHYARD_SERVICE_PORT: "7777",
+        WEBAI_BRIDGE_SERVICE_PORT: "7777",
       }),
     ).toBe("http://127.0.0.1:7777");
   });
@@ -120,12 +120,12 @@ describe("switchyard MCP surface", () => {
       summary: "bundle",
     });
 
-    const { runSwitchyardMcpTool } = await import(
+    const { runWebaiBridgeMcpTool } = await import(
       "../../../packages/surfaces/mcp/src/index.js"
     );
 
     await expect(
-      runSwitchyardMcpTool("switchyard.providers.list", undefined, client as never),
+      runWebaiBridgeMcpTool("webai-bridge.providers.list", undefined, client as never),
     ).resolves.toEqual({
       readOnly: true,
       command: "providers",
@@ -135,7 +135,7 @@ describe("switchyard MCP surface", () => {
 
     client.health.mockResolvedValue({ totals: { total: 5 } });
     await expect(
-      runSwitchyardMcpTool("switchyard.runtime.health", undefined, client as never),
+      runWebaiBridgeMcpTool("webai-bridge.runtime.health", undefined, client as never),
     ).resolves.toEqual({
       readOnly: true,
       command: "health",
@@ -144,7 +144,7 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool("switchyard.runtime.doctor", undefined, client as never),
+      runWebaiBridgeMcpTool("webai-bridge.runtime.doctor", undefined, client as never),
     ).resolves.toEqual({
       readOnly: true,
       command: "runtime-doctor",
@@ -163,8 +163,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.runtime.plan",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.runtime.plan",
         {
           policyProfile: "official-api-first",
           requiredCapabilities: ["tool-calling"],
@@ -196,8 +196,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.doctor",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.doctor",
         { provider: "chatgpt" },
         client as never,
       ),
@@ -220,8 +220,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.attach_target",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.attach_target",
         { provider: "chatgpt" },
         client as never,
       ),
@@ -233,8 +233,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.store_readiness",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.store_readiness",
         { provider: "chatgpt" },
         client as never,
       ),
@@ -246,8 +246,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.live_readiness",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.live_readiness",
         { provider: "chatgpt" },
         client as never,
       ),
@@ -259,8 +259,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.diagnose_ladder",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.diagnose_ladder",
         { provider: "chatgpt" },
         client as never,
       ),
@@ -272,8 +272,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.diagnose",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.diagnose",
         { provider: "chatgpt" },
         client as never,
       ),
@@ -285,8 +285,8 @@ describe("switchyard MCP surface", () => {
     });
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.public_distribution_ledger",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.public_distribution_ledger",
         undefined,
         client as never,
       ),
@@ -304,8 +304,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.public_distribution_ledger_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.public_distribution_ledger_schema",
         undefined,
         client as never,
       ),
@@ -314,14 +314,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "public-distribution-ledger-schema",
         result: expect.objectContaining({
-          title: "Switchyard Public Distribution Ledger",
+          title: "WebaiBridge Public Distribution Ledger",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.distribution_surfaces",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.distribution_surfaces",
         undefined,
         client as never,
       ),
@@ -337,8 +337,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.distribution_surface",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.distribution_surface",
         { target: "codex" },
         client as never,
       ),
@@ -354,8 +354,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_kits",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_kits",
         undefined,
         client as never,
       ),
@@ -371,8 +371,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_kit_catalog",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_kit_catalog",
         undefined,
         client as never,
       ),
@@ -390,8 +390,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_kit_catalog_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_kit_catalog_schema",
         undefined,
         client as never,
       ),
@@ -400,14 +400,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "builder-kit-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard Builder Kit Catalog",
+          title: "WebaiBridge Builder Kit Catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_packs",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_packs",
         undefined,
         client as never,
       ),
@@ -423,8 +423,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_pack_catalog",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_pack_catalog",
         undefined,
         client as never,
       ),
@@ -442,8 +442,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_pack_catalog_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_pack_catalog_schema",
         undefined,
         client as never,
       ),
@@ -452,14 +452,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "skill-pack-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard Skill Pack Catalog",
+          title: "WebaiBridge Skill Pack Catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.compat_target_catalog",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.compat_target_catalog",
         undefined,
         client as never,
       ),
@@ -476,8 +476,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.compat_target_catalog_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.compat_target_catalog_schema",
         undefined,
         client as never,
       ),
@@ -486,14 +486,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "compat-target-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard Compat Target Catalog",
+          title: "WebaiBridge Compat Target Catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.compat_target",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.compat_target",
         { target: "codex" },
         client as never,
       ),
@@ -509,8 +509,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_playbooks",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_playbooks",
         undefined,
         client as never,
       ),
@@ -526,8 +526,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_playbooks_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_playbooks_schema",
         undefined,
         client as never,
       ),
@@ -536,14 +536,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "host-playbooks-schema",
         result: expect.objectContaining({
-          title: "Switchyard Host Integration Playbooks",
+          title: "WebaiBridge Host Integration Playbooks",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_playbook",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_playbook",
         { target: "mcp" },
         client as never,
       ),
@@ -559,8 +559,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_examples",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_examples",
         undefined,
         client as never,
       ),
@@ -586,8 +586,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_examples_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_examples_schema",
         undefined,
         client as never,
       ),
@@ -596,14 +596,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "host-examples-schema",
         result: expect.objectContaining({
-          title: "Switchyard Host Integration Examples",
+          title: "WebaiBridge Host Integration Examples",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_example",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_example",
         { target: "codex" },
         client as never,
       ),
@@ -614,7 +614,7 @@ describe("switchyard MCP surface", () => {
         result: expect.objectContaining({
           target: "codex",
           hostShape: "responses-client-config",
-          bestEntry: "pnpm run switchyard:cli -- host-example --target codex",
+          bestEntry: "pnpm run webai-bridge:cli -- host-example --target codex",
           smokeCommand: "pnpm run example:host-codex",
           firstSuccessCheck: expect.any(String),
         }),
@@ -622,8 +622,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_journeys",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_journeys",
         undefined,
         client as never,
       ),
@@ -640,8 +640,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_journeys_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_journeys_schema",
         undefined,
         client as never,
       ),
@@ -650,14 +650,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "builder-journeys-schema",
         result: expect.objectContaining({
-          title: "Switchyard Builder Journeys",
+          title: "WebaiBridge Builder Journeys",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_journey",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_journey",
         { target: "mcp-read-only-first-success" },
         client as never,
       ),
@@ -673,8 +673,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_intent_router",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_intent_router",
         undefined,
         client as never,
       ),
@@ -692,8 +692,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_intent_router_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_intent_router_schema",
         undefined,
         client as never,
       ),
@@ -702,14 +702,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "builder-intent-router-schema",
         result: expect.objectContaining({
-          title: "Switchyard Builder Intent Router",
+          title: "WebaiBridge Builder Intent Router",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_intent",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_intent",
         { target: "support-truth" },
         client as never,
       ),
@@ -719,14 +719,14 @@ describe("switchyard MCP surface", () => {
         command: "builder-intent",
         result: expect.objectContaining({
           id: "support-truth",
-          firstHopMcp: "switchyard.catalog.surface_catalog",
+          firstHopMcp: "webai-bridge.catalog.surface_catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.keyword_truth",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.keyword_truth",
         undefined,
         client as never,
       ),
@@ -736,16 +736,16 @@ describe("switchyard MCP surface", () => {
         command: "keyword-truth",
         result: expect.objectContaining({
           entries: expect.arrayContaining([
-            expect.objectContaining({ id: "switchyard-shared-provider-runtime" }),
-            expect.objectContaining({ id: "switchyard-mcp", truthStatus: "partial-with-label" }),
+            expect.objectContaining({ id: "webai-bridge-shared-provider-runtime" }),
+            expect.objectContaining({ id: "webai-bridge-mcp", truthStatus: "partial-with-label" }),
           ]),
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.keyword_truth_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.keyword_truth_schema",
         undefined,
         client as never,
       ),
@@ -754,15 +754,15 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "keyword-truth-schema",
         result: expect.objectContaining({
-          title: "Switchyard Keyword Truth Table",
+          title: "WebaiBridge Keyword Truth Table",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.keyword_entry",
-        { target: "switchyard-mcp" },
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.keyword_entry",
+        { target: "webai-bridge-mcp" },
         client as never,
       ),
     ).resolves.toEqual(
@@ -770,7 +770,7 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "keyword-entry",
         result: expect.objectContaining({
-          id: "switchyard-mcp",
+          id: "webai-bridge-mcp",
           requiredLabels: expect.arrayContaining([
             "partial",
             "read-only MCP server",
@@ -780,8 +780,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.surface_catalog_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.surface_catalog_schema",
         undefined,
         client as never,
       ),
@@ -790,14 +790,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "surface-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard Public Surface Catalog",
+          title: "WebaiBridge Public Surface Catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_catalog",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_catalog",
         undefined,
         client as never,
       ),
@@ -813,8 +813,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_catalog_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_catalog_schema",
         undefined,
         client as never,
       ),
@@ -823,14 +823,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "provider-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard Provider Runtime Catalog",
+          title: "WebaiBridge Provider Runtime Catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_entry",
         { target: "chatgpt" },
         client as never,
       ),
@@ -846,8 +846,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_entry",
         { target: "gemini:web-login" },
         client as never,
       ),
@@ -863,8 +863,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_manifests",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_manifests",
         undefined,
         client as never,
       ),
@@ -884,8 +884,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_manifests_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_manifests_schema",
         undefined,
         client as never,
       ),
@@ -894,14 +894,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "starter-manifests-schema",
         result: expect.objectContaining({
-          title: "Switchyard Starter Manifest Templates",
+          title: "WebaiBridge Starter Manifest Templates",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_examples",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_examples",
         undefined,
         client as never,
       ),
@@ -921,8 +921,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_examples_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_examples_schema",
         undefined,
         client as never,
       ),
@@ -931,14 +931,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "starter-examples-schema",
         result: expect.objectContaining({
-          title: "Switchyard Starter Manifest Examples",
+          title: "WebaiBridge Starter Manifest Examples",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_index",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_index",
         undefined,
         client as never,
       ),
@@ -954,8 +954,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_index_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_index_schema",
         undefined,
         client as never,
       ),
@@ -964,14 +964,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "starter-pack-index-schema",
         result: expect.objectContaining({
-          title: "Switchyard Starter Pack Index",
+          title: "WebaiBridge Starter Pack Index",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_entry",
         { target: "codex" },
         client as never,
       ),
@@ -987,8 +987,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_chooser",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_chooser",
         undefined,
         client as never,
       ),
@@ -1005,8 +1005,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_chooser_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_chooser_schema",
         undefined,
         client as never,
       ),
@@ -1015,14 +1015,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "starter-pack-chooser-schema",
         result: expect.objectContaining({
-          title: "Switchyard Starter Pack Chooser",
+          title: "WebaiBridge Starter Pack Chooser",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_scenario",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_scenario",
         { target: "mcp-inspector" },
         client as never,
       ),
@@ -1039,8 +1039,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_comparison",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_comparison",
         undefined,
         client as never,
       ),
@@ -1061,8 +1061,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_comparison_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_comparison_schema",
         undefined,
         client as never,
       ),
@@ -1071,14 +1071,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "starter-pack-comparison-schema",
         result: expect.objectContaining({
-          title: "Switchyard Starter Pack Comparison",
+          title: "WebaiBridge Starter Pack Comparison",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_filter",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_filter",
         { target: "read-only-truth" },
         client as never,
       ),
@@ -1102,8 +1102,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_template",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_template",
         { target: "mcp" },
         client as never,
       ),
@@ -1118,8 +1118,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_example",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_example",
         { target: "mcp" },
         client as never,
       ),
@@ -1135,8 +1135,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_template",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_template",
         { target: "runtime-diagnostics-pack" },
         client as never,
       ),
@@ -1151,8 +1151,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_example",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_example",
         { target: "runtime-diagnostics-pack" },
         client as never,
       ),
@@ -1167,8 +1167,8 @@ describe("switchyard MCP surface", () => {
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.mcp_tools",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.mcp_tools",
         undefined,
         client as never,
       ),
@@ -1177,14 +1177,14 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "mcp-tools",
         result: expect.arrayContaining([
-          expect.objectContaining({ name: "switchyard.runtime.health" }),
+          expect.objectContaining({ name: "webai-bridge.runtime.health" }),
         ]),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.mcp_tool_catalog",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.mcp_tool_catalog",
         undefined,
         client as never,
       ),
@@ -1194,16 +1194,16 @@ describe("switchyard MCP surface", () => {
         command: "mcp-tool-catalog",
         result: expect.objectContaining({
           tools: expect.arrayContaining([
-            expect.objectContaining({ name: "switchyard.runtime.health" }),
-            expect.objectContaining({ name: "switchyard.catalog.mcp_tool_catalog" }),
+            expect.objectContaining({ name: "webai-bridge.runtime.health" }),
+            expect.objectContaining({ name: "webai-bridge.catalog.mcp_tool_catalog" }),
           ]),
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.mcp_tool_catalog_schema",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.mcp_tool_catalog_schema",
         undefined,
         client as never,
       ),
@@ -1212,15 +1212,15 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "mcp-tool-catalog-schema",
         result: expect.objectContaining({
-          title: "Switchyard MCP Tool Catalog",
+          title: "WebaiBridge MCP Tool Catalog",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.mcp_tool",
-        { target: "switchyard.runtime.health" },
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.mcp_tool",
+        { target: "webai-bridge.runtime.health" },
         client as never,
       ),
     ).resolves.toEqual(
@@ -1228,22 +1228,22 @@ describe("switchyard MCP surface", () => {
         readOnly: true,
         command: "mcp-tool",
         result: expect.objectContaining({
-          name: "switchyard.runtime.health",
+          name: "webai-bridge.runtime.health",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.mcp_tool",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.mcp_tool",
         { target: "mystery.tool" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.mcp_tool requires a known MCP tool");
+    ).rejects.toThrow("webai-bridge.catalog.mcp_tool requires a known MCP tool");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.mcp_status",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.mcp_status",
         undefined,
         client as never,
       ),
@@ -1260,53 +1260,53 @@ describe("switchyard MCP surface", () => {
   });
 
   it("fails closed when provider-scoped tools are missing provider ids", async () => {
-    const { runSwitchyardMcpTool } = await import(
+    const { runWebaiBridgeMcpTool } = await import(
       "../../../packages/surfaces/mcp/src/index.js"
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.provider.status",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.provider.status",
         undefined,
         client as never,
       ),
-    ).rejects.toThrow("switchyard.provider.status requires a non-empty provider");
+    ).rejects.toThrow("webai-bridge.provider.status requires a non-empty provider");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_kit",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_kit",
         undefined,
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.builder_kit requires a non-empty target");
+    ).rejects.toThrow("webai-bridge.catalog.builder_kit requires a non-empty target");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_entry",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.provider_entry requires a known provider entry");
+    ).rejects.toThrow("webai-bridge.catalog.provider_entry requires a known provider entry");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_entry",
         { target: "gemini" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.provider_entry requires an unambiguous provider entry");
+    ).rejects.toThrow("webai-bridge.catalog.provider_entry requires an unambiguous provider entry");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.provider_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.provider_entry",
         { target: "gemini:web-login:bogus" },
         client as never,
       ),
-    ).rejects.toThrow('switchyard.catalog.provider_entry requires a target shaped like "<providerId>" or "<providerId>:<lane>".');
+    ).rejects.toThrow('webai-bridge.catalog.provider_entry requires a target shaped like "<providerId>" or "<providerId>:<lane>".');
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_pack",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_pack",
         { target: "runtime-diagnostics-pack" },
         client as never,
       ),
@@ -1316,78 +1316,78 @@ describe("switchyard MCP surface", () => {
         command: "skill-pack",
         result: expect.objectContaining({
           id: "runtime-diagnostics-pack",
-          routeCommand: "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack",
-          routeMcpTool: "switchyard.catalog.skill_pack",
+          routeCommand: "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack",
+          routeMcpTool: "webai-bridge.catalog.skill_pack",
         }),
       }),
     );
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.skill_pack",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.skill_pack",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.skill_pack requires a known skill pack");
+    ).rejects.toThrow("webai-bridge.catalog.skill_pack requires a known skill pack");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_playbook",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_playbook",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.host_playbook requires a known host playbook");
+    ).rejects.toThrow("webai-bridge.catalog.host_playbook requires a known host playbook");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.host_example",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.host_example",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.host_example requires a known host example");
+    ).rejects.toThrow("webai-bridge.catalog.host_example requires a known host example");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_scenario",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_scenario",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.starter_pack_scenario requires a known starter pack scenario");
+    ).rejects.toThrow("webai-bridge.catalog.starter_pack_scenario requires a known starter pack scenario");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.starter_pack_filter",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.starter_pack_filter",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.starter_pack_filter requires a known starter pack filter");
+    ).rejects.toThrow("webai-bridge.catalog.starter_pack_filter requires a known starter pack filter");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_journey",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_journey",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.builder_journey requires a known builder journey");
+    ).rejects.toThrow("webai-bridge.catalog.builder_journey requires a known builder journey");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.keyword_entry",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.keyword_entry",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.keyword_entry requires a known keyword truth entry");
+    ).rejects.toThrow("webai-bridge.catalog.keyword_entry requires a known keyword truth entry");
 
     await expect(
-      runSwitchyardMcpTool(
-        "switchyard.catalog.builder_intent",
+      runWebaiBridgeMcpTool(
+        "webai-bridge.catalog.builder_intent",
         { target: "mystery" },
         client as never,
       ),
-    ).rejects.toThrow("switchyard.catalog.builder_intent requires a known builder intent");
+    ).rejects.toThrow("webai-bridge.catalog.builder_intent requires a known builder intent");
   });
 
-  it("registers the read-only Switchyard toolset on an MCP server", async () => {
+  it("registers the read-only WebaiBridge toolset on an MCP server", async () => {
     const registered = new Map<
       string,
       {
@@ -1407,42 +1407,42 @@ describe("switchyard MCP surface", () => {
 
     client.health.mockResolvedValue({ totals: { total: 5 } });
 
-    const { registerSwitchyardReadonlyMcpTools } = await import(
+    const { registerWebaiBridgeReadonlyMcpTools } = await import(
       "../../../packages/surfaces/mcp/src/index.js"
     );
 
-    registerSwitchyardReadonlyMcpTools(server as never, client as never);
+    registerWebaiBridgeReadonlyMcpTools(server as never, client as never);
 
-    expect(registered.has("switchyard.runtime.health")).toBe(true);
-    expect(registered.has("switchyard.provider.support_bundle")).toBe(true);
-    expect(registered.has("switchyard.catalog.provider_catalog")).toBe(true);
-    expect(registered.has("switchyard.catalog.provider_catalog_schema")).toBe(true);
-    expect(registered.has("switchyard.catalog.compat_target_catalog")).toBe(true);
-    expect(registered.has("switchyard.catalog.compat_target_catalog_schema")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_examples")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_manifests_schema")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_examples_schema")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_pack_index")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_pack_entry")).toBe(true);
-    expect(registered.has("switchyard.catalog.host_playbooks")).toBe(true);
-    expect(registered.has("switchyard.catalog.host_playbook")).toBe(true);
-    expect(registered.has("switchyard.catalog.host_examples")).toBe(true);
-    expect(registered.has("switchyard.catalog.host_example")).toBe(true);
-    expect(registered.has("switchyard.catalog.builder_journeys")).toBe(true);
-    expect(registered.has("switchyard.catalog.builder_journey")).toBe(true);
-    expect(registered.has("switchyard.catalog.builder_intent_router")).toBe(true);
-    expect(registered.has("switchyard.catalog.builder_intent_router_schema")).toBe(true);
-    expect(registered.has("switchyard.catalog.builder_intent")).toBe(true);
-    expect(registered.has("switchyard.catalog.keyword_truth")).toBe(true);
-    expect(registered.has("switchyard.catalog.keyword_truth_schema")).toBe(true);
-    expect(registered.has("switchyard.catalog.keyword_entry")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_pack_chooser")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_pack_scenario")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_pack_comparison")).toBe(true);
-    expect(registered.has("switchyard.catalog.starter_pack_filter")).toBe(true);
-    expect(registered.has("switchyard.catalog.skill_packs")).toBe(true);
+    expect(registered.has("webai-bridge.runtime.health")).toBe(true);
+    expect(registered.has("webai-bridge.provider.support_bundle")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.provider_catalog")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.provider_catalog_schema")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.compat_target_catalog")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.compat_target_catalog_schema")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_examples")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_manifests_schema")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_examples_schema")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_pack_index")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_pack_entry")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.host_playbooks")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.host_playbook")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.host_examples")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.host_example")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.builder_journeys")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.builder_journey")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.builder_intent_router")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.builder_intent_router_schema")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.builder_intent")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.keyword_truth")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.keyword_truth_schema")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.keyword_entry")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_pack_chooser")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_pack_scenario")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_pack_comparison")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.starter_pack_filter")).toBe(true);
+    expect(registered.has("webai-bridge.catalog.skill_packs")).toBe(true);
 
-    const result = await registered.get("switchyard.runtime.health")?.handler();
+    const result = await registered.get("webai-bridge.runtime.health")?.handler();
 
     expect(result).toEqual({
       content: [
@@ -1509,12 +1509,12 @@ describe("switchyard MCP surface", () => {
       const baseUrl = `http://127.0.0.1:${address.port}`;
       const transport = new StdioClientTransport({
         command: "pnpm",
-        args: ["run", "switchyard:mcp", "--", "--base-url", baseUrl],
+        args: ["run", "webai-bridge:mcp", "--", "--base-url", baseUrl],
         cwd: repoRoot,
         stderr: "pipe",
       });
       const mcpClient = new Client({
-        name: "switchyard-mcp-roundtrip-test",
+        name: "webai-bridge-mcp-roundtrip-test",
         version: "0.0.0",
       });
 
@@ -1522,56 +1522,56 @@ describe("switchyard MCP surface", () => {
         await mcpClient.connect(transport);
         const tools = await mcpClient.listTools();
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.runtime.health",
+          "webai-bridge.runtime.health",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.provider_catalog",
+          "webai-bridge.catalog.provider_catalog",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.provider_catalog_schema",
+          "webai-bridge.catalog.provider_catalog_schema",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.compat_target_catalog",
+          "webai-bridge.catalog.compat_target_catalog",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.compat_target_catalog_schema",
+          "webai-bridge.catalog.compat_target_catalog_schema",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.starter_manifests_schema",
+          "webai-bridge.catalog.starter_manifests_schema",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.starter_pack_index",
+          "webai-bridge.catalog.starter_pack_index",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.starter_pack_chooser",
+          "webai-bridge.catalog.starter_pack_chooser",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.builder_example",
+          "webai-bridge.catalog.builder_example",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.skill_packs",
+          "webai-bridge.catalog.skill_packs",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.host_playbooks",
+          "webai-bridge.catalog.host_playbooks",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.host_examples",
+          "webai-bridge.catalog.host_examples",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.builder_journeys",
+          "webai-bridge.catalog.builder_journeys",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.builder_intent_router",
+          "webai-bridge.catalog.builder_intent_router",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.keyword_truth",
+          "webai-bridge.catalog.keyword_truth",
         );
         expect(tools.tools.map((tool) => tool.name)).toContain(
-          "switchyard.catalog.starter_pack_comparison",
+          "webai-bridge.catalog.starter_pack_comparison",
         );
 
         const result = await mcpClient.callTool({
-          name: "switchyard.runtime.health",
+          name: "webai-bridge.runtime.health",
         });
         const structured = result.structuredContent as {
           readOnly: boolean;
@@ -1596,7 +1596,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const catalogResult = await mcpClient.callTool({
-          name: "switchyard.catalog.skill_packs",
+          name: "webai-bridge.catalog.skill_packs",
         });
         const catalogStructured = catalogResult.structuredContent as {
           command: string;
@@ -1613,7 +1613,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const skillPackResult = await mcpClient.callTool({
-          name: "switchyard.catalog.skill_pack",
+          name: "webai-bridge.catalog.skill_pack",
           arguments: { target: "runtime-diagnostics-pack" },
         });
         const skillPackStructured = skillPackResult.structuredContent as {
@@ -1630,14 +1630,14 @@ describe("switchyard MCP surface", () => {
             command: "skill-pack",
             result: expect.objectContaining({
               id: "runtime-diagnostics-pack",
-              routeCommand: "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack",
-              routeMcpTool: "switchyard.catalog.skill_pack",
+              routeCommand: "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack",
+              routeMcpTool: "webai-bridge.catalog.skill_pack",
             }),
           }),
         );
 
         const schemaResult = await mcpClient.callTool({
-          name: "switchyard.catalog.starter_examples_schema",
+          name: "webai-bridge.catalog.starter_examples_schema",
         });
         const schemaStructured = schemaResult.structuredContent as {
           command: string;
@@ -1648,13 +1648,13 @@ describe("switchyard MCP surface", () => {
           expect.objectContaining({
             command: "starter-examples-schema",
             result: expect.objectContaining({
-              title: "Switchyard Starter Manifest Examples",
+              title: "WebaiBridge Starter Manifest Examples",
             }),
           }),
         );
 
         const starterPackResult = await mcpClient.callTool({
-          name: "switchyard.catalog.starter_pack_entry",
+          name: "webai-bridge.catalog.starter_pack_entry",
           arguments: { target: "mcp" },
         });
         const starterPackStructured = starterPackResult.structuredContent as {
@@ -1673,7 +1673,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const chooserScenarioResult = await mcpClient.callTool({
-          name: "switchyard.catalog.starter_pack_scenario",
+          name: "webai-bridge.catalog.starter_pack_scenario",
           arguments: { target: "mcp-inspector" },
         });
         const chooserScenarioStructured = chooserScenarioResult.structuredContent as {
@@ -1695,7 +1695,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const comparisonResult = await mcpClient.callTool({
-          name: "switchyard.catalog.starter_pack_comparison",
+          name: "webai-bridge.catalog.starter_pack_comparison",
         });
         const comparisonStructured = comparisonResult.structuredContent as {
           command: string;
@@ -1716,7 +1716,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const hostPlaybookResult = await mcpClient.callTool({
-          name: "switchyard.catalog.host_playbook",
+          name: "webai-bridge.catalog.host_playbook",
           arguments: { target: "codex" },
         });
         const hostPlaybookStructured = hostPlaybookResult.structuredContent as {
@@ -1738,7 +1738,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const hostExampleResult = await mcpClient.callTool({
-          name: "switchyard.catalog.host_example",
+          name: "webai-bridge.catalog.host_example",
           arguments: { target: "mcp" },
         });
         const hostExampleStructured = hostExampleResult.structuredContent as {
@@ -1755,7 +1755,7 @@ describe("switchyard MCP surface", () => {
             result: expect.objectContaining({
               target: "mcp",
               hostShape: "stdio-client-config",
-              bestEntry: "pnpm run switchyard:cli -- host-example --target mcp",
+              bestEntry: "pnpm run webai-bridge:cli -- host-example --target mcp",
               smokeCommand: "pnpm run example:host-mcp",
               firstSuccessCheck: expect.any(String),
             }),
@@ -1763,7 +1763,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const builderJourneyResult = await mcpClient.callTool({
-          name: "switchyard.catalog.builder_journey",
+          name: "webai-bridge.catalog.builder_journey",
           arguments: { target: "codex-first-success" },
         });
         const builderJourneyStructured = builderJourneyResult.structuredContent as {
@@ -1785,7 +1785,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const builderIntentResult = await mcpClient.callTool({
-          name: "switchyard.catalog.builder_intent",
+          name: "webai-bridge.catalog.builder_intent",
           arguments: { target: "support-truth" },
         });
         const builderIntentStructured = builderIntentResult.structuredContent as {
@@ -1807,7 +1807,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const keywordTruthResult = await mcpClient.callTool({
-          name: "switchyard.catalog.keyword_truth",
+          name: "webai-bridge.catalog.keyword_truth",
         });
         const keywordTruthStructured = keywordTruthResult.structuredContent as {
           command: string;
@@ -1822,7 +1822,7 @@ describe("switchyard MCP surface", () => {
             result: expect.objectContaining({
               entries: expect.arrayContaining([
                 expect.objectContaining({
-                  id: "switchyard-shared-provider-runtime",
+                  id: "webai-bridge-shared-provider-runtime",
                   truthStatus: "claimable-now",
                 }),
               ]),
@@ -1831,7 +1831,7 @@ describe("switchyard MCP surface", () => {
         );
 
         const builderExampleResult = await mcpClient.callTool({
-          name: "switchyard.catalog.builder_example",
+          name: "webai-bridge.catalog.builder_example",
           arguments: { target: "mcp" },
         });
         const builderExampleStructured = builderExampleResult.structuredContent as {

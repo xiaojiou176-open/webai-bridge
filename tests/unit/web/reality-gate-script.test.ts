@@ -104,7 +104,7 @@ describe("run-reality-gate script", () => {
       .mockImplementation(((code?: number) => {
         throw new Error(`EXIT:${code}`);
       }) as never);
-    const artifactDir = createRepoScopedArtifactDir("switchyard-reality-gate-");
+    const artifactDir = createRepoScopedArtifactDir("webai-bridge-reality-gate-");
 
     vi.doMock("node:child_process", () => ({ spawnSync }));
     vi.doMock("../../../scripts/verify-gemini-live.mjs", () => ({
@@ -118,11 +118,11 @@ describe("run-reality-gate script", () => {
     }));
 
     const originalArgv = [...process.argv];
-    const originalArtifactDir = process.env.SWITCHYARD_REALITY_GATE_ARTIFACT_DIR;
+    const originalArtifactDir = process.env.WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR;
     const originalCi = process.env.CI;
     const originalGithubActions = process.env.GITHUB_ACTIONS;
     process.argv[1] = scriptPath;
-    process.env.SWITCHYARD_REALITY_GATE_ARTIFACT_DIR = artifactDir;
+    process.env.WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR = artifactDir;
     delete process.env.CI;
     delete process.env.GITHUB_ACTIONS;
 
@@ -132,7 +132,7 @@ describe("run-reality-gate script", () => {
       ).rejects.toThrow("EXIT:1");
     } finally {
       process.argv = originalArgv;
-      restoreOptionalEnv("SWITCHYARD_REALITY_GATE_ARTIFACT_DIR", originalArtifactDir);
+      restoreOptionalEnv("WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR", originalArtifactDir);
       restoreOptionalEnv("CI", originalCi);
       restoreOptionalEnv("GITHUB_ACTIONS", originalGithubActions);
       rmSync(artifactDir, {
@@ -148,14 +148,14 @@ describe("run-reality-gate script", () => {
       "pnpm",
       ["typecheck"],
       expect.objectContaining({
-        cwd: expect.stringContaining("/Switchyard"),
+        cwd: expect.stringContaining("/WebaiBridge"),
         env: process.env,
         stdio: "inherit",
       }),
     );
     expect(runLightweightRuntimePrune).toHaveBeenCalledWith(
       expect.objectContaining({
-        repoRoot: expect.stringContaining("/Switchyard"),
+        repoRoot: expect.stringContaining("/WebaiBridge"),
         env: process.env,
       }),
     );
@@ -209,7 +209,7 @@ describe("run-reality-gate script", () => {
       .mockImplementation(((code?: number) => {
         throw new Error(`EXIT:${code}`);
       }) as never);
-    const artifactDir = createRepoScopedArtifactDir("switchyard-reality-gate-");
+    const artifactDir = createRepoScopedArtifactDir("webai-bridge-reality-gate-");
 
     vi.doMock("node:child_process", () => ({ spawnSync }));
     vi.doMock("../../../scripts/verify-gemini-live.mjs", () => ({
@@ -223,11 +223,11 @@ describe("run-reality-gate script", () => {
     }));
 
     const originalArgv = [...process.argv];
-    const originalArtifactDir = process.env.SWITCHYARD_REALITY_GATE_ARTIFACT_DIR;
+    const originalArtifactDir = process.env.WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR;
     const originalCi = process.env.CI;
     const originalGithubActions = process.env.GITHUB_ACTIONS;
     process.argv[1] = scriptPath;
-    process.env.SWITCHYARD_REALITY_GATE_ARTIFACT_DIR = artifactDir;
+    process.env.WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR = artifactDir;
     delete process.env.CI;
     delete process.env.GITHUB_ACTIONS;
 
@@ -237,7 +237,7 @@ describe("run-reality-gate script", () => {
       ).rejects.toThrow("EXIT:2");
     } finally {
       process.argv = originalArgv;
-      restoreOptionalEnv("SWITCHYARD_REALITY_GATE_ARTIFACT_DIR", originalArtifactDir);
+      restoreOptionalEnv("WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR", originalArtifactDir);
       restoreOptionalEnv("CI", originalCi);
       restoreOptionalEnv("GITHUB_ACTIONS", originalGithubActions);
       rmSync(artifactDir, {
@@ -251,14 +251,14 @@ describe("run-reality-gate script", () => {
     expect(runLightweightRuntimePrune).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({
-        repoRoot: expect.stringContaining("/Switchyard"),
+        repoRoot: expect.stringContaining("/WebaiBridge"),
         env: process.env,
       }),
     );
     expect(runLightweightRuntimePrune).toHaveBeenNthCalledWith(
       2,
       expect.objectContaining({
-        repoRoot: expect.stringContaining("/Switchyard"),
+        repoRoot: expect.stringContaining("/WebaiBridge"),
         env: process.env,
       }),
     );

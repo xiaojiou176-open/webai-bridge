@@ -1,16 +1,16 @@
 {
-  "name": "switchyard",
+  "name": "webai-bridge",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "description": "Shared provider runtime for AI apps.",
-  "homepage": "https://xiaojiou176-open.github.io/Switchyard/",
+  "homepage": "https://xiaojiou176-open.github.io/webai-bridge/",
   "bugs": {
-    "url": "https://github.com/xiaojiou176-open/Switchyard/issues"
+    "url": "https://github.com/xiaojiou176-open/webai-bridge/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaojiou176-open/Switchyard.git"
+    "url": "https://github.com/xiaojiou176-open/webai-bridge.git"
   },
   "type": "module",
   "packageManager": "pnpm@10.22.0",
@@ -19,7 +19,7 @@
     "pnpm": ">=10.0.0"
   },
   "scripts": {
-    "install": "node -e \"console.log('Switchyard workspace dependencies installed.')\"",
+    "install": "node -e \"console.log('WebaiBridge workspace dependencies installed.')\"",
     "prepare": "simple-git-hooks",
     "scan:host-process-risks": "bash scripts/ci/host-safety-gate.sh",
     "check:host-safety": "bash scripts/ci/host-safety-gate.sh",
@@ -34,8 +34,8 @@
     "test:mcp:smoke": "pnpm exec vitest run --config vitest.config.ts --project surface-mcp",
     "test:examples": "pnpm exec vitest run --config vitest.config.ts --project builder-starters",
     "test:starter-packs": "pnpm exec vitest run --config vitest.config.ts --project starter-packs",
-    "test:integration": "pnpm --filter @switchyard/auth-portal --filter @switchyard/surface-http -r test:integration && pnpm run test:examples && pnpm run test:starter-packs",
-    "test:e2e": "pnpm --filter @switchyard/app-service test:e2e",
+    "test:integration": "pnpm --filter @webai-bridge/auth-portal --filter @webai-bridge/surface-http -r test:integration && pnpm run test:examples && pnpm run test:starter-packs",
+    "test:e2e": "pnpm --filter @webai-bridge/app-service test:e2e",
     "test:docs-frontdoor": "pnpm exec vitest run --config vitest.config.ts --project docs-frontdoor",
     "test:quality-governance": "pnpm exec vitest run tests/unit/web/closeout-gate.test.ts tests/unit/web/reality-gate-script.test.ts tests/unit/web/reality-gate-governance.test.ts tests/integration/docs/governance-drift.test.ts --config vitest.config.ts",
     "test": "pnpm run test:unit && pnpm run test:integration && pnpm run test:e2e && pnpm run test:docs-frontdoor",
@@ -48,8 +48,8 @@
     "seed:isolated-chrome-root": "pnpm exec node scripts/seed-isolated-chrome-root.mjs",
     "reseed:isolated-chrome-root": "pnpm exec node scripts/seed-isolated-chrome-root.mjs --reseed",
     "bootstrap:web-login-browser": "pnpm exec node scripts/bootstrap-web-auth-browser.mjs",
-    "switchyard:cli": "pnpm exec node scripts/switchyard-cli.mjs",
-    "switchyard:mcp": "pnpm exec tsx scripts/switchyard-mcp.mjs",
+    "webai-bridge:cli": "pnpm exec node scripts/webai-bridge-cli.mjs",
+    "webai-bridge:mcp": "pnpm exec tsx scripts/webai-bridge-mcp.mjs",
     "example:runtime-bridge": "pnpm exec node examples/runtime-bridge/invoke.mjs",
     "example:mcp-inspector": "pnpm exec node examples/mcp-inspector/smoke.mjs",
     "example:runtime-diagnostics": "pnpm exec node examples/runtime-diagnostics/check.mjs",
@@ -67,7 +67,7 @@
     "starter-pack:research-copilot-pack": "pnpm exec node starter-packs/skills/research-copilot-pack/smoke.mjs",
     "starter-pack:compare-runtime-pack": "pnpm exec node starter-packs/skills/compare-runtime-pack/smoke.mjs",
     "starter-pack:byok-first-safe-pack": "pnpm exec node starter-packs/skills/byok-first-safe-pack/smoke.mjs",
-    "start:service-local": "pnpm --filter @switchyard/app-service start",
+    "start:service-local": "pnpm --filter @webai-bridge/app-service start",
     "start:local-experience": "pnpm exec node scripts/start-local-experience.mjs",
     "start:runtime-appliance": "pnpm exec node scripts/start-local-experience.mjs",
     "audit:runtime-footprint": "pnpm exec node scripts/runtime-cache-maintenance.mjs audit",
@@ -83,10 +83,10 @@
   "devDependencies": {
     "@stryker-mutator/core": "^9.6.1",
     "@stryker-mutator/vitest-runner": "^9.6.1",
-    "@switchyard/consumer-claude-code": "workspace:*",
-    "@switchyard/consumer-codex": "workspace:*",
-    "@switchyard/consumer-compat-shared": "workspace:*",
-    "@switchyard/consumer-openclaw": "workspace:*",
+    "@webai-bridge/consumer-claude-code": "workspace:*",
+    "@webai-bridge/consumer-codex": "workspace:*",
+    "@webai-bridge/consumer-compat-shared": "workspace:*",
+    "@webai-bridge/consumer-openclaw": "workspace:*",
     "@types/node": "25.6.0",
     "@vitest/coverage-v8": "^4.1.2",
     "ajv": "^8.18.0",

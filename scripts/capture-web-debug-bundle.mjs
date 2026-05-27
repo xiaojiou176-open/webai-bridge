@@ -30,7 +30,7 @@ function parseProviderArgs(argv = process.argv.slice(2)) {
 async function main() {
   if (isCiEnvironment(process.env)) {
     throw new Error(
-      "Switchyard capture:web-debug-bundle is credentialed-workstation only and must not run inside CI.",
+      "WebaiBridge capture:web-debug-bundle is credentialed-workstation only and must not run inside CI.",
     );
   }
 

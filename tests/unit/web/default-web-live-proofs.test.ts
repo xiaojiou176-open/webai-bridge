@@ -9,7 +9,7 @@ describe("default web live proof runners", () => {
   it("wires every provider runner to the shared env and fetch inputs", async () => {
     const fetchFn = vi.fn<typeof fetch>();
     const env = {
-      SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen-cookie",
+      WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen-cookie",
     };
     const runChatgptWebLiveProof = vi.fn(async () => ({ status: "success", provider: "chatgpt" }));
     const runGeminiWebLiveProof = vi.fn(async () => ({ status: "success", provider: "gemini" }));

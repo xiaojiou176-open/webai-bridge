@@ -23,15 +23,15 @@ import {
 } from "../../../packages/surfaces/http/src/service-language.js";
 
 import {
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
-  SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME,
-  SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
-  SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL,
-  SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME,
+  WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
+  WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL,
+  WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME,
 } from "./browser-bootstrap.js";
 
 export type WebDebugSupportRunner = (
@@ -57,9 +57,9 @@ type CurrentBrowserSnapshot = {
 };
 
 const CONSOLE_FAIL_CLOSED_MESSAGE =
-  "Switchyard could not observe current console events on the attached browser during this inspection, so current-console stays unavailable instead of inventing detached history.";
+  "WebaiBridge could not observe current console events on the attached browser during this inspection, so current-console stays unavailable instead of inventing detached history.";
 const NETWORK_FAIL_CLOSED_MESSAGE =
-  "Switchyard did not capture fresh live request events during this inspection window, so current-network falls back to a limited resource-timing snapshot.";
+  "WebaiBridge did not capture fresh live request events during this inspection window, so current-network falls back to a limited resource-timing snapshot.";
 const STORE_READY_NOTE =
   "Stored session materials can be present in the local auth store while the currently attached browser page is still logged out, redirected, or otherwise not live-ready.";
 const DEBUG_OBSERVE_WINDOW_MS = 250;
@@ -101,29 +101,29 @@ function resolveAttachTarget(
 ): ServiceProviderAttachTargetView {
   const mode =
     provider.session.acquisitionMode === "existing-chrome-profile"
-      ? SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      ? WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
       : provider.session.acquisitionMode;
   const geminiCdpUrl = provider.provider === "gemini" ? env[GEMINI_WEB_CDP_URL_ENV_NAME] : undefined;
-  const existingProfileCdpUrl = env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME];
-  const existingBrowserSessionUrl = env[SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME];
-  const sharedCdpUrl = env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME];
+  const existingProfileCdpUrl = env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME];
+  const existingBrowserSessionUrl = env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME];
+  const sharedCdpUrl = env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME];
   const existingProfileDir =
-    env[SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME] ??
-    env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME];
-  const existingProfileName = env[SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME];
+    env[WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME] ??
+    env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME];
+  const existingProfileName = env[WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME];
 
   const cdpUrl =
     geminiCdpUrl?.trim() ||
     (mode === "existing-browser-session"
       ? existingBrowserSessionUrl?.trim()
-      : mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      : mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
         ? existingProfileCdpUrl?.trim()
         : sharedCdpUrl?.trim()) ||
-    (mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
-      ? SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
+    (mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
+      ? WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
       : mode === "existing-browser-session"
         ? undefined
-        : SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL);
+        : WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL);
 
   if (!cdpUrl) {
     return {
@@ -132,20 +132,20 @@ function resolveAttachTarget(
       source: "missing",
       available: false,
       note:
-        "Switchyard cannot inspect the attached browser yet because no reusable CDP/session URL is present in the runtime environment.",
+        "WebaiBridge cannot inspect the attached browser yet because no reusable CDP/session URL is present in the runtime environment.",
     };
   }
 
   return {
     mode,
     label:
-      mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
         ? `Isolated Chrome root${existingProfileName ? ` (${existingProfileName})` : ""}`
         : mode === "existing-browser-session"
           ? "Existing browser session"
           : "Managed onboarding browser",
     cdpUrl,
-    userDataDir: mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE ? existingProfileDir?.trim() : undefined,
+    userDataDir: mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE ? existingProfileDir?.trim() : undefined,
     source:
       geminiCdpUrl?.trim() ||
       existingProfileCdpUrl?.trim() ||
@@ -155,7 +155,7 @@ function resolveAttachTarget(
         : "default",
     available: true,
     note:
-      "This is the canonical browser attach target Switchyard will inspect next. It tells you where the browser session lives, not whether the page is already live-ready.",
+      "This is the canonical browser attach target WebaiBridge will inspect next. It tells you where the browser session lives, not whether the page is already live-ready.",
   };
 }
 
@@ -305,8 +305,8 @@ async function readCurrentPageCapture(
               entries: consoleEntries,
               diagnostic:
                 consoleEntries.length > 0
-                  ? "Switchyard captured live console/pageerror events from the attached browser during this inspection window."
-                  : "Switchyard observed the attached browser for current console/pageerror events during this inspection window, but no new entries fired.",
+                  ? "WebaiBridge captured live console/pageerror events from the attached browser during this inspection window."
+                  : "WebaiBridge observed the attached browser for current console/pageerror events during this inspection window, but no new entries fired.",
             }
           : {
               status: "unavailable",
@@ -319,7 +319,7 @@ async function readCurrentPageCapture(
               status: "captured",
               entries: requestEntries,
               diagnostic:
-                "Switchyard captured live request lifecycle events from the attached browser during this inspection window.",
+                "WebaiBridge captured live request lifecycle events from the attached browser during this inspection window.",
             }
           : result.networkEntries.length > 0
             ? {
@@ -345,7 +345,7 @@ async function readCurrentPageCapture(
                 entries: [],
                 diagnostic:
                   typeof page.on === "function"
-                    ? "Switchyard observed the attached browser for live request events during this inspection window, but no new requests fired."
+                    ? "WebaiBridge observed the attached browser for live request events during this inspection window, but no new requests fired."
                     : NETWORK_FAIL_CLOSED_MESSAGE,
               },
     };
@@ -696,8 +696,8 @@ async function inspectCurrentBrowserSnapshot(
   } catch (error) {
     const diagnostic =
       error instanceof Error
-        ? `Switchyard could not inspect the attached browser: ${error.message}`
-        : "Switchyard could not inspect the attached browser.";
+        ? `WebaiBridge could not inspect the attached browser: ${error.message}`
+        : "WebaiBridge could not inspect the attached browser.";
 
     return buildUnavailableSnapshots(diagnostic);
   }

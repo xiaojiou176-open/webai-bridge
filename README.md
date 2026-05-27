@@ -1,8 +1,8 @@
-# Switchyard
+# WebaiBridge
 
 **One shared provider runtime for AI apps.**
 
-Switchyard turns end-user `BYOK + Web/Login` access into one service-first
+WebaiBridge turns end-user `BYOK + Web/Login` access into one service-first
 runtime that AI products can call without rebuilding provider routing,
 credential/session handling, and diagnostics from scratch.
 
@@ -12,16 +12,16 @@ apps can depend on.
 
 <p align="center">
   <img
-    src="./.github/social-preview-switchyard.svg"
-    alt="Switchyard social preview: one shared provider runtime for AI apps. BYOK plus Web/Login. Docs, proof pack, and a read-only status view."
+    src="./.github/social-preview-webai-bridge.svg"
+    alt="WebaiBridge social preview: one shared provider runtime for AI apps. BYOK plus Web/Login. Docs, proof pack, and a read-only status view."
     width="960"
   />
 </p>
 
 <p align="center">
   <img
-    src="./.github/switchyard-storefront-loop.gif"
-    alt="Switchyard storefront loop preview."
+    src="./.github/webai-bridge-storefront-loop.gif"
+    alt="WebaiBridge storefront loop preview."
     width="960"
   />
 </p>
@@ -30,7 +30,7 @@ apps can depend on.
 
 > **One shared provider runtime for AI apps.**
 >
-> Use Switchyard when you want AI products to plug into real end-user access
+> Use WebaiBridge when you want AI products to plug into real end-user access
 > lanes without every product re-inventing provider contracts, session logic,
 > and diagnostics.
 
@@ -59,7 +59,7 @@ Today the truthful public story is:
 - **Secondary machine-readable surface**:
   `packages/surfaces/mcp/server.json`, a **read-only MCP descriptor**
 - **Builder-facing packet**:
-  `distribution/claude-marketplace/plugins/switchyard-builder-suite/skills/runtime-diagnostics/`
+  `distribution/claude-marketplace/plugins/webai-bridge-builder-suite/skills/runtime-diagnostics/`
   plus starter packs and host examples
 - **Not claimed today**: official marketplace listings, official MCP Registry
   listing, npm publication, hosted multi-tenant runtime, write-capable MCP, or
@@ -69,7 +69,7 @@ Artifact-ready still does **not** mean listed-live.
 
 ## Public Language Policy
 
-Switchyard now treats the public front door as **English-first**.
+WebaiBridge now treats the public front door as **English-first**.
 
 - The default landing path for global developers stays English-first.
 - Bilingual support remains available through glossary and i18n helper pages.
@@ -89,7 +89,7 @@ Switchyard now treats the public front door as **English-first**.
 | bootstrap a local workstation or inspect workstation-bound reality | [docs/runbooks/dev-bootstrap.md](./docs/runbooks/dev-bootstrap.md) |
 | browse the single public router first | [docs/index.html](./docs/index.html) |
 
-If you are touching Switchyard for the first time, stop there.
+If you are touching WebaiBridge for the first time, stop there.
 
 The heavier shelves still exist, but they are not first-row front door pages:
 
@@ -109,7 +109,7 @@ intentionally not tracked in the public repo history.
 
 If you only remember four lines, remember these:
 
-1. Switchyard is **not** another AI app.
+1. WebaiBridge is **not** another AI app.
 2. It is a **shared provider runtime for AI apps**.
 3. It turns `BYOK + Web/Login` access into a service-first substrate that other
    AI products can call.
@@ -167,7 +167,7 @@ the ready-to-open URLs for:
 - `doctor-first control ledger`
 - `docs front door`
 
-## Why Switchyard Exists
+## Why WebaiBridge Exists
 
 Many AI products keep rebuilding the same messy layer:
 
@@ -177,7 +177,7 @@ Many AI products keep rebuilding the same messy layer:
 - diagnostics and remediation
 - builder starter surfaces
 
-Switchyard exists so that this repeated work can become one reusable runtime:
+WebaiBridge exists so that this repeated work can become one reusable runtime:
 
 > **a shared provider runtime that AI apps can plug into, instead of each app
 > re-inventing the provider layer alone**
@@ -201,7 +201,7 @@ Switchyard exists so that this repeated work can become one reusable runtime:
 
 ## V1 Scope
 
-Switchyard V1 is intentionally narrow:
+WebaiBridge V1 is intentionally narrow:
 
 - `BYOK`
 - `Web/Login`
@@ -236,7 +236,7 @@ Explicit non-goals right now:
 
 ## Architecture In One Sentence
 
-Switchyard separates **lane**, **provider**, **consumer**, and **surface** so
+WebaiBridge separates **lane**, **provider**, **consumer**, and **surface** so
 that the runtime stays reusable even while builder routes and public claims stay
 fail-closed.
 
@@ -244,8 +244,8 @@ High-level shape:
 
 ```mermaid
 flowchart LR
-    A["BYOK lane"] --> K["Switchyard kernel"]
-    B["Web/Login lane"] --> K["Switchyard kernel"]
+    A["BYOK lane"] --> K["WebaiBridge kernel"]
+    B["Web/Login lane"] --> K["WebaiBridge kernel"]
     K --> H["HTTP service surface"]
     K --> S["SDK surface"]
     H --> F["First-party integrations"]
@@ -304,7 +304,7 @@ Current distribution truth is intentionally narrow:
 - builder packets and starter packs are public repo surfaces, not official
   listings
 - packet-scoped host receipts, including the
-  `switchyard-runtime-diagnostics` packet, belong in the packet's own manifest
+  `webai-bridge-runtime-diagnostics` packet, belong in the packet's own manifest
   and README; they do **not** upgrade repo-wide npm, marketplace, or official
   MCP Registry truth
 
@@ -354,7 +354,7 @@ public warehouse list.
 
 ### Internal-only working packs
 
-- Switchyard keeps its maintainer-only contracts, ledgers, and working packs in
+- WebaiBridge keeps its maintainer-only contracts, ledgers, and working packs in
   a private local maintainer shelf when present in the maintainer workspace.
 - That shelf is intentionally **not** part of the public repo history.
 - Public readers should rely on the first-row docs, proof pack, API reference,
@@ -377,7 +377,7 @@ public warehouse list.
 - `.runtime-cache/`, maintainer-only shelves, and `.env*` stay out of public
   release
   surfaces.
-- Repo-local cleanup only applies to Switchyard-owned runtime artifacts, never
+- Repo-local cleanup only applies to WebaiBridge-owned runtime artifacts, never
   to machine-wide caches or other apps.
 - Before live/browser/cleanup actions, run:
 
@@ -397,5 +397,5 @@ footprint, go to [docs/runbooks/dev-bootstrap.md](./docs/runbooks/dev-bootstrap.
 
 ## One Final Sentence
 
-> Switchyard exists because AI apps should share one honest provider runtime
+> WebaiBridge exists because AI apps should share one honest provider runtime
 > instead of each product rebuilding the provider layer alone.

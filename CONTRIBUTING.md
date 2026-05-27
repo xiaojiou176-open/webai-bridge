@@ -1,6 +1,6 @@
-# Contributing to Switchyard
+# Contributing to WebaiBridge
 
-`Switchyard` 不是“想到什么就往里塞”的 playground。
+`WebaiBridge` 不是“想到什么就往里塞”的 playground。
 
 更直白一点说：
 

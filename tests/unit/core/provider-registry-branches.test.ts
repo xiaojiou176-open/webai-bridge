@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { SwitchyardContractError } from "../../../packages/contracts/src/index.js";
+import { WebaiBridgeContractError } from "../../../packages/contracts/src/index.js";
 import { createProviderRegistry } from "../../../packages/kernel/src/index.js";
 
 describe("ProviderRegistry branch coverage", () => {
@@ -46,7 +46,7 @@ describe("ProviderRegistry branch coverage", () => {
           authModes: ["api-key"],
         },
       ]),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
 
     expect(() =>
       createProviderRegistry([
@@ -56,7 +56,7 @@ describe("ProviderRegistry branch coverage", () => {
           authModes: ["api-key"],
         },
       ]),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
 
     expect(() =>
       createProviderRegistry([
@@ -66,7 +66,7 @@ describe("ProviderRegistry branch coverage", () => {
           authModes: ["api-key"],
         },
       ]),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 
   it("rejects missing auth modes and provider/model mismatches", () => {
@@ -78,7 +78,7 @@ describe("ProviderRegistry branch coverage", () => {
           authModes: [],
         },
       ]),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
 
     expect(() =>
       createProviderRegistry([
@@ -89,7 +89,7 @@ describe("ProviderRegistry branch coverage", () => {
           defaultModel: "chatgpt/gpt-4o",
         },
       ]),
-    ).toThrowError(SwitchyardContractError);
+    ).toThrowError(WebaiBridgeContractError);
   });
 
   it("throws from require when the requested lane is absent", () => {
@@ -101,6 +101,6 @@ describe("ProviderRegistry branch coverage", () => {
       },
     ]);
 
-    expect(() => registry.require("chatgpt", "byok")).toThrowError(SwitchyardContractError);
+    expect(() => registry.require("chatgpt", "byok")).toThrowError(WebaiBridgeContractError);
   });
 });

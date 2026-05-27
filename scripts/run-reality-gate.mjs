@@ -128,7 +128,7 @@ export function buildTruthAlignmentSummary(geminiByok, webLogin) {
       resolveWorkspaceClassification(result) ??
       result.classification ??
       undefined,
-    runtimeDoctorCommand: `pnpm run switchyard:cli -- provider-doctor --provider ${result.provider ?? "gemini"} --json`,
+    runtimeDoctorCommand: `pnpm run webai-bridge:cli -- provider-doctor --provider ${result.provider ?? "gemini"} --json`,
   }));
 
   return {
@@ -337,7 +337,7 @@ export function persistRealityGateReport(report, env = process.env) {
 async function main() {
   if (isCiEnvironment(process.env)) {
     throw new Error(
-      "Switchyard reality:gate is credentialed-workstation only and must not run inside CI.",
+      "WebaiBridge reality:gate is credentialed-workstation only and must not run inside CI.",
     );
   }
 

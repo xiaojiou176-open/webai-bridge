@@ -3,7 +3,7 @@ import {
   type ModelReference,
   type ModelReferenceInput,
   type ProviderId,
-  SwitchyardContractError,
+  WebaiBridgeContractError,
   normalizeProviderId,
   parseModelReference
 } from '../../contracts/src/index.js';
@@ -44,7 +44,7 @@ function resolveProviderId(request: ModelResolutionRequest, parsedModel?: ModelR
     const normalizedProvider = normalizeProviderId(parsedModel.providerKey);
 
     if (normalizedProvider && normalizedProvider !== request.providerId) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'model-resolution-failed',
         `Requested provider "${request.providerId}" conflicts with model reference "${parsedModel.canonical}".`
       );
@@ -56,7 +56,7 @@ function resolveProviderId(request: ModelResolutionRequest, parsedModel?: ModelR
   }
 
   if (!parsedModel) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'model-resolution-failed',
       'Model resolution requires providerId or modelReference.'
     );
@@ -65,7 +65,7 @@ function resolveProviderId(request: ModelResolutionRequest, parsedModel?: ModelR
   const providerId = normalizeProviderId(parsedModel.providerKey);
 
   if (!providerId) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-unsupported',
       `Model reference "${parsedModel.canonical}" targets a provider outside the current V1 scope.`
     );
@@ -98,7 +98,7 @@ export function resolveModelReference(
     const fallbackModel = entry.defaultModel ?? entry.recommendedModel;
 
     if (!fallbackModel) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'model-resolution-failed',
         `Provider "${providerId}" on lane "${request.laneId}" has no default or recommended model.`
       );
@@ -115,7 +115,7 @@ export function resolveModelReference(
   const entries = sortEntries(registry.entriesForProvider(providerId), laneOrder);
 
   if (entries.length === 0) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-unsupported',
       `Provider "${providerId}" has no registered V1 entries for model resolution.`
     );
@@ -135,7 +135,7 @@ export function resolveModelReference(
   const fallbackModel = selectedEntry.defaultModel ?? selectedEntry.recommendedModel;
 
   if (!fallbackModel) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'model-resolution-failed',
       `Provider "${providerId}" has no default or recommended model in the registry.`
     );

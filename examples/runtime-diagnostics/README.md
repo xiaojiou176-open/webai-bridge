@@ -1,6 +1,6 @@
 # Runtime Diagnostics Starter
 
-这个 starter 针对的是 `Switchyard` 最有辨识度的一类 builder 需求：
+这个 starter 针对的是 `WebaiBridge` 最有辨识度的一类 builder 需求：
 
 > 不要先假装一切都能 invoke，  
 > 先把 provider 现在到底卡在哪看清楚。
@@ -16,15 +16,15 @@ pnpm run example:runtime-diagnostics
 
 ## 可选环境变量
 
-- `SWITCHYARD_RUNTIME_BASE_URL`
-- `SWITCHYARD_SERVICE_PORT`
-- `SWITCHYARD_RUNTIME_PROVIDER`
+- `WEBAI_BRIDGE_RUNTIME_BASE_URL`
+- `WEBAI_BRIDGE_SERVICE_PORT`
+- `WEBAI_BRIDGE_RUNTIME_PROVIDER`
 
 默认 provider = `chatgpt`
 
 前提：
 
-- 本机已有可访问的 `Switchyard` runtime
+- 本机已有可访问的 `WebaiBridge` runtime
 - 目标 provider 的状态、probe、support bundle 路由能被当前 runtime 正常读取
 
 ## 它默认会读哪些东西
@@ -36,7 +36,7 @@ pnpm run example:runtime-diagnostics
 
 ## 它证明什么
 
-- `Switchyard` 今天的性格确实是 truth-first / fail-closed
+- `WebaiBridge` 今天的性格确实是 truth-first / fail-closed
 - 外部 builder 可以先做 triage，再决定要不要往 invoke 方向继续走
 
 ## 它不证明什么

@@ -4,11 +4,11 @@
   "exampleShape": "truth-sync-and-discoverability",
   "example": {
     "name": "docs-seo-sync-pack-example",
-    "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json",
+    "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json",
     "steps": [
-      "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json",
-      "pnpm run switchyard:cli -- surface-catalog --json",
-      "pnpm run switchyard:cli -- keyword-truth --json",
+      "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json",
+      "pnpm run webai-bridge:cli -- surface-catalog --json",
+      "pnpm run webai-bridge:cli -- keyword-truth --json",
       "cat docs/discoverability-keyword-truth.md",
       "cat docs/public-surface-support-matrix.md"
     ]

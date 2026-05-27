@@ -120,9 +120,9 @@ describe("copy-ready starter packs", () => {
       const routeEntry = skillPackRoutes.routes.find((item: { id: string }) => item.id === id);
       expect(routeEntry?.packPath).toBe(packPath);
       expect(routeEntry?.catalogCommand).toBe(
-        `pnpm run switchyard:cli -- skill-pack --target ${id} --json`,
+        `pnpm run webai-bridge:cli -- skill-pack --target ${id} --json`,
       );
-      expect(routeEntry?.recommendedMcpTools).toContain("switchyard.catalog.skill_pack");
+      expect(routeEntry?.recommendedMcpTools).toContain("webai-bridge.catalog.skill_pack");
 
       for (const relativePath of routeEntry?.packFiles ?? []) {
         expect(existsSync(resolve(repoRoot, relativePath))).toBe(true);
@@ -190,7 +190,7 @@ describe("copy-ready starter packs", () => {
           status: "partial",
           starterKind: "skill",
           recommendedPack: entry.packId,
-          bestEntry: `pnpm run switchyard:cli -- skill-pack-route --target ${entry.packId}`,
+          bestEntry: `pnpm run webai-bridge:cli -- skill-pack-route --target ${entry.packId}`,
         }),
       );
       expect(scenario?.recommendedDocs).toContain("docs/host-integration-playbooks.md");
@@ -256,13 +256,13 @@ describe("copy-ready starter packs", () => {
     try {
       const baseUrl = `http://127.0.0.1:${address.port}`;
       const codex = await runPack("starter-packs/builders/codex/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: baseUrl,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: baseUrl,
       });
       const claudeCode = await runPack("starter-packs/builders/claude-code/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: baseUrl,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: baseUrl,
       });
       const openclaw = await runPack("starter-packs/builders/openclaw/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: baseUrl,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: baseUrl,
       });
 
       expect(codex).toEqual(expect.objectContaining({ starterPackId: "codex", response: expect.objectContaining({ ok: true }) }));
@@ -304,15 +304,15 @@ describe("copy-ready starter packs", () => {
 
       try {
         const output = await runPack("starter-packs/builders/mcp/smoke.mjs", {
-          SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+          WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
         });
 
         expect(output).toEqual(
           expect.objectContaining({
             starterPackId: "mcp",
             availableTools: expect.arrayContaining([
-              "switchyard.runtime.health",
-              "switchyard.catalog.starter_examples_schema",
+              "webai-bridge.runtime.health",
+              "webai-bridge.catalog.starter_examples_schema",
             ]),
             toolResult: expect.objectContaining({ command: "health" }),
           }),
@@ -361,7 +361,7 @@ describe("copy-ready starter packs", () => {
 
     try {
       const output = await runPack("starter-packs/skills/runtime-diagnostics-pack/smoke.mjs", {
-        SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
       });
 
       expect(output).toEqual(
@@ -370,8 +370,8 @@ describe("copy-ready starter packs", () => {
           route: expect.objectContaining({
             id: "runtime-diagnostics-pack",
             recommendedMcpTools: expect.arrayContaining([
-              "switchyard.catalog.skill_pack",
-              "switchyard.provider.support_bundle",
+              "webai-bridge.catalog.skill_pack",
+              "webai-bridge.provider.support_bundle",
             ]),
           }),
           provider: "chatgpt",
@@ -397,12 +397,12 @@ describe("copy-ready starter packs", () => {
         route: expect.objectContaining({
           id: "docs-seo-sync-pack",
           recommendedCliCommands: expect.arrayContaining([
-            "pnpm run switchyard:cli -- keyword-truth --json",
+            "pnpm run webai-bridge:cli -- keyword-truth --json",
           ]),
         }),
         publicSurfaceCount: expect.any(Number),
         compatTargetCount: expect.any(Number),
-        keywordTruthHasSwitchyard: true,
+        keywordTruthHasWebaiBridge: true,
         supportMatrixHasPartial: true,
       }),
     );

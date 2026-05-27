@@ -28,8 +28,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/openai/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider openai --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider openai --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "openai"
       }
     },
@@ -59,8 +59,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/anthropic/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider anthropic --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider anthropic --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "anthropic"
       }
     },
@@ -90,8 +90,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/gemini/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider gemini --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider gemini --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "gemini:web-login"
       }
     },
@@ -121,8 +121,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/xai/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider xai --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider xai --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "xai"
       }
     },
@@ -152,8 +152,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/openrouter/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider openrouter --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider openrouter --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "openrouter"
       }
     },
@@ -183,8 +183,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/groq/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider groq --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider groq --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "groq"
       }
     },
@@ -214,8 +214,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/qwen/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider qwen --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider qwen --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "qwen:web-login"
       }
     },
@@ -245,8 +245,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/vertex/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider vertex --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider vertex --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "vertex"
       }
     },
@@ -276,8 +276,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/bedrock/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider bedrock --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider bedrock --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "bedrock"
       }
     },
@@ -307,8 +307,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/chatgpt/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider chatgpt --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider chatgpt --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "chatgpt"
       }
     },
@@ -338,8 +338,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/gemini/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider gemini --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider gemini --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "gemini:web-login"
       }
     },
@@ -369,8 +369,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/claude/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider claude --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider claude --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "claude"
       }
     },
@@ -400,8 +400,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/grok/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider grok --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider grok --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "grok"
       }
     },
@@ -431,8 +431,8 @@
       },
       "doctorEntryPoints": {
         "serviceRoute": "/v1/runtime/providers/qwen/doctor",
-        "cliCommand": "pnpm run switchyard:cli -- provider-doctor --provider qwen --json",
-        "mcpTool": "switchyard.provider.doctor",
+        "cliCommand": "pnpm run webai-bridge:cli -- provider-doctor --provider qwen --json",
+        "mcpTool": "webai-bridge.provider.doctor",
         "providerCatalogTarget": "qwen:web-login"
       }
     }

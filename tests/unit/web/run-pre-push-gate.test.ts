@@ -23,8 +23,8 @@ describe("run-pre-push-gate script", () => {
 
     const originalGitDir = process.env.GIT_DIR;
     const originalGitWorkTree = process.env.GIT_WORK_TREE;
-    process.env.GIT_DIR = "/tmp/switchyard-test.git";
-    process.env.GIT_WORK_TREE = "/tmp/switchyard-test";
+    process.env.GIT_DIR = "/tmp/webai-bridge-test.git";
+    process.env.GIT_WORK_TREE = "/tmp/webai-bridge-test";
 
     try {
       const { run } = await import("../../../scripts/run-pre-push-gate.mjs");

@@ -669,7 +669,7 @@ export function createReadonlyCliClient(options) {
     const payload = await response.json();
 
     if (!response.ok) {
-      const error = new Error(`Switchyard CLI request failed with HTTP ${response.status} at ${path}.`);
+      const error = new Error(`WebaiBridge CLI request failed with HTTP ${response.status} at ${path}.`);
       Object.assign(error, {
         status: response.status,
         payload,
@@ -682,7 +682,7 @@ export function createReadonlyCliClient(options) {
 
   return {
     normalizeProvider(provider) {
-      return encodeRuntimePathSegment(provider, "Switchyard CLI provider id");
+      return encodeRuntimePathSegment(provider, "WebaiBridge CLI provider id");
     },
     listProviders() {
       return request("/v1/runtime/providers").then((payload) => payload.discovery.providers);
@@ -770,7 +770,7 @@ async function projectProviderSupportBundle(options, client, selector, projected
   };
 }
 
-export async function runSwitchyardCli(options, client) {
+export async function runWebaiBridgeCli(options, client) {
   const command = options.command;
   const catalog = readPublicSurfaceCatalog();
   const templates = readStarterManifestTemplates();
@@ -1418,7 +1418,7 @@ export function renderCliPayload(payload) {
   return JSON.stringify(payload, null, 2);
 }
 
-export async function runSwitchyardCliMain(
+export async function runWebaiBridgeCliMain(
   argv = process.argv.slice(2),
   env = process.env,
   clientOverride,
@@ -1426,7 +1426,7 @@ export async function runSwitchyardCliMain(
   const options = parseCliArgs(argv);
   const baseUrl = resolveCliBaseUrl(env, options.baseUrl);
   const client = clientOverride ?? createReadonlyCliClient({ baseUrl });
-  const payload = await runSwitchyardCli(options, client);
+  const payload = await runWebaiBridgeCli(options, client);
 
   return renderCliPayload({
     baseUrl,
@@ -1436,7 +1436,7 @@ export async function runSwitchyardCliMain(
 }
 
 async function main() {
-  console.log(await runSwitchyardCliMain());
+  console.log(await runWebaiBridgeCliMain());
 }
 
 if (import.meta.url === new URL(process.argv[1], "file:").href) {

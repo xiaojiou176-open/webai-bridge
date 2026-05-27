@@ -1,8 +1,8 @@
-# Switchyard 30-Second Overview
+# WebaiBridge 30-Second Overview
 
 If you only have 30 seconds, remember these four lines:
 
-1. Switchyard is **not** another AI app.
+1. WebaiBridge is **not** another AI app.
 2. It is a **shared provider runtime for AI apps**.
 3. It turns `BYOK + Web/Login` access into one service-first substrate that
    other AI products can call.
@@ -13,7 +13,7 @@ If you only have 30 seconds, remember these four lines:
 
 ## One Sentence
 
-> **Switchyard is the shared runtime pipe for AI apps, not another AI app.**
+> **WebaiBridge is the shared runtime pipe for AI apps, not another AI app.**
 
 ## The Problem It Solves
 

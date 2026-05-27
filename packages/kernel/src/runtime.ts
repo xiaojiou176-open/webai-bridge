@@ -3,14 +3,14 @@ import {
   type LaneId,
   type RuntimeInvocationPlan,
   type RuntimeRequest,
-  SwitchyardContractError,
+  WebaiBridgeContractError,
   createDiagnosticRecord
 } from '../../contracts/src/index.js';
 import { dispatchLane, type LaneDispatchOptions } from './lane-dispatch.js';
 import { resolveModelReference } from './model-resolution.js';
 import { type ProviderRegistry } from './provider-registry.js';
 
-export interface SwitchyardRuntimeOptions extends LaneDispatchOptions {
+export interface WebaiBridgeRuntimeOptions extends LaneDispatchOptions {
   readonly registry: ProviderRegistry;
 }
 
@@ -50,11 +50,11 @@ function buildRuntimeDiagnostics(
   ]);
 }
 
-export class SwitchyardRuntime {
+export class WebaiBridgeRuntime {
   readonly registry: ProviderRegistry;
   readonly laneOrder: readonly LaneId[];
 
-  constructor(options: SwitchyardRuntimeOptions) {
+  constructor(options: WebaiBridgeRuntimeOptions) {
     this.registry = options.registry;
     this.laneOrder = Object.freeze([...(options.laneOrder ?? ['byok', 'web-login'])]);
   }
@@ -65,7 +65,7 @@ export class SwitchyardRuntime {
 
   prepareInvocation(request: RuntimeRequest): RuntimeInvocationPlan {
     if (!request.providerId && !request.modelReference) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'routing-failed',
         'Runtime invocation requires at least providerId or modelReference.'
       );
@@ -117,7 +117,7 @@ export class SwitchyardRuntime {
     const executor = executors[plan.selection.laneId];
 
     if (!executor) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'routing-failed',
         `No runtime executor is configured for lane "${plan.selection.laneId}".`,
         {
@@ -134,7 +134,7 @@ export class SwitchyardRuntime {
     const input = inputs[plan.selection.laneId];
 
     if (input === undefined) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'routing-failed',
         `No runtime execution input is configured for lane "${plan.selection.laneId}".`,
         {
@@ -156,6 +156,6 @@ export class SwitchyardRuntime {
   }
 }
 
-export function createSwitchyardRuntime(options: SwitchyardRuntimeOptions): SwitchyardRuntime {
-  return new SwitchyardRuntime(options);
+export function createWebaiBridgeRuntime(options: WebaiBridgeRuntimeOptions): WebaiBridgeRuntime {
+  return new WebaiBridgeRuntime(options);
 }

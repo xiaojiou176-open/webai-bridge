@@ -181,14 +181,14 @@ describe('credentials baseline', () => {
 
   it('persists high-stability web acquisition outputs into a local-first store', () => {
     const storeEnv = {
-      SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: join(
+      WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: join(
         process.cwd(),
         '.runtime-cache',
         'temp',
         'credentials-store.test.json'
       )
     };
-    rmSync(storeEnv.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
+    rmSync(storeEnv.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
 
     upsertStoredWebProviderSession(
       {
@@ -202,8 +202,8 @@ describe('credentials baseline', () => {
           'openai-access-token': 'present'
         },
         runtimeEnv: {
-          SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: 'chatgpt_session=stored',
-          SWITCHYARD_WEB_CHATGPT_USER_AGENT: 'SwitchyardStored/1.0'
+          WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: 'chatgpt_session=stored',
+          WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: 'WebaiBridgeStored/1.0'
         },
         updatedAt: '2026-03-29T20:00:00.000Z',
         source: 'local-auth-portal'
@@ -216,7 +216,7 @@ describe('credentials baseline', () => {
     const records = buildStoredWebCredentialRecords('terry-local', storeEnv);
 
     expect(resolveLocalWebAuthStorePath(storeEnv)).toContain('credentials-store.test.json');
-    expect(runtimeEnv.SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE).toBe('chatgpt_session=stored');
+    expect(runtimeEnv.WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE).toBe('chatgpt_session=stored');
     expect(sessions.chatgpt).toEqual(
       expect.objectContaining({
         state: 'ready',
@@ -232,19 +232,19 @@ describe('credentials baseline', () => {
       })
     );
 
-    rmSync(storeEnv.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
+    rmSync(storeEnv.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
   });
 
   it('returns an empty store for missing files and can remove stored provider sessions', () => {
     const storeEnv = {
-      SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: join(
+      WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: join(
         process.cwd(),
         '.runtime-cache',
         'temp',
         'credentials-blank-store.test.json'
       )
     };
-    rmSync(storeEnv.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
+    rmSync(storeEnv.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
 
     expect(createEmptyLocalWebAuthStore()).toEqual({
       version: 1,
@@ -260,7 +260,7 @@ describe('credentials baseline', () => {
         providerId: 'chatgpt',
         state: 'ready',
         runtimeEnv: {
-          SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: 'chatgpt_session=stored'
+          WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: 'chatgpt_session=stored'
         },
         updatedAt: '2026-03-29T20:00:00.000Z',
         source: 'local-auth-portal'
@@ -272,7 +272,7 @@ describe('credentials baseline', () => {
         providerId: 'gemini',
         state: 'user-action-required',
         runtimeEnv: {
-          SWITCHYARD_WEB_GEMINI_USER_AGENT: 'SwitchyardStored/1.0'
+          WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: 'WebaiBridgeStored/1.0'
         },
         updatedAt: '2026-03-29T20:00:00.000Z',
         source: 'local-auth-portal'
@@ -292,6 +292,6 @@ describe('credentials baseline', () => {
       'gemini'
     ]);
 
-    rmSync(storeEnv.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
+    rmSync(storeEnv.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH, { force: true });
   });
 });

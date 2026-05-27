@@ -14,10 +14,10 @@ describe("Default web acquisition runners", () => {
       loginUrl,
       loginOpened: true,
       cdpUrl: "http://127.0.0.1:9333",
-      summary: `Switchyard started a managed onboarding browser for ${provider}.`,
+      summary: `WebaiBridge started a managed onboarding browser for ${provider}.`,
     }));
     const runners = createDefaultWebAcquisitionRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9333",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9333",
     }, {
       bootstrapBrowser,
     });
@@ -87,13 +87,13 @@ describe("Default web acquisition runners", () => {
       loginUrl,
       loginOpened: true,
       cdpUrl: "http://127.0.0.1:9338",
-      userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+      userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
       browserTarget: {
         kind: "isolated-chrome-root",
         label: "Isolated Chrome root",
-        summary: "Reuse Switchyard's dedicated Chrome root and single repo-owned profile instead of the managed onboarding browser.",
+        summary: "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile instead of the managed onboarding browser.",
       },
-      summary: "Switchyard attached or launched the isolated Chrome root.",
+      summary: "WebaiBridge attached or launched the isolated Chrome root.",
       request,
     }));
     const runners = createDefaultWebAcquisitionRunners({}, {
@@ -103,7 +103,7 @@ describe("Default web acquisition runners", () => {
     const result = await runners.chatgpt?.start({
       mode: "existing-chrome-profile",
       existingChromeProfile: {
-        userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+        userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
       },
     });
 
@@ -113,7 +113,7 @@ describe("Default web acquisition runners", () => {
         request: expect.objectContaining({
           mode: "isolated-chrome-root",
           existingChromeProfile: expect.objectContaining({
-            userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+            userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
           }),
         }),
       }),
@@ -129,18 +129,18 @@ describe("Default web acquisition runners", () => {
           kind: "isolated-chrome-root",
         }),
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-          SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR:
-            "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+          WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+          WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR:
+            "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
         }),
         captureRequest: expect.objectContaining({
           mode: "isolated-chrome-root",
           existingChromeProfile: expect.objectContaining({
             cdpUrl: "http://127.0.0.1:9338",
-            userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+            userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
           }),
         }),
       }),
@@ -158,23 +158,23 @@ describe("Default web acquisition runners", () => {
       loginUrl,
       loginOpened: true,
       cdpUrl: "http://127.0.0.1:9338",
-      userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
-      profileName: "switchyard",
+      userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
+      profileName: "webai-bridge",
       profileDirectory: "Profile 1",
       browserTarget: {
         kind: "isolated-chrome-root",
         label: "Isolated Chrome root",
-        summary: "Reuse Switchyard's dedicated Chrome root and single repo-owned profile instead of the managed onboarding browser.",
+        summary: "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile instead of the managed onboarding browser.",
       },
-      summary: "Switchyard attached or launched the isolated Chrome root.",
+      summary: "WebaiBridge attached or launched the isolated Chrome root.",
       request,
     }));
 
     const runners = createDefaultWebAcquisitionRunners(
       {
-        SWITCHYARD_CHROME_USER_DATA_DIR:
-          "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
-        SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+        WEBAI_BRIDGE_CHROME_USER_DATA_DIR:
+          "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
+        WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
       },
       {
         bootstrapBrowser,
@@ -194,14 +194,14 @@ describe("Default web acquisition runners", () => {
       expect.objectContaining({
         mode: "isolated-chrome-root",
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_CHROME_USER_DATA_DIR:
-          "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
-          SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+          WEBAI_BRIDGE_CHROME_USER_DATA_DIR:
+          "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
+          WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
         }),
         captureRequest: expect.objectContaining({
           existingChromeProfile: expect.objectContaining({
-            profileName: "switchyard",
-            userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
+            profileName: "webai-bridge",
+            userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
           }),
         }),
       }),
@@ -220,15 +220,15 @@ describe("Default web acquisition runners", () => {
         loginUrl,
         loginOpened: false,
         cdpUrl: "http://127.0.0.1:9338",
-        userDataDir: "/mock-home/test/.cache/switchyard/browser/chrome-user-data",
-        profileName: "switchyard",
+        userDataDir: "/mock-home/test/.cache/webai-bridge/browser/chrome-user-data",
+        profileName: "webai-bridge",
         profileDirectory: "Profile 1",
         browserTarget: {
           kind: "isolated-chrome-root",
           label: "Isolated Chrome root",
-          summary: "Reuse Switchyard's dedicated Chrome root and single repo-owned profile instead of the managed onboarding browser.",
+          summary: "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile instead of the managed onboarding browser.",
         },
-        summary: "Switchyard attached the isolated repo Chrome root.",
+        summary: "WebaiBridge attached the isolated repo Chrome root.",
       }),
     });
 
@@ -241,10 +241,10 @@ describe("Default web acquisition runners", () => {
         advanced: true,
         cdpUrl: "http://127.0.0.1:9338",
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-          SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+          WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
         }),
       }),
     );
@@ -287,7 +287,7 @@ describe("Default web acquisition runners", () => {
     const runners = createDefaultWebAcquisitionRunners({}, {
       bootstrapBrowser: async () => {
         const error = Object.assign(
-          new Error("Switchyard could not find a reusable browser session at that URL."),
+          new Error("WebaiBridge could not find a reusable browser session at that URL."),
           {
             code: "existing-browser-session-missing",
           },
@@ -318,7 +318,7 @@ describe("Default web acquisition runners", () => {
     const runners = createDefaultWebAcquisitionRunners({}, {
       bootstrapBrowser: async () => {
         const error = Object.assign(
-          new Error("Switchyard reached that profile endpoint, but it was not a reusable browser-debug session."),
+          new Error("WebaiBridge reached that profile endpoint, but it was not a reusable browser-debug session."),
           {
             code: "endpoint-not-devtools",
           },
@@ -349,7 +349,7 @@ describe("Default web acquisition runners", () => {
     const runners = createDefaultWebAcquisitionRunners({}, {
       bootstrapBrowser: async () => {
         const error = Object.assign(
-          new Error("Switchyard could not find that Chrome profile on disk."),
+          new Error("WebaiBridge could not find that Chrome profile on disk."),
           {
             code: "existing-profile-missing",
           },
@@ -420,7 +420,7 @@ describe("Default web acquisition runners", () => {
       bootstrapBrowser: async () => {
         const error = Object.assign(
           new Error(
-            "Switchyard reached that browser session URL, but it did not respond like a reusable Chrome DevTools endpoint.",
+            "WebaiBridge reached that browser session URL, but it did not respond like a reusable Chrome DevTools endpoint.",
           ),
           {
             code: "endpoint-not-devtools",
@@ -461,7 +461,7 @@ describe("Default web acquisition runners", () => {
     async ({ provider, blocker }) => {
       const { createDefaultWebAcquisitionRunners } = await acquisitionRunnersModulePromise;
       const runners = createDefaultWebAcquisitionRunners({
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:1",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:1",
       });
 
       const capture =

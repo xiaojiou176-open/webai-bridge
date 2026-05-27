@@ -1,6 +1,6 @@
-# @switchyard/surface-mcp
+# @webai-bridge/surface-mcp
 
-`@switchyard/surface-mcp` 是 `Switchyard` 的 **read-only MCP surface**。
+`@webai-bridge/surface-mcp` 是 `WebaiBridge` 的 **read-only MCP surface**。
 
 一句最重要的人话：
 
@@ -32,13 +32,13 @@
 ## Local Usage Today
 
 ```bash
-pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010
+pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010
 ```
 
 如果后续做 release publish，这个包会暴露：
 
 ```bash
-switchyard-mcp --base-url http://127.0.0.1:4010
+webai-bridge-mcp --base-url http://127.0.0.1:4010
 ```
 
 ## Read Next
@@ -51,9 +51,9 @@ switchyard-mcp --base-url http://127.0.0.1:4010
 ## Use Today
 
 - 本地 stdio surface
-  - `pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010`
+  - `pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010`
 - skill-pack route card
-  - `switchyard.catalog.skill_pack`
+  - `webai-bridge.catalog.skill_pack`
   - read the chosen skill pack entry first, then follow its route pointers
 - host example route
   - 先看 [examples/hosts/mcp/README.md](../../../examples/hosts/mcp/README.md)

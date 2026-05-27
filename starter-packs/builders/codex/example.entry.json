@@ -4,8 +4,8 @@
   "exampleShape": "responses-runtime-helper",
   "example": {
     "name": "codex-runtime-helper-example",
-    "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-    "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target codex --json",
+    "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+    "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target codex --json",
     "request": {
       "model": "openai/gpt-4.1",
       "lane": "byok",

@@ -17,7 +17,7 @@ import {
 } from '../../shared/provider-factory.js';
 
 const geminiEnvNames = [
-  'SWITCHYARD_GEMINI_API_KEY',
+  'WEBAI_BRIDGE_GEMINI_API_KEY',
   'GEMINI_API_KEY',
   'GOOGLE_API_KEY',
 ] as const;
@@ -27,7 +27,7 @@ const geminiTransportContract: ProviderTransportContract = {
   method: 'POST',
   requestShape: 'generate-content',
   baseUrl: defaultGeminiBaseUrl,
-  baseUrlEnvNames: ['SWITCHYARD_GEMINI_BASE_URL'],
+  baseUrlEnvNames: ['WEBAI_BRIDGE_GEMINI_BASE_URL'],
   path: '/models/{model}:generateContent',
   auth: {
     scheme: 'query-api-key',

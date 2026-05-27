@@ -1,11 +1,11 @@
 import { describe, expect, test, vi } from "vitest";
 
 import {
-  createSwitchyardServiceClient,
-  createSwitchyardSdk,
+  createWebaiBridgeServiceClient,
+  createWebaiBridgeSdk,
 } from "../../../packages/sdk/src/index.js";
 
-describe("Switchyard service client", () => {
+describe("WebaiBridge service client", () => {
   test("calls the runtime service bootstrap and provider discovery routes with stable catalog URLs", async () => {
     const fetchMock = vi.fn(async (input: string) => {
       if (
@@ -18,7 +18,7 @@ describe("Switchyard service client", () => {
           async json() {
             return {
               bootstrap: {
-                serviceName: "switchyard-local-service",
+                serviceName: "webai-bridge-local-service",
               },
             };
           },
@@ -43,7 +43,7 @@ describe("Switchyard service client", () => {
       };
     });
 
-    const client = createSwitchyardServiceClient({
+    const client = createWebaiBridgeServiceClient({
       baseUrl: "http://127.0.0.1:4317",
       fetch: fetchMock as unknown as typeof fetch,
     });
@@ -73,8 +73,8 @@ describe("Switchyard service client", () => {
         headers: expect.any(Headers),
       }),
     );
-    expect(bootstrap.bootstrap.serviceName).toBe("switchyard-local-service");
-    expect(entrypoint.bootstrap.serviceName).toBe("switchyard-local-service");
+    expect(bootstrap.bootstrap.serviceName).toBe("webai-bridge-local-service");
+    expect(entrypoint.bootstrap.serviceName).toBe("webai-bridge-local-service");
     expect(providers[0]?.providerId).toBe("chatgpt");
   });
 
@@ -93,7 +93,7 @@ describe("Switchyard service client", () => {
       },
     }));
 
-    const sdk = createSwitchyardSdk({
+    const sdk = createWebaiBridgeSdk({
       service: {
         baseUrl: "http://127.0.0.1:4317",
         fetch: fetchMock as unknown as typeof fetch,
@@ -143,7 +143,7 @@ describe("Switchyard service client", () => {
       },
     }));
 
-    const client = createSwitchyardServiceClient({
+    const client = createWebaiBridgeServiceClient({
       baseUrl: "http://127.0.0.1:4317",
       fetch: fetchMock as unknown as typeof fetch,
     });
@@ -223,7 +223,7 @@ describe("Switchyard service client", () => {
       throw new Error(`Unexpected request ${input}`);
     });
 
-    const client = createSwitchyardServiceClient({
+    const client = createWebaiBridgeServiceClient({
       baseUrl: "http://127.0.0.1:4317",
       fetch: fetchMock as unknown as typeof fetch,
     });
@@ -464,7 +464,7 @@ describe("Switchyard service client", () => {
       };
     });
 
-    const client = createSwitchyardServiceClient({
+    const client = createWebaiBridgeServiceClient({
       baseUrl: "http://127.0.0.1:4317/",
       fetch: fetchMock as unknown as typeof fetch,
       headers: {
@@ -534,7 +534,7 @@ describe("Switchyard service client", () => {
   });
 
   test("surfaces provider lookup helpers and throws when createModel targets an unknown provider", () => {
-    const sdk = createSwitchyardSdk();
+    const sdk = createWebaiBridgeSdk();
     
     expect(sdk.getProvider("gemini")?.provider).toBe("gemini");
     expect(sdk.getProviderProfile("gemini")?.provider).toBe("gemini");

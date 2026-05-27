@@ -3,7 +3,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "nod
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 
-const TEST_STATE_KEY = "__switchyardVerifyWebLoginState";
+const TEST_STATE_KEY = "__webai_bridgeVerifyWebLoginState";
 const deferredCleanupPaths = new Set<string>();
 
 function scheduleDeferredCleanup(path: string) {
@@ -25,33 +25,33 @@ function setState(state: unknown) {
 function buildStoredRuntimeEnv(provider: "chatgpt" | "grok" | "qwen") {
   if (provider === "chatgpt") {
     return {
-      SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_cookie=1",
-      SWITCHYARD_WEB_CHATGPT_USER_AGENT: "chatgpt-test-agent",
+      WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "chatgpt_cookie=1",
+      WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "chatgpt-test-agent",
     };
   }
 
   if (provider === "grok") {
     return {
-      SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
-      SWITCHYARD_WEB_GROK_USER_AGENT: "grok-test-agent",
+      WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_cookie=1",
+      WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "grok-test-agent",
     };
   }
 
   return {
-    SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
-    SWITCHYARD_WEB_QWEN_USER_AGENT: "qwen-test-agent",
+    WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_cookie=1",
+    WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "qwen-test-agent",
   };
 }
 
 function createTestEnv(provider: "chatgpt" | "grok" | "qwen") {
   const workspaceRoot = mkdtempSync(
-    join(process.cwd(), ".runtime-cache", "switchyard-verify-web-login-test-"),
+    join(process.cwd(), ".runtime-cache", "webai-bridge-verify-web-login-test-"),
   );
   scheduleDeferredCleanup(workspaceRoot);
 
   return {
     ...buildStoredRuntimeEnv(provider),
-    SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: join(
+    WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: join(
       workspaceRoot,
       "local-web-auth-store.json",
     ),
@@ -224,7 +224,7 @@ function createSpawnSyncMock(options: {
 }
 
 function createTempOutDir() {
-  return mkdtempSync(join(tmpdir(), "switchyard-orchestration-"));
+  return mkdtempSync(join(tmpdir(), "webai-bridge-orchestration-"));
 }
 
 afterEach(() => {
@@ -534,7 +534,7 @@ describe("verify-web-login orchestration", () => {
         expect(args).toEqual(
           expect.arrayContaining(["--provider", "chatgpt"]),
         );
-        expect(options?.env?.SWITCHYARD_WEB_LOGIN_ISOLATED_CHILD).toBe("1");
+        expect(options?.env?.WEBAI_BRIDGE_WEB_LOGIN_ISOLATED_CHILD).toBe("1");
 
         return {
           status: 0,
@@ -905,7 +905,7 @@ describe("verify-web-login orchestration", () => {
   it("writes a recovered browser-backed store record back to ready after coherence passes", async () => {
     const outDir = createTempOutDir();
     const workspaceRoot = mkdtempSync(
-      join(process.cwd(), ".runtime-cache", "switchyard-chatgpt-ready-writeback-"),
+      join(process.cwd(), ".runtime-cache", "webai-bridge-chatgpt-ready-writeback-"),
     );
     const storePath = join(workspaceRoot, "local-web-auth-store.json");
     scheduleDeferredCleanup(workspaceRoot);
@@ -966,7 +966,7 @@ describe("verify-web-login orchestration", () => {
         mode: "isolated-chrome-root",
         existingProfileDir: "/tmp/isolated",
         existingProfileDirectory: "Profile 1",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
         cdpUrl: "http://127.0.0.1:9338",
       })),
@@ -980,7 +980,7 @@ describe("verify-web-login orchestration", () => {
         browserMode: "isolated-chrome-root",
         userDataDir: "/tmp/isolated",
         profileDirectory: "Profile 1",
-        profileName: "switchyard",
+        profileName: "webai-bridge",
         cdpUrl: "http://127.0.0.1:9338",
         capturedAt: "2026-04-05T01:00:00.000Z",
       })),
@@ -1004,7 +1004,7 @@ describe("verify-web-login orchestration", () => {
           browserMode: "isolated-chrome-root",
           userDataDir: "/tmp/isolated",
           profileDirectory: "Profile 1",
-          profileName: "switchyard",
+          profileName: "webai-bridge",
           cdpUrl: "http://127.0.0.1:9338",
           pageUrl: "https://chatgpt.com/",
           pageTitle: "ChatGPT",
@@ -1060,7 +1060,7 @@ describe("verify-web-login orchestration", () => {
     const [result] = await runWebLoginLiveVerification({
       env: {
         ...createTestEnv("chatgpt"),
-        SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: storePath,
+        WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: storePath,
       },
       providers: ["chatgpt"],
       outDir,
@@ -1102,7 +1102,7 @@ describe("verify-web-login orchestration", () => {
   it("writes qwen user-action-required invoke verdict back into the local auth store", async () => {
     const outDir = createTempOutDir();
     const env = createTestEnv("qwen");
-    const storePath = env.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH;
+    const storePath = env.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH;
     vi.doUnmock("../../../scripts/browser-session-coherence.mjs");
     writeFileSync(
       storePath,
@@ -1192,7 +1192,7 @@ describe("verify-web-login orchestration", () => {
   it("writes qwen unauthorized bootstrap failures back as external blockers", async () => {
     const outDir = createTempOutDir();
     const env = createTestEnv("qwen");
-    const storePath = env.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH;
+    const storePath = env.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH;
     writeFileSync(
       storePath,
       `${JSON.stringify(
@@ -1281,7 +1281,7 @@ describe("verify-web-login orchestration", () => {
   it("writes claude overdue subscription blockers back into the local auth store", async () => {
     const outDir = createTempOutDir();
     const env = createTestEnv("claude");
-    const storePath = env.SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH;
+    const storePath = env.WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH;
     writeFileSync(
       storePath,
       `${JSON.stringify(

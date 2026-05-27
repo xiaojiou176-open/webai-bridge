@@ -8,9 +8,9 @@ afterEach(() => {
 
 describe("Grok browser DOM transport", () => {
   it("executes through Playwright CDP when the attached browser can answer through the page UI", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const evaluate = vi
       .fn()
@@ -19,7 +19,7 @@ describe("Grok browser DOM transport", () => {
       })
       .mockResolvedValueOnce(["Existing Grok assistant text"])
       .mockResolvedValue({
-        text: "SWITCHYARD_GROK_DOM_OK",
+        text: "WEBAI_BRIDGE_GROK_DOM_OK",
         isStreaming: false,
       });
     const goto = vi.fn().mockResolvedValue(undefined);
@@ -64,7 +64,7 @@ describe("Grok browser DOM transport", () => {
 
     const text = await invokeGrokBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_GROK_DOM_OK",
+        message: "Reply with exactly WEBAI_BRIDGE_GROK_DOM_OK",
       },
       process.env,
       connectOverCDP,
@@ -77,19 +77,19 @@ describe("Grok browser DOM transport", () => {
     });
     expect(click).toHaveBeenCalled();
     expect(sendClick).toHaveBeenCalled();
-    expect(type).toHaveBeenCalledWith("Reply with exactly SWITCHYARD_GROK_DOM_OK", {
+    expect(type).toHaveBeenCalledWith("Reply with exactly WEBAI_BRIDGE_GROK_DOM_OK", {
       delay: 20,
     });
     expect(press).not.toHaveBeenCalled();
     expect(waitForTimeout).toHaveBeenCalled();
-    expect(text).toContain("SWITCHYARD_GROK_DOM_OK");
+    expect(text).toContain("WEBAI_BRIDGE_GROK_DOM_OK");
     expect(close).toHaveBeenCalled();
   });
 
   it("reconnects once when the attached browser page closes during prompt submission", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const firstEvaluate = vi.fn().mockResolvedValueOnce({
       ok: true,
@@ -137,9 +137,9 @@ describe("Grok browser DOM transport", () => {
       })
       .mockResolvedValueOnce(["Existing Grok assistant text"])
       .mockResolvedValue({
-        text: "SWITCHYARD_GROK_DOM_RETRY_OK",
+        text: "WEBAI_BRIDGE_GROK_DOM_RETRY_OK",
         isStreaming: false,
-        bodyText: "SWITCHYARD_GROK_DOM_RETRY_OK",
+        bodyText: "WEBAI_BRIDGE_GROK_DOM_RETRY_OK",
       });
     const secondGoto = vi.fn().mockResolvedValue(undefined);
     const secondWaitForTimeout = vi.fn().mockResolvedValue(undefined);
@@ -185,7 +185,7 @@ describe("Grok browser DOM transport", () => {
 
     const text = await invokeGrokBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_GROK_DOM_RETRY_OK and nothing else.",
+        message: "Reply with exactly WEBAI_BRIDGE_GROK_DOM_RETRY_OK and nothing else.",
       },
       process.env,
       connectOverCDP,
@@ -194,15 +194,15 @@ describe("Grok browser DOM transport", () => {
     expect(connectOverCDP).toHaveBeenCalledTimes(2);
     expect(firstPress).toHaveBeenCalledWith("Enter");
     expect(secondSendClick).toHaveBeenCalled();
-    expect(text).toBe("SWITCHYARD_GROK_DOM_RETRY_OK");
+    expect(text).toBe("WEBAI_BRIDGE_GROK_DOM_RETRY_OK");
     expect(firstClose).toHaveBeenCalled();
     expect(secondClose).toHaveBeenCalled();
   });
 
   it("reuses an existing Grok tab instead of forcing a reload", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const evaluate = vi
       .fn()
@@ -211,9 +211,9 @@ describe("Grok browser DOM transport", () => {
       })
       .mockResolvedValueOnce(["Existing Grok assistant text"])
       .mockResolvedValue({
-        text: "SWITCHYARD_GROK_DOM_OK",
+        text: "WEBAI_BRIDGE_GROK_DOM_OK",
         isStreaming: false,
-        bodyText: "SWITCHYARD_GROK_DOM_OK",
+        bodyText: "WEBAI_BRIDGE_GROK_DOM_OK",
       });
     const goto = vi.fn().mockResolvedValue(undefined);
     const bringToFront = vi.fn().mockResolvedValue(undefined);
@@ -258,7 +258,7 @@ describe("Grok browser DOM transport", () => {
 
     await invokeGrokBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_GROK_DOM_OK",
+        message: "Reply with exactly WEBAI_BRIDGE_GROK_DOM_OK",
       },
       process.env,
       vi.fn().mockResolvedValue(browser),
@@ -273,9 +273,9 @@ describe("Grok browser DOM transport", () => {
   });
 
   it("waits for the exact verification token instead of returning stable non-token text", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const evaluate = vi
       .fn()
@@ -294,9 +294,9 @@ describe("Grok browser DOM transport", () => {
         bodyText: "Grok is thinking about the answer.",
       })
       .mockResolvedValueOnce({
-        text: "SWITCHYARD_GROK_DOM_WAIT_TOKEN",
+        text: "WEBAI_BRIDGE_GROK_DOM_WAIT_TOKEN",
         isStreaming: false,
-        bodyText: "SWITCHYARD_GROK_DOM_WAIT_TOKEN",
+        bodyText: "WEBAI_BRIDGE_GROK_DOM_WAIT_TOKEN",
       });
     const goto = vi.fn().mockResolvedValue(undefined);
     const waitForTimeout = vi.fn().mockResolvedValue(undefined);
@@ -339,21 +339,21 @@ describe("Grok browser DOM transport", () => {
 
     const text = await invokeGrokBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_GROK_DOM_WAIT_TOKEN and nothing else.",
+        message: "Reply with exactly WEBAI_BRIDGE_GROK_DOM_WAIT_TOKEN and nothing else.",
       },
       process.env,
       vi.fn().mockResolvedValue(browser),
     );
 
-    expect(text).toBe("SWITCHYARD_GROK_DOM_WAIT_TOKEN");
+    expect(text).toBe("WEBAI_BRIDGE_GROK_DOM_WAIT_TOKEN");
     expect(waitForTimeout).toHaveBeenCalledTimes(4);
     expect(close).toHaveBeenCalled();
   });
 
   it("returns the requested token from a final DOM read-back even if the abort signal is already set", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "auth_token=abc; sso=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
 
     const controller = new AbortController();
     controller.abort();
@@ -365,10 +365,10 @@ describe("Grok browser DOM transport", () => {
       })
       .mockResolvedValueOnce(["Existing Grok assistant text"])
       .mockResolvedValueOnce({
-        text: "SWITCHYARD_GROK_DOM_ABORT_OK",
+        text: "WEBAI_BRIDGE_GROK_DOM_ABORT_OK",
         isStreaming: false,
         bodyText:
-          "Reply with exactly SWITCHYARD_GROK_DOM_ABORT_OK and nothing else. SWITCHYARD_GROK_DOM_ABORT_OK",
+          "Reply with exactly WEBAI_BRIDGE_GROK_DOM_ABORT_OK and nothing else. WEBAI_BRIDGE_GROK_DOM_ABORT_OK",
       });
     const goto = vi.fn().mockResolvedValue(undefined);
     const waitForTimeout = vi.fn().mockResolvedValue(undefined);
@@ -411,14 +411,14 @@ describe("Grok browser DOM transport", () => {
 
     const text = await invokeGrokBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_GROK_DOM_ABORT_OK and nothing else.",
+        message: "Reply with exactly WEBAI_BRIDGE_GROK_DOM_ABORT_OK and nothing else.",
         signal: controller.signal,
       },
       process.env,
       vi.fn().mockResolvedValue(browser),
     );
 
-    expect(text).toBe("SWITCHYARD_GROK_DOM_ABORT_OK");
+    expect(text).toBe("WEBAI_BRIDGE_GROK_DOM_ABORT_OK");
     expect(waitForTimeout).toHaveBeenCalledTimes(1);
     expect(close).toHaveBeenCalled();
   });

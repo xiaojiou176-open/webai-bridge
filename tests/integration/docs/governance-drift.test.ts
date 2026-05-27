@@ -9,7 +9,7 @@ function read(relativePath: string) {
   return readFileSync(resolve(repoRoot, relativePath), "utf8");
 }
 
-describe("Switchyard docs and design governance drift contracts", () => {
+describe("WebaiBridge docs and design governance drift contracts", () => {
   it("keeps public-plane truth aligned with fail-closed runtime wording", () => {
     const supportMatrix = read("docs/public-surface-support-matrix.md");
     const proofPack = read("docs/public-proof-pack.md");
@@ -36,8 +36,8 @@ describe("Switchyard docs and design governance drift contracts", () => {
     const stitchDesign = read(".stitch/DESIGN.md");
     const designMaster = read("design-system/MASTER.md");
     const donorLedger = read("design-system/DONOR_ABSORPTION_LEDGER.md");
-    const authPortalMaster = read("design-system/switchyard-auth-portal/MASTER.md");
-    const debugWorkbenchMaster = read("design-system/switchyard-debug-cockpit/MASTER.md");
+    const authPortalMaster = read("design-system/webai-bridge-auth-portal/MASTER.md");
+    const debugWorkbenchMaster = read("design-system/webai-bridge-debug-cockpit/MASTER.md");
 
     expect(stitchDesign).toContain("Generated design output must follow:");
     expect(stitchDesign).toContain("`design-system/MASTER.md`");
@@ -49,7 +49,7 @@ describe("Switchyard docs and design governance drift contracts", () => {
     expect(designMaster).toContain("| Public docs/help surfaces | answer-first editorial routing |");
     expect(designMaster).toContain("## Maintainer-Only Detail");
     expect(designMaster).not.toContain("private maintainer-only design mother strategy contract");
-    expect(donorLedger).toContain("# Switchyard Public Donor Boundary Ledger");
+    expect(donorLedger).toContain("# WebaiBridge Public Donor Boundary Ledger");
     expect(donorLedger).toContain("| Runtime/operator shells |");
     expect(donorLedger).toContain("| Public docs/help surfaces |");
     expect(donorLedger).not.toContain("| Auth portal shell |");
@@ -102,19 +102,19 @@ describe("Switchyard docs and design governance drift contracts", () => {
     expect(llms).toContain("catalogs/discoverability-keyword-truth.json");
 
     expect(read("catalogs/builder-intent-router.schema.json")).toContain(
-      "Switchyard Builder Intent Router",
+      "WebaiBridge Builder Intent Router",
     );
     expect(read("catalogs/builder-journeys.schema.json")).toContain(
-      "Switchyard Builder Journeys",
+      "WebaiBridge Builder Journeys",
     );
     expect(read("catalogs/starter-pack-comparison.schema.json")).toContain(
-      "Switchyard Starter Pack Comparison",
+      "WebaiBridge Starter Pack Comparison",
     );
     expect(read("catalogs/compat-target-catalog.schema.json")).toContain(
-      "Switchyard Compat Target Catalog",
+      "WebaiBridge Compat Target Catalog",
     );
     expect(read("catalogs/mcp-tool-catalog.schema.json")).toContain(
-      "Switchyard MCP Tool Catalog",
+      "WebaiBridge MCP Tool Catalog",
     );
   });
 });

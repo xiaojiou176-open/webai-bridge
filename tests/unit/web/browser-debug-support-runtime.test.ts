@@ -94,7 +94,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).chatgpt!(createProvider());
 
     expect(connectOverCDP).toHaveBeenCalledWith("http://127.0.0.1:39222");
@@ -172,7 +172,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).chatgpt!(createProvider());
 
     expect(debug.currentConsole).toMatchObject({
@@ -231,7 +231,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).chatgpt!(createProvider());
 
     expect(debug.currentPage.classification).toBe("session-incomplete");
@@ -271,7 +271,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+      WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
     }).gemini!(
       createProvider({
         provider: "gemini",
@@ -323,7 +323,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).grok!(
       createProvider({
         provider: "grok",
@@ -368,7 +368,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).qwen!(
       createProvider({
         provider: "qwen",
@@ -420,7 +420,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).qwen!(
       createProvider({
         provider: "qwen",
@@ -432,9 +432,9 @@ describe("browser debug support runtime", () => {
           accountLabel: "qwen:local",
           captureProvenance: {
             browserMode: "isolated-chrome-root",
-            userDataDir: "/tmp/switchyard-browser",
+            userDataDir: "/tmp/webai-bridge-browser",
             profileDirectory: "Profile 1",
-            profileName: "switchyard",
+            profileName: "webai-bridge",
             cdpUrl: "http://127.0.0.1:9338",
           },
           persistenceAudit: {
@@ -510,7 +510,7 @@ describe("browser debug support runtime", () => {
     );
 
     const debug = await createDefaultWebDebugSupportRunners({
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
     }).grok!(
       createProvider({
         provider: "grok",

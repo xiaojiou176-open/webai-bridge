@@ -6,17 +6,17 @@ import {
 import { chromium, type BrowserContext, type Page } from "playwright-core";
 
 export const QWEN_WEB_LIVE_PROOF_ENV_NAMES = [
-  "SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE",
-  "SWITCHYARD_WEB_QWEN_USER_AGENT",
+  "WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE",
+  "WEBAI_BRIDGE_WEB_QWEN_USER_AGENT",
 ] as const;
 
 export const QWEN_WEB_LIVE_PROOF_URL = "https://chat.qwen.ai";
 export const QWEN_WEB_SESSION_PROBE_URL = "https://chat.qwen.ai/api/v2/chats/new";
 const LIVE_PROOF_RERUN_COMMAND = "pnpm exec node scripts/verify-web-login-live.mjs --provider qwen";
-const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
+const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
 const EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
 const QWEN_WEB_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
 const QWEN_WEB_DEFAULT_ISOLATED_CDP_URL = "http://127.0.0.1:9338";
 const ISOLATED_CHROME_ROOT_MODE = "isolated-chrome-root";
@@ -27,7 +27,7 @@ function includesAny(value: string, needles: readonly string[]): boolean {
 }
 
 function resolveQwenCdpUrl(env: Record<string, string | undefined>) {
-  const browserMode = env[SWITCHYARD_BROWSER_MODE_ENV_NAME]?.trim();
+  const browserMode = env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]?.trim();
 
   return (
     env[SHARED_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
@@ -178,9 +178,9 @@ export async function runQwenWebLiveProof(
       buildHeaders(resolvedEnv) {
         return {
           accept: "application/json, text/event-stream, */*",
-          cookie: resolvedEnv.SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE,
+          cookie: resolvedEnv.WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE,
           "content-type": "application/json",
-          "user-agent": resolvedEnv.SWITCHYARD_WEB_QWEN_USER_AGENT,
+          "user-agent": resolvedEnv.WEBAI_BRIDGE_WEB_QWEN_USER_AGENT,
         };
       },
       validate(body, response) {
@@ -256,9 +256,9 @@ export async function runQwenBrowserWorkspaceProof(
   ) => chromium.connectOverCDP(endpointURL),
 ): Promise<WebLiveProofResult> {
   const envStatus = collectLiveProofEnvStatus(QWEN_WEB_LIVE_PROOF_ENV_NAMES, env);
-  const cookieBundle = env.SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE?.trim();
+  const cookieBundle = env.WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE?.trim();
 
-  if (!cookieBundle || !env.SWITCHYARD_WEB_QWEN_USER_AGENT?.trim()) {
+  if (!cookieBundle || !env.WEBAI_BRIDGE_WEB_QWEN_USER_AGENT?.trim()) {
     return {
       status: "external-blocker",
       provider: "qwen",

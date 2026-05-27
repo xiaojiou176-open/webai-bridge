@@ -1,15 +1,15 @@
 {
-  "name": "switchyard-builder-suite",
+  "name": "webai-bridge-builder-suite",
   "version": "0.1.0",
-  "description": "Truth-first Switchyard builder skills for runtime diagnostics and docs/SEO sync.",
+  "description": "Truth-first WebaiBridge builder skills for runtime diagnostics and docs/SEO sync.",
   "author": {
-    "name": "Switchyard"
+    "name": "WebaiBridge"
   },
   "license": "MIT",
-  "homepage": "https://github.com/xiaojiou176-open/Switchyard",
-  "repository": "https://github.com/xiaojiou176-open/Switchyard",
+  "homepage": "https://github.com/xiaojiou176-open/webai-bridge",
+  "repository": "https://github.com/xiaojiou176-open/webai-bridge",
   "keywords": [
-    "switchyard",
+    "webai-bridge",
     "claude-code",
     "openclaw",
     "runtime-diagnostics",

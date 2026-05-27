@@ -2,7 +2,7 @@
 
 这个样板间解决的是最常见的第一堵墙：
 
-> “我知道 `Switchyard` 是个 shared provider runtime，  
+> “我知道 `WebaiBridge` 是个 shared provider runtime，  
 > 但我第一条 invoke 到底怎么发？”
 
 更直白一点说，这个 starter 就像一把已经插好电的延长线。  
@@ -16,18 +16,18 @@ pnpm run example:runtime-bridge
 
 前提：
 
-- 本机已有可访问的 `Switchyard` runtime
+- 本机已有可访问的 `WebaiBridge` runtime
 - 目标 provider 有你自己的合法凭证
 - 如果你走 `byok`，就需要对应 API key；如果你换成 `web`，就需要对应网页登录态
 
 ## 可选环境变量
 
-- `SWITCHYARD_RUNTIME_BASE_URL`
-- `SWITCHYARD_SERVICE_PORT`
-- `SWITCHYARD_RUNTIME_PROVIDER`
-- `SWITCHYARD_RUNTIME_MODEL`
-- `SWITCHYARD_RUNTIME_INPUT`
-- `SWITCHYARD_RUNTIME_LANE`
+- `WEBAI_BRIDGE_RUNTIME_BASE_URL`
+- `WEBAI_BRIDGE_SERVICE_PORT`
+- `WEBAI_BRIDGE_RUNTIME_PROVIDER`
+- `WEBAI_BRIDGE_RUNTIME_MODEL`
+- `WEBAI_BRIDGE_RUNTIME_INPUT`
+- `WEBAI_BRIDGE_RUNTIME_LANE`
 
 默认值会从：
 

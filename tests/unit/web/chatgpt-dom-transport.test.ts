@@ -8,8 +8,8 @@ afterEach(() => {
 
 describe("ChatGPT browser DOM transport", () => {
   it("executes through Playwright CDP when the attached browser can answer through the page UI", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
-    vi.stubEnv("SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE", "chatgpt_session=abc");
 
     const evaluate = vi
       .fn()
@@ -22,10 +22,10 @@ describe("ChatGPT browser DOM transport", () => {
       })
       .mockResolvedValueOnce([])
       .mockResolvedValue({
-        text: "SWITCHYARD_CHATGPT_DOM_OK",
+        text: "WEBAI_BRIDGE_CHATGPT_DOM_OK",
         isStreaming: false,
         bodyText:
-          "Reply with exactly SWITCHYARD_CHATGPT_DOM_OK and nothing else. SWITCHYARD_CHATGPT_DOM_OK",
+          "Reply with exactly WEBAI_BRIDGE_CHATGPT_DOM_OK and nothing else. WEBAI_BRIDGE_CHATGPT_DOM_OK",
       });
     const goto = vi.fn().mockResolvedValue(undefined);
     const waitForTimeout = vi.fn().mockResolvedValue(undefined);
@@ -59,7 +59,7 @@ describe("ChatGPT browser DOM transport", () => {
 
     const text = await invokeChatgptBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_CHATGPT_DOM_OK and nothing else.",
+        message: "Reply with exactly WEBAI_BRIDGE_CHATGPT_DOM_OK and nothing else.",
       },
       process.env,
       connectOverCDP,
@@ -81,12 +81,12 @@ describe("ChatGPT browser DOM transport", () => {
         url: "https://chatgpt.com/",
       }),
     ]);
-    expect(text).toContain("SWITCHYARD_CHATGPT_DOM_OK");
+    expect(text).toContain("WEBAI_BRIDGE_CHATGPT_DOM_OK");
     expect(close).toHaveBeenCalled();
   });
 
   it("fails before sending when ChatGPT already shows a visible rate-limit gate", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
 
     const evaluate = vi
       .fn()
@@ -124,7 +124,7 @@ describe("ChatGPT browser DOM transport", () => {
     await expect(
       invokeChatgptBrowserDomTransport(
         {
-          message: "Reply with exactly SWITCHYARD_CHATGPT_DOM_OK and nothing else.",
+          message: "Reply with exactly WEBAI_BRIDGE_CHATGPT_DOM_OK and nothing else.",
         },
         process.env,
         connectOverCDP,
@@ -135,7 +135,7 @@ describe("ChatGPT browser DOM transport", () => {
   });
 
   it("fails before sending when ChatGPT is still on the logged-out landing page", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
 
     const evaluate = vi.fn().mockResolvedValueOnce({
       pageText: "登录 ChatGPT 免费注册 使用密码继续",
@@ -166,7 +166,7 @@ describe("ChatGPT browser DOM transport", () => {
     await expect(
       invokeChatgptBrowserDomTransport(
         {
-          message: "Reply with exactly SWITCHYARD_CHATGPT_DOM_OK",
+          message: "Reply with exactly WEBAI_BRIDGE_CHATGPT_DOM_OK",
         },
         process.env,
         vi.fn().mockResolvedValue(browser),
@@ -175,7 +175,7 @@ describe("ChatGPT browser DOM transport", () => {
   });
 
   it("reuses an existing ChatGPT tab instead of opening another one", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
 
     const evaluate = vi
       .fn()
@@ -188,9 +188,9 @@ describe("ChatGPT browser DOM transport", () => {
       })
       .mockResolvedValueOnce(["Existing assistant text"])
       .mockResolvedValue({
-        text: "SWITCHYARD_CHATGPT_DOM_OK",
+        text: "WEBAI_BRIDGE_CHATGPT_DOM_OK",
         isStreaming: false,
-        bodyText: "SWITCHYARD_CHATGPT_DOM_OK",
+        bodyText: "WEBAI_BRIDGE_CHATGPT_DOM_OK",
       });
     const click = vi.fn().mockResolvedValue(undefined);
     const page = {
@@ -226,7 +226,7 @@ describe("ChatGPT browser DOM transport", () => {
 
     await invokeChatgptBrowserDomTransport(
       {
-        message: "Reply with exactly SWITCHYARD_CHATGPT_DOM_OK and nothing else.",
+        message: "Reply with exactly WEBAI_BRIDGE_CHATGPT_DOM_OK and nothing else.",
       },
       process.env,
       vi.fn().mockResolvedValue(browser),
@@ -241,7 +241,7 @@ describe("ChatGPT browser DOM transport", () => {
   });
 
   it("ignores stale assistant text until the current request token appears", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:39222");
 
     const evaluate = vi
       .fn()

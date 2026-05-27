@@ -14,10 +14,10 @@ import {
 } from "../../shared/http-transport.js";
 import { urlHostnameMatches } from "../../shared/url-hosts.js";
 
-const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
+const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
 const EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
 const GROK_WEB_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
 const GROK_WEB_DEFAULT_ISOLATED_CDP_URL = "http://127.0.0.1:9338";
 const ISOLATED_CHROME_ROOT_MODE = "isolated-chrome-root";
@@ -47,7 +47,7 @@ type GrokBrowserSessionResult =
   | GrokBrowserSessionSuccess;
 
 function resolveGrokCdpUrl(env: Record<string, string | undefined>) {
-  const browserMode = env[SWITCHYARD_BROWSER_MODE_ENV_NAME]?.trim();
+  const browserMode = env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]?.trim();
 
   return (
     env[SHARED_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
@@ -175,7 +175,7 @@ export async function invokeGrokBrowserSessionTransport(args: {
 
     if (typeof context.addCookies === "function") {
       await context.addCookies(
-        parseGrokCookies(envValues.SWITCHYARD_WEB_GROK_COOKIE_BUNDLE),
+        parseGrokCookies(envValues.WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE),
       ).catch(() => undefined);
     }
 

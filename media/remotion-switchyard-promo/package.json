@@ -1,11 +1,11 @@
 {
-  "name": "switchyard-remotion-promo",
+  "name": "webai-bridge-remotion-promo",
   "private": true,
   "type": "module",
   "scripts": {
     "studio": "remotion studio src/index.ts",
-    "still": "remotion still src/index.ts SwitchyardPromo out/switchyard-promo-frame.png --frame=90 --scale=0.25",
-    "render": "remotion render src/index.ts SwitchyardPromo out/switchyard-promo.mp4"
+    "still": "remotion still src/index.ts WebaiBridgePromo out/webai-bridge-promo-frame.png --frame=90 --scale=0.25",
+    "render": "remotion render src/index.ts WebaiBridgePromo out/webai-bridge-promo.mp4"
   },
   "dependencies": {
     "react": "^19.1.1",
