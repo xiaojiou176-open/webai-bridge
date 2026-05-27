@@ -87,7 +87,7 @@
     "@webai-bridge/consumer-codex": "workspace:*",
     "@webai-bridge/consumer-compat-shared": "workspace:*",
     "@webai-bridge/consumer-openclaw": "workspace:*",
-    "@types/node": "25.6.0",
+    "@types/node": "25.9.1",
     "@vitest/coverage-v8": "^4.1.2",
     "ajv": "^8.18.0",
     "playwright-core": "1.59.1",
