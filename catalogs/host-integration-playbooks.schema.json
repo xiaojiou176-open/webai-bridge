@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/host-integration-playbooks.schema.json",
-  "title": "Switchyard Host Integration Playbooks",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/host-integration-playbooks.schema.json",
+  "title": "WebaiBridge Host Integration Playbooks",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -1,4 +1,4 @@
-# Switchyard for Claude Code
+# WebaiBridge for Claude Code
 
 ## Status
 
@@ -16,7 +16,7 @@
 
 ## What Is Already Landed
 
-- Switchyard already has:
+- WebaiBridge already has:
   - a durable service runtime
   - durable auth/session contracts
   - durable service vs SDK surface contracts
@@ -39,4 +39,4 @@ Do not imagine this as:
 The more truthful reading is:
 
 > if this grows later, it should grow from the gateway/API compatibility layer
-> first, not by copying the Claude Code product shell into Switchyard
+> first, not by copying the Claude Code product shell into WebaiBridge

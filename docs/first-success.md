@@ -1,6 +1,6 @@
-# Switchyard Default First Success
+# WebaiBridge Default First Success
 
-The easiest mistake for a first-time Switchyard visitor is opening twenty docs
+The easiest mistake for a first-time WebaiBridge visitor is opening twenty docs
 tabs before proving even one bounded path.
 
 This page only does one job:
@@ -31,7 +31,7 @@ are not part of this route.
 
 In plain English:
 
-- start the Switchyard service runtime
+- start the WebaiBridge service runtime
 - prove the runtime is alive
 - prove it can accept one minimal invoke
 - only then move into builder packs, starter packs, or compat lanes
@@ -83,7 +83,7 @@ here is already a useful first success.
 pnpm run example:runtime-bridge
 ```
 
-This is the closest minimal proof of the Switchyard value proposition:
+This is the closest minimal proof of the WebaiBridge value proposition:
 
 - it sends one bounded JSON body through `/v1/runtime/invoke`
 - it proves the shared runtime can do more than list tools and print catalogs
@@ -137,7 +137,7 @@ Open:
 
 ## What This Path Proves
 
-- Switchyard really has a service-first runtime front door
+- WebaiBridge really has a service-first runtime front door
 - the repo really has a runnable read-only MCP surface
 - the repo really has an executable minimal invoke starter
 - you do **not** need to pretend you already have full Codex, Claude Code, or
@@ -156,4 +156,4 @@ Open:
 >
 > **Open builder lanes second.**
 >
-> That is the most honest front door Switchyard can offer today.
+> That is the most honest front door WebaiBridge can offer today.

@@ -14,28 +14,28 @@ describe("browser debug support", () => {
     } = await import("../../../scripts/browser-debug-support.mjs");
 
     const env = {
-      SWITCHYARD_BROWSER_MODE: "managed-browser",
-      SWITCHYARD_WEB_AUTH_USER_DATA_DIR: `${process.cwd()}/.runtime-cache/test-managed-browser`,
-      SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:49222",
-      SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:49223",
+      WEBAI_BRIDGE_BROWSER_MODE: "managed-browser",
+      WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR: `${process.cwd()}/.runtime-cache/test-managed-browser`,
+      WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:49222",
+      WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:49223",
     };
 
     expect(resolveProviderAttachTarget("chatgpt", env)).toEqual(
       expect.objectContaining({
         cdpUrl: "http://127.0.0.1:49222",
-        cdpUrlSource: "SWITCHYARD_WEB_AUTH_CDP_URL",
+        cdpUrlSource: "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
       }),
     );
     expect(resolveProviderAttachTarget("gemini", env)).toEqual(
       expect.objectContaining({
         cdpUrl: "http://127.0.0.1:49223",
-        cdpUrlSource: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+        cdpUrlSource: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       }),
     );
     expect(resolveCanonicalProfile("chatgpt", env)).toEqual(
       expect.objectContaining({
         managedProfileDir: `${process.cwd()}/.runtime-cache/test-managed-browser`,
-        managedProfileSource: "SWITCHYARD_WEB_AUTH_USER_DATA_DIR",
+        managedProfileSource: "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR",
       }),
     );
     expect(
@@ -117,8 +117,8 @@ describe("browser debug support", () => {
         blocker: "chatgpt-browser-session-incomplete",
       },
       {
-        SWITCHYARD_BROWSER_MODE: "managed-browser",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
+        WEBAI_BRIDGE_BROWSER_MODE: "managed-browser",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:39222",
       },
       {
         observeMs: 0,
@@ -167,7 +167,7 @@ describe("browser debug support", () => {
       expect.objectContaining({
         screenshots: true,
         snapshots: true,
-        title: "Switchyard chatgpt browser debug support",
+        title: "WebaiBridge chatgpt browser debug support",
       }),
     );
     expect(tracingStop).toHaveBeenCalledWith(

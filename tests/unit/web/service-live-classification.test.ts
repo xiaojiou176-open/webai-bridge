@@ -30,7 +30,7 @@ describe("Service live classification", () => {
         rerunCommand:
           "pnpm run bootstrap:web-login-browser -- --provider gemini && pnpm exec node scripts/verify-web-login-live.mjs --provider gemini",
         diagnostic:
-          "Gemini attached browser is still on a Google sign-in screen, so the browser session must be completed before Switchyard can invoke Gemini.",
+          "Gemini attached browser is still on a Google sign-in screen, so the browser session must be completed before WebaiBridge can invoke Gemini.",
         summary:
           "Gemini is currently attached to a Google CookieMismatch or sign-in page. Reopen the managed Gemini browser, complete Google sign-in again, then rerun the live gate.",
       },

@@ -1,6 +1,6 @@
 # Research Copilot Pack
 
-这个 pack 适合的是先读 truth surfaces、再把研究型 copilot 接进 Switchyard 的宿主，而不是直接放飞成自动研究代理。
+这个 pack 适合的是先读 truth surfaces、再把研究型 copilot 接进 WebaiBridge 的宿主，而不是直接放飞成自动研究代理。
 
 ## 当前诚实边界
 
@@ -13,9 +13,9 @@
 - current pack-local smoke:
   `pnpm exec node starter-packs/skills/research-copilot-pack/smoke.mjs`
 - planned CLI route:
-  `pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack`
+  `pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack`
 - planned MCP:
-  `switchyard.catalog.skill_pack_route`
+  `webai-bridge.catalog.skill_pack_route`
 - 当前这轮只落 pack-local scaffold，尚未把 route/catalog/index 接进共享面。
 
 ## 当前不该吹的东西

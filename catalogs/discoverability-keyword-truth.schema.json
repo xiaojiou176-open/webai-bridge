@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/discoverability-keyword-truth.schema.json",
-  "title": "Switchyard Keyword Truth Table",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/discoverability-keyword-truth.schema.json",
+  "title": "WebaiBridge Keyword Truth Table",
   "type": "object",
   "additionalProperties": false,
   "required": [

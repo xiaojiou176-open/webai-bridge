@@ -1,4 +1,4 @@
-import { SwitchyardContractError } from './diagnostics.js';
+import { WebaiBridgeContractError } from './diagnostics.js';
 
 export interface ModelReference {
   readonly providerKey: string;
@@ -31,7 +31,7 @@ function splitModelReference(input: ModelReferenceInput): StructuredModelReferen
   const separatorIndex = raw.indexOf('/');
 
   if (separatorIndex <= 0 || separatorIndex === raw.length - 1) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'invalid-model-reference',
       `Model reference must use "provider/model" form, received "${input}".`
     );
@@ -49,7 +49,7 @@ export function parseModelReference(input: ModelReferenceInput): ModelReference 
   const modelId = normalizeModelSegment(parts.model);
 
   if (!providerKey || !modelId) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'invalid-model-reference',
       `Model reference must include both provider and model, received "${JSON.stringify(input)}".`
     );

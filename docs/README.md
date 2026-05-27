@@ -1,6 +1,6 @@
-# Switchyard Public Docs
+# WebaiBridge Public Docs
 
-This is the public docs map for Switchyard.
+This is the public docs map for WebaiBridge.
 
 Treat it like an adoption desk, not a warehouse list: the job of this page is
 to route a reader to the next truthful page, not to enumerate every file in the
@@ -42,7 +42,7 @@ Keep these public, but demoted one shelf deeper:
 
 ## Public Language Policy
 
-Switchyard treats the public front door as **English-first**.
+WebaiBridge treats the public front door as **English-first**.
 
 - The default route for global developers stays English-first.
 - Glossary, FAQ, and i18n helper pages can remain bilingual support surfaces.
@@ -125,7 +125,7 @@ machine-readable shelf, instead of turning this atlas back into a file cabinet.
 
 ## Internal Truth Shelves
 
-Switchyard still uses maintainer-only contracts, ledgers, and working packs in
+WebaiBridge still uses maintainer-only contracts, ledgers, and working packs in
 a private local maintainer shelf when that shelf exists in the maintainer
 workspace.
 

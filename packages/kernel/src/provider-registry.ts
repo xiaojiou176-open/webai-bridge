@@ -7,7 +7,7 @@ import {
   type ModelReference,
   type ModelReferenceInput,
   type ProviderId,
-  SwitchyardContractError,
+  WebaiBridgeContractError,
   createCapabilityMatrix,
   normalizeLaneId,
   normalizeProviderId,
@@ -54,7 +54,7 @@ function normalizeRegistryModel(
   const normalizedProvider = normalizeProviderId(parsed.providerKey) ?? parsed.providerKey;
 
   if (normalizedProvider !== providerId) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'registry-invalid',
       `${label} must point back to provider "${providerId}", received "${parsed.canonical}".`
     );
@@ -68,21 +68,21 @@ function normalizeRegistration(input: ProviderRegistration): RegisteredProvider 
   const laneId = normalizeLaneId(input.laneId);
 
   if (!providerId) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-unsupported',
       `Provider "${input.providerId}" is outside the current V1 provider universe.`
     );
   }
 
   if (!laneId) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'configuration-invalid',
       `Lane "${input.laneId}" is invalid. V1 only allows BYOK and Web/Login.`
     );
   }
 
   if (!providerSupportsLane(providerId, laneId)) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-lane-incompatible',
       `Provider "${providerId}" cannot be registered on lane "${laneId}".`
     );
@@ -91,7 +91,7 @@ function normalizeRegistration(input: ProviderRegistration): RegisteredProvider 
   const authModes = [...new Set(input.authModes)];
 
   if (authModes.length === 0) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'registry-invalid',
       `Provider "${providerId}" on lane "${laneId}" must declare at least one auth mode.`
     );
@@ -131,7 +131,7 @@ export class ProviderRegistry {
       const key = registryKey(entry.providerId, entry.laneId);
 
       if (this.byKey.has(key)) {
-        throw new SwitchyardContractError(
+        throw new WebaiBridgeContractError(
           'registry-invalid',
           `Duplicate provider registration detected for "${entry.providerId}" on "${entry.laneId}".`
         );
@@ -170,7 +170,7 @@ export class ProviderRegistry {
     const entry = this.get(providerId, laneId);
 
     if (!entry) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'provider-lane-incompatible',
         `Provider "${providerId}" is not registered on lane "${laneId}".`
       );

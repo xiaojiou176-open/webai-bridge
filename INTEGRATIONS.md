@@ -1,6 +1,6 @@
 # Integration Boundaries
 
-Switchyard is a **shared provider runtime for AI apps**.
+WebaiBridge is a **shared provider runtime for AI apps**.
 
 It can sit behind coding-agent or builder workflows, but this repository does
 **not** currently claim:
@@ -49,7 +49,7 @@ It can sit behind coding-agent or builder workflows, but this repository does
 
 ## How To Read The Repo
 
-If you are evaluating Switchyard for an external toolchain, the truthful order is:
+If you are evaluating WebaiBridge for an external toolchain, the truthful order is:
 
 1. decide whether you need service-first or MCP-first access
 2. use the existing repo-native runtime, MCP surface, or starter pack

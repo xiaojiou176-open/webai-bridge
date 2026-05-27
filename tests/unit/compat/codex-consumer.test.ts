@@ -34,7 +34,7 @@ describe("Codex thin compat adapter", () => {
     });
 
     const adapter = createCodexThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as typeof fetch,
     });
     const result = await adapter.responses({
@@ -60,7 +60,7 @@ describe("Codex thin compat adapter", () => {
 
   it("fails closed for dual-lane providers without an explicit lane", async () => {
     const adapter = createCodexThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: vi.fn() as typeof fetch,
     });
 

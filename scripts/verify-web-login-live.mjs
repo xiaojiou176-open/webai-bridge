@@ -27,32 +27,32 @@ import {
   isCiEnvironment,
   resolveCredentialedBrowserMode,
   resolveLocalWebAuthStoreArtifactPath,
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
 } from "./runtime-policy.mjs";
 import { runLightweightRuntimePrune } from "./runtime-cache-maintenance.mjs";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, "..");
 const tempRootDir = join(repoRoot, ".runtime-cache", "temp");
-const ISOLATED_CHILD_ENV_NAME = "SWITCHYARD_WEB_LOGIN_ISOLATED_CHILD";
-const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
+const ISOLATED_CHILD_ENV_NAME = "WEBAI_BRIDGE_WEB_LOGIN_ISOLATED_CHILD";
+const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
 const EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-const GEMINI_WEB_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_GEMINI_CDP_URL";
-const SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
-const SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+const GEMINI_WEB_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL";
+const WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
+const WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL =
   "http://127.0.0.1:9338";
 const STORED_RUNTIME_ROUTING_ENV_NAMES = new Set([
-  "SWITCHYARD_BROWSER_MODE",
-  "SWITCHYARD_CHROME_USER_DATA_DIR",
-  "SWITCHYARD_CHROME_PROFILE_NAME",
-  "SWITCHYARD_WEB_AUTH_ACTIVE_MODE",
-  "SWITCHYARD_WEB_AUTH_CDP_URL",
-  "SWITCHYARD_WEB_AUTH_USER_DATA_DIR",
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR",
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL",
-  "SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL",
-  "SWITCHYARD_WEB_GEMINI_CDP_URL",
+  "WEBAI_BRIDGE_BROWSER_MODE",
+  "WEBAI_BRIDGE_CHROME_USER_DATA_DIR",
+  "WEBAI_BRIDGE_CHROME_PROFILE_NAME",
+  "WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE",
+  "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
+  "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR",
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR",
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL",
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL",
+  "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
 ]);
 
 const providerProofs = [
@@ -110,36 +110,36 @@ const providerIds = providerProofs.map((proof) => proof.provider);
 const providerSessionMaterialCatalog = {
   chatgpt: {
     envNames: [
-      "SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE",
-      "SWITCHYARD_WEB_CHATGPT_USER_AGENT",
+      "WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE",
+      "WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT",
     ],
     probeUrl: "https://chatgpt.com/api/auth/session",
   },
   gemini: {
     envNames: [
-      "SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE",
-      "SWITCHYARD_WEB_GEMINI_USER_AGENT",
+      "WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE",
+      "WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT",
     ],
     probeUrl: "https://gemini.google.com/app",
   },
   claude: {
     envNames: [
-      "SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE",
-      "SWITCHYARD_WEB_CLAUDE_USER_AGENT",
+      "WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE",
+      "WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT",
     ],
     probeUrl: "https://claude.ai/api/organizations",
   },
   grok: {
     envNames: [
-      "SWITCHYARD_WEB_GROK_COOKIE_BUNDLE",
-      "SWITCHYARD_WEB_GROK_USER_AGENT",
+      "WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE",
+      "WEBAI_BRIDGE_WEB_GROK_USER_AGENT",
     ],
     probeUrl: "https://grok.com",
   },
   qwen: {
     envNames: [
-      "SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE",
-      "SWITCHYARD_WEB_QWEN_USER_AGENT",
+      "WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE",
+      "WEBAI_BRIDGE_WEB_QWEN_USER_AGENT",
     ],
     probeUrl: "https://chat.qwen.ai",
   },
@@ -463,7 +463,7 @@ function mapIsolatedProviderFailureResult(result) {
       ...buildProviderDiagnosisArtifacts(result.provider),
       diagnostic: result.diagnostic,
       summary:
-        `${result.provider} needs the managed onboarding browser attached over CDP before Switchyard can prove or invoke the live web session.`,
+        `${result.provider} needs the managed onboarding browser attached over CDP before WebaiBridge can prove or invoke the live web session.`,
       debug: result.debug,
     };
   }
@@ -500,7 +500,7 @@ function mapBrowserAttachFailureAsExternalBlocker(provider, env, diagnostic) {
     rerunCommand: buildProviderRerunCommand(provider),
     ...buildProviderDiagnosisArtifacts(provider),
     diagnostic,
-    summary: `${provider} needs the managed onboarding browser attached over CDP before Switchyard can prove or invoke the live web session.`,
+    summary: `${provider} needs the managed onboarding browser attached over CDP before WebaiBridge can prove or invoke the live web session.`,
   };
 }
 
@@ -749,10 +749,10 @@ function providerHasSessionMaterial(proof, env, storedSessions) {
 
 function resolveGeminiCdpUrl(env = process.env) {
   const defaultSharedCdpUrl =
-    resolveCredentialedBrowserMode(env) === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+    resolveCredentialedBrowserMode(env) === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
       ? env[EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
-        SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
-      : SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL;
+        WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
+      : WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL;
 
   return (
     env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim() ||
@@ -762,13 +762,13 @@ function resolveGeminiCdpUrl(env = process.env) {
 }
 
 function applyPreferredCdpDefaults(env) {
-  if (resolveCredentialedBrowserMode(env) !== SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (resolveCredentialedBrowserMode(env) !== WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     return env;
   }
 
   const sharedCdpUrl =
     env[EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
-    SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL;
+    WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL;
 
   return {
     ...env,
@@ -967,7 +967,7 @@ export function mapGeminiLiveProofFailureResult(liveProofResult, env = process.e
       ...buildProviderDiagnosisArtifacts("gemini"),
       diagnostic: liveProofResult.diagnostic,
       summary:
-        "Gemini needs the managed onboarding browser attached over CDP before Switchyard can prove or invoke the live web session.",
+        "Gemini needs the managed onboarding browser attached over CDP before WebaiBridge can prove or invoke the live web session.",
     };
   }
 
@@ -1075,7 +1075,7 @@ export function mapGrokLiveProofFailureResult(liveProofResult) {
       ...buildProviderDiagnosisArtifacts("grok"),
       diagnostic: liveProofResult.diagnostic,
       summary:
-        "Grok cookie material is present, but the attached browser is blocked on a human-verification or anti-bot gate. Complete that verification in the Switchyard browser, then rerun the Grok-only live gate.",
+        "Grok cookie material is present, but the attached browser is blocked on a human-verification or anti-bot gate. Complete that verification in the WebaiBridge browser, then rerun the Grok-only live gate.",
     };
   }
 
@@ -1103,7 +1103,7 @@ export function mapGrokLiveProofFailureResult(liveProofResult) {
     ...buildProviderDiagnosisArtifacts("grok"),
     diagnostic: liveProofResult.diagnostic,
     summary:
-      "Grok cookie material is present, but the attached browser is not landing on the authenticated composer surface. Reopen Grok in the Switchyard browser, finish sign-in or any human verification there, then rerun the Grok-only live gate.",
+      "Grok cookie material is present, but the attached browser is not landing on the authenticated composer surface. Reopen Grok in the WebaiBridge browser, finish sign-in or any human verification there, then rerun the Grok-only live gate.",
   };
 }
 
@@ -1143,10 +1143,10 @@ function buildProviderRiskExternalBlocker({ proof, liveProofResult, invokeResult
       diagnostic: invokeResult.message,
       summary:
         isTokenInvalidated
-          ? "ChatGPT proved the stored session, but the live conversation endpoint reports that the current auth token has been invalidated. Reopen ChatGPT in the Switchyard browser, complete sign-in again, then rerun the live gate."
+          ? "ChatGPT proved the stored session, but the live conversation endpoint reports that the current auth token has been invalidated. Reopen ChatGPT in the WebaiBridge browser, complete sign-in again, then rerun the live gate."
           : isRateLimited
             ? "ChatGPT attached browser is already showing a visible rate-limit gate. Wait for provider capacity or switch to a plan with more headroom, then rerun the ChatGPT-only live gate."
-          : "ChatGPT proved the stored session, but the live conversation endpoint was blocked by an unusual-activity risk check. Reopen ChatGPT in the Switchyard browser, finish any verification/CAPTCHA, then rerun the live gate.",
+          : "ChatGPT proved the stored session, but the live conversation endpoint was blocked by an unusual-activity risk check. Reopen ChatGPT in the WebaiBridge browser, finish any verification/CAPTCHA, then rerun the live gate.",
     };
   }
 
@@ -1162,7 +1162,7 @@ function buildProviderRiskExternalBlocker({ proof, liveProofResult, invokeResult
     rerunCommand: buildProviderRerunCommand("grok"),
     diagnostic: invokeResult.message,
     summary:
-      "Grok proved the stored session, but the live response endpoint was rejected by upstream anti-bot checks. Reopen Grok in the Switchyard browser, complete any human verification, then rerun the live gate.",
+      "Grok proved the stored session, but the live response endpoint was rejected by upstream anti-bot checks. Reopen Grok in the WebaiBridge browser, complete any human verification, then rerun the live gate.",
   };
 }
 
@@ -1207,7 +1207,7 @@ export function detectSoftInvokeFailure({ proof, liveProofResult, invokeResult }
       diagnostic:
         "Qwen runtime reached the upstream transport, but the configured model id was rejected as not found.",
       summary:
-        "Switchyard reached the live Qwen transport, but the configured model id does not exist upstream. Update the default Qwen model before rerunning verify:web-login-live.",
+        "WebaiBridge reached the live Qwen transport, but the configured model id does not exist upstream. Update the default Qwen model before rerunning verify:web-login-live.",
       envStatus: liveProofResult.envStatus,
     };
   }
@@ -1314,7 +1314,7 @@ export function mapInvokeFailureResult({ proof, liveProofResult, invokeResult, e
       diagnostic: invokeResult.message,
       summary:
         invokeResult.suggestedAction ??
-        "Let Switchyard start or reattach the managed Gemini onboarding browser, finish sign-in there, then rerun verify:web-login-live.",
+        "Let WebaiBridge start or reattach the managed Gemini onboarding browser, finish sign-in there, then rerun verify:web-login-live.",
     };
   }
 
@@ -1352,7 +1352,7 @@ export function mapInvokeFailureResult({ proof, liveProofResult, invokeResult, e
       ...buildProviderDiagnosisArtifacts("gemini"),
       diagnostic: invokeResult.message,
       summary:
-        "Gemini cookie material is present, but the attached browser session is not landing on the authenticated Gemini composer. Reopen Gemini in the Switchyard browser, finish Google sign-in or fix the CookieMismatch page, then rerun the live gate.",
+        "Gemini cookie material is present, but the attached browser session is not landing on the authenticated Gemini composer. Reopen Gemini in the WebaiBridge browser, finish Google sign-in or fix the CookieMismatch page, then rerun the live gate.",
     };
   }
 
@@ -2830,7 +2830,7 @@ export async function runWebLoginLiveVerification(options = {}) {
 async function main() {
   if (isCiEnvironment(process.env)) {
     throw new Error(
-      "Switchyard verify:web-login-live is credentialed-workstation only and must not run inside CI.",
+      "WebaiBridge verify:web-login-live is credentialed-workstation only and must not run inside CI.",
     );
   }
 

@@ -1,4 +1,4 @@
-# Switchyard MCP Status
+# WebaiBridge MCP Status
 
 ## Current Status
 
@@ -10,8 +10,8 @@
 
 Many users search for:
 
-- `Switchyard MCP`
-- `Switchyard MCP server`
+- `WebaiBridge MCP`
+- `WebaiBridge MCP server`
 - `AI runtime MCP backend`
 
 Without this page, it is easy to confuse:
@@ -21,11 +21,11 @@ Without this page, it is easy to confuse:
 
 ## What Is True Right Now
 
-- Switchyard ships a committed service runtime and SDK/client surfaces
-- Switchyard now also ships a committed **read-only stdio MCP server/tool
+- WebaiBridge ships a committed service runtime and SDK/client surfaces
+- WebaiBridge now also ships a committed **read-only stdio MCP server/tool
   surface**:
   - startup command:
-    - `pnpm run switchyard:mcp`
+    - `pnpm run webai-bridge:mcp`
   - committed package:
     - `packages/surfaces/mcp`
   - backing model:
@@ -33,12 +33,12 @@ Without this page, it is easy to confuse:
     - local-first
     - read-only
 - the landed toolset is intentionally narrow:
-  - `switchyard.runtime.bootstrap`
-  - `switchyard.providers.list`
-  - `switchyard.runtime.health`
-  - `switchyard.runtime.doctor`
-  - `switchyard.runtime.plan`
-  - `switchyard.auth.status`
+  - `webai-bridge.runtime.bootstrap`
+  - `webai-bridge.providers.list`
+  - `webai-bridge.runtime.health`
+  - `webai-bridge.runtime.doctor`
+  - `webai-bridge.runtime.plan`
+  - `webai-bridge.auth.status`
   - provider-scoped status, doctor, probe, remediation, current-page, current-console,
     and current-network
   - provider support-bundle, readiness, attach-target, and diagnose ladder
@@ -74,30 +74,30 @@ If later phase gates open further, a more reasonable direction is:
 If plugin, skills, or builder tooling only needs current truth, the stable
 entrypoints today are:
 
-- connect directly to `pnpm run switchyard:mcp`
+- connect directly to `pnpm run webai-bridge:mcp`
 - or read:
-  - `pnpm run switchyard:cli -- mcp-status`
-  - `pnpm run switchyard:cli -- surface-catalog`
-  - `pnpm run switchyard:cli -- compat-target-catalog`
-  - `pnpm run switchyard:cli -- compat-target-catalog-schema`
-  - `pnpm run switchyard:cli -- builder-kit-catalog`
-  - `pnpm run switchyard:cli -- builder-kit-catalog-schema`
-  - `pnpm run switchyard:cli -- skill-pack-catalog`
-  - `pnpm run switchyard:cli -- skill-pack-catalog-schema`
-  - `pnpm run switchyard:cli -- skill-pack-routes`
-  - `pnpm run switchyard:cli -- skill-pack-routes-schema`
-  - `pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack`
-  - `pnpm run switchyard:cli -- mcp-tools`
-  - `pnpm run switchyard:cli -- mcp-tool-catalog`
-  - `pnpm run switchyard:cli -- mcp-tool-catalog-schema`
-  - `pnpm run switchyard:cli -- mcp-tool --target switchyard.runtime.health`
-  - `pnpm run switchyard:cli -- starter-manifests-schema`
-  - `pnpm run switchyard:cli -- starter-examples-schema`
-  - `pnpm run switchyard:cli -- starter-pack-index`
-  - `pnpm run switchyard:cli -- starter-pack-index-schema`
-  - `pnpm run switchyard:cli -- starter-pack-chooser`
-  - `pnpm run switchyard:cli -- starter-pack-chooser-schema`
-  - `pnpm run switchyard:cli -- starter-pack-scenario --target mcp-inspector`
+  - `pnpm run webai-bridge:cli -- mcp-status`
+  - `pnpm run webai-bridge:cli -- surface-catalog`
+  - `pnpm run webai-bridge:cli -- compat-target-catalog`
+  - `pnpm run webai-bridge:cli -- compat-target-catalog-schema`
+  - `pnpm run webai-bridge:cli -- builder-kit-catalog`
+  - `pnpm run webai-bridge:cli -- builder-kit-catalog-schema`
+  - `pnpm run webai-bridge:cli -- skill-pack-catalog`
+  - `pnpm run webai-bridge:cli -- skill-pack-catalog-schema`
+  - `pnpm run webai-bridge:cli -- skill-pack-routes`
+  - `pnpm run webai-bridge:cli -- skill-pack-routes-schema`
+  - `pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack`
+  - `pnpm run webai-bridge:cli -- mcp-tools`
+  - `pnpm run webai-bridge:cli -- mcp-tool-catalog`
+  - `pnpm run webai-bridge:cli -- mcp-tool-catalog-schema`
+  - `pnpm run webai-bridge:cli -- mcp-tool --target webai-bridge.runtime.health`
+  - `pnpm run webai-bridge:cli -- starter-manifests-schema`
+  - `pnpm run webai-bridge:cli -- starter-examples-schema`
+  - `pnpm run webai-bridge:cli -- starter-pack-index`
+  - `pnpm run webai-bridge:cli -- starter-pack-index-schema`
+  - `pnpm run webai-bridge:cli -- starter-pack-chooser`
+  - `pnpm run webai-bridge:cli -- starter-pack-chooser-schema`
+  - `pnpm run webai-bridge:cli -- starter-pack-scenario --target mcp-inspector`
   - `catalogs/mcp-tool-catalog.json`
   - `catalogs/mcp-tool-catalog.schema.json`
   - `catalogs/skill-pack-routes.json`
@@ -115,18 +115,18 @@ If your real question is:
 Do not stop at the tool inventory. Go here next:
 
 - [docs/starter-pack-chooser.md](./starter-pack-chooser.md)
-- `switchyard.catalog.starter_pack_chooser`
-- `switchyard.catalog.starter_pack_scenario`
+- `webai-bridge.catalog.starter_pack_chooser`
+- `webai-bridge.catalog.starter_pack_scenario`
 
-If you have already decided to attach Switchyard to a host instead of only
+If you have already decided to attach WebaiBridge to a host instead of only
 reading current truth, go here next:
 
 - [docs/host-integration-playbooks.md](./host-integration-playbooks.md)
-- `switchyard.catalog.host_playbooks`
-- `switchyard.catalog.host_playbook`
+- `webai-bridge.catalog.host_playbooks`
+- `webai-bridge.catalog.host_playbook`
 - [examples/hosts/README.md](../examples/hosts/README.md)
-- `switchyard.catalog.host_examples`
-- `switchyard.catalog.host_example`
+- `webai-bridge.catalog.host_examples`
+- `webai-bridge.catalog.host_example`
 
 If you already picked a **skill pack** and your real question is:
 
@@ -134,10 +134,10 @@ If you already picked a **skill pack** and your real question is:
 
 go here next:
 
-- `pnpm run switchyard:cli -- skill-pack-routes`
-- `pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack`
-- `switchyard.catalog.skill_packs`
-- `switchyard.catalog.skill_pack`
+- `pnpm run webai-bridge:cli -- skill-pack-routes`
+- `pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack`
+- `webai-bridge.catalog.skill_packs`
+- `webai-bridge.catalog.skill_pack`
 - [docs/host-integration-playbooks.md](./host-integration-playbooks.md)
 
 ## Fastest Route By Question
@@ -145,97 +145,97 @@ go here next:
 Treat this section like a triage desk:
 
 - if you need runtime, auth, or provider state:
-  - `switchyard.runtime.bootstrap`
-  - `switchyard.providers.list`
-  - `switchyard.runtime.health`
-  - `switchyard.runtime.doctor`
-  - `switchyard.runtime.plan`
-  - `switchyard.auth.status`
-  - `switchyard.provider.status`
-  - `switchyard.provider.doctor`
-  - `switchyard.provider.probe`
-  - `switchyard.provider.remediation`
-  - `switchyard.provider.current_page`
-  - `switchyard.provider.current_console`
-  - `switchyard.provider.current_network`
-  - `switchyard.provider.store_readiness`
-  - `switchyard.provider.live_readiness`
-  - `switchyard.provider.attach_target`
-  - `switchyard.provider.diagnose_ladder`
-  - `switchyard.provider.support_bundle`
-  - `switchyard.provider.diagnose`
+  - `webai-bridge.runtime.bootstrap`
+  - `webai-bridge.providers.list`
+  - `webai-bridge.runtime.health`
+  - `webai-bridge.runtime.doctor`
+  - `webai-bridge.runtime.plan`
+  - `webai-bridge.auth.status`
+  - `webai-bridge.provider.status`
+  - `webai-bridge.provider.doctor`
+  - `webai-bridge.provider.probe`
+  - `webai-bridge.provider.remediation`
+  - `webai-bridge.provider.current_page`
+  - `webai-bridge.provider.current_console`
+  - `webai-bridge.provider.current_network`
+  - `webai-bridge.provider.store_readiness`
+  - `webai-bridge.provider.live_readiness`
+  - `webai-bridge.provider.attach_target`
+  - `webai-bridge.provider.diagnose_ladder`
+  - `webai-bridge.provider.support_bundle`
+  - `webai-bridge.provider.diagnose`
 
 These runtime and provider doctor routes now also expose `activePolicyPack`,
 so the read-only MCP surface can explain the current routing policy in human
 terms instead of only returning a bare `policyProfile` id.
 - if you need surface, compat, or provider truth:
-  - `switchyard.catalog.surface_catalog`
-  - `switchyard.catalog.surface_catalog_schema`
-  - `switchyard.catalog.compat_target_catalog`
-  - `switchyard.catalog.compat_target_catalog_schema`
-  - `switchyard.catalog.builder_kit_catalog`
-  - `switchyard.catalog.builder_kit_catalog_schema`
-  - `switchyard.catalog.skill_pack_catalog`
-  - `switchyard.catalog.skill_pack_catalog_schema`
-  - `switchyard.catalog.provider_catalog`
-  - `switchyard.catalog.provider_entry`
-  - `switchyard.catalog.compat_targets`
-  - `switchyard.catalog.compat_target`
+  - `webai-bridge.catalog.surface_catalog`
+  - `webai-bridge.catalog.surface_catalog_schema`
+  - `webai-bridge.catalog.compat_target_catalog`
+  - `webai-bridge.catalog.compat_target_catalog_schema`
+  - `webai-bridge.catalog.builder_kit_catalog`
+  - `webai-bridge.catalog.builder_kit_catalog_schema`
+  - `webai-bridge.catalog.skill_pack_catalog`
+  - `webai-bridge.catalog.skill_pack_catalog_schema`
+  - `webai-bridge.catalog.provider_catalog`
+  - `webai-bridge.catalog.provider_entry`
+  - `webai-bridge.catalog.compat_targets`
+  - `webai-bridge.catalog.compat_target`
 - if you need a builder path, skill pack, or starter pack:
-  - `switchyard.catalog.builder_kits`
-  - `switchyard.catalog.builder_kit`
-  - `switchyard.catalog.skill_packs`
-  - `switchyard.catalog.skill_pack`
-  - `switchyard.catalog.starter_manifests`
-  - `switchyard.catalog.starter_manifests_schema`
-  - `switchyard.catalog.starter_examples`
-  - `switchyard.catalog.starter_examples_schema`
-  - `switchyard.catalog.starter_pack_index`
-  - `switchyard.catalog.starter_pack_index_schema`
-  - `switchyard.catalog.starter_pack_entry`
-  - `switchyard.catalog.starter_pack_chooser`
-  - `switchyard.catalog.starter_pack_chooser_schema`
-  - `switchyard.catalog.starter_pack_scenario`
-  - `switchyard.catalog.starter_pack_comparison`
-  - `switchyard.catalog.starter_pack_comparison_schema`
-  - `switchyard.catalog.starter_pack_filter`
+  - `webai-bridge.catalog.builder_kits`
+  - `webai-bridge.catalog.builder_kit`
+  - `webai-bridge.catalog.skill_packs`
+  - `webai-bridge.catalog.skill_pack`
+  - `webai-bridge.catalog.starter_manifests`
+  - `webai-bridge.catalog.starter_manifests_schema`
+  - `webai-bridge.catalog.starter_examples`
+  - `webai-bridge.catalog.starter_examples_schema`
+  - `webai-bridge.catalog.starter_pack_index`
+  - `webai-bridge.catalog.starter_pack_index_schema`
+  - `webai-bridge.catalog.starter_pack_entry`
+  - `webai-bridge.catalog.starter_pack_chooser`
+  - `webai-bridge.catalog.starter_pack_chooser_schema`
+  - `webai-bridge.catalog.starter_pack_scenario`
+  - `webai-bridge.catalog.starter_pack_comparison`
+  - `webai-bridge.catalog.starter_pack_comparison_schema`
+  - `webai-bridge.catalog.starter_pack_filter`
 - if you need a full builder journey or keyword-claim truth:
-  - `switchyard.catalog.builder_journeys`
-  - `switchyard.catalog.builder_journeys_schema`
-  - `switchyard.catalog.builder_journey`
-  - `switchyard.catalog.builder_intent_router`
-  - `switchyard.catalog.builder_intent_router_schema`
-  - `switchyard.catalog.builder_intent`
-  - `switchyard.catalog.keyword_truth`
-  - `switchyard.catalog.keyword_truth_schema`
-  - `switchyard.catalog.keyword_entry`
+  - `webai-bridge.catalog.builder_journeys`
+  - `webai-bridge.catalog.builder_journeys_schema`
+  - `webai-bridge.catalog.builder_journey`
+  - `webai-bridge.catalog.builder_intent_router`
+  - `webai-bridge.catalog.builder_intent_router_schema`
+  - `webai-bridge.catalog.builder_intent`
+  - `webai-bridge.catalog.keyword_truth`
+  - `webai-bridge.catalog.keyword_truth_schema`
+  - `webai-bridge.catalog.keyword_entry`
 - if you need host integration docs or runnable examples:
-  - `switchyard.catalog.host_playbooks`
-  - `switchyard.catalog.host_playbooks_schema`
-  - `switchyard.catalog.host_playbook`
-  - `switchyard.catalog.host_examples`
-  - `switchyard.catalog.host_examples_schema`
-  - `switchyard.catalog.host_example`
+  - `webai-bridge.catalog.host_playbooks`
+  - `webai-bridge.catalog.host_playbooks_schema`
+  - `webai-bridge.catalog.host_playbook`
+  - `webai-bridge.catalog.host_examples`
+  - `webai-bridge.catalog.host_examples_schema`
+  - `webai-bridge.catalog.host_example`
 - if you need starter templates/examples or the MCP inventory itself:
-  - `switchyard.catalog.builder_template`
-  - `switchyard.catalog.builder_example`
-  - `switchyard.catalog.skill_template`
-  - `switchyard.catalog.skill_example`
-  - `switchyard.catalog.mcp_status`
-  - `switchyard.catalog.mcp_tools`
-  - `switchyard.catalog.mcp_tool_catalog`
-  - `switchyard.catalog.mcp_tool_catalog_schema`
-  - `switchyard.catalog.mcp_tool`
+  - `webai-bridge.catalog.builder_template`
+  - `webai-bridge.catalog.builder_example`
+  - `webai-bridge.catalog.skill_template`
+  - `webai-bridge.catalog.skill_example`
+  - `webai-bridge.catalog.mcp_status`
+  - `webai-bridge.catalog.mcp_tools`
+  - `webai-bridge.catalog.mcp_tool_catalog`
+  - `webai-bridge.catalog.mcp_tool_catalog_schema`
+  - `webai-bridge.catalog.mcp_tool`
 
 ## What Would Be Fake Today
 
 These claims are still dishonest:
 
-- `Switchyard MCP has full tool parity today`
-- `Switchyard MCP is already an execution brain`
-- `Switchyard is already a Codex/Claude Code MCP backend`
+- `WebaiBridge MCP has full tool parity today`
+- `WebaiBridge MCP is already an execution brain`
+- `WebaiBridge is already a Codex/Claude Code MCP backend`
 
 The most truthful public wording today is:
 
-> Switchyard ships a committed **read-only MCP surface** on `main`, but it is
+> WebaiBridge ships a committed **read-only MCP surface** on `main`, but it is
 > still only a thin partial server/tool slice.

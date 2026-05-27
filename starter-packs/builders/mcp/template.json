@@ -8,8 +8,8 @@
       "templateShape": "read-only-runtime-inspector",
       "manifest": {
         "starterTarget": "mcp",
-        "startupCommand": "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target mcp --json",
+        "startupCommand": "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target mcp --json",
         "mode": "read-only stdio runtime inspection",
         "safeClaims": [
           "partial read-only MCP surface",

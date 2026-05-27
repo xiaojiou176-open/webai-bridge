@@ -3,9 +3,9 @@ import { afterEach, describe, expect, it } from "vitest";
 import { GROK_INVOKE_HANDOFF } from "../../../packages/providers/web/grok/src/transport.js";
 import { QWEN_INVOKE_HANDOFF } from "../../../packages/providers/web/qwen/src/transport.js";
 import { requestLocalJson } from "./local-http-client.js";
-import { startSwitchyardE2EService } from "./service-test-harness.js";
+import { startWebaiBridgeE2EService } from "./service-test-harness.js";
 
-const startedServices: Array<Awaited<ReturnType<typeof startSwitchyardE2EService>>> = [];
+const startedServices: Array<Awaited<ReturnType<typeof startWebaiBridgeE2EService>>> = [];
 
 afterEach(async () => {
   await Promise.all(startedServices.splice(0).map((service) => service.close()));
@@ -13,7 +13,7 @@ afterEach(async () => {
 
 describe("Long-tail Web/Login baseline providers", () => {
   it("publishes Grok's artifact and probe contract through the status surface", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
     });
     startedServices.push(service);
@@ -60,7 +60,7 @@ describe("Long-tail Web/Login baseline providers", () => {
   });
 
   it("keeps Grok blocked once the runtime loses a trustworthy authenticated probe", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         grok: {
@@ -136,7 +136,7 @@ describe("Long-tail Web/Login baseline providers", () => {
   });
 
   it("blocks Grok invoke until a real baseline transport replaces the descriptive stub", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         grok: {
@@ -238,7 +238,7 @@ describe("Long-tail Web/Login baseline providers", () => {
   });
 
   it("publishes Qwen's artifact and probe contract through the status surface", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
     });
     startedServices.push(service);
@@ -285,7 +285,7 @@ describe("Long-tail Web/Login baseline providers", () => {
   });
 
   it("keeps Qwen blocked once the runtime loses a trustworthy authenticated probe", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         qwen: {
@@ -361,7 +361,7 @@ describe("Long-tail Web/Login baseline providers", () => {
   });
 
   it("blocks Qwen invoke until a real baseline transport replaces the descriptive stub", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         qwen: {

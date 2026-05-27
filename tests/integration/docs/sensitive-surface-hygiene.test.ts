@@ -42,7 +42,7 @@ function isAllowedTrackedPath(file: string) {
   return file === ".env.example";
 }
 
-describe("Switchyard sensitive surface hygiene", () => {
+describe("WebaiBridge sensitive surface hygiene", () => {
   it("keeps the tracked sensitive-material gate itself green", () => {
     const output = execFileSync("node", ["scripts/check-sensitive-material.mjs"], {
       cwd: repoRoot,

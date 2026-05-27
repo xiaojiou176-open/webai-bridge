@@ -11,9 +11,9 @@
 ## 协同入口
 
 - CLI:
-  `pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack`
+  `pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack`
 - MCP:
-  `switchyard.catalog.skill_pack_route`
+  `webai-bridge.catalog.skill_pack_route`
 - 这张 route card 会把 pack、本地 catalog 和 MCP 只读入口对齐，避免手工拼接 truth surfaces。
 
 ## 当前不该吹的东西
@@ -25,6 +25,6 @@
 ## 运行
 
 ```bash
-pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack
+pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack
 pnpm run starter-pack:docs-seo-sync-pack
 ```

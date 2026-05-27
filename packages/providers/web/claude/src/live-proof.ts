@@ -4,8 +4,8 @@ import {
 } from "../../../../lanes/web/src/live-proof.js";
 
 export const CLAUDE_WEB_LIVE_PROOF_ENV_NAMES = [
-  "SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE",
-  "SWITCHYARD_WEB_CLAUDE_USER_AGENT",
+  "WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE",
+  "WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT",
 ] as const;
 
 export const CLAUDE_WEB_LIVE_PROOF_URL = "https://claude.ai/api/organizations";
@@ -24,8 +24,8 @@ export async function runClaudeWebLiveProof(
       buildHeaders(resolvedEnv) {
         return {
           accept: "application/json, text/plain, */*",
-          cookie: resolvedEnv.SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE,
-          "user-agent": resolvedEnv.SWITCHYARD_WEB_CLAUDE_USER_AGENT,
+          cookie: resolvedEnv.WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE,
+          "user-agent": resolvedEnv.WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT,
         };
       },
       validate(body) {

@@ -25,7 +25,7 @@ export type ServiceProviderStoreReadinessView =
 export type ServiceProviderLiveReadinessView =
   ServiceProviderDebugSupportView["liveReadiness"];
 
-export interface SwitchyardServiceClientOptions {
+export interface WebaiBridgeServiceClientOptions {
   baseUrl: string;
   fetch?: FetchLike;
   headers?: Record<string, string>;
@@ -80,12 +80,12 @@ export interface RuntimeInvokeResponse {
 
 type ServiceProviderId = ServiceDiscoveryView["providerId"];
 
-export class SwitchyardServiceClient {
+export class WebaiBridgeServiceClient {
   readonly routes: ServiceRuntimeRouteCatalog;
   readonly #fetch: FetchLike;
   readonly #headers: Record<string, string>;
 
-  constructor(options: SwitchyardServiceClientOptions) {
+  constructor(options: WebaiBridgeServiceClientOptions) {
     this.routes = buildServiceRouteCatalog(options.baseUrl);
     this.#fetch = options.fetch ?? fetch;
     this.#headers = options.headers ?? {};
@@ -110,7 +110,7 @@ export class SwitchyardServiceClient {
     const payload = (await response.json()) as T;
 
     if (!response.ok) {
-      const error = new Error(`Switchyard service request failed with HTTP ${response.status} at ${url}.`);
+      const error = new Error(`WebaiBridge service request failed with HTTP ${response.status} at ${url}.`);
       Object.assign(error, {
         status: response.status,
         payload,
@@ -290,10 +290,10 @@ export class SwitchyardServiceClient {
   }
 }
 
-export function createSwitchyardServiceClient(
-  options: SwitchyardServiceClientOptions,
+export function createWebaiBridgeServiceClient(
+  options: WebaiBridgeServiceClientOptions,
 ) {
-  return new SwitchyardServiceClient(options);
+  return new WebaiBridgeServiceClient(options);
 }
 
 export type {

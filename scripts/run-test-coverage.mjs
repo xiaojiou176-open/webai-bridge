@@ -25,7 +25,7 @@ if ((coverageCommand.status ?? 1) !== 0) {
 // and floor checks so a lucky reporter run cannot masquerade as coverage green.
 if (!existsSync(coverageSummaryPath)) {
   console.error(
-    `Switchyard coverage gate expected ${coverageSummaryPath}, but the summary artifact was not created.`,
+    `WebaiBridge coverage gate expected ${coverageSummaryPath}, but the summary artifact was not created.`,
   );
   process.exit(1);
 }
@@ -36,7 +36,7 @@ const linesPct = Number(coverageSummary?.total?.lines?.pct ?? NaN);
 
 if (!Number.isFinite(statementsPct) || !Number.isFinite(linesPct)) {
   console.error(
-    "Switchyard coverage gate could not read total statement/line coverage from coverage-summary.json.",
+    "WebaiBridge coverage gate could not read total statement/line coverage from coverage-summary.json.",
   );
   process.exit(1);
 }
@@ -56,11 +56,11 @@ if (linesPct < MINIMUM_LINES_PCT) {
 
 if (failures.length > 0) {
   for (const failure of failures) {
-    console.error(`Switchyard coverage gate failed: ${failure}`);
+    console.error(`WebaiBridge coverage gate failed: ${failure}`);
   }
   process.exit(1);
 }
 
 console.log(
-  `Switchyard coverage gate passed: statements=${statementsPct.toFixed(2)}%, lines=${linesPct.toFixed(2)}%.`,
+  `WebaiBridge coverage gate passed: statements=${statementsPct.toFixed(2)}%, lines=${linesPct.toFixed(2)}%.`,
 );

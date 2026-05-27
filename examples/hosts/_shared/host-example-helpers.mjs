@@ -69,7 +69,7 @@ export async function runMcpStyleHostExample(moduleUrl) {
   const baseUrl = resolveRuntimeBaseUrl();
   const transport = new StdioClientTransport({
     command: "pnpm",
-    args: ["run", "switchyard:mcp", "--", "--base-url", baseUrl],
+    args: ["run", "webai-bridge:mcp", "--", "--base-url", baseUrl],
     cwd: repoRoot,
     stderr: "pipe",
   });

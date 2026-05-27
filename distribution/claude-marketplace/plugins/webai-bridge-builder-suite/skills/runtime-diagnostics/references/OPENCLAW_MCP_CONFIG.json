@@ -1,0 +1,17 @@
+{
+  "mcp": {
+    "servers": {
+      "webai-bridge": {
+        "command": "pnpm",
+        "args": [
+          "run",
+          "webai-bridge:mcp",
+          "--",
+          "--base-url",
+          "http://127.0.0.1:4010"
+        ],
+        "cwd": "/ABSOLUTE/PATH/TO/WEBAI_BRIDGE"
+      }
+    }
+  }
+}

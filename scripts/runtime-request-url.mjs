@@ -1,7 +1,7 @@
 import { isIP } from "node:net";
 
 const DEFAULT_RUNTIME_PORT = "4010";
-const RUNTIME_PATH_ROOT_URL = "http://switchyard.local";
+const RUNTIME_PATH_ROOT_URL = "http://webai-bridge.local";
 
 function decodePathSegment(segment) {
   try {
@@ -65,19 +65,19 @@ export function normalizeRuntimeBaseUrl(baseUrl) {
 
   if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
     throw new Error(
-      `Switchyard runtime base URL must use http or https. Received: ${parsed.protocol}`,
+      `WebaiBridge runtime base URL must use http or https. Received: ${parsed.protocol}`,
     );
   }
 
   if (parsed.username || parsed.password || parsed.search || parsed.hash) {
     throw new Error(
-      "Switchyard runtime base URL must not include credentials, query parameters, or fragments.",
+      "WebaiBridge runtime base URL must not include credentials, query parameters, or fragments.",
     );
   }
 
   if (!isAllowedRuntimeHostname(parsed.hostname)) {
     throw new Error(
-      `Switchyard runtime base URL must point at a loopback, private-network, or local-development host. Refusing ${parsed.hostname}.`,
+      `WebaiBridge runtime base URL must point at a loopback, private-network, or local-development host. Refusing ${parsed.hostname}.`,
     );
   }
 
@@ -85,7 +85,7 @@ export function normalizeRuntimeBaseUrl(baseUrl) {
   return parsed;
 }
 
-export function encodeRuntimePathSegment(segment, label = "Switchyard runtime path segment") {
+export function encodeRuntimePathSegment(segment, label = "WebaiBridge runtime path segment") {
   if (typeof segment !== "string" || !segment.trim()) {
     throw new Error(`${label} must be a non-empty string.`);
   }
@@ -103,18 +103,18 @@ export function encodeRuntimePathSegment(segment, label = "Switchyard runtime pa
 
 function normalizeRuntimeRequestPath(path) {
   if (typeof path !== "string" || !path.startsWith("/")) {
-    throw new Error(`Switchyard runtime request path must start with /. Received: ${path}`);
+    throw new Error(`WebaiBridge runtime request path must start with /. Received: ${path}`);
   }
 
   if (path.startsWith("//")) {
     throw new Error(
-      `Switchyard runtime request path must stay on the local runtime origin. Refusing host-style path: ${path}`,
+      `WebaiBridge runtime request path must stay on the local runtime origin. Refusing host-style path: ${path}`,
     );
   }
 
   if (path.includes("\\") || path.includes("?") || path.includes("#")) {
     throw new Error(
-      `Switchyard runtime request path must not include backslashes, query parameters, or fragments. Received: ${path}`,
+      `WebaiBridge runtime request path must not include backslashes, query parameters, or fragments. Received: ${path}`,
     );
   }
 
@@ -125,14 +125,14 @@ function normalizeRuntimeRequestPath(path) {
 
   if (decodedRawSegments.some((segment) => segment === "." || segment === "..")) {
     throw new Error(
-      `Switchyard runtime request path must not contain path traversal segments. Received: ${path}`,
+      `WebaiBridge runtime request path must not contain path traversal segments. Received: ${path}`,
     );
   }
 
   const parsed = new URL(path, RUNTIME_PATH_ROOT_URL);
   if (parsed.origin !== RUNTIME_PATH_ROOT_URL) {
     throw new Error(
-      `Switchyard runtime request path must stay on the local runtime origin. Refusing: ${path}`,
+      `WebaiBridge runtime request path must stay on the local runtime origin. Refusing: ${path}`,
     );
   }
 
@@ -146,7 +146,7 @@ export function buildRuntimeRequestUrl(baseUrl, path) {
 
   if (requestUrl.origin !== normalizedBaseUrl.origin) {
     throw new Error(
-      `Switchyard runtime request path must stay on the local runtime origin. Refusing: ${path}`,
+      `WebaiBridge runtime request path must stay on the local runtime origin. Refusing: ${path}`,
     );
   }
 
@@ -157,13 +157,13 @@ export function resolveRuntimeBaseUrlFromEnv(
   env = process.env,
   defaultPort = DEFAULT_RUNTIME_PORT,
 ) {
-  const explicit = env.SWITCHYARD_RUNTIME_BASE_URL?.trim();
+  const explicit = env.WEBAI_BRIDGE_RUNTIME_BASE_URL?.trim();
 
   if (explicit) {
     return normalizeRuntimeBaseUrl(explicit).toString().replace(/\/$/u, "");
   }
 
-  const port = env.SWITCHYARD_SERVICE_PORT?.trim() || defaultPort;
+  const port = env.WEBAI_BRIDGE_SERVICE_PORT?.trim() || defaultPort;
   return normalizeRuntimeBaseUrl(`http://127.0.0.1:${port}`)
     .toString()
     .replace(/\/$/u, "");

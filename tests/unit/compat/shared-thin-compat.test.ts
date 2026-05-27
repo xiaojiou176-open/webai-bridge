@@ -68,7 +68,7 @@ describe("shared thin compat helpers", () => {
         lane: "byok",
       }),
     ).rejects.toMatchObject({
-      name: "SwitchyardContractError",
+      name: "WebaiBridgeContractError",
       message: expect.stringContaining('Unknown provider "mystery"'),
     });
   });
@@ -91,7 +91,7 @@ describe("shared thin compat helpers", () => {
         lane: "web",
       }),
     ).rejects.toMatchObject({
-      name: "SwitchyardContractError",
+      name: "WebaiBridgeContractError",
     });
   });
 

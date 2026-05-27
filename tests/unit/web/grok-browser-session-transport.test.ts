@@ -8,9 +8,9 @@ afterEach(() => {
 
 describe("Grok browser-session transport", () => {
   it("reuses an existing Grok tab, injects cookies, and extracts browser-session text", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_cookie=1; x-signature=abc");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
-    vi.stubEnv("SWITCHYARD_BROWSER_MODE", "isolated-chrome-root");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_cookie=1; x-signature=abc");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_BROWSER_MODE", "isolated-chrome-root");
 
     const evaluate = vi.fn(async (callback, payload) => {
       const originalFetch = global.fetch;
@@ -105,9 +105,9 @@ describe("Grok browser-session transport", () => {
   });
 
   it("opens a fresh Grok page and creates a conversation when no reusable tab exists yet", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GROK_COOKIE_BUNDLE", "grok_cookie=1");
-    vi.stubEnv("SWITCHYARD_WEB_GROK_USER_AGENT", "SwitchyardTest/1.0");
-    vi.stubEnv("SWITCHYARD_WEB_AUTH_CDP_URL", "http://127.0.0.1:9338");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE", "grok_cookie=1");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GROK_USER_AGENT", "WebaiBridgeTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_AUTH_CDP_URL", "http://127.0.0.1:9338");
 
     const newPage = {
       url: () => "about:blank",

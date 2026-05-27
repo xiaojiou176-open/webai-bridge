@@ -24,7 +24,7 @@ describe("web acquisition start flows", () => {
         label: "Existing browser session",
         summary: "Attach to a browser session that is already exposing a reusable browser-session URL.",
       },
-      summary: "Switchyard attached the existing browser session.",
+      summary: "WebaiBridge attached the existing browser session.",
     });
 
     const runners = createDefaultWebAcquisitionRunners({}, { bootstrapBrowser });
@@ -41,10 +41,10 @@ describe("web acquisition start flows", () => {
         provider: "gemini",
         mode: "existing-browser-session",
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "existing-browser-session",
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9555",
-          SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL: "http://127.0.0.1:9555",
-          SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9555",
+          WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "existing-browser-session",
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9555",
+          WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL: "http://127.0.0.1:9555",
+          WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9555",
         }),
         captureRequest: {
           mode: "existing-browser-session",

@@ -1,15 +1,15 @@
 {
-  "name": "@switchyard/consumer-codex",
+  "name": "@webai-bridge/consumer-codex",
   "version": "0.1.0",
-  "description": "Thin fail-closed Codex runtime bridge for Switchyard.",
+  "description": "Thin fail-closed Codex runtime bridge for WebaiBridge.",
   "license": "MIT",
-  "homepage": "https://xiaojiou176-open.github.io/Switchyard/compat/codex.md",
+  "homepage": "https://xiaojiou176-open.github.io/webai-bridge/compat/codex.md",
   "bugs": {
-    "url": "https://github.com/xiaojiou176-open/Switchyard/issues"
+    "url": "https://github.com/xiaojiou176-open/webai-bridge/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaojiou176-open/Switchyard.git",
+    "url": "https://github.com/xiaojiou176-open/webai-bridge.git",
     "directory": "packages/consumers/codex"
   },
   "type": "module",
@@ -32,7 +32,7 @@
     "access": "public"
   },
   "keywords": [
-    "switchyard",
+    "webai-bridge",
     "codex",
     "compat",
     "thin-adapter",

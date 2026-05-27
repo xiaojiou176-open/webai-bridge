@@ -10,7 +10,7 @@
       "currentListingStatus": "official-surface-exists-unlisted",
       "strongestCurrentDistributionSurface": "package-ready adapter + starter pack + host example + compat docs",
       "artifactNames": [
-        "@switchyard/consumer-codex",
+        "@webai-bridge/consumer-codex",
         "starter-packs/builders/codex",
         "examples/hosts/codex",
         "docs/compat/codex.md"
@@ -24,7 +24,7 @@
         "thin compat adapter",
         "builder-facing runtime bridge",
         "package-ready artifact",
-        "official Codex plugin surface exists, but Switchyard is not listed yet"
+        "official Codex plugin surface exists, but WebaiBridge is not listed yet"
       ],
       "forbiddenOverclaims": [
         "official Codex marketplace listed",
@@ -50,7 +50,7 @@
       "currentListingStatus": "official-surface-exists-unlisted",
       "strongestCurrentDistributionSurface": "package-ready adapter + starter pack + host example + marketplace-compatible bundle",
       "artifactNames": [
-        "@switchyard/consumer-claude-code",
+        "@webai-bridge/consumer-claude-code",
         "starter-packs/builders/claude-code",
         "examples/hosts/claude-code",
         "distribution/claude-marketplace",
@@ -66,7 +66,7 @@
         "fail-closed bridge",
         "package-ready artifact",
         "marketplace-ready bundle",
-        "official Claude Code plugin surface exists, but Switchyard is not listed yet"
+        "official Claude Code plugin surface exists, but WebaiBridge is not listed yet"
       ],
       "forbiddenOverclaims": [
         "official Claude Code marketplace listed",
@@ -91,7 +91,7 @@
       "currentListingStatus": "official-surface-exists-unlisted",
       "strongestCurrentDistributionSurface": "package-ready adapter + starter pack + host example + OpenClaw-compatible Claude bundle",
       "artifactNames": [
-        "@switchyard/consumer-openclaw",
+        "@webai-bridge/consumer-openclaw",
         "starter-packs/builders/openclaw",
         "examples/hosts/openclaw",
         "distribution/claude-marketplace",
@@ -107,7 +107,7 @@
         "without product-shell inheritance",
         "package-ready artifact",
         "OpenClaw-compatible bundle",
-        "official OpenClaw plugin surfaces exist, but Switchyard is not listed yet"
+        "official OpenClaw plugin surfaces exist, but WebaiBridge is not listed yet"
       ],
       "forbiddenOverclaims": [
         "official OpenClaw marketplace listed",
@@ -133,13 +133,13 @@
       "currentListingStatus": "official-surface-exists-unlisted",
       "strongestCurrentDistributionSurface": "package-ready MCP surface + stdio CLI/bin + docs + host example",
       "artifactNames": [
-        "@switchyard/surface-mcp",
-        "switchyard-mcp",
+        "@webai-bridge/surface-mcp",
+        "webai-bridge-mcp",
         "examples/hosts/mcp",
         "docs/mcp.md"
       ],
       "proofCommands": [
-        "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
+        "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
         "pnpm run example:host-mcp"
       ],
       "allowedClaims": [
@@ -147,7 +147,7 @@
         "package-ready artifact",
         "stdio MCP server",
         "not an execution brain",
-        "official MCP registry exists, but Switchyard is not listed yet"
+        "official MCP registry exists, but WebaiBridge is not listed yet"
       ],
       "forbiddenOverclaims": [
         "official MCP registry listed",

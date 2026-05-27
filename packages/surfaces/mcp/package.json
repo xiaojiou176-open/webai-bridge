@@ -1,16 +1,16 @@
 {
-  "name": "@switchyard/surface-mcp",
+  "name": "@webai-bridge/surface-mcp",
   "version": "0.1.0",
-  "mcpName": "io.github.xiaojiou176-open/switchyard-mcp",
-  "description": "Read-only MCP surface for Switchyard runtime truth and catalogs.",
+  "mcpName": "io.github.xiaojiou176-open/webai-bridge-mcp",
+  "description": "Read-only MCP surface for WebaiBridge runtime truth and catalogs.",
   "license": "MIT",
-  "homepage": "https://xiaojiou176-open.github.io/Switchyard/mcp.md",
+  "homepage": "https://xiaojiou176-open.github.io/webai-bridge/mcp.md",
   "bugs": {
-    "url": "https://github.com/xiaojiou176-open/Switchyard/issues"
+    "url": "https://github.com/xiaojiou176-open/webai-bridge/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaojiou176-open/Switchyard.git",
+    "url": "https://github.com/xiaojiou176-open/webai-bridge.git",
     "directory": "packages/surfaces/mcp"
   },
   "type": "module",
@@ -24,7 +24,7 @@
   "main": "./dist/packages/surfaces/mcp/src/index.js",
   "types": "./src/index.ts",
   "bin": {
-    "switchyard-mcp": "./dist/packages/surfaces/mcp/src/cli.js"
+    "webai-bridge-mcp": "./dist/packages/surfaces/mcp/src/cli.js"
   },
   "scripts": {
     "build": "pnpm exec node ../../../scripts/build-package.mjs && pnpm exec node ./scripts/copy-package-assets.mjs",
@@ -47,7 +47,7 @@
     "access": "public"
   },
   "keywords": [
-    "switchyard",
+    "webai-bridge",
     "mcp",
     "model-context-protocol",
     "read-only",

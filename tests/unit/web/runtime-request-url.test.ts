@@ -50,8 +50,8 @@ describe("runtime request URL helpers", () => {
     expect(normalizeRuntimeBaseUrl("http://[fd00::1]:4010").toString()).toBe(
       "http://[fd00::1]:4010/",
     );
-    expect(normalizeRuntimeBaseUrl("http://switchyard-dev:4010").toString()).toBe(
-      "http://switchyard-dev:4010/",
+    expect(normalizeRuntimeBaseUrl("http://webai-bridge-dev:4010").toString()).toBe(
+      "http://webai-bridge-dev:4010/",
     );
   });
 
@@ -78,12 +78,12 @@ describe("runtime request URL helpers", () => {
   it("derives runtime base URLs from env and formats help URLs safely", () => {
     expect(
       resolveRuntimeBaseUrlFromEnv({
-        SWITCHYARD_RUNTIME_BASE_URL: "http://127.0.0.1:4317",
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: "http://127.0.0.1:4317",
       }),
     ).toBe("http://127.0.0.1:4317");
     expect(
       resolveRuntimeBaseUrlFromEnv({
-        SWITCHYARD_SERVICE_PORT: "4017",
+        WEBAI_BRIDGE_SERVICE_PORT: "4017",
       }),
     ).toBe("http://127.0.0.1:4017");
     expect(

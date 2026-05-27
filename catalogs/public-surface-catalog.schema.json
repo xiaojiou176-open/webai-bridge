@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/public-surface-catalog.schema.json",
-  "title": "Switchyard Public Surface Catalog",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/public-surface-catalog.schema.json",
+  "title": "WebaiBridge Public Surface Catalog",
   "type": "object",
   "additionalProperties": false,
   "required": [

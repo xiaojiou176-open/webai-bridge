@@ -24,9 +24,9 @@ function createCompiledServiceModule(outDir: string) {
   });
   writeFileSync(
     join(serviceDir, "index.js"),
-    `export async function startSwitchyardService() {
+    `export async function startWebaiBridgeService() {
       return {
-        baseUrl: "http://switchyard.test",
+        baseUrl: "http://webai-bridge.test",
         async close() {}
       };
     }`,
@@ -41,7 +41,7 @@ afterEach(() => {
 
 describe("verify-service-live script", () => {
   it("returns success when the compiled service echoes every expected token", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -105,7 +105,7 @@ describe("verify-service-live script", () => {
       expect(result).toEqual(
         expect.objectContaining({
           status: "success",
-          baseUrl: "http://switchyard.test",
+          baseUrl: "http://webai-bridge.test",
           providers: expect.arrayContaining([
             expect.objectContaining({ provider: "chatgpt" }),
             expect.objectContaining({ provider: "gemini" }),
@@ -132,7 +132,7 @@ describe("verify-service-live script", () => {
   });
 
   it("reuses provider-scoped external blockers when the service preflight only sees a generic fetch failure", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -308,7 +308,7 @@ describe("verify-service-live script", () => {
   });
 
   it("returns a top-level external-blocker when Claude reports an overdue account action requirement", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -423,7 +423,7 @@ describe("verify-service-live script", () => {
   });
 
   it("fails closed when managed-browser bootstrap cannot attach to the isolated chrome root", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -448,7 +448,7 @@ describe("verify-service-live script", () => {
             error: {
               code: "existing-profile-locked",
               message:
-                "Switchyard found the isolated repo Chrome root locked by another Chrome instance, but CDP is not reachable. Reuse the existing instance via attach, or close it before retrying.",
+                "WebaiBridge found the isolated repo Chrome root locked by another Chrome instance, but CDP is not reachable. Reuse the existing instance via attach, or close it before retrying.",
             },
           }),
         };
@@ -510,7 +510,7 @@ describe("verify-service-live script", () => {
   });
 
   it("attaches browser debug context to direct service-side external blockers", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (command === "pnpm" && args.includes("apps/service/tsconfig.json")) {
         const outDirIndex = args.indexOf("--outDir");
@@ -599,7 +599,7 @@ describe("verify-service-live script", () => {
   });
 
   it("returns a service-token-mismatch failure when the service responds with the wrong token", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -660,7 +660,7 @@ describe("verify-service-live script", () => {
   });
 
   it("returns a fetch failure when the local service cannot be reached", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -710,7 +710,7 @@ describe("verify-service-live script", () => {
   });
 
   it("times out stalled service invokes and reuses provider-scoped external blockers", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&
@@ -795,7 +795,7 @@ describe("verify-service-live script", () => {
   });
 
   it("retries with a managed-browser bootstrap when the first service invoke reports a CDP attach failure", async () => {
-    const outDir = mkdtempSync(join(tmpdir(), "switchyard-service-live-"));
+    const outDir = mkdtempSync(join(tmpdir(), "webai-bridge-service-live-"));
     const spawnSync = vi.fn((command: string, args: string[]) => {
       if (
         command === "pnpm" &&

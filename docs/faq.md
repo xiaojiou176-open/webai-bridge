@@ -1,18 +1,18 @@
-# Switchyard FAQ
+# WebaiBridge FAQ
 
-## Is Switchyard a shared provider runtime?
+## Is WebaiBridge a shared provider runtime?
 
 Yes.
 
 更具体地说：
 
-`Switchyard` 当前把自己定义成：
+`WebaiBridge` 当前把自己定义成：
 
 - `shared provider runtime for AI apps`
 - `BYOK + Web/Login`
 - `service-first API substrate`
 
-## Is Switchyard an AI app backend?
+## Is WebaiBridge an AI app backend?
 
 Partly yes, but only in a narrow sense.
 
@@ -23,9 +23,9 @@ Partly yes, but only in a narrow sense.
 - 统一 auth/session/diagnostics
 - 暴露稳定的 service / SDK surface
 
-那 `Switchyard` 确实是这类 backend/runtime。
+那 `WebaiBridge` 确实是这类 backend/runtime。
 
-## Does Switchyard support Codex today?
+## Does WebaiBridge support Codex today?
 
 Partially, but only in a thin fail-closed sense.
 
@@ -36,7 +36,7 @@ Truthful status:
 - `not full support`
 - `no tool / MCP / worktree parity`
 
-## Does Switchyard support Claude Code today?
+## Does WebaiBridge support Claude Code today?
 
 Partially, but only in a thin fail-closed sense.
 
@@ -47,7 +47,7 @@ Truthful status:
 - `not full support`
 - `no terminal shell / approval / tool / MCP parity`
 
-## Does Switchyard support OpenClaw today?
+## Does WebaiBridge support OpenClaw today?
 
 Partially, but only in a thin fail-closed sense.
 
@@ -58,7 +58,7 @@ Truthful status:
 - `not full support`
 - `no operator/control-plane/product-shell parity`
 
-## Is Switchyard an MCP server today?
+## Is WebaiBridge an MCP server today?
 
 Partially yes, but only in a thin read-only sense.
 
@@ -117,61 +117,61 @@ Partially yes, but only in a thin read-only sense.
 
 当前最稳定的入口是：
 
-- `pnpm run switchyard:cli -- surface-catalog`
-- `pnpm run switchyard:cli -- surface-catalog-schema`
-- `pnpm run switchyard:cli -- compat-target-catalog`
-- `pnpm run switchyard:cli -- compat-target-catalog-schema`
-- `pnpm run switchyard:cli -- compat-targets`
-- `pnpm run switchyard:cli -- compat-target --target codex`
-- `pnpm run switchyard:cli -- compat-target --target claude-code`
-- `pnpm run switchyard:cli -- compat-target --target openclaw`
-- `pnpm run switchyard:cli -- builder-kit-catalog`
-- `pnpm run switchyard:cli -- builder-kit-catalog-schema`
-- `pnpm run switchyard:cli -- builder-kits`
-- `pnpm run switchyard:cli -- builder-kit --target codex`
-- `pnpm run switchyard:cli -- builder-kit --target claude-code`
-- `pnpm run switchyard:cli -- builder-kit --target openclaw`
-- `pnpm run switchyard:cli -- builder-kit --target mcp`
-- `pnpm run switchyard:cli -- skill-pack-catalog`
-- `pnpm run switchyard:cli -- skill-pack-catalog-schema`
-- `pnpm run switchyard:cli -- skill-packs`
-- `pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack`
-- `pnpm run switchyard:cli -- host-playbooks`
-- `pnpm run switchyard:cli -- host-playbooks-schema`
-- `pnpm run switchyard:cli -- host-playbook --target codex`
-- `pnpm run switchyard:cli -- host-examples`
-- `pnpm run switchyard:cli -- host-example --target codex`
-- `pnpm run switchyard:cli -- builder-intent-router`
-- `pnpm run switchyard:cli -- builder-intent-router-schema`
-- `pnpm run switchyard:cli -- builder-intent --target support-truth`
-- `pnpm run switchyard:cli -- starter-manifests`
-- `pnpm run switchyard:cli -- starter-manifests-schema`
-- `pnpm run switchyard:cli -- starter-examples`
-- `pnpm run switchyard:cli -- starter-examples-schema`
-- `pnpm run switchyard:cli -- starter-pack-index`
-- `pnpm run switchyard:cli -- starter-pack-index-schema`
-- `pnpm run switchyard:cli -- starter-pack-entry --target codex`
-- `pnpm run switchyard:cli -- starter-pack-chooser`
-- `pnpm run switchyard:cli -- starter-pack-chooser-schema`
-- `pnpm run switchyard:cli -- starter-pack-scenario --target codex-builder`
-- `pnpm run switchyard:cli -- starter-pack-comparison`
-- `pnpm run switchyard:cli -- starter-pack-comparison-schema`
-- `pnpm run switchyard:cli -- starter-pack-filter --target read-only-truth`
-- `pnpm run switchyard:cli -- keyword-truth`
-- `pnpm run switchyard:cli -- keyword-truth-schema`
-- `pnpm run switchyard:cli -- keyword-entry --target switchyard-mcp`
-- `pnpm run switchyard:cli -- builder-template --target codex`
-- `pnpm run switchyard:cli -- builder-example --target codex`
-- `pnpm run switchyard:cli -- skill-template --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- skill-example --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- provider-catalog`
-- `pnpm run switchyard:cli -- provider-entry --target chatgpt`
-- `pnpm run switchyard:cli -- mcp-status`
-- `pnpm run switchyard:cli -- mcp-tools`
-- `pnpm run switchyard:cli -- mcp-tool-catalog`
-- `pnpm run switchyard:cli -- mcp-tool-catalog-schema`
-- `pnpm run switchyard:cli -- mcp-tool --target switchyard.runtime.health`
+- `pnpm run webai-bridge:cli -- surface-catalog`
+- `pnpm run webai-bridge:cli -- surface-catalog-schema`
+- `pnpm run webai-bridge:cli -- compat-target-catalog`
+- `pnpm run webai-bridge:cli -- compat-target-catalog-schema`
+- `pnpm run webai-bridge:cli -- compat-targets`
+- `pnpm run webai-bridge:cli -- compat-target --target codex`
+- `pnpm run webai-bridge:cli -- compat-target --target claude-code`
+- `pnpm run webai-bridge:cli -- compat-target --target openclaw`
+- `pnpm run webai-bridge:cli -- builder-kit-catalog`
+- `pnpm run webai-bridge:cli -- builder-kit-catalog-schema`
+- `pnpm run webai-bridge:cli -- builder-kits`
+- `pnpm run webai-bridge:cli -- builder-kit --target codex`
+- `pnpm run webai-bridge:cli -- builder-kit --target claude-code`
+- `pnpm run webai-bridge:cli -- builder-kit --target openclaw`
+- `pnpm run webai-bridge:cli -- builder-kit --target mcp`
+- `pnpm run webai-bridge:cli -- skill-pack-catalog`
+- `pnpm run webai-bridge:cli -- skill-pack-catalog-schema`
+- `pnpm run webai-bridge:cli -- skill-packs`
+- `pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack`
+- `pnpm run webai-bridge:cli -- host-playbooks`
+- `pnpm run webai-bridge:cli -- host-playbooks-schema`
+- `pnpm run webai-bridge:cli -- host-playbook --target codex`
+- `pnpm run webai-bridge:cli -- host-examples`
+- `pnpm run webai-bridge:cli -- host-example --target codex`
+- `pnpm run webai-bridge:cli -- builder-intent-router`
+- `pnpm run webai-bridge:cli -- builder-intent-router-schema`
+- `pnpm run webai-bridge:cli -- builder-intent --target support-truth`
+- `pnpm run webai-bridge:cli -- starter-manifests`
+- `pnpm run webai-bridge:cli -- starter-manifests-schema`
+- `pnpm run webai-bridge:cli -- starter-examples`
+- `pnpm run webai-bridge:cli -- starter-examples-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-index`
+- `pnpm run webai-bridge:cli -- starter-pack-index-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-entry --target codex`
+- `pnpm run webai-bridge:cli -- starter-pack-chooser`
+- `pnpm run webai-bridge:cli -- starter-pack-chooser-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-scenario --target codex-builder`
+- `pnpm run webai-bridge:cli -- starter-pack-comparison`
+- `pnpm run webai-bridge:cli -- starter-pack-comparison-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-filter --target read-only-truth`
+- `pnpm run webai-bridge:cli -- keyword-truth`
+- `pnpm run webai-bridge:cli -- keyword-truth-schema`
+- `pnpm run webai-bridge:cli -- keyword-entry --target webai-bridge-mcp`
+- `pnpm run webai-bridge:cli -- builder-template --target codex`
+- `pnpm run webai-bridge:cli -- builder-example --target codex`
+- `pnpm run webai-bridge:cli -- skill-template --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- skill-example --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- provider-catalog`
+- `pnpm run webai-bridge:cli -- provider-entry --target chatgpt`
+- `pnpm run webai-bridge:cli -- mcp-status`
+- `pnpm run webai-bridge:cli -- mcp-tools`
+- `pnpm run webai-bridge:cli -- mcp-tool-catalog`
+- `pnpm run webai-bridge:cli -- mcp-tool-catalog-schema`
+- `pnpm run webai-bridge:cli -- mcp-tool --target webai-bridge.runtime.health`
 - `catalogs/public-surface-catalog.json`
 - `catalogs/public-surface-catalog.schema.json`
 - `catalogs/compat-target-catalog.json`
@@ -220,9 +220,9 @@ Partially yes, but only in a thin read-only sense.
 当前最短路径是：
 
 - [docs/starter-pack-chooser.md](./starter-pack-chooser.md)
-- `pnpm run switchyard:cli -- starter-pack-chooser`
-- `pnpm run switchyard:cli -- starter-pack-scenario --target codex-builder`
-- `pnpm run switchyard:cli -- starter-pack-scenario --target mcp-inspector`
+- `pnpm run webai-bridge:cli -- starter-pack-chooser`
+- `pnpm run webai-bridge:cli -- starter-pack-scenario --target codex-builder`
+- `pnpm run webai-bridge:cli -- starter-pack-scenario --target mcp-inspector`
 
 如果你只想记一句人话：
 
@@ -242,9 +242,9 @@ Partially yes, but only in a thin read-only sense.
 当前最短路径是：
 
 - [catalogs/starter-pack-comparison.json](../catalogs/starter-pack-comparison.json)
-- `pnpm run switchyard:cli -- starter-pack-comparison`
-- `pnpm run switchyard:cli -- starter-pack-filter --target thin-runtime-bridges`
-- `pnpm run switchyard:cli -- starter-pack-filter --target read-only-truth`
+- `pnpm run webai-bridge:cli -- starter-pack-comparison`
+- `pnpm run webai-bridge:cli -- starter-pack-filter --target thin-runtime-bridges`
+- `pnpm run webai-bridge:cli -- starter-pack-filter --target read-only-truth`
 
 ## Where do I start if I want one full builder journey instead of jumping across multiple docs?
 
@@ -258,8 +258,8 @@ Partially yes, but only in a thin read-only sense.
 当前最短路径是：
 
 - [catalogs/builder-journeys.json](../catalogs/builder-journeys.json)
-- `pnpm run switchyard:cli -- builder-journeys`
-- `pnpm run switchyard:cli -- builder-journey --target codex-first-success`
+- `pnpm run webai-bridge:cli -- builder-journeys`
+- `pnpm run webai-bridge:cli -- builder-journey --target codex-first-success`
 
 ## How do I wire the chosen pack into a host?
 
@@ -273,18 +273,18 @@ Partially yes, but only in a thin read-only sense.
 当前最短路径是：
 
 - [docs/host-integration-playbooks.md](./host-integration-playbooks.md)
-- `pnpm run switchyard:cli -- host-playbooks`
-- `pnpm run switchyard:cli -- host-playbook --target codex`
-- `pnpm run switchyard:cli -- host-playbook --target mcp`
+- `pnpm run webai-bridge:cli -- host-playbooks`
+- `pnpm run webai-bridge:cli -- host-playbook --target codex`
+- `pnpm run webai-bridge:cli -- host-playbook --target mcp`
 
 如果你不只是想读文字手册，而是想直接看一份 host-local config 长什么样：
 
 - [docs/host-integration-examples.md](./host-integration-examples.md)
-- `pnpm run switchyard:cli -- host-examples`
-- `pnpm run switchyard:cli -- host-example --target codex`
-- `pnpm run switchyard:cli -- host-example --target mcp`
+- `pnpm run webai-bridge:cli -- host-examples`
+- `pnpm run webai-bridge:cli -- host-example --target codex`
+- `pnpm run webai-bridge:cli -- host-example --target mcp`
 
-## Is Switchyard SDK-first?
+## Is WebaiBridge SDK-first?
 
 No.
 
@@ -311,7 +311,7 @@ No.
 - 你用浏览器登录、OAuth、订阅会话
 - 更接近“没有 API Key，但已有真实账号使用资格”的场景
 
-## Where do Switchyard runtime caches live now?
+## Where do WebaiBridge runtime caches live now?
 
 先把这个问题理解成“仓库自己的可清理资产放哪里”，不是“电脑上一切缓存都归它管”。
 
@@ -320,7 +320,7 @@ No.
 - repo-local runtime assets
   - `.runtime-cache/`
 - repo-external dedicated cache root
-  - `~/.cache/switchyard`
+  - `~/.cache/webai-bridge`
 - shared tool caches
   - 不归当前 repo 自动清理
 
@@ -334,7 +334,7 @@ No.
 - `TTL = 7 days`
 - `maxBytes = 8 GiB`
 
-## Does Switchyard own my real Chrome profile?
+## Does WebaiBridge own my real Chrome profile?
 
 No.
 
@@ -342,15 +342,15 @@ No.
 
 - 本地 credentialed 开发默认可以指向你分配给当前 repo 的真实 Chrome Profile
 - 通过：
-  - `SWITCHYARD_CHROME_USER_DATA_DIR`
-  - `SWITCHYARD_CHROME_PROFILE_NAME`
+  - `WEBAI_BRIDGE_CHROME_USER_DATA_DIR`
+  - `WEBAI_BRIDGE_CHROME_PROFILE_NAME`
 - 真实 Chrome Profile 是**用户资产**
 - 它不属于 repo cache
 - 它不会被自动清理
 
 repo-local 的：
 
-- `.runtime-cache/switchyard-web-auth-browser`
+- `.runtime-cache/webai-bridge-web-auth-browser`
 
 现在只是显式 opt-in 的 managed fallback，不再是默认日常工位。
 
@@ -399,12 +399,12 @@ No.
 - [docs/discoverability-keyword-truth.md](./discoverability-keyword-truth.md)
 - [catalogs/discoverability-keyword-truth.json](../catalogs/discoverability-keyword-truth.json)
 - [catalogs/discoverability-keyword-truth.schema.json](../catalogs/discoverability-keyword-truth.schema.json)
-- `pnpm run switchyard:cli -- keyword-truth`
-- `pnpm run switchyard:cli -- keyword-truth-schema`
-- `pnpm run switchyard:cli -- keyword-entry --target switchyard-mcp`
-- `switchyard.catalog.keyword_truth`
-- `switchyard.catalog.keyword_truth_schema`
-- `switchyard.catalog.keyword_entry`
+- `pnpm run webai-bridge:cli -- keyword-truth`
+- `pnpm run webai-bridge:cli -- keyword-truth-schema`
+- `pnpm run webai-bridge:cli -- keyword-entry --target webai-bridge-mcp`
+- `webai-bridge.catalog.keyword_truth`
+- `webai-bridge.catalog.keyword_truth_schema`
+- `webai-bridge.catalog.keyword_entry`
 
 ## Where do I start if I do not yet know which truthful surface I need?
 
@@ -415,10 +415,10 @@ No.
 - [docs/starter-pack-chooser.md](./starter-pack-chooser.md)
 - [catalogs/builder-intent-router.json](../catalogs/builder-intent-router.json)
 - [catalogs/builder-intent-router.schema.json](../catalogs/builder-intent-router.schema.json)
-- `pnpm run switchyard:cli -- builder-intent-router`
-- `pnpm run switchyard:cli -- builder-intent --target support-truth`
-- `switchyard.catalog.builder_intent_router`
-- `switchyard.catalog.builder_intent`
+- `pnpm run webai-bridge:cli -- builder-intent-router`
+- `pnpm run webai-bridge:cli -- builder-intent --target support-truth`
+- `webai-bridge.catalog.builder_intent_router`
+- `webai-bridge.catalog.builder_intent`
 
 ## Where do I look if I only need thin compat target truth?
 
@@ -428,14 +428,14 @@ No.
 
 - [catalogs/compat-target-catalog.json](../catalogs/compat-target-catalog.json)
 - [catalogs/compat-target-catalog.schema.json](../catalogs/compat-target-catalog.schema.json)
-- `pnpm run switchyard:cli -- compat-target-catalog`
-- `pnpm run switchyard:cli -- compat-target-catalog-schema`
-- `pnpm run switchyard:cli -- compat-target --target codex`
-- `pnpm run switchyard:cli -- compat-target --target claude-code`
-- `pnpm run switchyard:cli -- compat-target --target openclaw`
-- `switchyard.catalog.compat_target_catalog`
-- `switchyard.catalog.compat_target_catalog_schema`
-- `switchyard.catalog.compat_target`
+- `pnpm run webai-bridge:cli -- compat-target-catalog`
+- `pnpm run webai-bridge:cli -- compat-target-catalog-schema`
+- `pnpm run webai-bridge:cli -- compat-target --target codex`
+- `pnpm run webai-bridge:cli -- compat-target --target claude-code`
+- `pnpm run webai-bridge:cli -- compat-target --target openclaw`
+- `webai-bridge.catalog.compat_target_catalog`
+- `webai-bridge.catalog.compat_target_catalog_schema`
+- `webai-bridge.catalog.compat_target`
 
 ## Where do I look if I only need builder kit truth?
 
@@ -445,15 +445,15 @@ No.
 
 - [catalogs/builder-kit-catalog.json](../catalogs/builder-kit-catalog.json)
 - [catalogs/builder-kit-catalog.schema.json](../catalogs/builder-kit-catalog.schema.json)
-- `pnpm run switchyard:cli -- builder-kit-catalog`
-- `pnpm run switchyard:cli -- builder-kit-catalog-schema`
-- `pnpm run switchyard:cli -- builder-kit --target codex`
-- `pnpm run switchyard:cli -- builder-kit --target claude-code`
-- `pnpm run switchyard:cli -- builder-kit --target openclaw`
-- `pnpm run switchyard:cli -- builder-kit --target mcp`
-- `switchyard.catalog.builder_kit_catalog`
-- `switchyard.catalog.builder_kit_catalog_schema`
-- `switchyard.catalog.builder_kit`
+- `pnpm run webai-bridge:cli -- builder-kit-catalog`
+- `pnpm run webai-bridge:cli -- builder-kit-catalog-schema`
+- `pnpm run webai-bridge:cli -- builder-kit --target codex`
+- `pnpm run webai-bridge:cli -- builder-kit --target claude-code`
+- `pnpm run webai-bridge:cli -- builder-kit --target openclaw`
+- `pnpm run webai-bridge:cli -- builder-kit --target mcp`
+- `webai-bridge.catalog.builder_kit_catalog`
+- `webai-bridge.catalog.builder_kit_catalog_schema`
+- `webai-bridge.catalog.builder_kit`
 
 ## Where do I look if I only need skill pack truth?
 
@@ -463,13 +463,13 @@ No.
 
 - [catalogs/skill-pack-catalog.json](../catalogs/skill-pack-catalog.json)
 - [catalogs/skill-pack-catalog.schema.json](../catalogs/skill-pack-catalog.schema.json)
-- `pnpm run switchyard:cli -- skill-pack-catalog`
-- `pnpm run switchyard:cli -- skill-pack-catalog-schema`
-- `pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack`
-- `switchyard.catalog.skill_pack_catalog`
-- `switchyard.catalog.skill_pack_catalog_schema`
-- `switchyard.catalog.skill_pack`
+- `pnpm run webai-bridge:cli -- skill-pack-catalog`
+- `pnpm run webai-bridge:cli -- skill-pack-catalog-schema`
+- `pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack`
+- `webai-bridge.catalog.skill_pack_catalog`
+- `webai-bridge.catalog.skill_pack_catalog_schema`
+- `webai-bridge.catalog.skill_pack`
 
 ## Where do I look if I only need provider ids, lanes, auth mode, or stability tiers?
 
@@ -480,13 +480,13 @@ No.
 - [docs/provider-runtime-catalog.md](./provider-runtime-catalog.md)
 - [catalogs/provider-runtime-catalog.json](../catalogs/provider-runtime-catalog.json)
 - [catalogs/provider-runtime-catalog.schema.json](../catalogs/provider-runtime-catalog.schema.json)
-- `pnpm run switchyard:cli -- provider-catalog`
-- `pnpm run switchyard:cli -- provider-catalog-schema`
-- `pnpm run switchyard:cli -- provider-entry --target chatgpt`
-- `pnpm run switchyard:cli -- provider-entry --target gemini:web-login`
-- `switchyard.catalog.provider_catalog`
-- `switchyard.catalog.provider_catalog_schema`
-- `switchyard.catalog.provider_entry`
+- `pnpm run webai-bridge:cli -- provider-catalog`
+- `pnpm run webai-bridge:cli -- provider-catalog-schema`
+- `pnpm run webai-bridge:cli -- provider-entry --target chatgpt`
+- `pnpm run webai-bridge:cli -- provider-entry --target gemini:web-login`
+- `webai-bridge.catalog.provider_catalog`
+- `webai-bridge.catalog.provider_catalog_schema`
+- `webai-bridge.catalog.provider_entry`
 
 ## Where do I look if I only need the current read-only MCP tool inventory?
 
@@ -496,9 +496,9 @@ No.
 
 - [catalogs/mcp-tool-catalog.json](../catalogs/mcp-tool-catalog.json)
 - [catalogs/mcp-tool-catalog.schema.json](../catalogs/mcp-tool-catalog.schema.json)
-- `pnpm run switchyard:cli -- mcp-tool-catalog`
-- `pnpm run switchyard:cli -- mcp-tool-catalog-schema`
-- `pnpm run switchyard:cli -- mcp-tool --target switchyard.runtime.health`
-- `switchyard.catalog.mcp_tool_catalog`
-- `switchyard.catalog.mcp_tool_catalog_schema`
-- `switchyard.catalog.mcp_tool`
+- `pnpm run webai-bridge:cli -- mcp-tool-catalog`
+- `pnpm run webai-bridge:cli -- mcp-tool-catalog-schema`
+- `pnpm run webai-bridge:cli -- mcp-tool --target webai-bridge.runtime.health`
+- `webai-bridge.catalog.mcp_tool_catalog`
+- `webai-bridge.catalog.mcp_tool_catalog_schema`
+- `webai-bridge.catalog.mcp_tool`

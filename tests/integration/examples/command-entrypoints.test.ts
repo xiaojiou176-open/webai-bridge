@@ -117,7 +117,7 @@ describe("example package-script entrypoints", () => {
 
     try {
       const { stdout } = await runExampleCommand("example:runtime-bridge", {
-        SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
       });
       const output = parseJsonFromCommandStdout(stdout) as {
         starter: string;
@@ -196,7 +196,7 @@ describe("example package-script entrypoints", () => {
 
       try {
         const { stdout } = await runExampleCommand("example:mcp-inspector", {
-          SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+          WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
         });
         const output = parseJsonFromCommandStdout(stdout) as {
           starter: string;
@@ -229,8 +229,8 @@ describe("example package-script entrypoints", () => {
         expect(output.starter).toBe("read-only-mcp-inspector");
         expect(output.availableTools).toEqual(
           expect.arrayContaining([
-            "switchyard.runtime.health",
-            "switchyard.catalog.mcp_tools",
+            "webai-bridge.runtime.health",
+            "webai-bridge.catalog.mcp_tools",
           ]),
         );
         expect(output.runtimeHealth).toMatchObject({
@@ -306,7 +306,7 @@ describe("example package-script entrypoints", () => {
 
     try {
       const failure = await expectCommandFailure("example:runtime-bridge", {
-        SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
+        WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${address.port}`,
       });
 
       expect(failure.code).not.toBe(0);
@@ -316,7 +316,7 @@ describe("example package-script entrypoints", () => {
         errorOutput.includes("missing-credential") &&
         errorOutput.includes("Missing credential for gemini.");
       const runtimeUnavailableFailure =
-        errorOutput.includes("Switchyard runtime is not reachable") &&
+        errorOutput.includes("WebaiBridge runtime is not reachable") &&
         errorOutput.includes("/v1/runtime/invoke");
 
       expect(missingCredentialFailure || runtimeUnavailableFailure).toBe(true);
@@ -328,11 +328,11 @@ describe("example package-script entrypoints", () => {
   it("fails truthfully when the runtime bridge alias cannot reach any runtime", async () => {
     const port = await reserveClosedPort();
     const failure = await expectCommandFailure("example:runtime-bridge", {
-      SWITCHYARD_RUNTIME_BASE_URL: `http://127.0.0.1:${port}`,
+      WEBAI_BRIDGE_RUNTIME_BASE_URL: `http://127.0.0.1:${port}`,
     });
 
     expect(failure.code).not.toBe(0);
-    expect(failure.stderr ?? "").toContain("Switchyard runtime is not reachable");
+    expect(failure.stderr ?? "").toContain("WebaiBridge runtime is not reachable");
     expect(failure.stderr ?? "").toContain("pnpm run start:service-local");
     expect(failure.stderr ?? "").toContain("/v1/runtime/invoke");
   });

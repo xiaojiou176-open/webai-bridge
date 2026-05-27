@@ -1,4 +1,4 @@
-# Switchyard Host Example: OpenClaw
+# WebaiBridge Host Example: OpenClaw
 
 这个 example 的目标是：
 

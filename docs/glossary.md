@@ -1,4 +1,4 @@
-# Switchyard Glossary / 术语表
+# WebaiBridge Glossary / 术语表
 
 ## Shared Provider Runtime
 
@@ -54,7 +54,7 @@ English:
 The initial service-first integrations into the owner’s own repos.
 
 中文：
-先把 Switchyard 接进自己的三个仓，作为第一批 service-first 集成。
+先把 WebaiBridge 接进自己的三个仓，作为第一批 service-first 集成。
 
 ## Consumer Compat
 

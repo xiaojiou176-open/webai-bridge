@@ -51,7 +51,7 @@ const VALID_STATES = new Set<CredentialState>([
 ]);
 
 function envKey(provider: WebProviderId, suffix: string): string {
-  return `SWITCHYARD_WEB_${provider.toUpperCase()}_${suffix}`;
+  return `WEBAI_BRIDGE_WEB_${provider.toUpperCase()}_${suffix}`;
 }
 
 export function loadProviderSessionsFromEnv(
@@ -84,7 +84,7 @@ export function loadProviderSessionsFromEnv(
 }
 
 export function loadServicePort(env: NodeJS.ProcessEnv): number {
-  const rawPort = env.SWITCHYARD_SERVICE_PORT;
+  const rawPort = env.WEBAI_BRIDGE_SERVICE_PORT;
   const parsed = rawPort ? Number(rawPort) : 4010;
 
   return Number.isInteger(parsed) && parsed > 0 ? parsed : 4010;

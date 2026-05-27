@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/surface-http",
+  "name": "@webai-bridge/surface-http",
   "private": true,
   "type": "module",
   "scripts": {

@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
-import { createSwitchyardSdk } from '../../../packages/sdk/src/index.js';
+import { createWebaiBridgeSdk } from '../../../packages/sdk/src/index.js';
 
-describe('Switchyard SDK surface', () => {
+describe('WebaiBridge SDK surface', () => {
   test('acts as a unified BYOK entry point for provider discovery and preparation', () => {
-    const sdk = createSwitchyardSdk({
+    const sdk = createWebaiBridgeSdk({
       env: {
         GEMINI_API_KEY: 'sdk-test-key',
       },
@@ -23,12 +23,12 @@ describe('Switchyard SDK surface', () => {
   });
 
   test('exposes the Web/Login runtime registry and auth-status semantics through the SDK', async () => {
-    const sdk = createSwitchyardSdk({
+    const sdk = createWebaiBridgeSdk({
       web: {
         useLocalWebAuthStore: false,
         runtimeEnv: {
-          SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: 'chatgpt=abc',
-          SWITCHYARD_WEB_CHATGPT_USER_AGENT: 'SwitchyardTest/1.0',
+          WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: 'chatgpt=abc',
+          WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: 'WebaiBridgeTest/1.0',
         },
         providerSessions: {
           chatgpt: {

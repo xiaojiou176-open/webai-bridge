@@ -17,7 +17,7 @@ describe("openclaw thin compat adapter", () => {
               runtimeShape: "runtime-first",
             },
             bootstrap: {
-              serviceName: "switchyard-service",
+              serviceName: "webai-bridge-service",
               lane: "web",
               consumption: "service-first",
               routeCatalog: {
@@ -101,7 +101,7 @@ describe("openclaw thin compat adapter", () => {
               },
               receipt: {
                 recommendedCliCommands: [
-                  "pnpm run switchyard:cli -- provider-doctor --provider chatgpt --json",
+                  "pnpm run webai-bridge:cli -- provider-doctor --provider chatgpt --json",
                 ],
               },
             },
@@ -141,7 +141,7 @@ describe("openclaw thin compat adapter", () => {
     );
 
     const adapter = createOpenClawCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     });
 
@@ -181,7 +181,7 @@ describe("openclaw thin compat adapter", () => {
       mode: "copilot-brain",
     });
     const thin = await createOpenclawThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     }).delegateTurn({
       model: "chatgpt/gpt-4o",
@@ -198,7 +198,7 @@ describe("openclaw thin compat adapter", () => {
     expect(bootstrap).toEqual(
       expect.objectContaining({
         bootstrap: expect.objectContaining({
-          serviceName: "switchyard-service",
+          serviceName: "webai-bridge-service",
         }),
       }),
     );
@@ -215,10 +215,10 @@ describe("openclaw thin compat adapter", () => {
           lane: "web",
         }),
         runtimeRoutes: expect.objectContaining({
-          bootstrap: "http://switchyard.test/v1/runtime/bootstrap",
-          health: "http://switchyard.test/v1/runtime/health",
-          dispatchPlan: "http://switchyard.test/v1/runtime/dispatch-plan",
-          invoke: "http://switchyard.test/v1/runtime/invoke",
+          bootstrap: "http://webai-bridge.test/v1/runtime/bootstrap",
+          health: "http://webai-bridge.test/v1/runtime/health",
+          dispatchPlan: "http://webai-bridge.test/v1/runtime/dispatch-plan",
+          invoke: "http://webai-bridge.test/v1/runtime/invoke",
         }),
       }),
     );
@@ -268,7 +268,7 @@ describe("openclaw thin compat adapter", () => {
         }),
         runtime: expect.objectContaining({
           bootstrap: expect.objectContaining({
-            serviceName: "switchyard-service",
+            serviceName: "webai-bridge-service",
           }),
           health: expect.objectContaining({
             totals: expect.objectContaining({

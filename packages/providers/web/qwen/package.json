@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/provider-web-qwen",
+  "name": "@webai-bridge/provider-web-qwen",
   "private": true,
   "type": "module",
   "scripts": {

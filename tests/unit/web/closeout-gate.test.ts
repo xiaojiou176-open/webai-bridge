@@ -34,8 +34,8 @@ describe("Reality closeout script helpers", () => {
   it("supports concurrent web live verification runs without temp-dir collisions", async () => {
     const { runWebLoginLiveVerification } = await import("../../../scripts/verify-web-login-live.mjs");
     const isolatedEnv = {
-      SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: createRepoScopedStorePath(
-        "switchyard-closeout-gate-missing-store.json",
+      WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: createRepoScopedStorePath(
+        "webai-bridge-closeout-gate-missing-store.json",
       ),
     };
     const providers = ["chatgpt"] as const;
@@ -83,8 +83,8 @@ describe("Reality closeout script helpers", () => {
 
     const results = await runWebLoginLiveVerification({
       env: {
-        SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: createRepoScopedStorePath(
-          "switchyard-closeout-gate-provider-filter.json",
+        WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: createRepoScopedStorePath(
+          "webai-bridge-closeout-gate-provider-filter.json",
         ),
       },
       providers: ["chatgpt"],
@@ -128,11 +128,11 @@ describe("Reality closeout script helpers", () => {
         responseStatus: 200,
         envStatus: [
           {
-            name: "SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE",
+            name: "WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE",
             present: true,
           },
           {
-            name: "SWITCHYARD_WEB_GEMINI_USER_AGENT",
+            name: "WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT",
             present: true,
           },
         ],
@@ -638,7 +638,7 @@ describe("Reality closeout script helpers", () => {
         errorCategory: "provider-unavailable",
         failureStage: "invoke",
         message:
-          "ChatGPT attached browser is currently blocked on OpenAI email verification (verification code), so the end user must finish that verification before Switchyard can invoke ChatGPT.",
+          "ChatGPT attached browser is currently blocked on OpenAI email verification (verification code), so the end user must finish that verification before WebaiBridge can invoke ChatGPT.",
       },
       env: {},
     });
@@ -708,7 +708,7 @@ describe("Reality closeout script helpers", () => {
         provider: "gemini",
         blocker: "missing-gemini-api-key",
         classification: "session-material-missing",
-        missingEnvNames: ["SWITCHYARD_GEMINI_API_KEY"],
+        missingEnvNames: ["WEBAI_BRIDGE_GEMINI_API_KEY"],
       },
       webLogin: [
         {
@@ -792,7 +792,7 @@ describe("Reality closeout script helpers", () => {
         summary: "cdp unavailable",
       },
       {
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9222",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9222",
       },
     );
 

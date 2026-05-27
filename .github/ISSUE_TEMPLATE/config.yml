@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Switchyard Discussions
-    url: https://github.com/xiaojiou176-open/Switchyard/discussions
+  - name: WebaiBridge Discussions
+    url: https://github.com/xiaojiou176-open/webai-bridge/discussions
     about: Use Discussions for open-ended questions, frontdoor wording, and builder conversations.
   - name: Public Proof Pack
-    url: https://xiaojiou176-open.github.io/Switchyard/public-proof-pack.md
+    url: https://xiaojiou176-open.github.io/webai-bridge/public-proof-pack.md
     about: Check the current proof wording before opening a support or readiness issue.

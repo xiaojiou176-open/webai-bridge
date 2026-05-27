@@ -61,8 +61,8 @@ describe("diagnose-web-login-browser script", () => {
     const target = resolveCanonicalAttachTarget(
       "gemini",
       {
-        SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
-        SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL: "http://127.0.0.1:9555",
+        WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+        WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL: "http://127.0.0.1:9555",
       },
       {
         acquisitionMode: "existing-browser-session",
@@ -517,7 +517,7 @@ describe("diagnose-web-login-browser script", () => {
       {
         mode: "isolated-chrome-root",
         existingProfileDir: "/tmp/profile",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       {
@@ -551,7 +551,7 @@ describe("diagnose-web-login-browser script", () => {
       {
         mode: "isolated-chrome-root",
         existingProfileDir: "/tmp/profile",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         existingProfileCdpUrl: "http://127.0.0.1:9338",
       },
       {
@@ -654,7 +654,7 @@ describe("diagnose-web-login-browser script", () => {
       buildAttachHelper("chatgpt", {
         mode: "isolated-chrome-root",
         existingProfileDir: "/tmp/profile",
-        existingProfileName: "switchyard",
+        existingProfileName: "webai-bridge",
         cdpUrl: "http://127.0.0.1:9338",
       }).canonicalTargetHint,
     ).toContain("isolated repo Chrome root");
@@ -666,8 +666,8 @@ describe("diagnose-web-login-browser script", () => {
     );
 
     const target = resolveCanonicalAttachTarget("qwen", {
-      SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-      SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+      WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+      WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
     });
 
     expect(target.mode).toBe("isolated-chrome-root");
@@ -683,8 +683,8 @@ describe("diagnose-web-login-browser script", () => {
     const ladder = buildDiagnoseLadder(
       "gemini",
       resolveCanonicalAttachTarget("gemini", {
-        SWITCHYARD_BROWSER_MODE: "managed-browser",
-        SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+        WEBAI_BRIDGE_BROWSER_MODE: "managed-browser",
+        WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
       }),
       {
         ready: true,
@@ -720,7 +720,7 @@ describe("diagnose-web-login-browser script", () => {
   });
 
   it("reports attach failures as not live-ready and still writes a support bundle", async () => {
-    const workspace = createRepoTempWorkspace("switchyard-browser-diagnose-fail-");
+    const workspace = createRepoTempWorkspace("webai-bridge-browser-diagnose-fail-");
     const bundlePath = join(workspace, "gemini-support-bundle.json");
 
     vi.doMock("playwright-core", () => ({
@@ -766,7 +766,7 @@ describe("diagnose-web-login-browser script", () => {
   });
 
   it("writes a support bundle with current page evidence and diagnose ladder", async () => {
-    const workspace = createRepoTempWorkspace("switchyard-browser-diagnose-");
+    const workspace = createRepoTempWorkspace("webai-bridge-browser-diagnose-");
     const storePath = join(workspace, "local-web-auth-store.json");
     const bundlePath = join(workspace, "chatgpt-support-bundle.json");
 
@@ -828,7 +828,7 @@ describe("diagnose-web-login-browser script", () => {
         provider: "chatgpt",
         env: {
           ...process.env,
-          SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH: storePath,
+          WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH: storePath,
         },
         json: true,
         reload: true,
@@ -957,7 +957,7 @@ describe("diagnose-web-login-browser script", () => {
     );
 
     const target = resolveCanonicalAttachTarget("gemini", {
-      SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+      WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
     });
     const result = await collectBrowserEvidence("gemini", target, {
       reload: true,

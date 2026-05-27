@@ -31,13 +31,13 @@ describe("host integration examples", () => {
       expect(hostExample?.target).toBe(target);
       expect(catalogEntry?.target).toBe(target);
       expect(hostExample?.bestEntry).toBe(
-        `pnpm run switchyard:cli -- host-example --target ${target}`,
+        `pnpm run webai-bridge:cli -- host-example --target ${target}`,
       );
       expect(hostExample?.smokeCommand).toBe(
         `pnpm run example:host-${target}`,
       );
       expect(catalogEntry?.bestEntry).toBe(
-        `pnpm run switchyard:cli -- host-example --target ${target}`,
+        `pnpm run webai-bridge:cli -- host-example --target ${target}`,
       );
       expect(catalogEntry?.smokeCommand).toBe(
         `pnpm run example:host-${target}`,

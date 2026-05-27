@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/provider-web-chatgpt",
+  "name": "@webai-bridge/provider-web-chatgpt",
   "private": true,
   "type": "module",
   "scripts": {

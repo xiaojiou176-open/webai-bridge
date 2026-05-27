@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
 
 import { requestLocalJson } from "./local-http-client.js";
-import { startSwitchyardE2EService } from "./service-test-harness.js";
+import { startWebaiBridgeE2EService } from "./service-test-harness.js";
 
-const startedServices: Array<Awaited<ReturnType<typeof startSwitchyardE2EService>>> = [];
+const startedServices: Array<Awaited<ReturnType<typeof startWebaiBridgeE2EService>>> = [];
 
 afterEach(async () => {
   await Promise.all(startedServices.splice(0).map((service) => service.close()));
@@ -11,7 +11,7 @@ afterEach(async () => {
 
 describe("Web/Login lane end-to-end", () => {
   it("keeps all five web providers inside the runtime path with explicit stability targets", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
     });
     startedServices.push(service);
@@ -63,7 +63,7 @@ describe("Web/Login lane end-to-end", () => {
   });
 
   it("reports mixed session presence, degraded runtime health, and explicit recovery signals", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         chatgpt: {
@@ -188,7 +188,7 @@ describe("Web/Login lane end-to-end", () => {
   });
 
   it("blocks synthetic Web/Login invoke paths even when provider sessions look ready", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         chatgpt: {
@@ -307,7 +307,7 @@ describe("Web/Login lane end-to-end", () => {
   });
 
   it("keeps high-stability providers diagnosable in degraded mode while still blocking synthetic invoke", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         chatgpt: {

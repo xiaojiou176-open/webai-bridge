@@ -70,7 +70,7 @@ describe("reality gate governance helpers", () => {
           provider: "claude",
           blocker: "claude-account-action-required",
           classification: "account-action-required",
-          missingEnvNames: ["SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE"],
+          missingEnvNames: ["WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE"],
           persistenceAudit: {
             workspaceClassification: "attach-failed",
           },
@@ -119,7 +119,7 @@ describe("reality gate governance helpers", () => {
         blocker: "claude-account-action-required",
         classification: "account-action-required",
         workspaceClassification: "attach-failed",
-        missingEnvNames: ["SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE"],
+        missingEnvNames: ["WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE"],
         probeUrl: undefined,
         cdpUrl: undefined,
         rerunCommand: "pnpm run verify:web-login-live -- --provider claude",
@@ -329,14 +329,14 @@ describe("reality gate governance helpers", () => {
           story: "dispatchable",
           classification: undefined,
           runtimeDoctorCommand:
-            "pnpm run switchyard:cli -- provider-doctor --provider gemini --json",
+            "pnpm run webai-bridge:cli -- provider-doctor --provider gemini --json",
         },
         {
           provider: "claude",
           story: "blocked",
           classification: "account-action-required",
           runtimeDoctorCommand:
-            "pnpm run switchyard:cli -- provider-doctor --provider claude --json",
+            "pnpm run webai-bridge:cli -- provider-doctor --provider claude --json",
         },
       ],
     });

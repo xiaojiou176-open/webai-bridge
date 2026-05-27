@@ -32,6 +32,6 @@ sessions, or raw browser profile data in public reports.
 
 ## Scope Notes
 
-Switchyard handles user-owned credentials and browser session material. Reports
+WebaiBridge handles user-owned credentials and browser session material. Reports
 involving `.runtime-cache`, `.agents`, local browser profiles, or captured
 session artifacts should be treated as high sensitivity.

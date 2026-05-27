@@ -4,7 +4,7 @@ This page separates **repo-ready public surfaces** from **actual marketplace or 
 
 Current public release truth:
 
-- GitHub Pages storefront: `https://xiaojiou176-open.github.io/Switchyard/`
+- GitHub Pages storefront: `https://xiaojiou176-open.github.io/webai-bridge/`
 - GitHub release / npm / official MCP Registry / marketplace publication: **not yet published**
 
 ## Current Distribution Ledger
@@ -12,16 +12,16 @@ Current public release truth:
 | Surface | Materialized in repo | Publish-ready today | Published / listed today | Notes |
 | --- | --- | --- | --- | --- |
 | GitHub Pages storefront | yes | yes | yes | Current homepage points to GitHub Pages and should stay the primary public front door. |
-| Root npm package (`switchyard`) | yes | no | no | Root package is `private: true`; this repo does not ship a publishable root package today. |
-| MCP npm package (`@switchyard/surface-mcp`) | yes | yes | no | The package contract, `mcpName`, CLI bin, and `server.json` are landed, but the package is **not yet published**. |
-| Thin compat packages (`@switchyard/consumer-codex`, `@switchyard/consumer-claude-code`, `@switchyard/consumer-openclaw`) | yes | yes | no | The repo contains package-ready adapters and starter packs, but no registry publication is claimed yet. |
+| Root npm package (`webai-bridge`) | yes | no | no | Root package is `private: true`; this repo does not ship a publishable root package today. |
+| MCP npm package (`@webai-bridge/surface-mcp`) | yes | yes | no | The package contract, `mcpName`, CLI bin, and `server.json` are landed, but the package is **not yet published**. |
+| Thin compat packages (`@webai-bridge/consumer-codex`, `@webai-bridge/consumer-claude-code`, `@webai-bridge/consumer-openclaw`) | yes | yes | no | The repo contains package-ready adapters and starter packs, but no registry publication is claimed yet. |
 | Claude marketplace-compatible bundle | yes | yes | no | `distribution/claude-marketplace/` exists, but it is still a repo materialization, not a confirmed live listing. |
 | Builder starter packs | yes | yes | no dedicated registry | The public repo is the current install/discovery surface. |
 | Official MCP Registry listing | partial | yes | no | Submission materials exist in repo, but there is no live registry listing proof yet. |
 
 ## Secondary Packet Host-Lane Truth
 
-The `switchyard-runtime-diagnostics` folder is a **secondary packet**, not the
+The `webai-bridge-runtime-diagnostics` folder is a **secondary packet**, not the
 repo-wide distribution verdict.
 
 - Task-supplied 2026-04-11 external read-back says a ClawHub page for this
@@ -31,12 +31,12 @@ repo-wide distribution verdict.
 - Task-supplied 2026-04-11 external read-back says
   `OpenHands/extensions#161` is open with review still pending and mergeability
   blocked. That is a submission receipt, not a live listing.
-- None of those packet receipts upgrade Switchyard-wide npm, official MCP
+- None of those packet receipts upgrade WebaiBridge-wide npm, official MCP
   Registry, or repo-wide marketplace truth.
 
 ## What "Ready" Means Here
 
-For Switchyard, `ready` currently means:
+For WebaiBridge, `ready` currently means:
 
 - the public front door is explicit
 - the MCP and thin-compat artifacts are package-ready
@@ -46,7 +46,7 @@ For Switchyard, `ready` currently means:
 It does **not** mean:
 
 - npm publication already happened
-- the official MCP Registry already lists Switchyard
+- the official MCP Registry already lists WebaiBridge
 - Codex / Claude Code / OpenClaw marketplace publication is already live
 
 ## Fastest Public Surfaces
@@ -73,7 +73,7 @@ That page keeps three boxes separate:
 - the host-native runtime-diagnostics packet
 
 This matters because a packet-scoped host receipt still does **not** upgrade
-Switchyard-wide npm, Official MCP Registry, or hosted-runtime truth.
+WebaiBridge-wide npm, Official MCP Registry, or hosted-runtime truth.
 
 If you need the current registry / marketplace / owner-manual cockpit, open
 [.agents/internal-docs/mcp/mcp-listings-cockpit.md](.agents/internal-docs/mcp/mcp-listings-cockpit.md).
@@ -120,7 +120,7 @@ If you need the current registry / marketplace / owner-manual cockpit, open
 - `starter-ready`
 - `builder-facing public front door`
 - `marketplace-compatible bundle landed in repo`
-- `official registry surface exists, but Switchyard is not listed yet`
+- `official registry surface exists, but WebaiBridge is not listed yet`
 
 ### Forbidden overclaim
 

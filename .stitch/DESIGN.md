@@ -1,4 +1,4 @@
-# Switchyard Stitch Surface Notes
+# WebaiBridge Stitch Surface Notes
 
 This file is a thin public note for generated or stitched design assets.
 

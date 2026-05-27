@@ -125,7 +125,7 @@ export async function runGeminiLiveVerification(options = {}) {
 async function main() {
   if (isCiEnvironment(process.env)) {
     throw new Error(
-      "Switchyard verify:gemini-live is credentialed-workstation only and must not run inside CI.",
+      "WebaiBridge verify:gemini-live is credentialed-workstation only and must not run inside CI.",
     );
   }
 

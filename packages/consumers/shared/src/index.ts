@@ -1,14 +1,14 @@
 import {
   normalizeProviderId,
   providerSupportedLanes,
-  SwitchyardContractError,
+  WebaiBridgeContractError,
 } from "../../../contracts/src/index.js";
 import { parseModelReference } from "../../../contracts/src/model-reference.js";
 import {
-  createSwitchyardServiceClient,
+  createWebaiBridgeServiceClient,
   type RuntimeInvokeRequest,
   type RuntimeInvokeResponse,
-  type SwitchyardServiceClientOptions,
+  type WebaiBridgeServiceClientOptions,
 } from "../../../surfaces/sdk-client/src/index.js";
 
 export const THIN_COMPAT_TARGETS = ["codex", "claude-code", "openclaw"] as const;
@@ -75,7 +75,7 @@ export interface ThinCompatAdapter<TTarget extends ThinCompatTarget = ThinCompat
   failClosed(feature: ThinCompatUnsupportedFeature): never;
 }
 
-export type ThinCompatAdapterOptions = SwitchyardServiceClientOptions;
+export type ThinCompatAdapterOptions = WebaiBridgeServiceClientOptions;
 
 export interface ThinCompatManifestOptions<TTarget extends ThinCompatTarget> {
   readonly target: TTarget;
@@ -89,7 +89,7 @@ export class ThinCompatUnsupportedFeatureError extends Error {
 
   constructor(feature: ThinCompatUnsupportedFeature, target: ThinCompatTarget) {
     super(
-      `Switchyard thin compat target "${target}" intentionally does not expose "${feature}".`,
+      `WebaiBridge thin compat target "${target}" intentionally does not expose "${feature}".`,
     );
     this.name = "ThinCompatUnsupportedFeatureError";
     this.feature = feature;
@@ -119,7 +119,7 @@ function resolveProviderId(request: ThinCompatRequest) {
   if (requestedProvider) {
     const normalized = normalizeProviderId(requestedProvider);
     if (!normalized) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         "configuration-invalid",
         `Unknown provider "${request.provider}" for thin compat request.`,
         {
@@ -138,9 +138,9 @@ function resolveProviderId(request: ThinCompatRequest) {
   const normalized = normalizeProviderId(modelReference.providerKey);
 
   if (!normalized) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       "invalid-model-reference",
-      `Model reference "${request.model}" does not point at a known Switchyard provider.`,
+      `Model reference "${request.model}" does not point at a known WebaiBridge provider.`,
       {
         hints: ['Use the canonical "provider/model" form.'],
       },
@@ -165,7 +165,7 @@ function resolveLane(request: ThinCompatRequest, providerId: string): "web" | "b
     return toServiceLane(lanes[0]);
   }
 
-  throw new SwitchyardContractError(
+  throw new WebaiBridgeContractError(
     "configuration-invalid",
     `Provider "${providerId}" supports multiple lanes; thin compat requests must set "lane" explicitly.`,
     {
@@ -193,9 +193,9 @@ export function buildThinCompatInvokeRequest(
 
 export function createThinCompatAdapter<TTarget extends ThinCompatTarget>(
   manifest: ThinCompatManifest<TTarget>,
-  options: SwitchyardServiceClientOptions,
+  options: WebaiBridgeServiceClientOptions,
 ): ThinCompatAdapter<TTarget> {
-  const client = createSwitchyardServiceClient(options);
+  const client = createWebaiBridgeServiceClient(options);
 
   return {
     manifest,

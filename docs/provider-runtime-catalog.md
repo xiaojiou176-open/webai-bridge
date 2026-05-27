@@ -1,4 +1,4 @@
-# Switchyard Provider Runtime Directory
+# WebaiBridge Provider Runtime Directory
 
 This page is the thin public wrapper for the static provider directory.
 
@@ -16,16 +16,16 @@ In plain English:
 ## Read-Only Access
 
 ```bash
-pnpm run switchyard:cli -- provider-catalog
-pnpm run switchyard:cli -- provider-catalog-schema
-pnpm run switchyard:cli -- provider-entry --target chatgpt
-pnpm run switchyard:cli -- provider-entry --target openai:byok
-pnpm run switchyard:cli -- provider-entry --target gemini:web-login
+pnpm run webai-bridge:cli -- provider-catalog
+pnpm run webai-bridge:cli -- provider-catalog-schema
+pnpm run webai-bridge:cli -- provider-entry --target chatgpt
+pnpm run webai-bridge:cli -- provider-entry --target openai:byok
+pnpm run webai-bridge:cli -- provider-entry --target gemini:web-login
 ```
 
-- `switchyard.catalog.provider_catalog`
-- `switchyard.catalog.provider_catalog_schema`
-- `switchyard.catalog.provider_entry`
+- `webai-bridge.catalog.provider_catalog`
+- `webai-bridge.catalog.provider_catalog_schema`
+- `webai-bridge.catalog.provider_entry`
 
 ## What The Directory Tells You
 

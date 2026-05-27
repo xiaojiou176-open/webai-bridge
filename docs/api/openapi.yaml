@@ -1,10 +1,10 @@
 openapi: 3.1.0
 info:
-  title: Switchyard Service HTTP Surface
+  title: WebaiBridge Service HTTP Surface
   version: 0.1.0
   summary: Machine-readable contract for the current service-first runtime surface.
   description: >
-    This OpenAPI file documents the currently committed Switchyard HTTP runtime surface.
+    This OpenAPI file documents the currently committed WebaiBridge HTTP runtime surface.
     It is truthful to the current mainline service-first surface and does not claim any
     Codex, Claude Code, OpenClaw, or MCP adapter compatibility.
 servers:
@@ -373,7 +373,7 @@ components:
       type: object
       additionalProperties: true
       description: >
-        Switchyard currently returns rich runtime payloads. This schema stays broad on purpose so
+        WebaiBridge currently returns rich runtime payloads. This schema stays broad on purpose so
         the machine-readable contract can remain truthful without inventing fields that main has not
         yet committed as a frozen consumer-facing wire contract.
     AcquisitionRequest:

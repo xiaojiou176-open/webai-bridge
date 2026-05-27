@@ -38,7 +38,7 @@ export const providers = {
   bedrock,
 } as const;
 
-export interface SwitchyardProviderProfile {
+export interface WebaiBridgeProviderProfile {
   provider: ByokProviderId;
   displayName: string;
   implementation: ByokImplementation;
@@ -51,7 +51,7 @@ export interface SwitchyardProviderProfile {
 
 export function createProviderProfile(
   registration: ByokProviderRegistration,
-): SwitchyardProviderProfile {
+): WebaiBridgeProviderProfile {
   return {
     provider: registration.provider,
     displayName: registration.displayName,
@@ -70,14 +70,14 @@ export function createProviderProfile(
 
 export function listProviderProfiles(
   registry: ByokProviderRegistry,
-): readonly SwitchyardProviderProfile[] {
+): readonly WebaiBridgeProviderProfile[] {
   return registry.list().map(createProviderProfile);
 }
 
 export function getProviderProfile(
   registry: ByokProviderRegistry,
   provider: ByokProviderId,
-): SwitchyardProviderProfile | undefined {
+): WebaiBridgeProviderProfile | undefined {
   const registration = registry.get(provider);
 
   return registration ? createProviderProfile(registration) : undefined;

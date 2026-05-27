@@ -57,10 +57,10 @@ test-results/
 !.stitch/DESIGN.md
 design-system/*
 !design-system/MASTER.md
-!design-system/switchyard-auth-portal/
-!design-system/switchyard-auth-portal/MASTER.md
-!design-system/switchyard-debug-cockpit/
-!design-system/switchyard-debug-cockpit/MASTER.md
+!design-system/webai-bridge-auth-portal/
+!design-system/webai-bridge-auth-portal/MASTER.md
+!design-system/webai-bridge-debug-cockpit/
+!design-system/webai-bridge-debug-cockpit/MASTER.md
 
 # Python / sidecar local noise
 __pycache__/
@@ -80,3 +80,15 @@ venv/
 .claude/sessions/
 **/rollout-*.jsonl
 **/session-*.jsonl
+
+# Common secret files (patch 2026-05-27)
+*.key
+*.pem
+id_rsa
+id_ed25519
+*.p12
+*.pfx
+
+
+# .archive/ 全部 ignore（5/26 v2 错把 .archive/ 当成 tracked 加进 git，5/27 v3 修正）
+.archive/

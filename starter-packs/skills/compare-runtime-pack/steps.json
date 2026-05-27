@@ -1,7 +1,7 @@
 [
   "pnpm exec node starter-packs/skills/compare-runtime-pack/smoke.mjs",
-  "pnpm run switchyard:cli -- starter-pack-comparison --json",
-  "pnpm run switchyard:cli -- starter-pack-filter --target thin-runtime-bridges",
-  "pnpm run switchyard:cli -- starter-pack-filter --target read-only-truth",
+  "pnpm run webai-bridge:cli -- starter-pack-comparison --json",
+  "pnpm run webai-bridge:cli -- starter-pack-filter --target thin-runtime-bridges",
+  "pnpm run webai-bridge:cli -- starter-pack-filter --target read-only-truth",
   "cat docs/faq.md"
 ]

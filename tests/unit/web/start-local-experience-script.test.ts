@@ -81,28 +81,28 @@ describe("start-local-experience script helpers", () => {
       "../../../scripts/start-local-experience.mjs"
     );
 
-    const tempRoot = mkdtempSync(join(tmpdir(), "switchyard-project-site-"));
-    const projectRoot = resolve(tempRoot, "Switchyard");
+    const tempRoot = mkdtempSync(join(tmpdir(), "webai-bridge-project-site-"));
+    const projectRoot = resolve(tempRoot, "WebaiBridge");
     symlinkSync(process.cwd(), projectRoot, "dir");
 
     try {
-      expect(resolveStaticFilePath(tempRoot, "/Switchyard/")).toContain(
-        "/Switchyard/docs/index.html",
+      expect(resolveStaticFilePath(tempRoot, "/WebaiBridge/")).toContain(
+        "/WebaiBridge/docs/index.html",
       );
-      expect(resolveStaticFilePath(tempRoot, "/Switchyard/README.md")).toContain(
-        "/Switchyard/docs/README.md",
+      expect(resolveStaticFilePath(tempRoot, "/WebaiBridge/README.md")).toContain(
+        "/WebaiBridge/docs/README.md",
       );
-      expect(resolveStaticFilePath(tempRoot, "/Switchyard/first-success.md")).toContain(
-        "/Switchyard/docs/first-success.md",
+      expect(resolveStaticFilePath(tempRoot, "/WebaiBridge/first-success.md")).toContain(
+        "/WebaiBridge/docs/first-success.md",
       );
-      expect(resolveStaticFilePath(tempRoot, "/Switchyard/public-proof-pack.md")).toContain(
-        "/Switchyard/docs/public-proof-pack.md",
+      expect(resolveStaticFilePath(tempRoot, "/WebaiBridge/public-proof-pack.md")).toContain(
+        "/WebaiBridge/docs/public-proof-pack.md",
       );
-      expect(resolveStaticFilePath(tempRoot, "/Switchyard/runtime-control-ledger.md")).toContain(
-        "/Switchyard/runtime-control-ledger.md",
+      expect(resolveStaticFilePath(tempRoot, "/WebaiBridge/runtime-control-ledger.md")).toContain(
+        "/WebaiBridge/runtime-control-ledger.md",
       );
-      expect(resolveStaticFilePath(tempRoot, "/Switchyard/mcp.md")).toContain(
-        "/Switchyard/docs/mcp.md",
+      expect(resolveStaticFilePath(tempRoot, "/WebaiBridge/mcp.md")).toContain(
+        "/WebaiBridge/docs/mcp.md",
       );
     } finally {
       rmSync(tempRoot, {

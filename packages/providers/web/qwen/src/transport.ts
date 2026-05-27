@@ -83,9 +83,9 @@ export async function invokeQwenTransport(args: {
 
   const baseHeaders = {
     accept: "application/json, text/event-stream, */*",
-    cookie: envValues.SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE,
+    cookie: envValues.WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE,
     "content-type": "application/json",
-    "user-agent": envValues.SWITCHYARD_WEB_QWEN_USER_AGENT,
+    "user-agent": envValues.WEBAI_BRIDGE_WEB_QWEN_USER_AGENT,
   };
 
   const createResponse = await fetch("https://chat.qwen.ai/api/v2/chats/new", {

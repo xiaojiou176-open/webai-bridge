@@ -41,7 +41,7 @@ describe("claude-code thin compat adapter", () => {
     );
 
     const adapter = createClaudeCodeThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     });
 
@@ -54,7 +54,7 @@ describe("claude-code thin compat adapter", () => {
       lane: "byok",
     });
     const legacy = await createClaudeCodeCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     }).invokeMessages({
       model: "anthropic/claude-sonnet-4",
@@ -85,7 +85,7 @@ describe("claude-code thin compat adapter", () => {
 
   it("fails closed when tool execution is requested", async () => {
     const adapter = createClaudeCodeCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: vi.fn() as unknown as typeof fetch,
     });
 

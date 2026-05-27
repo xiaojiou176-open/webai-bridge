@@ -3,10 +3,10 @@
   "keywordVersion": 1,
   "entries": [
     {
-      "id": "switchyard-shared-provider-runtime",
-      "term": "Switchyard",
+      "id": "webai-bridge-shared-provider-runtime",
+      "term": "WebaiBridge",
       "truthStatus": "claimable-now",
-      "truthfulMeaning": "Switchyard can honestly describe itself as a shared provider runtime for AI apps.",
+      "truthfulMeaning": "WebaiBridge can honestly describe itself as a shared provider runtime for AI apps.",
       "requiredLabels": [],
       "canonicalDocs": [
         "README.md",
@@ -29,7 +29,7 @@
       "id": "ai-app-backend",
       "term": "AI app backend",
       "truthStatus": "claimable-now",
-      "truthfulMeaning": "Switchyard can claim a narrow AI app backend/runtime identity when the scope stays on provider access, auth, diagnostics, and service surfaces.",
+      "truthfulMeaning": "WebaiBridge can claim a narrow AI app backend/runtime identity when the scope stays on provider access, auth, diagnostics, and service surfaces.",
       "requiredLabels": [
         "narrow",
         "runtime-focused"
@@ -67,7 +67,7 @@
       "id": "service-first-ai-runtime",
       "term": "service-first AI runtime",
       "truthStatus": "claimable-now",
-      "truthfulMeaning": "Switchyard can honestly describe its public substrate as service-first when the claim stays on the runtime/service frontdoor rather than a host shell.",
+      "truthfulMeaning": "WebaiBridge can honestly describe its public substrate as service-first when the claim stays on the runtime/service frontdoor rather than a host shell.",
       "requiredLabels": [],
       "canonicalDocs": [
         ".agents/internal-docs/contracts/service-and-sdk-surfaces.md",
@@ -79,7 +79,7 @@
       "id": "api-substrate-first",
       "term": "API substrate first",
       "truthStatus": "claimable-now",
-      "truthfulMeaning": "Switchyard can honestly describe itself as API-substrate-first when the claim stays on the shared provider runtime surface.",
+      "truthfulMeaning": "WebaiBridge can honestly describe itself as API-substrate-first when the claim stays on the shared provider runtime surface.",
       "requiredLabels": [],
       "canonicalDocs": [
         ".agents/internal-docs/contracts/service-and-sdk-surfaces.md",
@@ -88,8 +88,8 @@
       ]
     },
     {
-      "id": "switchyard-codex",
-      "term": "Switchyard Codex",
+      "id": "webai-bridge-codex",
+      "term": "WebaiBridge Codex",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This keyword is only honest when paired with partial, thin-adapter, and fail-closed wording.",
       "requiredLabels": [
@@ -102,8 +102,8 @@
       ]
     },
     {
-      "id": "switchyard-claude-code",
-      "term": "Switchyard Claude Code",
+      "id": "webai-bridge-claude-code",
+      "term": "WebaiBridge Claude Code",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This keyword is only honest when paired with partial, thin-adapter, and fail-closed wording.",
       "requiredLabels": [
@@ -116,8 +116,8 @@
       ]
     },
     {
-      "id": "switchyard-openclaw",
-      "term": "Switchyard OpenClaw",
+      "id": "webai-bridge-openclaw",
+      "term": "WebaiBridge OpenClaw",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This keyword is only honest when paired with partial, thin-adapter, and fail-closed wording.",
       "requiredLabels": [
@@ -130,8 +130,8 @@
       ]
     },
     {
-      "id": "switchyard-package-consumer-codex",
-      "term": "@switchyard/consumer-codex",
+      "id": "webai-bridge-package-consumer-codex",
+      "term": "@webai-bridge/consumer-codex",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This package name is only honest when paired with package-ready, partial, and thin-adapter wording; no registry publish is claimed yet.",
       "requiredLabels": [
@@ -146,8 +146,8 @@
       ]
     },
     {
-      "id": "switchyard-package-consumer-claude-code",
-      "term": "@switchyard/consumer-claude-code",
+      "id": "webai-bridge-package-consumer-claude-code",
+      "term": "@webai-bridge/consumer-claude-code",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This package name is only honest when paired with package-ready, partial, and thin-adapter wording; no registry publish is claimed yet.",
       "requiredLabels": [
@@ -162,8 +162,8 @@
       ]
     },
     {
-      "id": "switchyard-package-consumer-openclaw",
-      "term": "@switchyard/consumer-openclaw",
+      "id": "webai-bridge-package-consumer-openclaw",
+      "term": "@webai-bridge/consumer-openclaw",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This package name is only honest when paired with package-ready, partial, and thin-adapter wording; no registry publish is claimed yet.",
       "requiredLabels": [
@@ -178,8 +178,8 @@
       ]
     },
     {
-      "id": "switchyard-mcp",
-      "term": "Switchyard MCP",
+      "id": "webai-bridge-mcp",
+      "term": "WebaiBridge MCP",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This keyword is only honest when paired with read-only MCP server, partial, and not-an-execution-brain wording.",
       "requiredLabels": [
@@ -194,8 +194,8 @@
       ]
     },
     {
-      "id": "switchyard-package-surface-mcp",
-      "term": "@switchyard/surface-mcp",
+      "id": "webai-bridge-package-surface-mcp",
+      "term": "@webai-bridge/surface-mcp",
       "truthStatus": "partial-with-label",
       "truthfulMeaning": "This package name is only honest when paired with package-ready, partial, and read-only MCP wording; no registry publish is claimed yet.",
       "requiredLabels": [
@@ -211,7 +211,7 @@
     },
     {
       "id": "supports-codex-today",
-      "term": "Switchyard supports Codex today",
+      "term": "WebaiBridge supports Codex today",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "This phrase is not honest on current main because Codex is only partial and fail-closed.",
       "requiredLabels": [],
@@ -222,7 +222,7 @@
     },
     {
       "id": "supports-claude-code-today",
-      "term": "Switchyard supports Claude Code today",
+      "term": "WebaiBridge supports Claude Code today",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "This phrase is not honest on current main because Claude Code is only partial and fail-closed.",
       "requiredLabels": [],
@@ -233,7 +233,7 @@
     },
     {
       "id": "supports-openclaw-today",
-      "term": "Switchyard supports OpenClaw today",
+      "term": "WebaiBridge supports OpenClaw today",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "This phrase is not honest on current main because OpenClaw is only partial and fail-closed.",
       "requiredLabels": [],
@@ -244,7 +244,7 @@
     },
     {
       "id": "mcp-full-parity",
-      "term": "Switchyard MCP has full parity today",
+      "term": "WebaiBridge MCP has full parity today",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "This phrase is not honest on current main because MCP is a partial read-only surface, not a full parity backend.",
       "requiredLabels": [],
@@ -255,7 +255,7 @@
     },
     {
       "id": "mcp-execution-backend",
-      "term": "Switchyard ships a full MCP execution backend today",
+      "term": "WebaiBridge ships a full MCP execution backend today",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "This phrase is not honest on current main because MCP remains read-only and fail-closed.",
       "requiredLabels": [],
@@ -266,7 +266,7 @@
     },
     {
       "id": "consumer-codex-on-npm-now",
-      "term": "@switchyard/consumer-codex available on npm now",
+      "term": "@webai-bridge/consumer-codex available on npm now",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "Current repo metadata is publish-ready, but no npm publish is claimed in fresh truth.",
       "requiredLabels": [],
@@ -277,7 +277,7 @@
     },
     {
       "id": "consumer-claude-code-on-npm-now",
-      "term": "@switchyard/consumer-claude-code available on npm now",
+      "term": "@webai-bridge/consumer-claude-code available on npm now",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "Current repo metadata is publish-ready, but no npm publish is claimed in fresh truth.",
       "requiredLabels": [],
@@ -288,7 +288,7 @@
     },
     {
       "id": "consumer-openclaw-on-npm-now",
-      "term": "@switchyard/consumer-openclaw available on npm now",
+      "term": "@webai-bridge/consumer-openclaw available on npm now",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "Current repo metadata is publish-ready, but no npm publish is claimed in fresh truth.",
       "requiredLabels": [],
@@ -299,7 +299,7 @@
     },
     {
       "id": "surface-mcp-on-npm-now",
-      "term": "@switchyard/surface-mcp available on npm now",
+      "term": "@webai-bridge/surface-mcp available on npm now",
       "truthStatus": "not-claimable",
       "truthfulMeaning": "Current repo metadata is publish-ready, but no npm publish is claimed in fresh truth.",
       "requiredLabels": [],

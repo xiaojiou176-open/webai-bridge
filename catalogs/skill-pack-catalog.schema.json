@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/skill-pack-catalog.schema.json",
-  "title": "Switchyard Skill Pack Catalog",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/skill-pack-catalog.schema.json",
+  "title": "WebaiBridge Skill Pack Catalog",
   "type": "object",
   "additionalProperties": false,
   "required": [

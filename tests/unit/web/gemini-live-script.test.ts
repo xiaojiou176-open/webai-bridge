@@ -34,7 +34,7 @@ afterEach(() => {
 
 describe("verify-gemini-live script helpers", () => {
   it("loads the compiled live-proof module and forwards env through the exported runner", async () => {
-    const outDir = join(tmpdir(), `switchyard-gemini-proof-${Date.now()}`);
+    const outDir = join(tmpdir(), `webai-bridge-gemini-proof-${Date.now()}`);
     const moduleDir = join(outDir, "packages/providers/byok/gemini/src");
     mkdirSync(moduleDir, { recursive: true });
     writeFileSync(
@@ -76,7 +76,7 @@ describe("verify-gemini-live script helpers", () => {
   });
 
   it("throws when the compiled module does not export runGeminiLiveProof", async () => {
-    const outDir = join(tmpdir(), `switchyard-gemini-proof-missing-${Date.now()}`);
+    const outDir = join(tmpdir(), `webai-bridge-gemini-proof-missing-${Date.now()}`);
     const moduleDir = join(outDir, "packages/providers/byok/gemini/src");
     mkdirSync(moduleDir, { recursive: true });
     writeFileSync(
@@ -111,7 +111,7 @@ describe("verify-gemini-live script helpers", () => {
   });
 
   it("falls back to process.env when no explicit env override is provided", async () => {
-    const outDir = join(tmpdir(), `switchyard-gemini-proof-default-${Date.now()}`);
+    const outDir = join(tmpdir(), `webai-bridge-gemini-proof-default-${Date.now()}`);
     const moduleDir = join(outDir, "packages/providers/byok/gemini/src");
     mkdirSync(moduleDir, { recursive: true });
     writeFileSync(
@@ -153,12 +153,12 @@ describe("verify-gemini-live script helpers", () => {
   });
 
   it("normalizes upstream reachability failures into external blockers", async () => {
-    const outDir = join(tmpdir(), `switchyard-gemini-proof-network-${Date.now()}`);
+    const outDir = join(tmpdir(), `webai-bridge-gemini-proof-network-${Date.now()}`);
     const moduleDir = join(outDir, "packages/providers/byok/gemini/src");
     mkdirSync(moduleDir, { recursive: true });
     writeFileSync(
       join(moduleDir, "live-proof.js"),
-      "export async function runGeminiLiveProof(){ return { status: 'failure', reason: 'invoke-failed', model: 'gemini/gemini-2.5-flash', envStatus: [{ name: 'SWITCHYARD_GEMINI_API_KEY', present: true }], envNameUsed: 'SWITCHYARD_GEMINI_API_KEY', requestUrl: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=%3Credacted%3E', diagnostics: [], rawSummary: 'fetch failed' }; }",
+      "export async function runGeminiLiveProof(){ return { status: 'failure', reason: 'invoke-failed', model: 'gemini/gemini-2.5-flash', envStatus: [{ name: 'WEBAI_BRIDGE_GEMINI_API_KEY', present: true }], envNameUsed: 'WEBAI_BRIDGE_GEMINI_API_KEY', requestUrl: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=%3Credacted%3E', diagnostics: [], rawSummary: 'fetch failed' }; }",
       "utf8",
     );
 
@@ -196,12 +196,12 @@ describe("verify-gemini-live script helpers", () => {
   });
 
   it("maps stable fetch failures with a configured Gemini key into external blockers", async () => {
-    const outDir = join(tmpdir(), `switchyard-gemini-proof-fetch-blocker-${Date.now()}`);
+    const outDir = join(tmpdir(), `webai-bridge-gemini-proof-fetch-blocker-${Date.now()}`);
     const moduleDir = join(outDir, "packages/providers/byok/gemini/src");
     mkdirSync(moduleDir, { recursive: true });
     writeFileSync(
       join(moduleDir, "live-proof.js"),
-      "export async function runGeminiLiveProof(){ return { status: 'failure', reason: 'invoke-failed', envStatus: [{ name: 'SWITCHYARD_GEMINI_API_KEY', present: true }], envNameUsed: 'SWITCHYARD_GEMINI_API_KEY', requestUrl: 'https://example.test', diagnostics: [], rawSummary: 'fetch failed' }; }",
+      "export async function runGeminiLiveProof(){ return { status: 'failure', reason: 'invoke-failed', envStatus: [{ name: 'WEBAI_BRIDGE_GEMINI_API_KEY', present: true }], envNameUsed: 'WEBAI_BRIDGE_GEMINI_API_KEY', requestUrl: 'https://example.test', diagnostics: [], rawSummary: 'fetch failed' }; }",
       "utf8",
     );
 
@@ -249,7 +249,7 @@ describe("verify-gemini-live script helpers", () => {
 
     await expect(
       runGeminiLiveVerification({
-        outDir: join(tmpdir(), `switchyard-gemini-proof-error-${Date.now()}`),
+        outDir: join(tmpdir(), `webai-bridge-gemini-proof-error-${Date.now()}`),
       }),
     ).rejects.toThrow(/tsc missing/i);
   });
@@ -270,7 +270,7 @@ describe("verify-gemini-live script helpers", () => {
 
     await expect(
       runGeminiLiveVerification({
-        outDir: join(tmpdir(), `switchyard-gemini-proof-exit-${Date.now()}`),
+        outDir: join(tmpdir(), `webai-bridge-gemini-proof-exit-${Date.now()}`),
       }),
     ).rejects.toThrow("EXIT:7");
     expect(processExit).toHaveBeenCalledWith(7);

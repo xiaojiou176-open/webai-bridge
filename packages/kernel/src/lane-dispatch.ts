@@ -4,7 +4,7 @@ import {
   type LaneId,
   type ModelReferenceInput,
   type ProviderId,
-  SwitchyardContractError,
+  WebaiBridgeContractError,
   isCredentialUsable,
   missingCapabilities,
   normalizeProviderId,
@@ -37,7 +37,7 @@ function resolveProviderId(request: LaneDispatchRequest): ProviderId {
   }
 
   if (!request.modelReference) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'routing-failed',
       'Lane dispatch requires either providerId or modelReference.'
     );
@@ -47,7 +47,7 @@ function resolveProviderId(request: LaneDispatchRequest): ProviderId {
   const providerId = normalizeProviderId(parsed.providerKey);
 
   if (!providerId) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-unsupported',
       `Model reference "${parsed.canonical}" points to a provider outside the current V1 scope.`
     );
@@ -87,7 +87,7 @@ export function dispatchLane(
   const registrations = registry.entriesForProvider(providerId);
 
   if (registrations.length === 0) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-unsupported',
       `Provider "${providerId}" has no registered V1 lanes.`
     );
@@ -104,7 +104,7 @@ export function dispatchLane(
     .map((entry) => entry.laneId);
 
   if (capabilityCompatibleLanes.length === 0) {
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       'provider-capability-mismatch',
       `Provider "${providerId}" does not satisfy the requested capability set.`
     );
@@ -114,7 +114,7 @@ export function dispatchLane(
 
   if (request.preferredLane) {
     if (!candidateLanes.includes(request.preferredLane)) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         'provider-lane-incompatible',
         `Provider "${providerId}" cannot use preferred lane "${request.preferredLane}".`
       );
@@ -123,7 +123,7 @@ export function dispatchLane(
     const preferredState = request.credentialStates?.[request.preferredLane];
 
     if (request.credentialStates && !isCredentialUsable(preferredState)) {
-      throw new SwitchyardContractError(
+      throw new WebaiBridgeContractError(
         mapCredentialStateToErrorCode(preferredState),
         `Preferred lane "${request.preferredLane}" is not currently usable for provider "${providerId}".`
       );
@@ -146,7 +146,7 @@ export function dispatchLane(
       .map((laneId) => request.credentialStates?.[laneId])
       .find((state) => state !== undefined);
 
-    throw new SwitchyardContractError(
+    throw new WebaiBridgeContractError(
       mapCredentialStateToErrorCode(firstState),
       `Provider "${providerId}" has no currently usable lane under the supplied credential state map.`
     );

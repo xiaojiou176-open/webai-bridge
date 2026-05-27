@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { createSwitchyardServiceClient } from "../../../packages/sdk/src/index.js";
+import { createWebaiBridgeServiceClient } from "../../../packages/sdk/src/index.js";
 
-describe("Switchyard service client branch coverage", () => {
+describe("WebaiBridge service client branch coverage", () => {
   it("merges default headers, per-request headers, and JSON bodies across the provider routes", async () => {
     const fetchMock = vi.fn(async (_input: string, init?: RequestInit) => ({
       ok: true,
@@ -18,7 +18,7 @@ describe("Switchyard service client branch coverage", () => {
       },
     }));
 
-    const client = createSwitchyardServiceClient({
+    const client = createWebaiBridgeServiceClient({
       baseUrl: "http://127.0.0.1:4317",
       fetch: fetchMock as unknown as typeof fetch,
       headers: {
@@ -68,7 +68,7 @@ describe("Switchyard service client branch coverage", () => {
       },
     }));
 
-    const client = createSwitchyardServiceClient({
+    const client = createWebaiBridgeServiceClient({
       baseUrl: "http://127.0.0.1:4317",
       fetch: fetchMock as unknown as typeof fetch,
     });

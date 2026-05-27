@@ -292,11 +292,11 @@ function getHandoffSummary(record: CredentialRecord, kind: CredentialHandoffKind
     case 'acquisition':
       return record.provider.authModeId === 'byok'
         ? 'Acquire the end-user-owned API key and bind it locally before runtime use starts.'
-        : 'Run a local browser login so Switchyard can capture the user-owned session for this provider slot.';
+        : 'Run a local browser login so WebaiBridge can capture the user-owned session for this provider slot.';
     case 're-authentication':
       return record.provider.authModeId === 'byok'
         ? 'Replace the expired or revoked API key with fresh end-user-owned material.'
-        : 'Ask the end user to sign in again so Switchyard can capture a renewed local session for the same provider slot.';
+        : 'Ask the end user to sign in again so WebaiBridge can capture a renewed local session for the same provider slot.';
     case 'refresh-recovery':
       return 'Retry local refresh against the current credential before escalating to a new user-authenticated session.';
     case 'status-review':

@@ -1,5 +1,5 @@
 {
-  "name": "@switchyard/provider-web-claude",
+  "name": "@webai-bridge/provider-web-claude",
   "private": true,
   "type": "module",
   "scripts": {

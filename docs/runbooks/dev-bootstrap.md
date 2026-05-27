@@ -1,10 +1,10 @@
-# Switchyard Dev Bootstrap
+# WebaiBridge Dev Bootstrap
 
 ## 文档目的
 
 这份 runbook 面向的是：
 
-- 第一次进入 `Switchyard` 的实现 Agent
+- 第一次进入 `WebaiBridge` 的实现 Agent
 - 需要把当前 docs-first 仓真正推进到代码实现的人
 
 它不回答“产品为什么存在”，而回答：
@@ -33,7 +33,7 @@
 
 完成本 runbook 后，应该达到以下状态：
 
-1. `Switchyard` 仓本地开发环境已准备好
+1. `WebaiBridge` 仓本地开发环境已准备好
 2. 关键参考运行时可被本地研究
 3. V1 固定 5 家网页登录 provider 的账户/测试前提明确
 4. `LiteLLM` 与 `openclaw-zero-token` 能以 `lab sidecar` 身份被使用
@@ -124,7 +124,7 @@
 
 - `pnpm run verify:service-live`
 
-这条脚本会直接启动本地 `Switchyard` service，并通过统一的 `service-first` invoke 入口验证高稳定 trio：
+这条脚本会直接启动本地 `WebaiBridge` service，并通过统一的 `service-first` invoke 入口验证高稳定 trio：
 
 - `chatgpt`
 - `gemini`
@@ -159,16 +159,16 @@ pnpm run diagnose:web-login-browser -- --provider chatgpt --reload --json
 如果你本地已经把 service 跑起来了，现在还有一组更细的只读 CLI 读法：
 
 ```bash
-pnpm run switchyard:cli -- provider-store-readiness --provider chatgpt
-pnpm run switchyard:cli -- provider-live-readiness --provider chatgpt
-pnpm run switchyard:cli -- provider-attach-target --provider chatgpt
-pnpm run switchyard:cli -- provider-diagnose-ladder --provider chatgpt
-pnpm run switchyard:cli -- provider-diagnose --provider chatgpt
-pnpm run switchyard:cli -- surface-catalog
-pnpm run switchyard:cli -- compat-targets
-pnpm run switchyard:cli -- compat-target --target codex
-pnpm run switchyard:cli -- mcp-status
-pnpm run switchyard:cli -- mcp-tools
+pnpm run webai-bridge:cli -- provider-store-readiness --provider chatgpt
+pnpm run webai-bridge:cli -- provider-live-readiness --provider chatgpt
+pnpm run webai-bridge:cli -- provider-attach-target --provider chatgpt
+pnpm run webai-bridge:cli -- provider-diagnose-ladder --provider chatgpt
+pnpm run webai-bridge:cli -- provider-diagnose --provider chatgpt
+pnpm run webai-bridge:cli -- surface-catalog
+pnpm run webai-bridge:cli -- compat-targets
+pnpm run webai-bridge:cli -- compat-target --target codex
+pnpm run webai-bridge:cli -- mcp-status
+pnpm run webai-bridge:cli -- mcp-tools
 ```
 
 可以先这样理解：
@@ -210,7 +210,7 @@ pnpm run cleanup:runtime -- --dry-run
 当前 `.runtime-cache/` 里的东西要分 4 类看：
 
 - `managed-browser-profile`
-  - `.runtime-cache/switchyard-web-auth-browser`
+  - `.runtime-cache/webai-bridge-web-auth-browser`
   - 这是 managed browser 的本地工位，默认保护，不常规删除
 - `debug-evidence`
   - `.runtime-cache/browser-debug/bundles`
@@ -220,13 +220,13 @@ pnpm run cleanup:runtime -- --dry-run
   - 这是 provider support bundle，默认参与 TTL / 容量治理，但不应漂到 repo 外的任意目录
 - `disposable-generated`
   - `.runtime-cache/temp`
-  - 再加上 `.runtime-cache/switchyard-verify-web-login-test-*`、`.runtime-cache/switchyard-chatgpt-ready-writeback-*`、`.runtime-cache/switchyard-store-preserve-*`
+  - 再加上 `.runtime-cache/webai-bridge-verify-web-login-test-*`、`.runtime-cache/webai-bridge-chatgpt-ready-writeback-*`、`.runtime-cache/webai-bridge-store-preserve-*`
   - 以及 `.runtime-cache/app-service*.log`、`.runtime-cache/reality-gate*.{out,exit}`
   - 这些都是 live proof / verifier writeback 产生的可重建临时产物和 repo-local 调试日志，清理时默认可以删除
 
 repo 外如果还需要当前仓专属的临时缓存，也只能进：
 
-- `~/.cache/switchyard`
+- `~/.cache/webai-bridge`
 
 默认治理规则现在是：
 
@@ -234,7 +234,7 @@ repo 外如果还需要当前仓专属的临时缓存，也只能进：
 - `maxBytes = 8 GiB`
 - repo-native cleanup 会同时审计：
   - repo-local `.runtime-cache/`
-  - repo-external `~/.cache/switchyard`
+  - repo-external `~/.cache/webai-bridge`
 - shared tool caches 明确不归当前仓自动清理：
   - `pnpm store`
   - `~/.npm`
@@ -246,7 +246,7 @@ repo 外如果还需要当前仓专属的临时缓存，也只能进：
 
 护栏也要说清楚：
 
-- 这条 cleanup 只管当前 repo 的 `.runtime-cache/` 和专属的 `~/.cache/switchyard`
+- 这条 cleanup 只管当前 repo 的 `.runtime-cache/` 和专属的 `~/.cache/webai-bridge`
 - 它不碰 `<macos-temp-root>/...`
 - 它不碰 `~/.cache` 里的其他共享工具目录、Docker 全局缓存、Chrome 全局目录
 - 默认不删 `managed-browser-profile`
@@ -263,29 +263,29 @@ pnpm run scan:host-process-risks
 现在这仓更推荐的本地 credentialed 工作方式不是 repo-local managed browser 常开，而是：
 
 - 默认本地入口 = `isolated-chrome-root`
-- repo 专属真实 Chrome 根目录固定在 `~/.cache/switchyard/browser/chrome-user-data`
+- repo 专属真实 Chrome 根目录固定在 `~/.cache/webai-bridge/browser/chrome-user-data`
 - steady-state 只保留一个 repo-owned 实例：缺席则启动，存在则 attach，不 second-launch
 - 默认 Chrome 根目录只在显式 seed / reseed 时读取
-- repo-local `switchyard-web-auth-browser` 只保留为显式隔离 fallback
+- repo-local `webai-bridge-web-auth-browser` 只保留为显式隔离 fallback
 
 推荐环境变量：
 
 ```bash
-export SWITCHYARD_BROWSER_MODE=isolated-chrome-root
-export SWITCHYARD_CHROME_USER_DATA_DIR="$HOME/.cache/switchyard/browser/chrome-user-data"
-export SWITCHYARD_CHROME_PROFILE_NAME="switchyard"
-export SWITCHYARD_EXTERNAL_CACHE_ROOT="$HOME/.cache/switchyard"
-export SWITCHYARD_CACHE_TTL_DAYS=7
-export SWITCHYARD_CACHE_MAX_BYTES=8589934592
-export SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL="http://127.0.0.1:9338"
+export WEBAI_BRIDGE_BROWSER_MODE=isolated-chrome-root
+export WEBAI_BRIDGE_CHROME_USER_DATA_DIR="$HOME/.cache/webai-bridge/browser/chrome-user-data"
+export WEBAI_BRIDGE_CHROME_PROFILE_NAME="webai-bridge"
+export WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT="$HOME/.cache/webai-bridge"
+export WEBAI_BRIDGE_CACHE_TTL_DAYS=7
+export WEBAI_BRIDGE_CACHE_MAX_BYTES=8589934592
+export WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL="http://127.0.0.1:9338"
 ```
 
 这里要记住一个边界：
 
-> `~/.cache/switchyard/browser/chrome-user-data` 是当前 repo 的永久浏览器工位。
+> `~/.cache/webai-bridge/browser/chrome-user-data` 是当前 repo 的永久浏览器工位。
 > 它属于 repo 专属 steady-state browser root，不参与 TTL / cap 自动裁剪。
 
-第一次把默认 Chrome 根目录里的 `switchyard` profile 搬进来，要显式跑：
+第一次把默认 Chrome 根目录里的 `webai-bridge` profile 搬进来，要显式跑：
 
 ```bash
 pnpm run seed:isolated-chrome-root -- --json
@@ -365,13 +365,13 @@ pnpm run reseed:isolated-chrome-root -- --json
 
 ## Docker 边界
 
-当前 `Switchyard` 没有 repo-owned Docker runtime。
+当前 `WebaiBridge` 没有 repo-owned Docker runtime。
 
 - 这份 runbook 不要求你本轮再开 Docker
 - 也不要把 `cleanup:runtime` 误当成 Docker 清盘命令
 - 如果未来引入 Docker sidecar / volume / network
   - 必须同步补 repo-native cleanup policy
-  - 只能清理明确带 `switchyard` 归属的资源
+  - 只能清理明确带 `webai-bridge` 归属的资源
   - 禁止 machine-wide destructive prune
 
 ---
@@ -416,7 +416,7 @@ python3 --version
 git --version
 ```
 
-当前阶段，只要这些工具存在并能工作，就已经够开始实现 `Switchyard` 的 Day 1 范围。
+当前阶段，只要这些工具存在并能工作，就已经够开始实现 `WebaiBridge` 的 Day 1 范围。
 
 ---
 
@@ -460,7 +460,7 @@ ls '<local-reference-root>'
 ### 对实现者的含义
 
 `Vercel AI SDK` 不需要先独立跑成一个 sidecar。  
-它更像是 `Switchyard` 自己将来会直接依赖的核心包。
+它更像是 `WebaiBridge` 自己将来会直接依赖的核心包。
 
 ### 当前要做的不是
 
@@ -492,13 +492,13 @@ litellm --model gpt-4o
 
 ### 你为什么要跑它
 
-不是因为 `Switchyard` 要依赖它做核心内核，而是为了：
+不是因为 `WebaiBridge` 要依赖它做核心内核，而是为了：
 
 - 看 unified gateway 是怎么组织的
 - 看 OpenAI-compatible surface
 - 看 proxy / routing / gateway 思路
 
-### 它当前在 `Switchyard` 里扮演什么
+### 它当前在 `WebaiBridge` 里扮演什么
 
 - `lab sidecar`
 - 对照运行时
@@ -590,7 +590,7 @@ pnpm ui:build
 - product shell
 - consumer-facing extras
 
-这些是它的产品世界，不是 `Switchyard V1` 的施工面。
+这些是它的产品世界，不是 `WebaiBridge V1` 的施工面。
 
 ---
 
@@ -632,17 +632,17 @@ pnpm ui:build
 
 - `Gemini BYOK`：
   - 运行 `pnpm exec node scripts/verify-gemini-live.mjs`
-  - 环境变量至少提供其一：`SWITCHYARD_GEMINI_API_KEY` / `GEMINI_API_KEY` / `GOOGLE_API_KEY`
+  - 环境变量至少提供其一：`WEBAI_BRIDGE_GEMINI_API_KEY` / `GEMINI_API_KEY` / `GOOGLE_API_KEY`
 - `Web/Login`：
   - 运行 `pnpm exec node scripts/verify-web-login-live.mjs`
   - 单 provider 复验可运行 `pnpm exec node scripts/verify-web-login-live.mjs --provider chatgpt`（`gemini / claude / grok / qwen` 同理）
   - 当前 live proof 默认读取：
-    - `SWITCHYARD_WEB_<PROVIDER>_COOKIE_BUNDLE`
-    - `SWITCHYARD_WEB_<PROVIDER>_USER_AGENT`
+    - `WEBAI_BRIDGE_WEB_<PROVIDER>_COOKIE_BUNDLE`
+    - `WEBAI_BRIDGE_WEB_<PROVIDER>_USER_AGENT`
 
 ### 当前推荐的本地浏览器准备方式
 
-如果你要走 `Web/Login` acquisition 主路径，默认优先让 `Switchyard` 自己准备浏览器，而不是手工研究某个 `9222` Chrome：
+如果你要走 `Web/Login` acquisition 主路径，默认优先让 `WebaiBridge` 自己准备浏览器，而不是手工研究某个 `9222` Chrome：
 
 ```bash
 pnpm run bootstrap:web-login-browser -- --provider chatgpt
@@ -650,7 +650,7 @@ pnpm run bootstrap:web-login-browser -- --provider gemini
 pnpm run bootstrap:web-login-browser -- --provider grok
 ```
 
-这条脚本会尝试启动或复用 `Switchyard` 自己的本地 onboarding 浏览器，再打开对应 provider 登录页。  
+这条脚本会尝试启动或复用 `WebaiBridge` 自己的本地 onboarding 浏览器，再打开对应 provider 登录页。  
 这是默认模式，也就是：
 
 - `managed browser`
@@ -666,7 +666,7 @@ pnpm run bootstrap:web-login-browser -- --provider grok
 - 默认情况：先走 `managed browser`
 - 高级情况：再切到 `existing profile / attach session`
 
-只有当你在做 fallback/debug/proof harness 时，才需要回到 env 层面关注 `SWITCHYARD_WEB_AUTH_CDP_URL` 一类底层变量；产品主路径不应该要求用户先理解这些实现细节。
+只有当你在做 fallback/debug/proof harness 时，才需要回到 env 层面关注 `WEBAI_BRIDGE_WEB_AUTH_CDP_URL` 一类底层变量；产品主路径不应该要求用户先理解这些实现细节。
 
 这里的 `<PROVIDER>` 当前对应：
 
@@ -703,7 +703,7 @@ pnpm run bootstrap:web-login-browser -- --provider grok
 > **它不是最终产品主 UX。**
 >
 > 最终产品主路径应该是：
-> - 用户在 `Switchyard` 内点击 acquisition/start，让系统启动或附着正确的本地 onboarding 浏览器
+> - 用户在 `WebaiBridge` 内点击 acquisition/start，让系统启动或附着正确的本地 onboarding 浏览器
 > - 用户在这份浏览器里完成登录 / OAuth / browser-session acquisition
 > - acquisition 结果进入本地 credential/session store
 > - `status / probe / reality gate` 优先消费这套本地产物

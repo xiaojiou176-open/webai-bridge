@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  SwitchyardContractError,
+  WebaiBridgeContractError,
   normalizeModelReference,
   parseModelReference,
   sameModelReference
@@ -33,12 +33,12 @@ describe('model reference normalization', () => {
   });
 
   it('rejects invalid model references that omit the provider/model separator', () => {
-    expect(() => parseModelReference('gemini-2.5-pro')).toThrowError(SwitchyardContractError);
+    expect(() => parseModelReference('gemini-2.5-pro')).toThrowError(WebaiBridgeContractError);
 
     try {
       parseModelReference('gemini-2.5-pro');
     } catch (error) {
-      expect((error as SwitchyardContractError).diagnostic.code).toBe('invalid-model-reference');
+      expect((error as WebaiBridgeContractError).diagnostic.code).toBe('invalid-model-reference');
     }
   });
 });

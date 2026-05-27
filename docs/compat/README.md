@@ -1,4 +1,4 @@
-# Switchyard Compatibility Matrix
+# WebaiBridge Compatibility Matrix
 
 This page is the compatibility front door.
 
@@ -42,63 +42,63 @@ truth, do not copy it by hand.
 
 Prefer:
 
-- `pnpm run switchyard:cli -- public-distribution-ledger`
-- `pnpm run switchyard:cli -- public-distribution-ledger-schema`
-- `pnpm run switchyard:cli -- distribution-surfaces`
-- `pnpm run switchyard:cli -- distribution-surface --target codex`
-- `pnpm run switchyard:cli -- surface-catalog`
-- `pnpm run switchyard:cli -- surface-catalog-schema`
-- `pnpm run switchyard:cli -- compat-target-catalog`
-- `pnpm run switchyard:cli -- compat-target-catalog-schema`
-- `pnpm run switchyard:cli -- compat-targets`
-- `pnpm run switchyard:cli -- compat-target --target codex`
-- `pnpm run switchyard:cli -- compat-target --target claude-code`
-- `pnpm run switchyard:cli -- compat-target --target openclaw`
-- `switchyard.catalog.compat_target_catalog`
-- `switchyard.catalog.compat_target_catalog_schema`
-- `switchyard.catalog.compat_targets`
-- `switchyard.catalog.compat_target`
-- `pnpm run switchyard:cli -- builder-kit-catalog`
-- `pnpm run switchyard:cli -- builder-kit-catalog-schema`
-- `pnpm run switchyard:cli -- builder-kits`
-- `pnpm run switchyard:cli -- builder-kit --target codex`
-- `pnpm run switchyard:cli -- builder-kit --target claude-code`
-- `pnpm run switchyard:cli -- builder-kit --target openclaw`
-- `pnpm run switchyard:cli -- builder-kit --target mcp`
-- `pnpm run switchyard:cli -- skill-pack-catalog`
-- `pnpm run switchyard:cli -- skill-pack-catalog-schema`
-- `pnpm run switchyard:cli -- skill-packs`
-- `pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack`
-- `pnpm run switchyard:cli -- starter-manifests`
-- `pnpm run switchyard:cli -- starter-manifests-schema`
-- `pnpm run switchyard:cli -- starter-examples`
-- `pnpm run switchyard:cli -- starter-examples-schema`
-- `pnpm run switchyard:cli -- starter-pack-index`
-- `pnpm run switchyard:cli -- starter-pack-index-schema`
-- `pnpm run switchyard:cli -- starter-pack-entry --target codex`
-- `pnpm run switchyard:cli -- starter-pack-chooser`
-- `pnpm run switchyard:cli -- starter-pack-chooser-schema`
-- `pnpm run switchyard:cli -- starter-pack-scenario --target codex-builder`
-- `pnpm run switchyard:cli -- starter-pack-comparison`
-- `pnpm run switchyard:cli -- starter-pack-comparison-schema`
-- `pnpm run switchyard:cli -- starter-pack-filter --target read-only-truth`
-- `pnpm run switchyard:cli -- host-playbooks`
-- `pnpm run switchyard:cli -- host-playbooks-schema`
-- `pnpm run switchyard:cli -- host-playbook --target codex`
-- `pnpm run switchyard:cli -- host-examples`
-- `pnpm run switchyard:cli -- host-examples-schema`
-- `pnpm run switchyard:cli -- host-example --target codex`
-- `pnpm run switchyard:cli -- provider-catalog`
-- `pnpm run switchyard:cli -- provider-catalog-schema`
-- `pnpm run switchyard:cli -- provider-entry --target chatgpt`
-- `pnpm run switchyard:cli -- provider-entry --target gemini:web-login`
-- `pnpm run switchyard:cli -- builder-template --target codex`
-- `pnpm run switchyard:cli -- builder-example --target codex`
-- `pnpm run switchyard:cli -- skill-template --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- skill-example --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- mcp-status`
-- `pnpm run switchyard:cli -- mcp-tools`
+- `pnpm run webai-bridge:cli -- public-distribution-ledger`
+- `pnpm run webai-bridge:cli -- public-distribution-ledger-schema`
+- `pnpm run webai-bridge:cli -- distribution-surfaces`
+- `pnpm run webai-bridge:cli -- distribution-surface --target codex`
+- `pnpm run webai-bridge:cli -- surface-catalog`
+- `pnpm run webai-bridge:cli -- surface-catalog-schema`
+- `pnpm run webai-bridge:cli -- compat-target-catalog`
+- `pnpm run webai-bridge:cli -- compat-target-catalog-schema`
+- `pnpm run webai-bridge:cli -- compat-targets`
+- `pnpm run webai-bridge:cli -- compat-target --target codex`
+- `pnpm run webai-bridge:cli -- compat-target --target claude-code`
+- `pnpm run webai-bridge:cli -- compat-target --target openclaw`
+- `webai-bridge.catalog.compat_target_catalog`
+- `webai-bridge.catalog.compat_target_catalog_schema`
+- `webai-bridge.catalog.compat_targets`
+- `webai-bridge.catalog.compat_target`
+- `pnpm run webai-bridge:cli -- builder-kit-catalog`
+- `pnpm run webai-bridge:cli -- builder-kit-catalog-schema`
+- `pnpm run webai-bridge:cli -- builder-kits`
+- `pnpm run webai-bridge:cli -- builder-kit --target codex`
+- `pnpm run webai-bridge:cli -- builder-kit --target claude-code`
+- `pnpm run webai-bridge:cli -- builder-kit --target openclaw`
+- `pnpm run webai-bridge:cli -- builder-kit --target mcp`
+- `pnpm run webai-bridge:cli -- skill-pack-catalog`
+- `pnpm run webai-bridge:cli -- skill-pack-catalog-schema`
+- `pnpm run webai-bridge:cli -- skill-packs`
+- `pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack`
+- `pnpm run webai-bridge:cli -- starter-manifests`
+- `pnpm run webai-bridge:cli -- starter-manifests-schema`
+- `pnpm run webai-bridge:cli -- starter-examples`
+- `pnpm run webai-bridge:cli -- starter-examples-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-index`
+- `pnpm run webai-bridge:cli -- starter-pack-index-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-entry --target codex`
+- `pnpm run webai-bridge:cli -- starter-pack-chooser`
+- `pnpm run webai-bridge:cli -- starter-pack-chooser-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-scenario --target codex-builder`
+- `pnpm run webai-bridge:cli -- starter-pack-comparison`
+- `pnpm run webai-bridge:cli -- starter-pack-comparison-schema`
+- `pnpm run webai-bridge:cli -- starter-pack-filter --target read-only-truth`
+- `pnpm run webai-bridge:cli -- host-playbooks`
+- `pnpm run webai-bridge:cli -- host-playbooks-schema`
+- `pnpm run webai-bridge:cli -- host-playbook --target codex`
+- `pnpm run webai-bridge:cli -- host-examples`
+- `pnpm run webai-bridge:cli -- host-examples-schema`
+- `pnpm run webai-bridge:cli -- host-example --target codex`
+- `pnpm run webai-bridge:cli -- provider-catalog`
+- `pnpm run webai-bridge:cli -- provider-catalog-schema`
+- `pnpm run webai-bridge:cli -- provider-entry --target chatgpt`
+- `pnpm run webai-bridge:cli -- provider-entry --target gemini:web-login`
+- `pnpm run webai-bridge:cli -- builder-template --target codex`
+- `pnpm run webai-bridge:cli -- builder-example --target codex`
+- `pnpm run webai-bridge:cli -- skill-template --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- skill-example --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- mcp-status`
+- `pnpm run webai-bridge:cli -- mcp-tools`
 
 Or read these machine-readable files directly:
 

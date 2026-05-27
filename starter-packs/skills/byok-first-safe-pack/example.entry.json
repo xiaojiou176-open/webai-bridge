@@ -7,8 +7,8 @@
     "catalogCommand": "pnpm exec node starter-packs/skills/byok-first-safe-pack/smoke.mjs",
     "steps": [
       "pnpm exec node starter-packs/skills/byok-first-safe-pack/smoke.mjs",
-      "pnpm run switchyard:cli -- provider-catalog --json",
-      "pnpm run switchyard:cli -- surface-catalog --json",
+      "pnpm run webai-bridge:cli -- provider-catalog --json",
+      "pnpm run webai-bridge:cli -- surface-catalog --json",
       "cat docs/api/sdk-quickstart.md",
       "cat docs/api/service-http-reference.md"
     ]

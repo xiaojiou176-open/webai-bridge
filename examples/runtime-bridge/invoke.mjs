@@ -14,10 +14,10 @@ if (!starter) {
 
 const baseUrl = resolveRuntimeBaseUrl();
 const request = {
-  provider: process.env.SWITCHYARD_RUNTIME_PROVIDER?.trim() || "openai",
-  model: process.env.SWITCHYARD_RUNTIME_MODEL?.trim() || starter.example.request.model,
-  input: process.env.SWITCHYARD_RUNTIME_INPUT?.trim() || starter.example.request.input,
-  lane: process.env.SWITCHYARD_RUNTIME_LANE?.trim() || "byok",
+  provider: process.env.WEBAI_BRIDGE_RUNTIME_PROVIDER?.trim() || "openai",
+  model: process.env.WEBAI_BRIDGE_RUNTIME_MODEL?.trim() || starter.example.request.model,
+  input: process.env.WEBAI_BRIDGE_RUNTIME_INPUT?.trim() || starter.example.request.input,
+  lane: process.env.WEBAI_BRIDGE_RUNTIME_LANE?.trim() || "byok",
 };
 
 const response = await requestJsonAtRuntimePath("/v1/runtime/invoke", {

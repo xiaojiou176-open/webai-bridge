@@ -47,7 +47,7 @@ describe("byok diagnostics helpers", () => {
       "gemini/gemini-2.5-pro",
       {
         mode: "api-key",
-        envNames: ["SWITCHYARD_GEMINI_API_KEY", "GOOGLE_API_KEY"],
+        envNames: ["WEBAI_BRIDGE_GEMINI_API_KEY", "GOOGLE_API_KEY"],
         description: "Gemini BYOK credentials",
         presence: {
           kind: "all",
@@ -57,7 +57,7 @@ describe("byok diagnostics helpers", () => {
 
     expect(anySet.message).toContain("[OPENAI_API_KEY] or [OPENAI_BASE_URL, OPENAI_API_KEY]");
     expect(anySet.userActionRequired).toBe(true);
-    expect(all.message).toContain("all of: SWITCHYARD_GEMINI_API_KEY, GOOGLE_API_KEY");
+    expect(all.message).toContain("all of: WEBAI_BRIDGE_GEMINI_API_KEY, GOOGLE_API_KEY");
     expect(all.state).toBe("missing");
   });
 

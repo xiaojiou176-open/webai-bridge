@@ -8,8 +8,8 @@
       "templateShape": "delegated-runtime-helper",
       "manifest": {
         "starterTarget": "openclaw",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target openclaw --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target openclaw --json",
         "invokeRoute": "/v1/runtime/invoke",
         "mode": "delegation-first runtime bridge",
         "safeClaims": [

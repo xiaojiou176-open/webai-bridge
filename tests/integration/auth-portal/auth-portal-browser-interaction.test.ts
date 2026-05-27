@@ -42,7 +42,7 @@ describe("auth portal browser interaction", () => {
                   summary: "Browser handoff ready",
                   modeLabel: "Use Isolated Chrome Root",
                   instructions:
-                    "Finish the provider login in the selected browser seat, then capture the session back into Switchyard.",
+                    "Finish the provider login in the selected browser seat, then capture the session back into WebaiBridge.",
                   browserTarget: {
                     summary: "Attach to the isolated repo-owned browser seat.",
                   },

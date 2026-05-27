@@ -64,16 +64,16 @@ function buildStatus(sessionSource: string) {
 function buildIsolatedChromeRootEnv() {
   return {
     ...process.env,
-    SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-    SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
-    SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
-    SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+    WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+    WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
+    WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+    WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
   };
 }
 
 describe("web acquisition capture", () => {
   it("captures a ready ChatGPT session from an existing browser page and persists the local-first record", async () => {
-    const existingPage = createPage("https://chatgpt.com", ["SwitchyardTest/1.0"]);
+    const existingPage = createPage("https://chatgpt.com", ["WebaiBridgeTest/1.0"]);
     const { browser, context } = createBrowserHarness({
       existingPages: [existingPage],
       cookies: [
@@ -110,7 +110,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof,
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -160,9 +160,9 @@ describe("web acquisition capture", () => {
     });
     expect(runChatgptWebLiveProof).toHaveBeenCalledWith(
       expect.objectContaining({
-        SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE:
+        WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE:
           "__Secure-next-auth.session-token=session-token; oai-did=device-1",
-        SWITCHYARD_WEB_CHATGPT_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "WebaiBridgeTest/1.0",
       }),
       fetch,
     );
@@ -188,7 +188,7 @@ describe("web acquisition capture", () => {
 
   it("falls back to the browser workspace proof for Qwen and derives a session token from storage", async () => {
     const qwenPage = createPage("https://chat.qwen.ai", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       "qwen-session-token",
       {
         url: "https://chat.qwen.ai/",
@@ -234,7 +234,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -248,8 +248,8 @@ describe("web acquisition capture", () => {
     }));
     vi.doMock("../../../packages/providers/web/qwen/src/index.js", () => ({
       QWEN_WEB_LIVE_PROOF_ENV_NAMES: [
-        "SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE",
-        "SWITCHYARD_WEB_QWEN_USER_AGENT",
+        "WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE",
+        "WEBAI_BRIDGE_WEB_QWEN_USER_AGENT",
       ],
       QWEN_WEB_LIVE_PROOF_URL: "https://chat.qwen.ai",
       createQwenWebRuntime: () => ({ getStatus }),
@@ -295,7 +295,7 @@ describe("web acquisition capture", () => {
 
   it("prefers exact Qwen session keys such as _bl_sid during capture", async () => {
     const qwenPage = createPage("https://chat.qwen.ai", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       "_bl_sid-token",
       {
         url: "https://chat.qwen.ai/",
@@ -359,7 +359,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -373,8 +373,8 @@ describe("web acquisition capture", () => {
     }));
     vi.doMock("../../../packages/providers/web/qwen/src/index.js", () => ({
       QWEN_WEB_LIVE_PROOF_ENV_NAMES: [
-        "SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE",
-        "SWITCHYARD_WEB_QWEN_USER_AGENT",
+        "WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE",
+        "WEBAI_BRIDGE_WEB_QWEN_USER_AGENT",
       ],
       QWEN_WEB_LIVE_PROOF_URL: "https://chat.qwen.ai",
       createQwenWebRuntime: () => ({ getStatus }),
@@ -417,7 +417,7 @@ describe("web acquisition capture", () => {
 
   it("prefers a Qwen session token from cookies over browser storage when both exist", async () => {
     const qwenPage = createPage("https://chat.qwen.ai", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       "storage-token-should-not-win",
       {
         url: "https://chat.qwen.ai/",
@@ -490,7 +490,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -504,8 +504,8 @@ describe("web acquisition capture", () => {
     }));
     vi.doMock("../../../packages/providers/web/qwen/src/index.js", () => ({
       QWEN_WEB_LIVE_PROOF_ENV_NAMES: [
-        "SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE",
-        "SWITCHYARD_WEB_QWEN_USER_AGENT",
+        "WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE",
+        "WEBAI_BRIDGE_WEB_QWEN_USER_AGENT",
       ],
       QWEN_WEB_LIVE_PROOF_URL: "https://chat.qwen.ai",
       createQwenWebRuntime: () => ({ getStatus }),
@@ -562,7 +562,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -624,7 +624,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -667,7 +667,7 @@ describe("web acquisition capture", () => {
   });
 
   it("does not overclaim Grok oauth/browser-session artifacts when only generic cookies are present", async () => {
-    const grokPage = createPage("https://grok.com/", ["SwitchyardTest/1.0"]);
+    const grokPage = createPage("https://grok.com/", ["WebaiBridgeTest/1.0"]);
     const { browser } = createBrowserHarness({
       existingPages: [grokPage],
       cookies: [
@@ -704,7 +704,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -758,7 +758,7 @@ describe("web acquisition capture", () => {
 
   it("downgrades Grok capture when the attached page is blocked on human verification", async () => {
     const grokPage = createPage("https://grok.com/", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       {
         finalUrl: "https://grok.com/",
         bodyText: "Verify you are human before continuing to Grok.",
@@ -801,7 +801,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -844,7 +844,7 @@ describe("web acquisition capture", () => {
 
   it("downgrades Grok capture when the attached page still requires an account action", async () => {
     const grokPage = createPage("https://grok.com/", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       {
         finalUrl: "https://grok.com/",
         bodyText: "Connect your X account to unlock early features in Grok.",
@@ -887,7 +887,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -930,7 +930,7 @@ describe("web acquisition capture", () => {
 
   it("persists a blocked Qwen capture when the browser session is permission-gated", async () => {
     const qwenPage = createPage("https://chat.qwen.ai", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       "_bl_sid-token",
       {
         url: "https://chat.qwen.ai/",
@@ -1007,7 +1007,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -1021,8 +1021,8 @@ describe("web acquisition capture", () => {
     }));
     vi.doMock("../../../packages/providers/web/qwen/src/index.js", () => ({
       QWEN_WEB_LIVE_PROOF_ENV_NAMES: [
-        "SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE",
-        "SWITCHYARD_WEB_QWEN_USER_AGENT",
+        "WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE",
+        "WEBAI_BRIDGE_WEB_QWEN_USER_AGENT",
       ],
       QWEN_WEB_LIVE_PROOF_URL: "https://chat.qwen.ai",
       createQwenWebRuntime: () => ({ getStatus }),
@@ -1071,7 +1071,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -1131,7 +1131,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -1175,7 +1175,7 @@ describe("web acquisition capture", () => {
 
   it("captures a ready Gemini session and stores Google auth artifacts", async () => {
     const geminiPage = createPage("https://gemini.google.com/app", [
-      "SwitchyardTest/1.0",
+      "WebaiBridgeTest/1.0",
       {
         finalUrl: "https://gemini.google.com/app",
         text: "Google Gemini\nGemini workspace ready",
@@ -1218,7 +1218,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof,
     }));
@@ -1250,8 +1250,8 @@ describe("web acquisition capture", () => {
 
     expect(runGeminiWebLiveProof).toHaveBeenCalledWith(
       expect.objectContaining({
-        SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "SID=sid-cookie; __Secure-1PSID=secure-cookie",
-        SWITCHYARD_WEB_GEMINI_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "SID=sid-cookie; __Secure-1PSID=secure-cookie",
+        WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "WebaiBridgeTest/1.0",
       }),
       fetch,
     );
@@ -1273,7 +1273,7 @@ describe("web acquisition capture", () => {
   });
 
   it("captures a ready Claude session and records the organization id when available", async () => {
-    const claudePage = createPage("https://claude.ai/new", ["SwitchyardTest/1.0"]);
+    const claudePage = createPage("https://claude.ai/new", ["WebaiBridgeTest/1.0"]);
     const { browser } = createBrowserHarness({
       existingPages: [claudePage],
       cookies: [
@@ -1305,7 +1305,7 @@ describe("web acquisition capture", () => {
       runChatgptWebLiveProof: vi.fn(),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));
@@ -1365,7 +1365,7 @@ describe("web acquisition capture", () => {
   });
 
   it("returns user-action-required when ChatGPT live proof still indicates a login step is unfinished", async () => {
-    const existingPage = createPage("https://chatgpt.com", ["SwitchyardTest/1.0"]);
+    const existingPage = createPage("https://chatgpt.com", ["WebaiBridgeTest/1.0"]);
     const { browser } = createBrowserHarness({
       existingPages: [existingPage],
       cookies: [
@@ -1396,7 +1396,7 @@ describe("web acquisition capture", () => {
       })),
     }));
     vi.doMock("../../../packages/providers/web/gemini/src/index.js", () => ({
-      GEMINI_WEB_CDP_URL_ENV_NAME: "SWITCHYARD_WEB_GEMINI_CDP_URL",
+      GEMINI_WEB_CDP_URL_ENV_NAME: "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
       createGeminiWebRuntime: () => ({ getStatus }),
       runGeminiWebLiveProof: vi.fn(),
     }));

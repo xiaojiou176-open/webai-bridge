@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
 
 import { requestLocalJson } from "./local-http-client.js";
-import { startSwitchyardE2EService } from "./service-test-harness.js";
+import { startWebaiBridgeE2EService } from "./service-test-harness.js";
 
-const startedServices: Array<Awaited<ReturnType<typeof startSwitchyardE2EService>>> = [];
+const startedServices: Array<Awaited<ReturnType<typeof startWebaiBridgeE2EService>>> = [];
 
 afterEach(async () => {
   await Promise.all(startedServices.splice(0).map((service) => service.close()));
@@ -11,7 +11,7 @@ afterEach(async () => {
 
 describe("High-stability trio Web/Login runtime", () => {
   it("surfaces provider-specific probe, capture, and refresh contracts in provider status", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         chatgpt: {
@@ -165,7 +165,7 @@ describe("High-stability trio Web/Login runtime", () => {
   });
 
   it("keeps session-rich metadata while surfacing synthetic invoke as an explicit blocker", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         chatgpt: {
@@ -267,7 +267,7 @@ describe("High-stability trio Web/Login runtime", () => {
   });
 
   it("returns provider-specific re-auth metadata when a trio session is no longer recoverable", async () => {
-    const service = await startSwitchyardE2EService({
+    const service = await startWebaiBridgeE2EService({
       useLocalWebAuthStore: false,
       providerSessions: {
         gemini: {

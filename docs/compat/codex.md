@@ -1,4 +1,4 @@
-# Switchyard for Codex
+# WebaiBridge for Codex
 
 ## Status
 
@@ -18,7 +18,7 @@ This page exists so the keyword stays truthful and discoverable.
 
 ## What Is Already Landed
 
-- Switchyard has a durable `service-first` runtime surface
+- WebaiBridge has a durable `service-first` runtime surface
 - the repo carries a thin adapter at `packages/consumers/codex/src/index.ts`
 - that landed slice keeps Codex in the consumer dimension, not the V1 input
   lane
@@ -34,7 +34,7 @@ This page exists so the keyword stays truthful and discoverable.
 
 Developers search for:
 
-- `Switchyard Codex`
+- `WebaiBridge Codex`
 - `shared provider runtime for Codex`
 - `Codex Responses runtime`
 

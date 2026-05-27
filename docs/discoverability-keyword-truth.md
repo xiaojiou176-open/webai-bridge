@@ -1,4 +1,4 @@
-# Switchyard Keyword Truth Table
+# WebaiBridge Keyword Truth Table
 
 这页不是营销话术。  
 它是一个“哪些关键词现在能诚实占位，哪些还不能”的总表。
@@ -11,20 +11,20 @@
 ## Read-only CLI Access
 
 ```bash
-pnpm run switchyard:cli -- keyword-truth
-pnpm run switchyard:cli -- keyword-truth-schema
-pnpm run switchyard:cli -- keyword-entry --target switchyard-mcp
+pnpm run webai-bridge:cli -- keyword-truth
+pnpm run webai-bridge:cli -- keyword-truth-schema
+pnpm run webai-bridge:cli -- keyword-entry --target webai-bridge-mcp
 ```
 
 ## Read-only MCP Access
 
-- `switchyard.catalog.keyword_truth`
-- `switchyard.catalog.keyword_truth_schema`
-- `switchyard.catalog.keyword_entry`
+- `webai-bridge.catalog.keyword_truth`
+- `webai-bridge.catalog.keyword_truth_schema`
+- `webai-bridge.catalog.keyword_entry`
 
 ## Claimable Now
 
-- `Switchyard`
+- `WebaiBridge`
 - `shared provider runtime`
 - `AI app backend`
 - `BYOK`
@@ -34,19 +34,19 @@ pnpm run switchyard:cli -- keyword-entry --target switchyard-mcp
 
 ## Partial, Not Full Compatibility Yet
 
-- `Switchyard Codex`
-- `Switchyard Claude Code`
-- `Switchyard OpenClaw`
-- `@switchyard/consumer-codex`
-- `@switchyard/consumer-claude-code`
-- `@switchyard/consumer-openclaw`
+- `WebaiBridge Codex`
+- `WebaiBridge Claude Code`
+- `WebaiBridge OpenClaw`
+- `@webai-bridge/consumer-codex`
+- `@webai-bridge/consumer-claude-code`
+- `@webai-bridge/consumer-openclaw`
 
 这些词现在可以出现在 docs/compat 页面里，  
 但必须伴随清楚的 `partial / thin adapter / not full compatibility yet` 标签。
 
 ## Partial, But Still Narrow
 
-- `Switchyard MCP`
+- `WebaiBridge MCP`
 
 这个词现在可以出现，但 companion label 必须更窄：
 
@@ -54,21 +54,21 @@ pnpm run switchyard:cli -- keyword-entry --target switchyard-mcp
 - `read-only MCP server`
 - `not an execution brain`
 - `not full Codex / Claude Code backend parity`
-- `@switchyard/surface-mcp`
+- `@webai-bridge/surface-mcp`
 
 ## Not Claimable
 
 以下说法现在不诚实：
 
-- `Switchyard supports Codex today`
-- `Switchyard supports Claude Code today`
-- `Switchyard supports OpenClaw today`
-- `Switchyard MCP has full parity today`
-- `Switchyard ships a full MCP execution backend today`
-- `@switchyard/consumer-codex available on npm now`
-- `@switchyard/consumer-claude-code available on npm now`
-- `@switchyard/consumer-openclaw available on npm now`
-- `@switchyard/surface-mcp available on npm now`
+- `WebaiBridge supports Codex today`
+- `WebaiBridge supports Claude Code today`
+- `WebaiBridge supports OpenClaw today`
+- `WebaiBridge MCP has full parity today`
+- `WebaiBridge ships a full MCP execution backend today`
+- `@webai-bridge/consumer-codex available on npm now`
+- `@webai-bridge/consumer-claude-code available on npm now`
+- `@webai-bridge/consumer-openclaw available on npm now`
+- `@webai-bridge/surface-mcp available on npm now`
 
 ## Why This Table Exists
 

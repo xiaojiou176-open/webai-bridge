@@ -1,6 +1,6 @@
-# Switchyard Public Proof Pack
+# WebaiBridge Public Proof Pack
 
-This page does **not** claim that Switchyard has already finished every lane,
+This page does **not** claim that WebaiBridge has already finished every lane,
 provider, compat route, or distribution surface.
 
 It exists to answer one narrower question:
@@ -25,7 +25,7 @@ now live outside the public docs plane in a private maintainer-only shelf.
 
 ## One-Line Verdict
 
-Today Switchyard can be honestly proved as:
+Today WebaiBridge can be honestly proved as:
 
 - a `shared provider runtime for AI apps`
 - a `BYOK + Web/Login` service-first substrate
@@ -40,7 +40,7 @@ This is not just "the docs look polished." The repo has fresh repo-side
 evidence:
 
 - `pnpm typecheck` = `0`
-- `pnpm exec vitest run tests/integration/docs/frontdoor-docs.test.ts tests/integration/docs/package-ready-distribution.test.ts tests/unit/mcp/switchyard-mcp.test.ts tests/unit/web/switchyard-cli.test.ts --config vitest.config.ts` = `0`
+- `pnpm exec vitest run tests/integration/docs/frontdoor-docs.test.ts tests/integration/docs/package-ready-distribution.test.ts tests/unit/mcp/webai-bridge-mcp.test.ts tests/unit/web/webai-bridge-cli.test.ts --config vitest.config.ts` = `0`
   - `5 files / 43 tests passed`
 - `pnpm build` = `0`
 
@@ -71,7 +71,7 @@ That proves:
 
 - the MCP server boots
 - the tool inventory is readable
-- `switchyard.runtime.health` is readable
+- `webai-bridge.runtime.health` is readable
 - the same runtime truth can also be opened through a thin local browser-facing
   auth/debug shell
 

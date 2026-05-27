@@ -101,9 +101,9 @@ function createLiveProofRequest(): ProviderTextRequest {
   return {
     model: geminiByokProvider.createModel(liveProofModel),
     input: {
-      prompt: 'Reply with exactly: SWITCHYARD_GEMINI_LIVE_OK',
+      prompt: 'Reply with exactly: WEBAI_BRIDGE_GEMINI_LIVE_OK',
       system:
-        'You are verifying the Switchyard Gemini BYOK live path. Reply with exactly SWITCHYARD_GEMINI_LIVE_OK.',
+        'You are verifying the WebaiBridge Gemini BYOK live path. Reply with exactly WEBAI_BRIDGE_GEMINI_LIVE_OK.',
       maxOutputTokens: 32,
       temperature: 0,
     },

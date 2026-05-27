@@ -120,8 +120,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runChatgptWebLiveProof(
       {
-        SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: "session=abc",
-        SWITCHYARD_WEB_CHATGPT_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: "session=abc",
+        WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -132,7 +132,7 @@ describe("Web/Login live proof harness", () => {
         method: "GET",
         headers: expect.objectContaining({
           cookie: "session=abc",
-          "user-agent": "SwitchyardTest/1.0",
+          "user-agent": "WebaiBridgeTest/1.0",
         }),
       }),
     );
@@ -165,8 +165,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runClaudeWebLiveProof(
       {
-        SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=abc",
-        SWITCHYARD_WEB_CLAUDE_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=abc",
+        WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -213,8 +213,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runClaudeWebLiveProof(
       {
-        SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=retry",
-        SWITCHYARD_WEB_CLAUDE_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=retry",
+        WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -246,8 +246,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runClaudeWebLiveProof(
       {
-        SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=abc",
-        SWITCHYARD_WEB_CLAUDE_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=abc",
+        WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -279,8 +279,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runClaudeWebLiveProof(
       {
-        SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=abc",
-        SWITCHYARD_WEB_CLAUDE_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE: "sessionKey=abc",
+        WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -301,8 +301,8 @@ describe("Web/Login live proof harness", () => {
         "gemini",
         runGeminiWebLiveProof,
         {
-          SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
-          SWITCHYARD_WEB_GEMINI_USER_AGENT: "SwitchyardTest/1.0",
+          WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
+          WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "WebaiBridgeTest/1.0",
         },
         "https://gemini.google.com/app",
         "<html><body><title>Gemini</title><div>Composer ready</div></body></html>",
@@ -312,8 +312,8 @@ describe("Web/Login live proof harness", () => {
         "grok",
         runGrokWebLiveProof,
         {
-          SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-          SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+          WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+          WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
         },
         "https://grok.com",
         "<html><body><h1>Grok</h1><div>Composer bootstrap ready</div></body></html>",
@@ -366,8 +366,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runQwenWebLiveProof(
       {
-        SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
-        SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
+        WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -379,7 +379,7 @@ describe("Web/Login live proof harness", () => {
         headers: expect.objectContaining({
           cookie: "qwen_session=abc",
           "content-type": "application/json",
-          "user-agent": "SwitchyardTest/1.0",
+          "user-agent": "WebaiBridgeTest/1.0",
         }),
       }),
     );
@@ -411,8 +411,8 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runQwenWebLiveProof(
       {
-        SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
-        SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
+        WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       fetchMock,
     );
@@ -433,9 +433,9 @@ describe("Web/Login live proof harness", () => {
         "gemini",
         runGeminiBrowserWorkspaceProof,
         {
-          SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
-          SWITCHYARD_WEB_GEMINI_USER_AGENT: "SwitchyardTest/1.0",
-          SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+          WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
+          WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "WebaiBridgeTest/1.0",
+          WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
         },
         "https://gemini.google.com/app",
         "Gemini Composer ready",
@@ -444,9 +444,9 @@ describe("Web/Login live proof harness", () => {
         "qwen",
         runQwenBrowserWorkspaceProof,
         {
-          SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
-          SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9224",
+          WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
+          WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9224",
         },
         "https://chat.qwen.ai/",
         "Qwen Workspace composer ready",
@@ -516,9 +516,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runQwenBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
-        SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9224",
+        WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
+        WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9224",
       },
       connectOverCDP,
     );
@@ -541,9 +541,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runQwenBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
-        SWITCHYARD_WEB_QWEN_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9224",
+        WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
+        WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9224",
       },
       connectOverCDP,
     );
@@ -560,7 +560,7 @@ describe("Web/Login live proof harness", () => {
 
   it("returns an external blocker when Qwen browser-proof is missing local session material", async () => {
     const result = await runQwenBrowserWorkspaceProof({
-      SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
+      WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: "qwen_session=abc",
     });
 
     expect(result).toEqual(
@@ -598,9 +598,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP as typeof import("playwright-core").chromium.connectOverCDP,
     );
@@ -647,9 +647,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP as typeof import("playwright-core").chromium.connectOverCDP,
     );
@@ -706,9 +706,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP as typeof import("playwright-core").chromium.connectOverCDP,
     );
@@ -753,9 +753,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP as typeof import("playwright-core").chromium.connectOverCDP,
     );
@@ -801,9 +801,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP,
     );
@@ -850,9 +850,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP,
     );
@@ -898,9 +898,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP,
     );
@@ -946,9 +946,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGrokBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9225",
       },
       connectOverCDP,
     );
@@ -992,9 +992,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGeminiBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
-        SWITCHYARD_WEB_GEMINI_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+        WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
+        WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
       },
       connectOverCDP,
     );
@@ -1036,9 +1036,9 @@ describe("Web/Login live proof harness", () => {
 
     const result = await runGeminiBrowserWorkspaceProof(
       {
-        SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
-        SWITCHYARD_WEB_GEMINI_USER_AGENT: "SwitchyardTest/1.0",
-        SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
+        WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: "SID=abc; __Secure-1PSID=def",
+        WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: "WebaiBridgeTest/1.0",
+        WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9223",
       },
       connectOverCDP,
     );
@@ -1102,8 +1102,8 @@ describe("Web/Login live proof harness", () => {
   it("treats Grok HTML redirects and human-verification pages as failures", async () => {
     const redirectResult = await runGrokWebLiveProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       vi.fn<typeof fetch>(async () => {
         return new Response("<html>redirect</html>", {
@@ -1117,8 +1117,8 @@ describe("Web/Login live proof harness", () => {
 
     const verificationResult = await runGrokWebLiveProof(
       {
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
-        SWITCHYARD_WEB_GROK_USER_AGENT: "SwitchyardTest/1.0",
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: "grok_session=abc",
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: "WebaiBridgeTest/1.0",
       },
       vi.fn<typeof fetch>(async () => {
         return new Response("<html>Verify you are human captcha</html>", {

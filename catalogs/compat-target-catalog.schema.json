@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/compat-target-catalog.schema.json",
-  "title": "Switchyard Compat Target Catalog",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/compat-target-catalog.schema.json",
+  "title": "WebaiBridge Compat Target Catalog",
   "type": "object",
   "additionalProperties": false,
   "required": [

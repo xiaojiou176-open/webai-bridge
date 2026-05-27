@@ -5,7 +5,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
   assertPathInsideAllowedRoots,
   assertSafePathSegment,
   resolveAllowedRuntimeArtifactRoots,
@@ -127,7 +127,7 @@ function uniqueSorted(values) {
 
 function normalizeBrowserModeForComparison(mode) {
   if (mode === "existing-chrome-profile") {
-    return SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE;
+    return WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE;
   }
 
   return mode;
@@ -273,10 +273,10 @@ function buildLegacyStoredCaptureProvenance(storedSession) {
     return undefined;
   }
 
-  if (browserMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (browserMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     const userDataDir = readLegacyRuntimeEnvValue(storedSession, [
-      "SWITCHYARD_CHROME_USER_DATA_DIR",
-      "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR",
+      "WEBAI_BRIDGE_CHROME_USER_DATA_DIR",
+      "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR",
     ]);
 
     return {
@@ -285,19 +285,19 @@ function buildLegacyStoredCaptureProvenance(storedSession) {
       profileDirectory: userDataDir ? "Profile 1" : undefined,
       profileName:
         readLegacyRuntimeEnvValue(storedSession, [
-          "SWITCHYARD_CHROME_PROFILE_NAME",
-        ]) ?? (userDataDir ? "switchyard" : undefined),
+          "WEBAI_BRIDGE_CHROME_PROFILE_NAME",
+        ]) ?? (userDataDir ? "webai-bridge" : undefined),
       cdpUrl: readLegacyRuntimeEnvValue(storedSession, [
-        "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL",
-        "SWITCHYARD_WEB_GEMINI_CDP_URL",
-        "SWITCHYARD_WEB_AUTH_CDP_URL",
+        "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL",
+        "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
+        "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
       ]),
     };
   }
 
   if (browserMode === "managed-browser") {
     const userDataDir = readLegacyRuntimeEnvValue(storedSession, [
-      "SWITCHYARD_WEB_AUTH_USER_DATA_DIR",
+      "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR",
     ]);
 
     return {
@@ -306,8 +306,8 @@ function buildLegacyStoredCaptureProvenance(storedSession) {
       profileDirectory: userDataDir ? DEFAULT_MANAGED_BROWSER_PROFILE_DIRECTORY : undefined,
       profileName: userDataDir ? DEFAULT_MANAGED_BROWSER_PROFILE_DIRECTORY : undefined,
       cdpUrl: readLegacyRuntimeEnvValue(storedSession, [
-        "SWITCHYARD_WEB_GEMINI_CDP_URL",
-        "SWITCHYARD_WEB_AUTH_CDP_URL",
+        "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
+        "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
       ]),
     };
   }
@@ -316,9 +316,9 @@ function buildLegacyStoredCaptureProvenance(storedSession) {
     return {
       browserMode,
       cdpUrl: readLegacyRuntimeEnvValue(storedSession, [
-        "SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL",
-        "SWITCHYARD_WEB_GEMINI_CDP_URL",
-        "SWITCHYARD_WEB_AUTH_CDP_URL",
+        "WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL",
+        "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
+        "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
       ]),
     };
   }
@@ -326,8 +326,8 @@ function buildLegacyStoredCaptureProvenance(storedSession) {
   return {
     browserMode,
     cdpUrl: readLegacyRuntimeEnvValue(storedSession, [
-      "SWITCHYARD_WEB_GEMINI_CDP_URL",
-      "SWITCHYARD_WEB_AUTH_CDP_URL",
+      "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL",
+      "WEBAI_BRIDGE_WEB_AUTH_CDP_URL",
     ]),
   };
 }
@@ -373,7 +373,7 @@ export function buildBrowserCaptureProvenance(args) {
   const capturedAt = args.capturedAt ?? new Date().toISOString();
   const mode = normalizeBrowserModeForComparison(args.mode);
 
-  if (mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     const isolatedProfile = resolveOptionalExistingChromeProfileRoot(args.env);
     return {
       browserMode: mode,
@@ -437,7 +437,7 @@ export function resolvePersistentCookieDbPath(target) {
     return undefined;
   }
 
-  if (target?.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (target?.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     if (!target?.existingProfileDir) {
       return undefined;
     }
@@ -445,14 +445,14 @@ export function resolvePersistentCookieDbPath(target) {
     const safeUserDataDir = assertPathInsideAllowedRoots(
       target.existingProfileDir,
       resolveAllowedBrowserFilesystemRoots(process.env),
-      "Switchyard browser cookie root",
+      "WebaiBridge browser cookie root",
     );
 
     return join(
       safeUserDataDir,
       assertSafePathSegment(
         target.existingProfileDirectory ?? "Profile 1",
-        "Switchyard browser cookie profile directory",
+        "WebaiBridge browser cookie profile directory",
       ),
       "Cookies",
     );
@@ -465,14 +465,14 @@ export function resolvePersistentCookieDbPath(target) {
   const safeUserDataDir = assertPathInsideAllowedRoots(
     target.userDataDir,
     resolveAllowedBrowserFilesystemRoots(process.env),
-    "Switchyard browser cookie root",
+    "WebaiBridge browser cookie root",
   );
 
   return join(
     safeUserDataDir,
     assertSafePathSegment(
       target.profileDirectory ?? DEFAULT_MANAGED_BROWSER_PROFILE_DIRECTORY,
-      "Switchyard browser cookie profile directory",
+      "WebaiBridge browser cookie profile directory",
     ),
     "Cookies",
   );
@@ -535,7 +535,7 @@ export function auditProviderPersistentArtifacts(provider, target, options = {})
       artifactStates: {},
       error: error instanceof Error ? error.message : String(error),
       summary:
-        "Switchyard could not query the Cookies sqlite file for persistence audit, so disk truth stayed unconfirmed.",
+        "WebaiBridge could not query the Cookies sqlite file for persistence audit, so disk truth stayed unconfirmed.",
     };
   }
 
@@ -553,7 +553,7 @@ export function auditProviderPersistentArtifacts(provider, target, options = {})
         `${result.stderr ?? result.stdout ?? ""}`.trim() ??
         "sqlite-query-failed",
       summary:
-        "Switchyard could not query the Cookies sqlite file for persistence audit, so disk truth stayed unconfirmed.",
+        "WebaiBridge could not query the Cookies sqlite file for persistence audit, so disk truth stayed unconfirmed.",
     };
   }
 

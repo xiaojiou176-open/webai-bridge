@@ -4,7 +4,7 @@
   "templateShape": "read-only-runtime-diagnostics",
   "manifest": {
     "starterTarget": "runtime-diagnostics-pack",
-    "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
+    "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
     "safeClaims": [
       "read-only runtime diagnostics starter",
       "provider triage helper",

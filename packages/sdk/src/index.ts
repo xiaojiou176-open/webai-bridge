@@ -3,16 +3,16 @@ import {
   parseModelReference,
 } from '../../lanes/byok/src/index.js';
 import {
-  createSwitchyardSdkClient,
-  createSwitchyardServiceClient,
-  type SwitchyardSdkClientOptions,
-  type SwitchyardServiceClientOptions,
+  createWebaiBridgeSdkClient,
+  createWebaiBridgeServiceClient,
+  type WebaiBridgeSdkClientOptions,
+  type WebaiBridgeServiceClientOptions,
 } from '../../surfaces/sdk-client/src/index.js';
 import {
   createDefaultWebRegistry,
-  createSwitchyardWebSdk,
-  type SwitchyardWebSdk,
-  type SwitchyardWebSdkOptions,
+  createWebaiBridgeWebSdk,
+  type WebaiBridgeWebSdk,
+  type WebaiBridgeWebSdkOptions,
 } from './web.js';
 import {
   anthropic,
@@ -29,17 +29,17 @@ import {
   xai,
 } from './providers.js';
 
-export interface SwitchyardSdkOptions extends SwitchyardSdkClientOptions {
-  service?: SwitchyardServiceClientOptions;
-  web?: SwitchyardWebSdkOptions;
+export interface WebaiBridgeSdkOptions extends WebaiBridgeSdkClientOptions {
+  service?: WebaiBridgeServiceClientOptions;
+  web?: WebaiBridgeWebSdkOptions;
 }
 
-export function createSwitchyardSdk(options: SwitchyardSdkOptions = {}) {
-  const client = createSwitchyardSdkClient(options);
+export function createWebaiBridgeSdk(options: WebaiBridgeSdkOptions = {}) {
+  const client = createWebaiBridgeSdkClient(options);
   const service = options.service
-    ? createSwitchyardServiceClient(options.service)
+    ? createWebaiBridgeServiceClient(options.service)
     : undefined;
-  const web = createSwitchyardWebSdk(options.web);
+  const web = createWebaiBridgeWebSdk(options.web);
 
   return {
     client,
@@ -84,5 +84,5 @@ export {
   xai,
 };
 export type * from '../../lanes/byok/src/index.js';
-export type { SwitchyardProviderProfile } from './providers.js';
-export type { SwitchyardWebSdk, SwitchyardWebSdkOptions };
+export type { WebaiBridgeProviderProfile } from './providers.js';
+export type { WebaiBridgeWebSdk, WebaiBridgeWebSdkOptions };

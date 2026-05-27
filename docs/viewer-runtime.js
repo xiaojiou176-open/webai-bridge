@@ -13,7 +13,7 @@ function viewerUsesDocsScopedAssets(viewerHref) {
 
 export function resolveRepoAssetHref(
   repoRelativePath,
-  viewerHref = "https://switchyard.local/docs/viewer.html",
+  viewerHref = "https://webai-bridge.local/docs/viewer.html",
 ) {
   const viewerDir = new URL("./", viewerHref);
   const normalizedRepoPath = repoRelativePath.replace(/^\/+/, "");
@@ -31,7 +31,7 @@ export function resolveRepoAssetHref(
 export function resolveMarkdownHref(
   target,
   currentDocPath,
-  viewerHref = "https://switchyard.local/docs/viewer.html",
+  viewerHref = "https://webai-bridge.local/docs/viewer.html",
 ) {
   if (!target || /^(https?:|mailto:|tel:)/i.test(target)) {
     return target;
@@ -49,7 +49,7 @@ export function resolveMarkdownHref(
         ? target.slice("docs/".length)
         : target;
 
-  const current = new URL(currentDocPath, "https://switchyard.local/");
+  const current = new URL(currentDocPath, "https://webai-bridge.local/");
   const resolved = new URL(normalizedTarget, current);
   const repoRelativePath = resolved.pathname.replace(/^\/+/, "");
   const viewerDocPath =
@@ -65,7 +65,7 @@ export function resolveMarkdownHref(
 }
 
 export function resolveFrontDoorHref(
-  viewerHref = "https://switchyard.local/docs/viewer.html",
+  viewerHref = "https://webai-bridge.local/docs/viewer.html",
 ) {
   if (viewerUsesDocsScopedAssets(viewerHref)) {
     return new URL("./index.html", viewerHref).toString();
@@ -105,7 +105,7 @@ function formatDocMetaLabel(docPath) {
 export function renderInline(
   source,
   currentDocPath,
-  viewerHref = "https://switchyard.local/docs/viewer.html",
+  viewerHref = "https://webai-bridge.local/docs/viewer.html",
 ) {
   return escapeHtml(source)
     .replace(/`([^`]+)`/g, "<code>$1</code>")
@@ -170,7 +170,7 @@ function parseList(lines, startIndex, baseIndent, tag, currentDocPath, viewerHre
 export function renderMarkdown(
   markdown,
   currentDocPath,
-  viewerHref = "https://switchyard.local/docs/viewer.html",
+  viewerHref = "https://webai-bridge.local/docs/viewer.html",
 ) {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const html = [];
@@ -299,7 +299,7 @@ export function renderMarkdown(
 
 export function resolveDocPath(
   search,
-  locationHref = "https://switchyard.local/docs/viewer.html",
+  locationHref = "https://webai-bridge.local/docs/viewer.html",
 ) {
   const params = new URLSearchParams(search);
   const raw = params.get("doc") ?? "README.md";
@@ -314,7 +314,7 @@ export function resolveDocPath(
     raw.startsWith("starter-packs/") ||
     raw.startsWith(".agents/");
   const resolved = repoRootLike
-    ? new URL(raw.replace(/^\/+/, ""), "https://switchyard.local/")
+    ? new URL(raw.replace(/^\/+/, ""), "https://webai-bridge.local/")
     : new URL(raw, new URL(locationHref).origin + "/docs/");
   const repoRelativePath = resolved.pathname.replace(/^\/+/, "");
 

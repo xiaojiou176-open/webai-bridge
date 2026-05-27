@@ -113,7 +113,7 @@ const DEFAULT_WEB_ACQUISITION_MODES: readonly AuthPortalAcquisitionModeView[] = 
     id: "isolated-chrome-root",
     label: "Use Isolated Chrome Root",
     description:
-      "Reuse Switchyard's dedicated Chrome root and single repo-owned profile for login and capture.",
+      "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile for login and capture.",
     advanced: true,
     default: true,
   },
@@ -121,7 +121,7 @@ const DEFAULT_WEB_ACQUISITION_MODES: readonly AuthPortalAcquisitionModeView[] = 
     id: "managed-browser",
     label: "Managed Browser",
     description:
-      "Let Switchyard launch or reattach its dedicated fallback onboarding browser for login and capture.",
+      "Let WebaiBridge launch or reattach its dedicated fallback onboarding browser for login and capture.",
     advanced: false,
     default: false,
   },
@@ -210,7 +210,7 @@ export function buildAuthPortalShellModel(
   const workflows = summarizeAuthRuntimeViews(sections.flatMap((section) => section.cards)).workflowSummary;
 
   return {
-    title: options.title ?? 'Switchyard Web/Login Access',
+    title: options.title ?? 'WebaiBridge Web/Login Access',
     mode: 'local-first',
     generatedAt: options.generatedAt ?? new Date().toISOString(),
     trustBoundary:
@@ -355,7 +355,7 @@ function getVisibleTruthFocus(card: AuthPortalCard): AuthPortalVisibleTruthFocus
         title: 'Human verification required',
         detail: getVisibleTruthDetail(
           card,
-          'The current browser hit a verification wall that still needs an end-user step before Switchyard can trust the session again.'
+          'The current browser hit a verification wall that still needs an end-user step before WebaiBridge can trust the session again.'
         ),
         nextStepLabel: 'Complete verification',
         nextStepDescription:
@@ -367,7 +367,7 @@ function getVisibleTruthFocus(card: AuthPortalCard): AuthPortalVisibleTruthFocus
         title: 'Session incomplete',
         detail: getVisibleTruthDetail(
           card,
-          'The current browser is not on a reusable workspace yet, so Switchyard cannot treat this slot as live-ready.',
+          'The current browser is not on a reusable workspace yet, so WebaiBridge cannot treat this slot as live-ready.',
           'browser-checkpoint-first'
         ),
         nextStepLabel: 'Finish browser session',
@@ -406,12 +406,12 @@ function getVisibleTruthFocus(card: AuthPortalCard): AuthPortalVisibleTruthFocus
         title: 'Workspace handoff incomplete',
         detail: getVisibleTruthDetail(
           card,
-          'The browser is nearby, but Switchyard still does not see a reusable workspace in the current seat.',
+          'The browser is nearby, but WebaiBridge still does not see a reusable workspace in the current seat.',
           'browser-checkpoint-first'
         ),
         nextStepLabel: 'Finish browser session',
         nextStepDescription:
-          'Use the current browser seat until it reaches the real provider workspace. Only then should Switchyard rerun the live proof.',
+          'Use the current browser seat until it reaches the real provider workspace. Only then should WebaiBridge rerun the live proof.',
         primaryLinkLabel: 'Inspect current browser first'
       };
     default:
@@ -853,7 +853,7 @@ function renderCardDetails(card: AuthPortalCard): string {
           card.diagnostic.contractCategoryLabel
         )}</code></p>
       </div>`
-    : '<div class="diagnostic diagnostic-ok"><strong>No active blocker</strong><p>Switchyard does not currently see a local credential blocker for this provider slot.</p></div>';
+    : '<div class="diagnostic diagnostic-ok"><strong>No active blocker</strong><p>WebaiBridge does not currently see a local credential blocker for this provider slot.</p></div>';
 
   return `<details class="card-details">
     <summary>${escapeHtml(detailsLabel)}</summary>
@@ -1217,7 +1217,7 @@ function renderBoundaryRail(model: AuthPortalShellModel): string {
     <article class="boundary-card">
       <p class="eyebrow eyebrow-compact">What this page does</p>
       <h2>Track your local provider access</h2>
-      <p>Use this portal to compare <strong>what Switchyard already holds locally</strong> against <strong>what the currently attached browser can actually reuse right now</strong>.</p>
+      <p>Use this portal to compare <strong>what WebaiBridge already holds locally</strong> against <strong>what the currently attached browser can actually reuse right now</strong>.</p>
     </article>
     <article class="boundary-card">
       <p class="eyebrow eyebrow-compact">What this page does not do</p>
@@ -1249,16 +1249,16 @@ function renderModeGuide(): string {
   return `<section class="mode-guide">
     <header class="section-header">
       <h2>Choose the right browser handoff</h2>
-      <p>Think of these like three ways to hand the same keyring to the same local runtime. The difference is where Switchyard picks it up, not who owns the account.</p>
+      <p>Think of these like three ways to hand the same keyring to the same local runtime. The difference is where WebaiBridge picks it up, not who owns the account.</p>
     </header>
     <div class="mode-guide-grid">
       <article class="mode-guide-card">
         <h3>Repo browser workspace</h3>
-        <p>Reuse Switchyard&apos;s dedicated Chrome workspace for this repo. This is the steady-state path when you already live inside the repo-owned browser seat.</p>
+        <p>Reuse WebaiBridge&apos;s dedicated Chrome workspace for this repo. This is the steady-state path when you already live inside the repo-owned browser seat.</p>
       </article>
       <article class="mode-guide-card">
         <h3>Managed fallback browser</h3>
-        <p>Let Switchyard open or reattach its simpler fallback browser for onboarding. Use this when the main workspace is not ready yet.</p>
+        <p>Let WebaiBridge open or reattach its simpler fallback browser for onboarding. Use this when the main workspace is not ready yet.</p>
       </article>
       <article class="mode-guide-card">
         <h3>Attach an existing session</h3>
@@ -1384,7 +1384,7 @@ document.addEventListener('click', async (event) => {
   try {
     if (actionId === 'start-web-login' || actionId === 'reauthenticate') {
       setActionBusy(button, true);
-      setFeedback('Preparing browser handoff', 'Switchyard is lining up the local browser workspace and checking whether a capture path is available.', '', '', 'working');
+      setFeedback('Preparing browser handoff', 'WebaiBridge is lining up the local browser workspace and checking whether a capture path is available.', '', '', 'working');
       const acquisitionMode = button.dataset.acquisitionMode ?? 'isolated-chrome-root';
       const { payload } = await callJson(
         replaceProvider(routeCatalog.providerAcquisitionStartTemplate, providerId),
@@ -1419,7 +1419,7 @@ document.addEventListener('click', async (event) => {
           ? 'Browser handoff ready'
           : 'Browser handoff needs attention',
         acquisition.summary ??
-          'Finish the provider login in the selected browser seat, then capture the session back into Switchyard.',
+          'Finish the provider login in the selected browser seat, then capture the session back into WebaiBridge.',
         details,
         \`\${captureButton}\${inspectButton}\`,
         acquisition.status === 'ready-for-user-login' ? 'success' : 'warning'
@@ -1430,7 +1430,7 @@ document.addEventListener('click', async (event) => {
 
     if (actionId === 'retry-refresh') {
       setActionBusy(button, true);
-      setFeedback('Capturing current session', 'Switchyard is reading the current browser state and writing the local handoff record.', '', '', 'working');
+      setFeedback('Capturing current session', 'WebaiBridge is reading the current browser state and writing the local handoff record.', '', '', 'working');
       const { payload } = await callJson(
         replaceProvider(routeCatalog.providerAcquisitionCaptureTemplate, providerId)
       );
@@ -1443,7 +1443,7 @@ document.addEventListener('click', async (event) => {
         acquisitionStatus === 'refreshable-but-degraded'
           ? 'Browser capture stored with follow-up'
           : 'Current browser captured',
-        payload.acquisition?.summary ?? 'Switchyard stored the current browser handoff record.',
+        payload.acquisition?.summary ?? 'WebaiBridge stored the current browser handoff record.',
         payload.acquisition?.storePath ?? '',
         reloadButton,
         acquisitionStatus === 'refreshable-but-degraded' ? 'warning' : 'success'
@@ -1467,7 +1467,7 @@ document.addEventListener('click', async (event) => {
 
   try {
     setActionBusy(button, true);
-    setFeedback('Capturing current session', 'Switchyard is writing the current browser state into the local store and then refreshing the portal.', '', '', 'working');
+    setFeedback('Capturing current session', 'WebaiBridge is writing the current browser state into the local store and then refreshing the portal.', '', '', 'working');
     const captureBody = button.dataset.captureBody
       ? JSON.parse(decodeURIComponent(button.dataset.captureBody))
       : {};
@@ -1481,7 +1481,7 @@ document.addEventListener('click', async (event) => {
       acquisitionStatus === 'refreshable-but-degraded'
         ? 'Browser capture stored with follow-up'
         : 'Current browser captured',
-      payload.acquisition?.summary ?? 'Switchyard stored the current browser handoff record.',
+      payload.acquisition?.summary ?? 'WebaiBridge stored the current browser handoff record.',
       payload.acquisition?.storePath ?? '',
       reloadButton,
       acquisitionStatus === 'refreshable-but-degraded' ? 'warning' : 'success'

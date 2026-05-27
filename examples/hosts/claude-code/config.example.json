@@ -1,7 +1,7 @@
 {
-  "name": "switchyard-claude-code-host-example",
-  "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-  "catalogCommand": "pnpm run switchyard:cli -- host-example --target claude-code --json",
+  "name": "webai-bridge-claude-code-host-example",
+  "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+  "catalogCommand": "pnpm run webai-bridge:cli -- host-example --target claude-code --json",
   "request": {
     "provider": "claude",
     "lane": "web",

@@ -33,7 +33,7 @@ describe("Claude Code thin compat adapter", () => {
     });
 
     const adapter = createClaudeCodeThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as typeof fetch,
     });
     const result = await adapter.messages({
@@ -58,7 +58,7 @@ describe("Claude Code thin compat adapter", () => {
 
   it("fails closed when approval-ui is requested", () => {
     const adapter = createClaudeCodeThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: vi.fn() as typeof fetch,
     });
 

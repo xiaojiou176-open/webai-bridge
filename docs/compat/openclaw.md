@@ -1,4 +1,4 @@
-# Switchyard for OpenClaw
+# WebaiBridge for OpenClaw
 
 ## Status
 
@@ -14,7 +14,7 @@
 
 ## What Is Already Landed
 
-- Switchyard already uses OpenClaw research to shape:
+- WebaiBridge already uses OpenClaw research to shape:
   - Web/Login runtime boundaries
   - auth/session design
   - thin HTTP/runtime seams

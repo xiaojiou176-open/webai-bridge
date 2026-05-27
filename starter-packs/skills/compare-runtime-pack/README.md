@@ -13,9 +13,9 @@
 - current pack-local smoke:
   `pnpm exec node starter-packs/skills/compare-runtime-pack/smoke.mjs`
 - planned CLI route:
-  `pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack`
+  `pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack`
 - planned MCP:
-  `switchyard.catalog.skill_pack_route`
+  `webai-bridge.catalog.skill_pack_route`
 - 当前这轮只落 pack-local scaffold，尚未把 route/catalog/index 接进共享面。
 
 ## 当前不该吹的东西

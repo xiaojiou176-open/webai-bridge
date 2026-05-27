@@ -17,7 +17,7 @@ describe("service index wiring", () => {
     const buildStoredWebRuntimeEnv = vi.fn(() => ({
       STORED_ENV: "1",
     }));
-    const createSwitchyardSdkClient = vi.fn(() => ({
+    const createWebaiBridgeSdkClient = vi.fn(() => ({
       kind: "sdk-client",
     }));
     const createDefaultWebLane = vi.fn(({ providerSessions, runtimeEnv }) => ({
@@ -55,10 +55,10 @@ describe("service index wiring", () => {
       buildStoredWebRuntimeEnv,
     }));
     vi.doMock("../../../packages/surfaces/sdk-client/src/index.js", () => ({
-      createSwitchyardSdkClient,
+      createWebaiBridgeSdkClient,
     }));
     vi.doMock("../../../packages/surfaces/http/src/index.js", () => ({
-      SwitchyardHttpSurface: vi.fn(function SwitchyardHttpSurface(this: { options?: unknown }, options: unknown) {
+      WebaiBridgeHttpSurface: vi.fn(function WebaiBridgeHttpSurface(this: { options?: unknown }, options: unknown) {
         this.options = options;
       }),
       createNodeHttpHandler,
@@ -82,11 +82,11 @@ describe("service index wiring", () => {
       loadServicePort,
     }));
 
-    const { createSwitchyardService } = await import(
+    const { createWebaiBridgeService } = await import(
       "../../../apps/service/src/index.js"
     );
 
-    const service = createSwitchyardService({
+    const service = createWebaiBridgeService({
       providerSessions: {
         chatgpt: {
           note: "option-session",
@@ -98,7 +98,7 @@ describe("service index wiring", () => {
       liveProofEnv: {
         LIVE_PROOF_ENV: "3",
       },
-      serviceName: "switchyard-test-service",
+      serviceName: "webai-bridge-test-service",
       ownerUserId: "local-user",
     });
 
@@ -122,7 +122,7 @@ describe("service index wiring", () => {
         }),
       }),
     );
-    expect(createSwitchyardSdkClient).toHaveBeenCalledWith(
+    expect(createWebaiBridgeSdkClient).toHaveBeenCalledWith(
       expect.objectContaining({
         env: expect.objectContaining({
           STORED_ENV: "1",
@@ -203,13 +203,13 @@ describe("service index wiring", () => {
       buildStoredWebRuntimeEnv: () => ({}),
     }));
     vi.doMock("../../../packages/surfaces/sdk-client/src/index.js", () => ({
-      createSwitchyardSdkClient: () => ({
+      createWebaiBridgeSdkClient: () => ({
         kind: "sdk-client",
         registry: byokRegistry,
       }),
     }));
     vi.doMock("../../../packages/surfaces/http/src/index.js", () => ({
-      SwitchyardHttpSurface: vi.fn(function SwitchyardHttpSurface(this: { options?: unknown }, options: unknown) {
+      WebaiBridgeHttpSurface: vi.fn(function WebaiBridgeHttpSurface(this: { options?: unknown }, options: unknown) {
         this.options = options;
         capturedSurfaceOptions = options as Record<string, unknown>;
       }),
@@ -255,13 +255,13 @@ describe("service index wiring", () => {
       ],
     }));
 
-    const { createSwitchyardService } = await import(
+    const { createWebaiBridgeService } = await import(
       "../../../apps/service/src/index.js"
     );
 
-    const service = createSwitchyardService({
+    const service = createWebaiBridgeService({
       runtimeEnv: {
-        SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+        WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
       },
       ownerUserId: "local-user",
     });
@@ -312,7 +312,7 @@ describe("service index wiring", () => {
           },
         ],
         env: expect.objectContaining({
-          SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+          WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
         }),
       }),
     );
@@ -337,7 +337,7 @@ describe("service index wiring", () => {
           },
         ],
         env: expect.objectContaining({
-          SWITCHYARD_GEMINI_API_KEY: "gemini-test-key",
+          WEBAI_BRIDGE_GEMINI_API_KEY: "gemini-test-key",
         }),
       }),
     );
@@ -349,10 +349,10 @@ describe("service index wiring", () => {
       buildStoredWebRuntimeEnv: () => ({}),
     }));
     vi.doMock("../../../packages/surfaces/sdk-client/src/index.js", () => ({
-      createSwitchyardSdkClient: () => ({ kind: "sdk-client" }),
+      createWebaiBridgeSdkClient: () => ({ kind: "sdk-client" }),
     }));
     vi.doMock("../../../packages/surfaces/http/src/index.js", () => ({
-      SwitchyardHttpSurface: class SwitchyardHttpSurface {},
+      WebaiBridgeHttpSurface: class WebaiBridgeHttpSurface {},
       createNodeHttpHandler: () => (_req: unknown, res: { statusCode: number; end(body: string): void }) => {
         res.statusCode = 200;
         res.end("ok");
@@ -384,13 +384,13 @@ describe("service index wiring", () => {
       loadServicePort: () => 0,
     }));
 
-    const { startSwitchyardService, startFromProcessEnv } = await import(
+    const { startWebaiBridgeService, startFromProcessEnv } = await import(
       "../../../apps/service/src/index.js"
     );
 
-    const started = await startSwitchyardService({
+    const started = await startWebaiBridgeService({
       port: 0,
-      serviceName: "switchyard-start-test",
+      serviceName: "webai-bridge-start-test",
     });
 
     expect(started.baseUrl).toMatch(/^http:\/\/127\.0\.0\.1:\d+$/);
@@ -417,7 +417,7 @@ describe("service index wiring", () => {
       },
     }));
     const buildStoredWebRuntimeEnv = vi.fn(() => ({
-      SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL: "http://127.0.0.1:9555",
+      WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL: "http://127.0.0.1:9555",
     }));
     const createDefaultWebLane = vi.fn(({ providerSessions, runtimeEnv }) => ({
       lane: { id: "lane" },
@@ -432,10 +432,10 @@ describe("service index wiring", () => {
       buildStoredWebRuntimeEnv,
     }));
     vi.doMock("../../../packages/surfaces/sdk-client/src/index.js", () => ({
-      createSwitchyardSdkClient: () => ({ kind: "sdk-client" }),
+      createWebaiBridgeSdkClient: () => ({ kind: "sdk-client" }),
     }));
     vi.doMock("../../../packages/surfaces/http/src/index.js", () => ({
-      SwitchyardHttpSurface: vi.fn(function SwitchyardHttpSurface(this: { options?: unknown }, options: unknown) {
+      WebaiBridgeHttpSurface: vi.fn(function WebaiBridgeHttpSurface(this: { options?: unknown }, options: unknown) {
         this.options = options;
       }),
       createNodeHttpHandler: vi.fn(() => "handler"),
@@ -461,13 +461,13 @@ describe("service index wiring", () => {
       loadServicePort: () => 4242,
     }));
 
-    const { createSwitchyardService } = await import(
+    const { createWebaiBridgeService } = await import(
       "../../../apps/service/src/index.js"
     );
 
-    createSwitchyardService({
+    createWebaiBridgeService({
       runtimeEnv: {
-        SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
+        WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
       },
     });
 
@@ -492,8 +492,8 @@ describe("service index wiring", () => {
         acquisitionMode: "isolated-chrome-root",
         captureProvenance: {
           browserMode: "isolated-chrome-root",
-          userDataDir: "/tmp/switchyard-browser",
-          profileName: "switchyard",
+          userDataDir: "/tmp/webai-bridge-browser",
+          profileName: "webai-bridge",
           cdpUrl: "http://127.0.0.1:9338",
         },
       },
@@ -512,10 +512,10 @@ describe("service index wiring", () => {
       buildStoredWebRuntimeEnv,
     }));
     vi.doMock("../../../packages/surfaces/sdk-client/src/index.js", () => ({
-      createSwitchyardSdkClient: () => ({ kind: "sdk-client" }),
+      createWebaiBridgeSdkClient: () => ({ kind: "sdk-client" }),
     }));
     vi.doMock("../../../packages/surfaces/http/src/index.js", () => ({
-      SwitchyardHttpSurface: vi.fn(function SwitchyardHttpSurface(this: { options?: unknown }, options: unknown) {
+      WebaiBridgeHttpSurface: vi.fn(function WebaiBridgeHttpSurface(this: { options?: unknown }, options: unknown) {
         this.options = options;
       }),
       createNodeHttpHandler: vi.fn(() => "handler"),
@@ -541,41 +541,41 @@ describe("service index wiring", () => {
       loadServicePort: () => 4242,
     }));
 
-    const { createSwitchyardService } = await import(
+    const { createWebaiBridgeService } = await import(
       "../../../apps/service/src/index.js"
     );
 
-    createSwitchyardService();
+    createWebaiBridgeService();
 
     expect(createDefaultWebLane).toHaveBeenCalledWith(
       expect.objectContaining({
         runtimeEnv: expect.objectContaining({
-          SWITCHYARD_BROWSER_MODE: "isolated-chrome-root",
-          SWITCHYARD_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
-          SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_CHROME_USER_DATA_DIR: "/tmp/switchyard-browser",
-          SWITCHYARD_CHROME_PROFILE_NAME: "switchyard",
+          WEBAI_BRIDGE_BROWSER_MODE: "isolated-chrome-root",
+          WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE: "isolated-chrome-root",
+          WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_CHROME_USER_DATA_DIR: "/tmp/webai-bridge-browser",
+          WEBAI_BRIDGE_CHROME_PROFILE_NAME: "webai-bridge",
         }),
       }),
     );
     expect(createDefaultWebLiveProofRunners).toHaveBeenCalledWith(
       expect.objectContaining({
         env: expect.objectContaining({
-          SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
-          SWITCHYARD_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+          WEBAI_BRIDGE_WEB_AUTH_CDP_URL: "http://127.0.0.1:9338",
         }),
       }),
     );
     expect(createDefaultWebDebugSupportRunners).toHaveBeenCalledWith(
       expect.objectContaining({
-        SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+        WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
       }),
     );
     expect(createDefaultWebAcquisitionRunners).toHaveBeenCalledWith(
       expect.objectContaining({
-        SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
+        WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL: "http://127.0.0.1:9338",
       }),
     );
   });

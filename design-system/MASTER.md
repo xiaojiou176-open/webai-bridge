@@ -1,22 +1,22 @@
-# Switchyard Public Design Contract
+# WebaiBridge Public Design Contract
 
 ## Role
 
-This file is the public operational contract for Switchyard design work.
+This file is the public operational contract for WebaiBridge design work.
 
 Authority order for public design assets is fixed:
 
 1. `DESIGN.md`
 2. `design-system/MASTER.md`
-3. `design-system/switchyard-auth-portal/MASTER.md`
-4. `design-system/switchyard-debug-cockpit/MASTER.md`
+3. `design-system/webai-bridge-auth-portal/MASTER.md`
+4. `design-system/webai-bridge-debug-cockpit/MASTER.md`
 
 Page masters may tighten or specialize a rule. They may not reopen donor
 selection or widen the borrow boundary.
 
 ## Product Truth
 
-Switchyard is a builder-facing shared provider runtime for AI apps.
+WebaiBridge is a builder-facing shared provider runtime for AI apps.
 
 It is not:
 

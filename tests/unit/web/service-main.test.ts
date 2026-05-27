@@ -39,7 +39,7 @@ describe("service main entrypoint", () => {
 
     expect(startFromProcessEnv).toHaveBeenCalledTimes(1);
     expect(logSpy).toHaveBeenCalledWith(
-      "Switchyard local service listening on http://127.0.0.1:4010. Press Ctrl+C to stop.",
+      "WebaiBridge local service listening on http://127.0.0.1:4010. Press Ctrl+C to stop.",
     );
     expect(onSpy).toHaveBeenCalled();
     expect(handlers.has("SIGINT")).toBe(true);

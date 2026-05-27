@@ -15,11 +15,11 @@ function read(relativePath: string) {
 
 const hanRegex = /[\p{Script=Han}]/u;
 
-describe("Switchyard docs frontdoor contracts", () => {
+describe("WebaiBridge docs frontdoor contracts", () => {
   it("keeps the docs frontdoor focused on first-row routes while demoting deeper shelves", () => {
     const docsReadme = read("docs/README.md");
 
-    expect(docsReadme).toContain("This is the public docs map for Switchyard.");
+    expect(docsReadme).toContain("This is the public docs map for WebaiBridge.");
     expect(docsReadme).toContain("Treat it like an adoption desk, not a warehouse list");
     expect(docsReadme).toContain("The public first row stays intentionally narrow");
     expect(docsReadme).toContain("docs/api/service-http-reference.md");
@@ -45,9 +45,9 @@ describe("Switchyard docs frontdoor contracts", () => {
     expect(docsReadme).not.toContain("docs/compat/claude-code.md");
     expect(docsReadme).not.toContain("docs/compat/openclaw.md");
     expect(docsReadme).not.toContain("docs/compare/byok-vs-web-login.md");
-    expect(docsReadme).not.toContain("docs/compare/switchyard-vs-codex.md");
-    expect(docsReadme).not.toContain("docs/compare/switchyard-vs-claude-code.md");
-    expect(docsReadme).not.toContain("docs/compare/switchyard-vs-openclaw.md");
+    expect(docsReadme).not.toContain("docs/compare/webai-bridge-vs-codex.md");
+    expect(docsReadme).not.toContain("docs/compare/webai-bridge-vs-claude-code.md");
+    expect(docsReadme).not.toContain("docs/compare/webai-bridge-vs-openclaw.md");
     expect(docsReadme).not.toContain("docs/public-surface-catalog.md");
     expect(docsReadme).not.toContain("catalogs/public-surface-catalog.schema.json");
     expect(docsReadme).not.toContain("catalogs/provider-runtime-catalog.json");
@@ -72,23 +72,23 @@ describe("Switchyard docs frontdoor contracts", () => {
       moduleUrl.href
     );
 
-    const viewerHref = "http://127.0.0.1:4185/Switchyard/docs/viewer.html?doc=README.md";
-    const rootViewerHref = "http://127.0.0.1:4185/Switchyard/viewer.html?doc=README.md";
+    const viewerHref = "http://127.0.0.1:4185/WebaiBridge/docs/viewer.html?doc=README.md";
+    const rootViewerHref = "http://127.0.0.1:4185/WebaiBridge/viewer.html?doc=README.md";
 
     expect(resolveRepoAssetHref("docs/first-success.md", viewerHref)).toBe(
-      "http://127.0.0.1:4185/Switchyard/docs/first-success.md",
+      "http://127.0.0.1:4185/WebaiBridge/docs/first-success.md",
     );
     expect(
       resolveMarkdownHref("./docs/runbooks/dev-bootstrap.md", "docs/README.md", viewerHref),
     ).toBe("./viewer.html?doc=docs%2Frunbooks%2Fdev-bootstrap.md");
     expect(resolveDocPath("?doc=README.md", viewerHref)).toBe("docs/README.md");
     expect(resolveRepoAssetHref("docs/first-success.md", rootViewerHref)).toBe(
-      "http://127.0.0.1:4185/Switchyard/first-success.md",
+      "http://127.0.0.1:4185/WebaiBridge/first-success.md",
     );
     expect(
       resolveMarkdownHref("./docs/runbooks/dev-bootstrap.md", "docs/README.md", rootViewerHref),
     ).toBe("./viewer.html?doc=runbooks%2Fdev-bootstrap.md");
-    expect(resolveFrontDoorHref(rootViewerHref)).toBe("http://127.0.0.1:4185/Switchyard/");
+    expect(resolveFrontDoorHref(rootViewerHref)).toBe("http://127.0.0.1:4185/WebaiBridge/");
 
     const rendered = renderMarkdown("- top\n  - child\n- next", "docs/README.md", viewerHref);
     expect(rendered).toContain("<ul><li>top<ul><li>child</li></ul></li><li>next</li></ul>");
@@ -97,8 +97,8 @@ describe("Switchyard docs frontdoor contracts", () => {
   it(
     "keeps the docs viewer working from a GitHub Pages-style project-site path",
     async () => {
-      const tempRoot = mkdtempSync(resolve(tmpdir(), "switchyard-viewer-"));
-      const projectRoot = resolve(tempRoot, "Switchyard");
+      const tempRoot = mkdtempSync(resolve(tmpdir(), "webai-bridge-viewer-"));
+      const projectRoot = resolve(tempRoot, "WebaiBridge");
       symlinkSync(repoRoot, projectRoot, "dir");
 
       const { startDocsStaticServer } = await import("../../../scripts/start-local-experience.mjs");
@@ -118,14 +118,14 @@ describe("Switchyard docs frontdoor contracts", () => {
         try {
           const page = await browser.newPage();
           await page.goto(
-            `${baseUrl}/Switchyard/docs/viewer.html?doc=first-success.md`,
+            `${baseUrl}/WebaiBridge/docs/viewer.html?doc=first-success.md`,
             { waitUntil: "networkidle" },
           );
           expect(await page.locator("#viewer-title").innerText()).toContain("First Success");
           await page.locator("#viewer-content a").first().click();
           await page.waitForLoadState("networkidle");
           expect(page.url()).toContain(
-            "/Switchyard/docs/viewer.html?doc=docs%2Frunbooks%2Fdev-bootstrap.md",
+            "/WebaiBridge/docs/viewer.html?doc=docs%2Frunbooks%2Fdev-bootstrap.md",
           );
           expect(await page.locator("#viewer-title").innerText()).toContain("Dev Bootstrap");
         } finally {
@@ -142,8 +142,8 @@ describe("Switchyard docs frontdoor contracts", () => {
   it(
     "keeps the root viewer working from a GitHub Pages-style project-site path",
     async () => {
-      const tempRoot = mkdtempSync(resolve(tmpdir(), "switchyard-root-viewer-"));
-      const projectRoot = resolve(tempRoot, "Switchyard");
+      const tempRoot = mkdtempSync(resolve(tmpdir(), "webai-bridge-root-viewer-"));
+      const projectRoot = resolve(tempRoot, "WebaiBridge");
       symlinkSync(repoRoot, projectRoot, "dir");
 
       const { startDocsStaticServer } = await import("../../../scripts/start-local-experience.mjs");
@@ -163,20 +163,20 @@ describe("Switchyard docs frontdoor contracts", () => {
         try {
           const page = await browser.newPage();
           await page.goto(
-            `${baseUrl}/Switchyard/viewer.html?doc=first-success.md`,
+            `${baseUrl}/WebaiBridge/viewer.html?doc=first-success.md`,
             { waitUntil: "networkidle" },
           );
           expect(await page.locator("#viewer-title").innerText()).toContain("First Success");
           await page.locator("#viewer-content a").first().click();
           await page.waitForLoadState("networkidle");
           expect(page.url()).toContain(
-            "/Switchyard/viewer.html?doc=runbooks%2Fdev-bootstrap.md",
+            "/WebaiBridge/viewer.html?doc=runbooks%2Fdev-bootstrap.md",
           );
           expect(await page.locator("#viewer-title").innerText()).toContain("Dev Bootstrap");
           await page.locator("#frontdoor-link").click();
           await page.waitForLoadState("networkidle").catch(() => undefined);
-          expect(page.url()).toContain("/Switchyard/");
-          expect(await page.title()).toContain("Switchyard Docs Front Door");
+          expect(page.url()).toContain("/WebaiBridge/");
+          expect(await page.title()).toContain("WebaiBridge Docs Front Door");
         } finally {
           await browser.close();
         }
@@ -191,8 +191,8 @@ describe("Switchyard docs frontdoor contracts", () => {
   it(
     "keeps the root docs front door working from a GitHub Pages-style project-site path",
     async () => {
-      const tempRoot = mkdtempSync(resolve(tmpdir(), "switchyard-frontdoor-"));
-      const projectRoot = resolve(tempRoot, "Switchyard");
+      const tempRoot = mkdtempSync(resolve(tmpdir(), "webai-bridge-frontdoor-"));
+      const projectRoot = resolve(tempRoot, "WebaiBridge");
       symlinkSync(repoRoot, projectRoot, "dir");
 
       const { startDocsStaticServer } = await import("../../../scripts/start-local-experience.mjs");
@@ -212,33 +212,33 @@ describe("Switchyard docs frontdoor contracts", () => {
         try {
           const page = await browser.newPage();
           await page.goto(
-            `${baseUrl}/Switchyard/`,
+            `${baseUrl}/WebaiBridge/`,
             { waitUntil: "networkidle" },
           );
-          expect(await page.title()).toContain("Switchyard Docs Front Door");
+          expect(await page.title()).toContain("WebaiBridge Docs Front Door");
 
           await page.locator('a[href="./first-success.md"]').first().click();
           await page.waitForLoadState("networkidle").catch(() => undefined);
-          expect(page.url()).toContain("/Switchyard/first-success.md");
-          expect((await page.textContent("body")) ?? "").toContain("Switchyard Default First Success");
+          expect(page.url()).toContain("/WebaiBridge/first-success.md");
+          expect((await page.textContent("body")) ?? "").toContain("WebaiBridge Default First Success");
 
           await page.goto(
-            `${baseUrl}/Switchyard/`,
+            `${baseUrl}/WebaiBridge/`,
             { waitUntil: "networkidle" },
           );
           await page.locator('a[href="./public-proof-pack.md"]').first().click();
           await page.waitForLoadState("networkidle").catch(() => undefined);
-          expect(page.url()).toContain("/Switchyard/public-proof-pack.md");
-          expect((await page.textContent("body")) ?? "").toContain("Switchyard Public Proof Pack");
+          expect(page.url()).toContain("/WebaiBridge/public-proof-pack.md");
+          expect((await page.textContent("body")) ?? "").toContain("WebaiBridge Public Proof Pack");
 
           await page.goto(
-            `${baseUrl}/Switchyard/`,
+            `${baseUrl}/WebaiBridge/`,
             { waitUntil: "networkidle" },
           );
           await page.locator('a[href="./README.md"]').first().click();
           await page.waitForLoadState("networkidle").catch(() => undefined);
-          expect(page.url()).toContain("/Switchyard/README.md");
-          expect((await page.textContent("body")) ?? "").toContain("Switchyard Public Docs");
+          expect(page.url()).toContain("/WebaiBridge/README.md");
+          expect((await page.textContent("body")) ?? "").toContain("WebaiBridge Public Docs");
         } finally {
           await browser.close();
         }
@@ -286,8 +286,8 @@ describe("Switchyard docs frontdoor contracts", () => {
     expect(i18n).not.toContain("bilingual developer frontdoor");
 
     const docsIndex = read("docs/index.html");
-    expect(docsIndex).toContain("Switchyard Public Docs");
-    expect(docsIndex).toContain("Start with what Switchyard is, what is proved, and what to try next.");
+    expect(docsIndex).toContain("WebaiBridge Public Docs");
+    expect(docsIndex).toContain("Start with what WebaiBridge is, what is proved, and what to try next.");
     expect(docsIndex).toContain("Open first success");
     expect(docsIndex).toContain("Skip to main content");
     expect(docsIndex).toContain("Front door");
@@ -345,7 +345,7 @@ describe("Switchyard docs frontdoor contracts", () => {
     }
 
     expect(mcpDocs).toContain("read-only stdio MCP server/tool surface on main");
-    expect(mcpDocs).toContain("pnpm run switchyard:mcp");
+    expect(mcpDocs).toContain("pnpm run webai-bridge:mcp");
   });
 
   it("keeps MCP docs aligned with the current read-only tool inventory and route map", () => {
@@ -356,33 +356,33 @@ describe("Switchyard docs frontdoor contracts", () => {
     };
     const mcpToolNames = catalogJson.mcp.tools.map((tool) => tool.name);
 
-    expect(mcpDocs).toContain("switchyard.catalog.starter_pack_index");
-    expect(mcpDocs).toContain("switchyard.catalog.starter_pack_comparison");
-    expect(mcpDocs).toContain("switchyard.catalog.starter_pack_chooser");
-    expect(mcpDocs).toContain("switchyard.catalog.host_playbooks");
-    expect(mcpDocs).toContain("switchyard.catalog.host_playbook");
-    expect(mcpDocs).toContain("switchyard.catalog.host_example");
-    expect(mcpDocs).toContain("switchyard.catalog.host_examples_schema");
-    expect(mcpDocs).toContain("switchyard.catalog.builder_journeys");
-    expect(mcpDocs).toContain("switchyard.catalog.keyword_truth");
-    expect(mcpDocs).toContain("switchyard.catalog.keyword_entry");
-    expect(mcpDocs).toContain("switchyard.catalog.mcp_tools");
+    expect(mcpDocs).toContain("webai-bridge.catalog.starter_pack_index");
+    expect(mcpDocs).toContain("webai-bridge.catalog.starter_pack_comparison");
+    expect(mcpDocs).toContain("webai-bridge.catalog.starter_pack_chooser");
+    expect(mcpDocs).toContain("webai-bridge.catalog.host_playbooks");
+    expect(mcpDocs).toContain("webai-bridge.catalog.host_playbook");
+    expect(mcpDocs).toContain("webai-bridge.catalog.host_example");
+    expect(mcpDocs).toContain("webai-bridge.catalog.host_examples_schema");
+    expect(mcpDocs).toContain("webai-bridge.catalog.builder_journeys");
+    expect(mcpDocs).toContain("webai-bridge.catalog.keyword_truth");
+    expect(mcpDocs).toContain("webai-bridge.catalog.keyword_entry");
+    expect(mcpDocs).toContain("webai-bridge.catalog.mcp_tools");
     expect(mcpDocs).toContain("Fastest Route By Question");
     expect(mcpDocs).toContain("read-only");
     expect(mcpDocs).toContain("not an execution brain");
 
-    expect(mcpApi).toContain("switchyard.catalog.starter_pack_index");
-    expect(mcpApi).toContain("switchyard.catalog.starter_pack_comparison_schema");
-    expect(mcpApi).toContain("switchyard.catalog.starter_pack_chooser");
-    expect(mcpApi).toContain("switchyard.catalog.host_playbooks");
-    expect(mcpApi).toContain("switchyard.catalog.host_playbook");
-    expect(mcpApi).toContain("switchyard.catalog.host_example");
-    expect(mcpApi).toContain("switchyard.catalog.host_examples_schema");
-    expect(mcpApi).toContain("switchyard.catalog.builder_journeys_schema");
-    expect(mcpApi).toContain("switchyard.catalog.keyword_truth_schema");
-    expect(mcpApi).toContain("switchyard.catalog.keyword_entry");
-    expect(mcpApi).toContain("switchyard.catalog.mcp_status");
-    expect(mcpApi).toContain("switchyard.catalog.mcp_tools");
+    expect(mcpApi).toContain("webai-bridge.catalog.starter_pack_index");
+    expect(mcpApi).toContain("webai-bridge.catalog.starter_pack_comparison_schema");
+    expect(mcpApi).toContain("webai-bridge.catalog.starter_pack_chooser");
+    expect(mcpApi).toContain("webai-bridge.catalog.host_playbooks");
+    expect(mcpApi).toContain("webai-bridge.catalog.host_playbook");
+    expect(mcpApi).toContain("webai-bridge.catalog.host_example");
+    expect(mcpApi).toContain("webai-bridge.catalog.host_examples_schema");
+    expect(mcpApi).toContain("webai-bridge.catalog.builder_journeys_schema");
+    expect(mcpApi).toContain("webai-bridge.catalog.keyword_truth_schema");
+    expect(mcpApi).toContain("webai-bridge.catalog.keyword_entry");
+    expect(mcpApi).toContain("webai-bridge.catalog.mcp_status");
+    expect(mcpApi).toContain("webai-bridge.catalog.mcp_tools");
     expect(mcpApi).toContain("Fastest Route By Question");
     expect(mcpApi).toContain("read-only");
     expect(mcpApi).toContain("partial");
@@ -554,66 +554,66 @@ describe("Switchyard docs frontdoor contracts", () => {
     expect(compatReadme).toContain("docs/public-distribution-ledger.md");
     expect(compatReadme).toContain("docs/public-surface-catalog.md");
     expect(compatReadme).toContain("docs/README.md");
-    expect(compatReadme).toContain("pnpm run switchyard:cli -- public-distribution-ledger");
-    expect(compatReadme).toContain("pnpm run switchyard:cli -- surface-catalog");
-    expect(compatReadme).toContain("pnpm run switchyard:cli -- compat-target-catalog");
-    expect(faq).toContain("pnpm run switchyard:cli -- surface-catalog");
-    expect(faq).toContain("pnpm run switchyard:cli -- surface-catalog-schema");
-    expect(faq).toContain("pnpm run switchyard:cli -- builder-kits");
-    expect(faq).toContain("pnpm run switchyard:cli -- skill-packs");
-    expect(faq).toContain("pnpm run switchyard:cli -- provider-catalog");
-    expect(faq).toContain("pnpm run switchyard:cli -- provider-catalog-schema");
-    expect(faq).toContain("pnpm run switchyard:cli -- compat-target-catalog");
-    expect(faq).toContain("pnpm run switchyard:cli -- compat-target-catalog-schema");
+    expect(compatReadme).toContain("pnpm run webai-bridge:cli -- public-distribution-ledger");
+    expect(compatReadme).toContain("pnpm run webai-bridge:cli -- surface-catalog");
+    expect(compatReadme).toContain("pnpm run webai-bridge:cli -- compat-target-catalog");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- surface-catalog");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- surface-catalog-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- builder-kits");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- skill-packs");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- provider-catalog");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- provider-catalog-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- compat-target-catalog");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- compat-target-catalog-schema");
     expect(faq).toContain("catalogs/compat-target-catalog.json");
     expect(faq).toContain("catalogs/compat-target-catalog.schema.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- builder-kit-catalog");
-    expect(faq).toContain("pnpm run switchyard:cli -- builder-kit-catalog-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- builder-kit-catalog");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- builder-kit-catalog-schema");
     expect(faq).toContain("catalogs/builder-kit-catalog.json");
     expect(faq).toContain("catalogs/builder-kit-catalog.schema.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- skill-pack-catalog");
-    expect(faq).toContain("pnpm run switchyard:cli -- skill-pack-catalog-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- skill-pack-catalog");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- skill-pack-catalog-schema");
     expect(faq).toContain("catalogs/skill-pack-catalog.json");
     expect(faq).toContain("catalogs/skill-pack-catalog.schema.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- starter-manifests");
-    expect(faq).toContain("pnpm run switchyard:cli -- starter-manifests-schema");
-    expect(faq).toContain("pnpm run switchyard:cli -- starter-examples");
-    expect(faq).toContain("pnpm run switchyard:cli -- starter-examples-schema");
-    expect(faq).toContain("pnpm run switchyard:cli -- starter-pack-chooser");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- starter-manifests");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- starter-manifests-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- starter-examples");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- starter-examples-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- starter-pack-chooser");
     expect(faq).toContain("catalogs/starter-pack-chooser.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- starter-pack-comparison");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- starter-pack-comparison");
     expect(faq).toContain("catalogs/starter-pack-comparison.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- builder-journeys");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- builder-journeys");
     expect(faq).toContain("catalogs/builder-journeys.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- builder-intent-router");
-    expect(faq).toContain("switchyard.catalog.builder_intent_router");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- builder-intent-router");
+    expect(faq).toContain("webai-bridge.catalog.builder_intent_router");
     expect(faq).toContain("docs/starter-pack-chooser.md");
-    expect(faq).toContain("pnpm run switchyard:cli -- keyword-truth");
-    expect(faq).toContain("pnpm run switchyard:cli -- keyword-truth-schema");
-    expect(faq).toContain("pnpm run switchyard:cli -- keyword-entry --target switchyard-mcp");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- keyword-truth");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- keyword-truth-schema");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- keyword-entry --target webai-bridge-mcp");
     expect(faq).toContain("catalogs/discoverability-keyword-truth.json");
     expect(faq).toContain("catalogs/discoverability-keyword-truth.schema.json");
     expect(faq).toContain("catalogs/builder-intent-router.json");
     expect(faq).toContain("catalogs/builder-intent-router.schema.json");
     expect(providerRuntimeCatalogDoc).toContain("catalogs/provider-runtime-catalog.json");
     expect(providerRuntimeCatalogDoc).toContain("catalogs/provider-runtime-catalog.schema.json");
-    expect(providerRuntimeCatalogDoc).toContain("pnpm run switchyard:cli -- provider-catalog-schema");
-    expect(providerRuntimeCatalogDoc).toContain("switchyard.catalog.provider_catalog_schema");
+    expect(providerRuntimeCatalogDoc).toContain("pnpm run webai-bridge:cli -- provider-catalog-schema");
+    expect(providerRuntimeCatalogDoc).toContain("webai-bridge.catalog.provider_catalog_schema");
     expect(providerRuntimeCatalogDoc).toContain("providerId + lane");
     expect(providerRuntimeCatalogDoc).toContain("providerId:lane");
     expect(compatReadme).toContain("catalogs/compat-target-catalog.json");
     expect(compatReadme).toContain("catalogs/compat-target-catalog.schema.json");
-    expect(compatReadme).toContain("pnpm run switchyard:cli -- compat-target-catalog");
-    expect(compatReadme).toContain("switchyard.catalog.compat_target_catalog");
+    expect(compatReadme).toContain("pnpm run webai-bridge:cli -- compat-target-catalog");
+    expect(compatReadme).toContain("webai-bridge.catalog.compat_target_catalog");
     expect(compatReadme).toContain("fail-closed");
-    expect(mcpDocs).toContain("pnpm run switchyard:cli -- mcp-tool-catalog");
+    expect(mcpDocs).toContain("pnpm run webai-bridge:cli -- mcp-tool-catalog");
     expect(mcpDocs).toContain("catalogs/mcp-tool-catalog.json");
-    expect(mcpDocs).toContain("pnpm run switchyard:cli -- skill-pack-routes");
-    expect(mcpDocs).toContain("switchyard.catalog.skill_pack");
+    expect(mcpDocs).toContain("pnpm run webai-bridge:cli -- skill-pack-routes");
+    expect(mcpDocs).toContain("webai-bridge.catalog.skill_pack");
     expect(publicSurfaceCatalogDoc).toContain("catalogs/builder-intent-router.json");
-    expect(publicSurfaceCatalogDoc).toContain("pnpm run switchyard:cli -- builder-intent-router");
-    expect(hostPlaybooksDoc).toContain("pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack");
-    expect(hostPlaybooksDoc).toContain("switchyard.catalog.skill_pack --target runtime-diagnostics-pack");
+    expect(publicSurfaceCatalogDoc).toContain("pnpm run webai-bridge:cli -- builder-intent-router");
+    expect(hostPlaybooksDoc).toContain("pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack");
+    expect(hostPlaybooksDoc).toContain("webai-bridge.catalog.skill_pack --target runtime-diagnostics-pack");
     expect(hostPlaybooksDoc).toContain("examples/hosts/README.md");
     expect(starterPackChooserDoc).toContain("Use-Case Skill Packs");
     expect(starterPackChooserDoc).not.toContain("current planned pack-local scaffolds");
@@ -643,13 +643,13 @@ describe("Switchyard docs frontdoor contracts", () => {
     ]) {
       expect(starterPackChooserDoc).toContain(entry.packId);
       expect(starterPackChooserDoc).toContain(
-        `pnpm run switchyard:cli -- skill-pack-route --target ${entry.packId}`,
+        `pnpm run webai-bridge:cli -- skill-pack-route --target ${entry.packId}`,
       );
       expect(hostPlaybooksDoc).toContain(
-        `pnpm run switchyard:cli -- skill-pack-route --target ${entry.packId}`,
+        `pnpm run webai-bridge:cli -- skill-pack-route --target ${entry.packId}`,
       );
       expect(hostPlaybooksDoc).toContain(
-        `switchyard.catalog.skill_pack --target ${entry.packId}`,
+        `webai-bridge.catalog.skill_pack --target ${entry.packId}`,
       );
       expect(starterPackChooserJson.scenarios).toEqual(
         expect.arrayContaining([
@@ -657,7 +657,7 @@ describe("Switchyard docs frontdoor contracts", () => {
             id: entry.scenarioId,
             status: "partial",
             recommendedPack: entry.packId,
-            bestEntry: `pnpm run switchyard:cli -- skill-pack-route --target ${entry.packId}`,
+            bestEntry: `pnpm run webai-bridge:cli -- skill-pack-route --target ${entry.packId}`,
             recommendedDocs: expect.arrayContaining(["docs/host-integration-playbooks.md"]),
           }),
         ]),
@@ -692,17 +692,17 @@ describe("Switchyard docs frontdoor contracts", () => {
         }),
       ]),
     );
-    expect(faq).toContain("switchyard.catalog.keyword_truth");
+    expect(faq).toContain("webai-bridge.catalog.keyword_truth");
     expect(keywordTruthDoc).toContain("catalogs/discoverability-keyword-truth.json");
-    expect(keywordTruthDoc).toContain("pnpm run switchyard:cli -- keyword-truth");
-    expect(keywordTruthDoc).toContain("switchyard.catalog.keyword_truth");
-    expect(faq).toContain("pnpm run switchyard:cli -- host-playbooks");
+    expect(keywordTruthDoc).toContain("pnpm run webai-bridge:cli -- keyword-truth");
+    expect(keywordTruthDoc).toContain("webai-bridge.catalog.keyword_truth");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- host-playbooks");
     expect(faq).toContain("catalogs/host-integration-playbooks.json");
-    expect(faq).toContain("pnpm run switchyard:cli -- host-examples");
-    expect(faq).toContain("pnpm run switchyard:cli -- host-example --target mcp");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- host-examples");
+    expect(faq).toContain("pnpm run webai-bridge:cli -- host-example --target mcp");
     expect(faq).toContain("examples/hosts/index.json");
     expect(hostExamplesDoc).toContain("examples/hosts/index.json");
-    expect(hostExamplesDoc).toContain("pnpm run switchyard:cli -- host-example --target codex");
+    expect(hostExamplesDoc).toContain("pnpm run webai-bridge:cli -- host-example --target codex");
     expect(hostExamplesDoc).toContain("examples/hosts/README.md");
     const ajv = new Ajv2020({
       strict: false,
@@ -810,12 +810,12 @@ describe("Switchyard docs frontdoor contracts", () => {
         expect.objectContaining({
           id: "runtime-diagnostics-pack",
           copyReadyPackPath: "starter-packs/skills/runtime-diagnostics-pack",
-          routeCommand: "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack",
+          routeCommand: "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack",
         }),
         expect.objectContaining({
           id: "docs-seo-sync-pack",
           copyReadyPackPath: "starter-packs/skills/docs-seo-sync-pack",
-          routeMcpTool: "switchyard.catalog.skill_pack",
+          routeMcpTool: "webai-bridge.catalog.skill_pack",
         }),
       ]),
     );
@@ -824,7 +824,7 @@ describe("Switchyard docs frontdoor contracts", () => {
         expect.objectContaining({
           target: "codex",
           examplePath: "examples/hosts/codex",
-          bestEntry: "pnpm run switchyard:cli -- host-example --target codex",
+          bestEntry: "pnpm run webai-bridge:cli -- host-example --target codex",
           smokeCommand: "pnpm run example:host-codex",
           firstSuccessCheck: expect.any(String),
         }),
@@ -833,7 +833,7 @@ describe("Switchyard docs frontdoor contracts", () => {
         expect.objectContaining({
           target: "mcp",
           examplePath: "examples/hosts/mcp",
-          bestEntry: "pnpm run switchyard:cli -- host-example --target mcp",
+          bestEntry: "pnpm run webai-bridge:cli -- host-example --target mcp",
           smokeCommand: "pnpm run example:host-mcp",
           firstSuccessCheck: expect.any(String),
         }),
@@ -858,63 +858,63 @@ describe("Switchyard docs frontdoor contracts", () => {
     expect(skillPackCatalogJson.packs).toEqual(catalogJson.skillPacks);
     expect(catalogJson.mcp.tools).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ name: "switchyard.catalog.compat_target_catalog" }),
-        expect.objectContaining({ name: "switchyard.catalog.compat_target_catalog_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_kit_catalog" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_kit_catalog_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.skill_pack_catalog" }),
-        expect.objectContaining({ name: "switchyard.catalog.skill_pack_catalog_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_manifests_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_examples_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_pack_index" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_pack_entry" }),
-        expect.objectContaining({ name: "switchyard.catalog.host_playbooks" }),
-        expect.objectContaining({ name: "switchyard.catalog.host_playbook" }),
-        expect.objectContaining({ name: "switchyard.catalog.host_examples" }),
-        expect.objectContaining({ name: "switchyard.catalog.host_example" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_pack_chooser" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_pack_scenario" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_pack_comparison" }),
-        expect.objectContaining({ name: "switchyard.catalog.starter_pack_filter" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_journeys" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_journey" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_intent_router" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_intent_router_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.builder_intent" }),
-        expect.objectContaining({ name: "switchyard.catalog.keyword_truth" }),
-        expect.objectContaining({ name: "switchyard.catalog.keyword_truth_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.keyword_entry" }),
-        expect.objectContaining({ name: "switchyard.catalog.provider_catalog_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.mcp_tool_catalog" }),
-        expect.objectContaining({ name: "switchyard.catalog.mcp_tool_catalog_schema" }),
-        expect.objectContaining({ name: "switchyard.catalog.mcp_tool" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.compat_target_catalog" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.compat_target_catalog_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_kit_catalog" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_kit_catalog_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.skill_pack_catalog" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.skill_pack_catalog_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_manifests_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_examples_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_pack_index" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_pack_entry" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.host_playbooks" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.host_playbook" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.host_examples" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.host_example" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_pack_chooser" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_pack_scenario" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_pack_comparison" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.starter_pack_filter" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_journeys" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_journey" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_intent_router" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_intent_router_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.builder_intent" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.keyword_truth" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.keyword_truth_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.keyword_entry" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.provider_catalog_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.mcp_tool_catalog" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.mcp_tool_catalog_schema" }),
+        expect.objectContaining({ name: "webai-bridge.catalog.mcp_tool" }),
       ]),
     );
     const validateMcpToolCatalog = ajv.compile(mcpToolCatalogSchema);
     expect(validateMcpToolCatalog(mcpToolCatalogJson)).toBe(true);
     expect(mcpToolCatalogJson.tools).toEqual(catalogJson.mcp.tools);
     expect(
-      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "switchyard.catalog.compat_targets")
+      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "webai-bridge.catalog.compat_targets")
         ?.route,
     ).toBe("catalogs/compat-target-catalog.json#targets");
     expect(
-      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "switchyard.catalog.compat_target")
+      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "webai-bridge.catalog.compat_target")
         ?.route,
     ).toBe("catalogs/compat-target-catalog.json#targets[target]");
     expect(
-      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "switchyard.catalog.builder_kits")
+      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "webai-bridge.catalog.builder_kits")
         ?.route,
     ).toBe("catalogs/builder-kit-catalog.json#kits");
     expect(
-      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "switchyard.catalog.builder_kit")
+      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "webai-bridge.catalog.builder_kit")
         ?.route,
     ).toBe("catalogs/builder-kit-catalog.json#kits[target]");
     expect(
-      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "switchyard.catalog.skill_packs")
+      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "webai-bridge.catalog.skill_packs")
         ?.route,
     ).toBe("catalogs/skill-pack-catalog.json#packs");
     expect(
-      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "switchyard.catalog.skill_pack")
+      mcpToolCatalogJson.tools.find((tool: { name: string; route: string }) => tool.name === "webai-bridge.catalog.skill_pack")
         ?.route,
     ).toBe("catalogs/skill-pack-catalog.json#packs[id]");
     expect(new Set(mcpToolCatalogJson.tools.map((tool: { name: string }) => tool.name)).size).toBe(
@@ -926,14 +926,14 @@ describe("Switchyard docs frontdoor contracts", () => {
           id: "runtime-diagnostics-pack",
           packPath: "starter-packs/skills/runtime-diagnostics-pack",
           recommendedMcpTools: expect.arrayContaining([
-            "switchyard.catalog.skill_pack",
-            "switchyard.provider.support_bundle",
+            "webai-bridge.catalog.skill_pack",
+            "webai-bridge.provider.support_bundle",
           ]),
         }),
         expect.objectContaining({
           id: "docs-seo-sync-pack",
           recommendedCliCommands: expect.arrayContaining([
-            "pnpm run switchyard:cli -- keyword-truth --json",
+            "pnpm run webai-bridge:cli -- keyword-truth --json",
           ]),
         }),
       ]),
@@ -946,8 +946,8 @@ describe("Switchyard docs frontdoor contracts", () => {
         expect.objectContaining({
           id: "pick-use-case-skill-pack",
           firstHopDoc: "docs/starter-pack-chooser.md",
-          firstHopCli: "pnpm run switchyard:cli -- starter-pack-chooser",
-          firstHopMcp: "switchyard.catalog.starter_pack_chooser",
+          firstHopCli: "pnpm run webai-bridge:cli -- starter-pack-chooser",
+          firstHopMcp: "webai-bridge.catalog.starter_pack_chooser",
           relatedDocs: expect.arrayContaining([
             "docs/host-integration-playbooks.md",
             "catalogs/starter-pack-comparison.json",
@@ -955,21 +955,21 @@ describe("Switchyard docs frontdoor contracts", () => {
         }),
         expect.objectContaining({
           id: "activate-skill-pack",
-          firstHopCli: "pnpm run switchyard:cli -- skill-pack-routes",
-          firstHopMcp: "switchyard.catalog.skill_packs",
+          firstHopCli: "pnpm run webai-bridge:cli -- skill-pack-routes",
+          firstHopMcp: "webai-bridge.catalog.skill_packs",
         }),
       ]),
     );
     expect(keywordTruthJson.entries).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ id: "switchyard-shared-provider-runtime", truthStatus: "claimable-now" }),
+        expect.objectContaining({ id: "webai-bridge-shared-provider-runtime", truthStatus: "claimable-now" }),
         expect.objectContaining({ id: "byok", truthStatus: "claimable-now" }),
         expect.objectContaining({ id: "web-login", truthStatus: "claimable-now" }),
         expect.objectContaining({ id: "service-first-ai-runtime", truthStatus: "claimable-now" }),
         expect.objectContaining({ id: "api-substrate-first", truthStatus: "claimable-now" }),
-        expect.objectContaining({ id: "switchyard-mcp", truthStatus: "partial-with-label" }),
+        expect.objectContaining({ id: "webai-bridge-mcp", truthStatus: "partial-with-label" }),
         expect.objectContaining({
-          id: "switchyard-mcp",
+          id: "webai-bridge-mcp",
           requiredLabels: expect.arrayContaining([
             "not full Codex / Claude Code backend parity",
           ]),

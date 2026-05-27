@@ -166,14 +166,14 @@ export async function invokeGrokTransport(args: {
   const baseHeaders = {
     accept: "application/json, text/event-stream, */*",
     "accept-language": "en-US,en;q=0.9",
-    cookie: envValues.SWITCHYARD_WEB_GROK_COOKIE_BUNDLE,
+    cookie: envValues.WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE,
     "content-type": "application/json",
     origin: "https://grok.com",
     referer: "https://grok.com/",
     "sec-fetch-dest": "empty",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin",
-    "user-agent": envValues.SWITCHYARD_WEB_GROK_USER_AGENT,
+    "user-agent": envValues.WEBAI_BRIDGE_WEB_GROK_USER_AGENT,
   };
 
   let conversationId: string | undefined;

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/builder-intent-router.schema.json",
-  "title": "Switchyard Builder Intent Router",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/builder-intent-router.schema.json",
+  "title": "WebaiBridge Builder Intent Router",
   "type": "object",
   "additionalProperties": false,
   "required": [

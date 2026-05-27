@@ -48,7 +48,7 @@ function buildBrowserLaunchSpec(browserPath, args, platform = process.platform) 
     if (!appBundlePath) {
       throw createLaunchError(
         "unsupported-browser-launch-target",
-        "Switchyard safe browser bootstrap on macOS requires a Chrome or Chromium app bundle path. Point SWITCHYARD_WEB_AUTH_BROWSER_PATH at a .app binary, or use Attach Existing Browser Session instead.",
+        "WebaiBridge safe browser bootstrap on macOS requires a Chrome or Chromium app bundle path. Point WEBAI_BRIDGE_WEB_AUTH_BROWSER_PATH at a .app binary, or use Attach Existing Browser Session instead.",
       );
     }
 
@@ -72,7 +72,7 @@ function buildBrowserLaunchSpec(browserPath, args, platform = process.platform) 
 
   throw createLaunchError(
     "unsupported-browser-launch-host",
-    "Switchyard safe browser bootstrap currently cannot prove a detached-free launch handoff on this host. Start the browser yourself and use Attach Existing Browser Session instead.",
+    "WebaiBridge safe browser bootstrap currently cannot prove a detached-free launch handoff on this host. Start the browser yourself and use Attach Existing Browser Session instead.",
   );
 }
 
@@ -93,14 +93,14 @@ export function launchBrowserViaOsHandoff(
   if (result.error) {
     throw createLaunchError(
       "browser-launch-failed",
-      `Switchyard could not hand off the browser launch to the host launcher: ${result.error.message}`,
+      `WebaiBridge could not hand off the browser launch to the host launcher: ${result.error.message}`,
     );
   }
 
   if ((result.status ?? 0) !== 0) {
     throw createLaunchError(
       "browser-launch-failed",
-      `Switchyard browser launch handoff exited with status ${result.status ?? "unknown"}.`,
+      `WebaiBridge browser launch handoff exited with status ${result.status ?? "unknown"}.`,
     );
   }
 

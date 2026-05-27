@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import {
-  createSwitchyardSdk,
-  createSwitchyardSdkClient,
+  createWebaiBridgeSdk,
+  createWebaiBridgeSdkClient,
 } from '../../../packages/sdk/src/index.js';
 import { runGeminiLiveProof } from '../../../packages/providers/byok/gemini/src/live-proof.js';
 import geminiByokProvider from '../../../packages/providers/byok/gemini/src/index.js';
@@ -13,7 +13,7 @@ afterEach(() => {
 
 describe('Gemini BYOK baseline', () => {
   test('prepares the real Gemini API key request path', () => {
-    const client = createSwitchyardSdkClient({
+    const client = createWebaiBridgeSdkClient({
       env: {
         GEMINI_API_KEY: 'test-gemini-key',
       },
@@ -21,7 +21,7 @@ describe('Gemini BYOK baseline', () => {
 
     const prepared = client.prepareText({
       model: 'gemini/gemini-2.5-flash',
-      prompt: 'Hello from Switchyard',
+      prompt: 'Hello from WebaiBridge',
       system: 'You are a concise test model.',
       maxOutputTokens: 128,
       temperature: 0.3,
@@ -62,7 +62,7 @@ describe('Gemini BYOK baseline', () => {
       contents: [
         {
           role: 'user',
-          parts: [{ text: 'Hello from Switchyard' }],
+          parts: [{ text: 'Hello from WebaiBridge' }],
         },
       ],
       generationConfig: {
@@ -73,7 +73,7 @@ describe('Gemini BYOK baseline', () => {
   });
 
   test('fails clearly when the Gemini API key is missing', async () => {
-    const client = createSwitchyardSdkClient({
+    const client = createWebaiBridgeSdkClient({
       env: {},
     });
 
@@ -112,7 +112,7 @@ describe('Gemini BYOK baseline', () => {
       );
     });
 
-    const client = createSwitchyardSdkClient({
+    const client = createWebaiBridgeSdkClient({
       env: {
         GEMINI_API_KEY: 'test-gemini-key',
       },
@@ -135,7 +135,7 @@ describe('Gemini BYOK baseline', () => {
   });
 
   test('exposes provider profiles through the SDK-facing entry point', () => {
-    const sdk = createSwitchyardSdk();
+    const sdk = createWebaiBridgeSdk();
     const geminiProfile = sdk.getProviderProfile('gemini');
     const openaiProfile = sdk.getProviderProfile('openai');
 
@@ -158,14 +158,14 @@ describe('Gemini BYOK baseline', () => {
     );
 
     const result = await runGeminiLiveProof({
-      SWITCHYARD_GEMINI_API_KEY: 'test-gemini-key',
+      WEBAI_BRIDGE_GEMINI_API_KEY: 'test-gemini-key',
     });
 
     expect(result).toEqual(
       expect.objectContaining({
         status: 'failure',
         reason: 'invoke-failed',
-        envNameUsed: 'SWITCHYARD_GEMINI_API_KEY',
+        envNameUsed: 'WEBAI_BRIDGE_GEMINI_API_KEY',
         rawSummary: 'fetch failed',
       }),
     );
@@ -183,7 +183,7 @@ describe('Gemini BYOK baseline', () => {
     } as never);
 
     const result = await runGeminiLiveProof({
-      SWITCHYARD_GEMINI_API_KEY: 'test-gemini-key',
+      WEBAI_BRIDGE_GEMINI_API_KEY: 'test-gemini-key',
     });
 
     expect(result).toEqual(
@@ -221,7 +221,7 @@ describe('Gemini BYOK baseline', () => {
             candidates: [
               {
                 content: {
-                  parts: [{ text: 'SWITCHYARD_GEMINI_LIVE_OK' }],
+                  parts: [{ text: 'WEBAI_BRIDGE_GEMINI_LIVE_OK' }],
                 },
               },
             ],
@@ -237,18 +237,18 @@ describe('Gemini BYOK baseline', () => {
     );
 
     const result = await runGeminiLiveProof({
-      SWITCHYARD_GEMINI_API_KEY: 'env-key',
-      SWITCHYARD_GEMINI_BASE_URL: 'https://proxy.internal/v1beta',
+      WEBAI_BRIDGE_GEMINI_API_KEY: 'env-key',
+      WEBAI_BRIDGE_GEMINI_BASE_URL: 'https://proxy.internal/v1beta',
     });
 
     expect(result).toEqual(
       expect.objectContaining({
         status: 'success',
-        envNameUsed: 'SWITCHYARD_GEMINI_API_KEY',
+        envNameUsed: 'WEBAI_BRIDGE_GEMINI_API_KEY',
         baseUrl: 'https://proxy.internal/v1beta',
         baseUrlSource: 'env',
-        baseUrlEnvName: 'SWITCHYARD_GEMINI_BASE_URL',
-        responseText: 'SWITCHYARD_GEMINI_LIVE_OK',
+        baseUrlEnvName: 'WEBAI_BRIDGE_GEMINI_BASE_URL',
+        responseText: 'WEBAI_BRIDGE_GEMINI_LIVE_OK',
       }),
     );
 

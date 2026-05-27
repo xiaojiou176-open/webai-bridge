@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/builder-kit-catalog.schema.json",
-  "title": "Switchyard Builder Kit Catalog",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/builder-kit-catalog.schema.json",
+  "title": "WebaiBridge Builder Kit Catalog",
   "type": "object",
   "additionalProperties": false,
   "required": [

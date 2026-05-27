@@ -6,7 +6,7 @@
       "target": "codex",
       "status": "partial",
       "starterShape": "responses-runtime-helper",
-      "bestEntry": "pnpm run switchyard:cli -- compat-target --target codex",
+      "bestEntry": "pnpm run webai-bridge:cli -- compat-target --target codex",
       "requiredInputs": [
         "service runtime base URL",
         "Codex-side request text",
@@ -14,7 +14,7 @@
       ],
       "starterSteps": [
         "Read the Codex compat target truth first.",
-        "Point the helper at the current Switchyard service runtime base URL.",
+        "Point the helper at the current WebaiBridge service runtime base URL.",
         "Keep the helper text-only and delegate actual invocation through the thin compat adapter.",
         "Expose unsupported features as fail-closed instead of silently dropping them."
       ],
@@ -48,7 +48,7 @@
       "target": "claude-code",
       "status": "partial",
       "starterShape": "message-runtime-helper",
-      "bestEntry": "pnpm run switchyard:cli -- compat-target --target claude-code",
+      "bestEntry": "pnpm run webai-bridge:cli -- compat-target --target claude-code",
       "requiredInputs": [
         "service runtime base URL",
         "Claude Code-style message payload",
@@ -57,7 +57,7 @@
       "starterSteps": [
         "Read the Claude Code compat truth page first.",
         "Normalize the message payload into the thin runtime bridge shape.",
-        "Delegate through the existing Switchyard runtime invoke route.",
+        "Delegate through the existing WebaiBridge runtime invoke route.",
         "Keep tool or terminal claims fail-closed and visibly unsupported."
       ],
       "outputArtifacts": [
@@ -91,12 +91,12 @@
       "target": "openclaw",
       "status": "partial",
       "starterShape": "delegated-runtime-helper",
-      "bestEntry": "pnpm run switchyard:cli -- compat-target --target openclaw",
+      "bestEntry": "pnpm run webai-bridge:cli -- compat-target --target openclaw",
       "requiredInputs": [
         "service runtime base URL",
         "delegation-first request envelope",
         "read-only preflight truth for bootstrap, health, and dispatch planning",
-        "explicit understanding that the OpenClaw product shell stays outside Switchyard"
+        "explicit understanding that the OpenClaw product shell stays outside WebaiBridge"
       ],
       "starterSteps": [
         "Read the OpenClaw compat truth page and upstream boundary reminder first.",
@@ -136,14 +136,14 @@
       "target": "mcp",
       "status": "partial",
       "starterShape": "read-only-runtime-inspector",
-      "bestEntry": "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
+      "bestEntry": "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
       "requiredInputs": [
         "service runtime base URL",
         "local MCP client capable of stdio transport",
         "read-only use case"
       ],
       "starterSteps": [
-        "Start the read-only Switchyard MCP server over stdio.",
+        "Start the read-only WebaiBridge MCP server over stdio.",
         "Enumerate the published tools before wiring client UX around them.",
         "Route only inspection and diagnostics requests through this surface.",
         "Keep invoke, acquisition, and browser-automation requests visibly unsupported."

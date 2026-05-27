@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/public-distribution-ledger.schema.json",
-  "title": "Switchyard Public Distribution Ledger",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/public-distribution-ledger.schema.json",
+  "title": "WebaiBridge Public Distribution Ledger",
   "type": "object",
   "additionalProperties": false,
   "required": [

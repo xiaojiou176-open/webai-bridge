@@ -1,4 +1,4 @@
-# Switchyard Public Surface Support Matrix
+# WebaiBridge Public Surface Support Matrix
 
 ## Purpose
 
@@ -8,7 +8,7 @@ Treat it like the signboard outside a store: it tells you which counters are
 really open today and which ones are still under construction.
 
 It is a **reference signboard**, not the first route for a brand-new reader.
-If someone is opening Switchyard for the first time, send them through:
+If someone is opening WebaiBridge for the first time, send them through:
 
 - `README.md`
 - `docs/index.html`
@@ -40,8 +40,8 @@ The current public story is:
 | --- | --- | --- | --- |
 | `HTTP/API` | `supported now` | Durable runtime discovery, auth, remediation, acquisition, invoke, and read-only browser-debug workbench routes are public and repo-backed today. | `docs/api/openapi.yaml`, `docs/api/service-http-reference.md`, `packages/surfaces/http/src/http-surface.ts`, `packages/surfaces/http/src/service-language.ts` |
 | `SDK/client` | `partial` | BYOK SDK, service client, and web helper exist, but they do not replace the service/runtime substrate as the primary public front door. | `docs/api/sdk-quickstart.md`, `packages/sdk/src/index.ts`, `packages/surfaces/sdk-client/src/service-client.ts` |
-| `CLI` | `partial` | The read-only builder/runtime helper is landed, including runtime-doctor, runtime-plan, provider-doctor, and coordinated skill-pack route cards. It is not an execution brain or a publication claim. | `scripts/switchyard-cli.mjs`, `tests/unit/web/switchyard-cli.test.ts`, `docs/public-distribution-ledger.md` |
-| `MCP` | `partial` | A read-only stdio MCP server/tool surface is landed on main, including runtime-doctor, runtime-plan, provider-doctor, and coordinated skill-pack route cards over the same inspection substrate. It is not an execution brain or full consumer parity. | `docs/mcp.md`, `packages/surfaces/mcp/src/index.ts`, `scripts/switchyard-mcp.mjs`, `tests/unit/mcp/switchyard-mcp.test.ts` |
+| `CLI` | `partial` | The read-only builder/runtime helper is landed, including runtime-doctor, runtime-plan, provider-doctor, and coordinated skill-pack route cards. It is not an execution brain or a publication claim. | `scripts/webai-bridge-cli.mjs`, `tests/unit/web/webai-bridge-cli.test.ts`, `docs/public-distribution-ledger.md` |
+| `MCP` | `partial` | A read-only stdio MCP server/tool surface is landed on main, including runtime-doctor, runtime-plan, provider-doctor, and coordinated skill-pack route cards over the same inspection substrate. It is not an execution brain or full consumer parity. | `docs/mcp.md`, `packages/surfaces/mcp/src/index.ts`, `scripts/webai-bridge-mcp.mjs`, `tests/unit/mcp/webai-bridge-mcp.test.ts` |
 | `Codex compat` | `partial` | A thin fail-closed adapter exists for text/runtime delegation only. | `docs/compat/codex.md`, `packages/consumers/codex/src/index.ts`, `tests/unit/compat/codex-consumer.test.ts` |
 | `Claude Code compat` | `partial` | A thin fail-closed adapter exists for message/runtime delegation only. | `docs/compat/claude-code.md`, `packages/consumers/claude-code/src/index.ts`, `tests/unit/compat/claude-code-consumer.test.ts` |
 | `OpenClaw compat` | `partial` | A thin fail-closed adapter exists for delegation-first runtime bridging only. | `docs/compat/openclaw.md`, `packages/consumers/openclaw/src/index.ts`, `tests/unit/compat/openclaw-consumer.test.ts` |
@@ -60,13 +60,13 @@ not copy this page by hand. Use:
 - `catalogs/skill-pack-catalog.schema.json`
 - `catalogs/skill-pack-routes.json`
 - `catalogs/skill-pack-routes.schema.json`
-- `pnpm run switchyard:cli -- surface-catalog`
-- `pnpm run switchyard:cli -- compat-targets`
-- `pnpm run switchyard:cli -- builder-kits`
-- `pnpm run switchyard:cli -- skill-pack-routes`
-- `pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack`
-- `pnpm run switchyard:cli -- mcp-status`
-- `pnpm run switchyard:cli -- mcp-tools`
+- `pnpm run webai-bridge:cli -- surface-catalog`
+- `pnpm run webai-bridge:cli -- compat-targets`
+- `pnpm run webai-bridge:cli -- builder-kits`
+- `pnpm run webai-bridge:cli -- skill-pack-routes`
+- `pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack`
+- `pnpm run webai-bridge:cli -- mcp-status`
+- `pnpm run webai-bridge:cli -- mcp-tools`
 
 The following claims are still dishonest today:
 

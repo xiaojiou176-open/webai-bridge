@@ -2,7 +2,7 @@
 
 这个 pack 适合的不是“复刻 Codex 产品壳”，而是：
 
-> 给外部 builder 一份可以直接接到 `Switchyard` runtime 的 text-only thin bridge。
+> 给外部 builder 一份可以直接接到 `WebaiBridge` runtime 的 text-only thin bridge。
 
 ## 当前诚实边界
 

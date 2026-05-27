@@ -6,7 +6,7 @@
       "id": "runtime-diagnostics-pack",
       "status": "partial",
       "starterShape": "read-only-runtime-diagnostics",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target runtime-diagnostics-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target runtime-diagnostics-pack",
       "requiredInputs": [
         "current provider id",
         "runtime diagnostics access",
@@ -35,9 +35,9 @@
         "docs/public-surface-support-matrix.md"
       ],
       "copyReadyPackPath": "starter-packs/skills/runtime-diagnostics-pack",
-      "routeCommand": "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack",
+      "routeCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack",
       "routeCatalogPath": "catalogs/skill-pack-routes.json#routes[id]",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "backingSurfaces": [
         "CLI",
         "MCP",
@@ -54,7 +54,7 @@
       "id": "docs-seo-sync-pack",
       "status": "partial",
       "starterShape": "truth-sync-and-discoverability",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target docs-seo-sync-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target docs-seo-sync-pack",
       "requiredInputs": [
         "current public-surface catalog",
         "discoverability keyword table",
@@ -83,9 +83,9 @@
         "docs/public-surface-catalog.md"
       ],
       "copyReadyPackPath": "starter-packs/skills/docs-seo-sync-pack",
-      "routeCommand": "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack",
+      "routeCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack",
       "routeCatalogPath": "catalogs/skill-pack-routes.json#routes[id]",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "backingSurfaces": [
         "public-surface catalog",
         "support matrix",
@@ -101,7 +101,7 @@
       "id": "chat-app-runtime-pack",
       "status": "planned",
       "starterShape": "chat-app-runtime-bridge",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target chat-app-runtime-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target chat-app-runtime-pack",
       "requiredInputs": [
         "runtime surface access",
         "provider catalog truth",
@@ -130,9 +130,9 @@
         "docs/public-surface-support-matrix.md"
       ],
       "copyReadyPackPath": "starter-packs/skills/chat-app-runtime-pack",
-      "routeCommand": "pnpm run switchyard:cli -- skill-pack-route --target chat-app-runtime-pack",
+      "routeCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target chat-app-runtime-pack",
       "routeCatalogPath": "catalogs/skill-pack-routes.json#routes[id]",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "backingSurfaces": [
         "HTTP/API",
         "SDK/client",
@@ -148,7 +148,7 @@
       "id": "research-copilot-pack",
       "status": "planned",
       "starterShape": "research-copilot-grounding",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target research-copilot-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target research-copilot-pack",
       "requiredInputs": [
         "surface catalog truth",
         "compat target truth",
@@ -177,9 +177,9 @@
         "docs/public-surface-catalog.md"
       ],
       "copyReadyPackPath": "starter-packs/skills/research-copilot-pack",
-      "routeCommand": "pnpm run switchyard:cli -- skill-pack-route --target research-copilot-pack",
+      "routeCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target research-copilot-pack",
       "routeCatalogPath": "catalogs/skill-pack-routes.json#routes[id]",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "backingSurfaces": [
         "surface catalog",
         "compat targets",
@@ -195,7 +195,7 @@
       "id": "compare-runtime-pack",
       "status": "planned",
       "starterShape": "compare-first-runtime-decision",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target compare-runtime-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target compare-runtime-pack",
       "requiredInputs": [
         "starter pack comparison catalog",
         "runtime surface truth",
@@ -224,9 +224,9 @@
         "docs/public-surface-catalog.md"
       ],
       "copyReadyPackPath": "starter-packs/skills/compare-runtime-pack",
-      "routeCommand": "pnpm run switchyard:cli -- skill-pack-route --target compare-runtime-pack",
+      "routeCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target compare-runtime-pack",
       "routeCatalogPath": "catalogs/skill-pack-routes.json#routes[id]",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "backingSurfaces": [
         "starter-pack comparison",
         "starter-pack filter",
@@ -242,7 +242,7 @@
       "id": "byok-first-safe-pack",
       "status": "planned",
       "starterShape": "byok-first-safe-runtime",
-      "bestEntry": "pnpm run switchyard:cli -- skill-pack --target byok-first-safe-pack",
+      "bestEntry": "pnpm run webai-bridge:cli -- skill-pack --target byok-first-safe-pack",
       "requiredInputs": [
         "provider catalog truth",
         "service/http reference",
@@ -271,9 +271,9 @@
         "docs/public-surface-support-matrix.md"
       ],
       "copyReadyPackPath": "starter-packs/skills/byok-first-safe-pack",
-      "routeCommand": "pnpm run switchyard:cli -- skill-pack-route --target byok-first-safe-pack",
+      "routeCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target byok-first-safe-pack",
       "routeCatalogPath": "catalogs/skill-pack-routes.json#routes[id]",
-      "routeMcpTool": "switchyard.catalog.skill_pack",
+      "routeMcpTool": "webai-bridge.catalog.skill_pack",
       "backingSurfaces": [
         "provider catalog",
         "SDK/client",

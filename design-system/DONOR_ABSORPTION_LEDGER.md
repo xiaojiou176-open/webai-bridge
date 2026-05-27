@@ -1,4 +1,4 @@
-# Switchyard Public Donor Boundary Ledger
+# WebaiBridge Public Donor Boundary Ledger
 
 This public ledger keeps only the outward-facing donor boundary summary.
 
@@ -27,7 +27,7 @@ to answer one question:
 
 - row-by-row pixel approval
 - reopening donor selection
-- inferring that any donor product worldview is part of Switchyard
+- inferring that any donor product worldview is part of WebaiBridge
 
 If a change needs finer review than this public ledger can provide, that review
 belongs in a maintainer-only shelf outside the public repo plane.

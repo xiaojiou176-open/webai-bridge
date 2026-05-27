@@ -6,8 +6,8 @@
       "id": "support-truth",
       "question": "What is actually supported right now?",
       "firstHopDoc": "docs/public-surface-catalog.md",
-      "firstHopCli": "pnpm run switchyard:cli -- surface-catalog",
-      "firstHopMcp": "switchyard.catalog.surface_catalog",
+      "firstHopCli": "pnpm run webai-bridge:cli -- surface-catalog",
+      "firstHopMcp": "webai-bridge.catalog.surface_catalog",
       "whyThisFirst": [
         "Start here when you need the current truthful surface and compat boundary first.",
         "This is the fastest way to see partial vs supported without confusing builder route docs with support status."
@@ -26,17 +26,17 @@
         "docs/mcp.md"
       ],
       "searchKeywords": [
-        "switchyard support truth",
-        "switchyard partial support",
-        "switchyard current surface status"
+        "webai-bridge support truth",
+        "webai-bridge partial support",
+        "webai-bridge current surface status"
       ]
     },
     {
       "id": "pick-starter-pack",
       "question": "Which starter pack should I pick first?",
       "firstHopDoc": "docs/starter-pack-chooser.md",
-      "firstHopCli": "pnpm run switchyard:cli -- starter-pack-chooser",
-      "firstHopMcp": "switchyard.catalog.starter_pack_chooser",
+      "firstHopCli": "pnpm run webai-bridge:cli -- starter-pack-chooser",
+      "firstHopMcp": "webai-bridge.catalog.starter_pack_chooser",
       "whyThisFirst": [
         "Start here when you already know you need a builder or skill pack but have not picked the first route.",
         "This is the narrow entry for first-hop pack selection."
@@ -55,17 +55,17 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard starter pack chooser",
-        "switchyard pick first pack",
-        "switchyard builder first hop"
+        "webai-bridge starter pack chooser",
+        "webai-bridge pick first pack",
+        "webai-bridge builder first hop"
       ]
     },
     {
       "id": "pick-use-case-skill-pack",
       "question": "I need a front-door use-case skill pack for chat, research, compare, or BYOK-first work. Which route fits?",
       "firstHopDoc": "docs/starter-pack-chooser.md",
-      "firstHopCli": "pnpm run switchyard:cli -- starter-pack-chooser",
-      "firstHopMcp": "switchyard.catalog.starter_pack_chooser",
+      "firstHopCli": "pnpm run webai-bridge:cli -- starter-pack-chooser",
+      "firstHopMcp": "webai-bridge.catalog.starter_pack_chooser",
       "whyThisFirst": [
         "Start here when you already know you want a use-case skill pack instead of a host bridge or generic truth catalog.",
         "The chooser now exposes the chat-app, research-copilot, compare-runtime, and BYOK-first-safe packs before handing you off to the exact route card."
@@ -84,9 +84,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard use case skill pack",
-        "switchyard chat research compare byok starter",
-        "switchyard front door skill pack",
+        "webai-bridge use case skill pack",
+        "webai-bridge chat research compare byok starter",
+        "webai-bridge front door skill pack",
         "chat-app-runtime-pack",
         "research-copilot-pack",
         "compare-runtime-pack",
@@ -97,8 +97,8 @@
       "id": "activate-skill-pack",
       "question": "I already picked a skill pack or use-case starter. What is the coordinated CLI + MCP route?",
       "firstHopDoc": "docs/host-integration-playbooks.md",
-      "firstHopCli": "pnpm run switchyard:cli -- skill-pack-routes",
-      "firstHopMcp": "switchyard.catalog.skill_packs",
+      "firstHopCli": "pnpm run webai-bridge:cli -- skill-pack-routes",
+      "firstHopMcp": "webai-bridge.catalog.skill_packs",
       "whyThisFirst": [
         "Start here once a skill pack is already chosen and you need the exact CLI plus MCP route card for the next handoff.",
         "This keeps pack-local work aligned with the landed pack files instead of reconstructing the route by hand."
@@ -118,9 +118,9 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard skill pack route",
-        "switchyard skill pack handoff",
-        "switchyard cli mcp skill pack",
+        "webai-bridge skill pack route",
+        "webai-bridge skill pack handoff",
+        "webai-bridge cli mcp skill pack",
         "runtime-diagnostics-pack",
         "docs-seo-sync-pack",
         "chat-app-runtime-pack",
@@ -133,8 +133,8 @@
       "id": "compare-packs",
       "question": "I need to compare or filter packs before choosing.",
       "firstHopDoc": "catalogs/starter-pack-comparison.json",
-      "firstHopCli": "pnpm run switchyard:cli -- starter-pack-comparison",
-      "firstHopMcp": "switchyard.catalog.starter_pack_comparison",
+      "firstHopCli": "pnpm run webai-bridge:cli -- starter-pack-comparison",
+      "firstHopMcp": "webai-bridge.catalog.starter_pack_comparison",
       "whyThisFirst": [
         "Start here when you are comparing constraints instead of asking for one default route.",
         "This is the right first hop for side-by-side pack truth and filtering."
@@ -152,17 +152,17 @@
         "starter-packs/README.md"
       ],
       "searchKeywords": [
-        "switchyard compare starter packs",
-        "switchyard filter packs",
-        "switchyard pack comparison"
+        "webai-bridge compare starter packs",
+        "webai-bridge filter packs",
+        "webai-bridge pack comparison"
       ]
     },
     {
       "id": "follow-builder-journey",
       "question": "I want one full builder path to first success.",
       "firstHopDoc": "catalogs/builder-journeys.json",
-      "firstHopCli": "pnpm run switchyard:cli -- builder-journeys",
-      "firstHopMcp": "switchyard.catalog.builder_journeys",
+      "firstHopCli": "pnpm run webai-bridge:cli -- builder-journeys",
+      "firstHopMcp": "webai-bridge.catalog.builder_journeys",
       "whyThisFirst": [
         "Start here when you want one complete route instead of hopping across multiple pages yourself.",
         "This is the right first hop for bounded first-success paths."
@@ -181,17 +181,17 @@
         "docs/host-integration-examples.md"
       ],
       "searchKeywords": [
-        "switchyard first success journey",
-        "switchyard builder journey",
-        "switchyard first hop full path"
+        "webai-bridge first success journey",
+        "webai-bridge builder journey",
+        "webai-bridge first hop full path"
       ]
     },
     {
       "id": "wire-host",
       "question": "I already chose a route. How do I wire a host?",
       "firstHopDoc": "docs/host-integration-playbooks.md",
-      "firstHopCli": "pnpm run switchyard:cli -- host-playbooks",
-      "firstHopMcp": "switchyard.catalog.host_playbooks",
+      "firstHopCli": "pnpm run webai-bridge:cli -- host-playbooks",
+      "firstHopMcp": "webai-bridge.catalog.host_playbooks",
       "whyThisFirst": [
         "Start here once you have already chosen a pack or journey and need host wiring guidance.",
         "This is the right first hop for host-local integration steps."
@@ -209,17 +209,17 @@
         "catalogs/builder-journeys.json"
       ],
       "searchKeywords": [
-        "switchyard host playbook",
-        "switchyard host wiring",
-        "switchyard integrate host"
+        "webai-bridge host playbook",
+        "webai-bridge host wiring",
+        "webai-bridge integrate host"
       ]
     },
     {
       "id": "copy-host-example",
       "question": "I need a runnable host-local example.",
       "firstHopDoc": "docs/host-integration-examples.md",
-      "firstHopCli": "pnpm run switchyard:cli -- host-examples",
-      "firstHopMcp": "switchyard.catalog.host_examples",
+      "firstHopCli": "pnpm run webai-bridge:cli -- host-examples",
+      "firstHopMcp": "webai-bridge.catalog.host_examples",
       "whyThisFirst": [
         "Start here when you want a concrete host-local shape instead of a prose playbook.",
         "This is the right first hop for copyable example structure."
@@ -237,17 +237,17 @@
         "examples/README.md"
       ],
       "searchKeywords": [
-        "switchyard host example",
-        "switchyard runnable host config",
-        "switchyard copyable example"
+        "webai-bridge host example",
+        "webai-bridge runnable host config",
+        "webai-bridge copyable example"
       ]
     },
     {
       "id": "repair-web-login-session",
       "question": "I need to acquire or repair a Web/Login browser session first.",
       "firstHopDoc": "docs/runbooks/dev-bootstrap.md",
-      "firstHopCli": "pnpm run switchyard:cli -- host-playbooks",
-      "firstHopMcp": "switchyard.catalog.host_playbooks",
+      "firstHopCli": "pnpm run webai-bridge:cli -- host-playbooks",
+      "firstHopMcp": "webai-bridge.catalog.host_playbooks",
       "whyThisFirst": [
         "Start here when the real blocker is browser/session acquisition rather than host wiring or pack choice.",
         "This is the fastest first hop for auth-portal, browser hygiene, and service-first Web/Login recovery steps."
@@ -266,17 +266,17 @@
         "docs/mcp.md"
       ],
       "searchKeywords": [
-        "switchyard web login repair",
-        "switchyard auth portal",
-        "switchyard browser session recovery"
+        "webai-bridge web login repair",
+        "webai-bridge auth portal",
+        "webai-bridge browser session recovery"
       ]
     },
     {
       "id": "keyword-claim-truth",
       "question": "Which keyword claims are truthful?",
       "firstHopDoc": "docs/discoverability-keyword-truth.md",
-      "firstHopCli": "pnpm run switchyard:cli -- keyword-truth",
-      "firstHopMcp": "switchyard.catalog.keyword_truth",
+      "firstHopCli": "pnpm run webai-bridge:cli -- keyword-truth",
+      "firstHopMcp": "webai-bridge.catalog.keyword_truth",
       "whyThisFirst": [
         "Start here when the problem is outward wording, docs sync, or truthful keyword usage.",
         "This is the right first hop for human and machine keyword truth."
@@ -294,17 +294,17 @@
         "docs/faq.md"
       ],
       "searchKeywords": [
-        "switchyard keyword truth",
-        "switchyard truthful claims",
-        "switchyard docs seo truth"
+        "webai-bridge keyword truth",
+        "webai-bridge truthful claims",
+        "webai-bridge docs seo truth"
       ]
     },
     {
       "id": "provider-directory",
       "question": "Which provider or lane am I even talking about?",
       "firstHopDoc": "docs/provider-runtime-catalog.md",
-      "firstHopCli": "pnpm run switchyard:cli -- provider-catalog",
-      "firstHopMcp": "switchyard.catalog.provider_catalog",
+      "firstHopCli": "pnpm run webai-bridge:cli -- provider-catalog",
+      "firstHopMcp": "webai-bridge.catalog.provider_catalog",
       "whyThisFirst": [
         "Start here when you need the current provider and lane directory before choosing a compat or host path.",
         "This is the right first hop for provider-scoped builder questions."
@@ -323,17 +323,17 @@
         ".agents/internal-docs/contracts/provider-runtime-contract.md"
       ],
       "searchKeywords": [
-        "switchyard provider catalog",
-        "switchyard provider directory",
-        "switchyard lane directory"
+        "webai-bridge provider catalog",
+        "webai-bridge provider directory",
+        "webai-bridge lane directory"
       ]
     },
     {
       "id": "inspect-read-only-mcp",
       "question": "What can the read-only MCP surface inspect today?",
       "firstHopDoc": "docs/mcp.md",
-      "firstHopCli": "pnpm run switchyard:cli -- mcp-status",
-      "firstHopMcp": "switchyard.catalog.mcp_status",
+      "firstHopCli": "pnpm run webai-bridge:cli -- mcp-status",
+      "firstHopMcp": "webai-bridge.catalog.mcp_status",
       "whyThisFirst": [
         "Start here when the question is about the current read-only MCP surface itself.",
         "This is the right first hop for MCP status, tool inventory, and fail-closed boundaries."
@@ -351,9 +351,9 @@
         "docs/public-surface-catalog.md"
       ],
       "searchKeywords": [
-        "switchyard mcp status",
-        "switchyard read only mcp",
-        "switchyard mcp tool inventory"
+        "webai-bridge mcp status",
+        "webai-bridge read only mcp",
+        "webai-bridge mcp tool inventory"
       ]
     }
   ]

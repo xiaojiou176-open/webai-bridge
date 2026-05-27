@@ -1,12 +1,12 @@
-# Switchyard MCP Install For Agent Shells
+# WebaiBridge MCP Install For Agent Shells
 
 This file is the shortest honest install path for agent shells that want the
-repo-native Switchyard MCP surface.
+repo-native WebaiBridge MCP surface.
 
 ## What This Installs
 
 - a **read-only stdio MCP surface**
-- backed by the local Switchyard checkout
+- backed by the local WebaiBridge checkout
 - **not** a hosted endpoint
 - **not** a published npm install today
 
@@ -22,7 +22,7 @@ pnpm install
 3. Start the MCP surface from the repo root:
 
 ```bash
-pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010
+pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010
 ```
 
 ## MCP Client Snippet
@@ -30,10 +30,10 @@ pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010
 ```json
 {
   "mcpServers": {
-    "switchyard": {
+    "webai-bridge": {
       "command": "pnpm",
-      "args": ["run", "switchyard:mcp", "--", "--base-url", "http://127.0.0.1:4010"],
-      "cwd": "/absolute/path/to/Switchyard"
+      "args": ["run", "webai-bridge:mcp", "--", "--base-url", "http://127.0.0.1:4010"],
+      "cwd": "/absolute/path/to/WebaiBridge"
     }
   }
 }
@@ -50,5 +50,5 @@ pnpm run example:host-mcp
 ## Truth Boundary
 
 - usable today: **local checkout + stdio**
-- not usable today: `npx @switchyard/surface-mcp`, Official MCP Registry install,
+- not usable today: `npx @webai-bridge/surface-mcp`, Official MCP Registry install,
   hosted HTTP MCP runtime, Smithery listing

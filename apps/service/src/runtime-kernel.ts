@@ -1,11 +1,11 @@
 import type {
   ProviderRegistration,
   RuntimeLaneExecutors,
-  SwitchyardRuntime,
+  WebaiBridgeRuntime,
 } from "../../../packages/kernel/src/index.js";
 import {
   createProviderRegistry,
-  createSwitchyardRuntime,
+  createWebaiBridgeRuntime,
 } from "../../../packages/kernel/src/index.js";
 import type {
   AuthMode,
@@ -226,13 +226,13 @@ function toWebRegistration(runtime: WebProviderRuntime): ProviderRegistration {
 export function createServiceRuntimeKernel(options: {
   byokRegistry: ByokProviderRegistry;
   webRegistry: WebProviderRegistry;
-}): SwitchyardRuntime {
+}): WebaiBridgeRuntime {
   const registrations = [
     ...options.byokRegistry.list().map(toByokRegistration),
     ...options.webRegistry.list().map(toWebRegistration),
   ];
 
-  return createSwitchyardRuntime({
+  return createWebaiBridgeRuntime({
     registry: createProviderRegistry(registrations),
     laneOrder: SERVICE_RUNTIME_LANE_ORDER,
   });
@@ -592,7 +592,7 @@ function createWebExecutor(options: {
 }
 
 export function createServiceRuntimeInvoker(options: {
-  runtime: SwitchyardRuntime;
+  runtime: WebaiBridgeRuntime;
   byokClient: {
     generateText(request: GenerateTextRequest): Promise<{
       ok: boolean;

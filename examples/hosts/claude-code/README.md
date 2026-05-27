@@ -1,4 +1,4 @@
-# Switchyard Host Example: Claude Code
+# WebaiBridge Host Example: Claude Code
 
 这个 example 的目标是：
 
@@ -6,7 +6,7 @@
 
 它适合：
 
-- 想把 message-style payload 接到 `Switchyard` runtime
+- 想把 message-style payload 接到 `WebaiBridge` runtime
 - 想快速拿到 host-local gateway config 形状
 
 它不适合：

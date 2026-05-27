@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 import { chromium } from "playwright-core";
 import {
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
   resolveCredentialedBrowserMode,
   resolveManagedBrowserUserDataDir,
   resolveOptionalExistingChromeProfileRoot,
@@ -15,41 +15,41 @@ const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, "..");
 const bundleRootDir = join(repoRoot, ".runtime-cache", "browser-debug", "bundles");
 
-const SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
-const SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_USER_DATA_DIR";
-const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR";
-const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-const GEMINI_WEB_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_GEMINI_CDP_URL";
-const SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
-const SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL = "http://127.0.0.1:9338";
+const WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
+const WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR";
+const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR";
+const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+const GEMINI_WEB_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL";
+const WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
+const WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL = "http://127.0.0.1:9338";
 
 const PROVIDER_BROWSER_DEBUG_CONFIG = {
   chatgpt: {
     displayName: "ChatGPT",
     loginUrl: "https://chatgpt.com",
     hostnames: ["chatgpt.com", "chat.openai.com", "auth.openai.com"],
-    defaultCdpUrl: SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
+    defaultCdpUrl: WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
   },
   gemini: {
     displayName: "Gemini",
     loginUrl: "https://gemini.google.com/app",
     hostnames: ["gemini.google.com", "accounts.google.com"],
-    defaultCdpUrl: SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
+    defaultCdpUrl: WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
   },
   grok: {
     displayName: "Grok",
     loginUrl: "https://grok.com",
     hostnames: ["grok.com", "x.com"],
-    defaultCdpUrl: SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
+    defaultCdpUrl: WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
   },
   qwen: {
     displayName: "Qwen",
     loginUrl: "https://chat.qwen.ai",
     hostnames: ["chat.qwen.ai", "tongyi.aliyun.com"],
-    defaultCdpUrl: SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
+    defaultCdpUrl: WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
   },
 };
 
@@ -126,16 +126,16 @@ export function resolveProviderAttachTarget(provider, env = process.env) {
 
   const cdpUrl =
     provider === "gemini"
-      ? mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
-        ? env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
-          SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
+      ? mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
+        ? env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
+          WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
         : env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim() ||
-          env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
+          env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
           config.defaultCdpUrl
-      : mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
-        ? env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
-          SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
-        : env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
+      : mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
+        ? env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
+          WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
+        : env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
           config.defaultCdpUrl;
 
   return {
@@ -144,14 +144,14 @@ export function resolveProviderAttachTarget(provider, env = process.env) {
     cdpUrl,
     cdpUrlSource:
       provider === "gemini" &&
-          mode !== SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE &&
+          mode !== WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE &&
           env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim()
         ? GEMINI_WEB_CDP_URL_ENV_NAME
-        : mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE &&
-            env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim()
-          ? SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME
-        : env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME]?.trim()
-          ? SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME
+        : mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE &&
+            env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim()
+          ? WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME
+        : env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME]?.trim()
+          ? WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME
           : "default",
     loginUrl: config.loginUrl,
     hostnames: config.hostnames,
@@ -169,8 +169,8 @@ export function resolveCanonicalProfile(provider, env = process.env) {
   return {
     provider,
     managedProfileDir: resolveManagedBrowserUserDataDir(env, repoRoot),
-    managedProfileSource: env[SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME]?.trim()
-      ? SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME
+    managedProfileSource: env[WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME]?.trim()
+      ? WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME
       : "default",
     existingProfileDir: configuredRealProfile?.userDataDir,
     existingProfileName: configuredRealProfile?.profileName,
@@ -331,7 +331,7 @@ export async function captureBrowserDebugContext(
         await context.tracing.start({
           screenshots: true,
           snapshots: true,
-          title: `Switchyard ${provider} browser debug support`,
+          title: `WebaiBridge ${provider} browser debug support`,
         });
         traceStarted = true;
       } catch (error) {

@@ -19,7 +19,7 @@ import {
   createOpenclawThinCompatAdapter,
 } from "../../../packages/consumers/openclaw/src/index.ts";
 
-describe("Switchyard thin compat adapters", () => {
+describe("WebaiBridge thin compat adapters", () => {
   it("keeps Codex as a fail-closed builder-facing starter", async () => {
     const fetchMock = vi.fn(async (_url: string, init?: RequestInit) => {
       expect(JSON.parse(`${init?.body ?? "{}"}`)).toMatchObject({
@@ -56,7 +56,7 @@ describe("Switchyard thin compat adapters", () => {
     );
 
     const adapter = createCodexThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     });
 
@@ -68,7 +68,7 @@ describe("Switchyard thin compat adapters", () => {
       mode: "plan",
     });
     const legacy = await createCodexCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     }).invokeText({
       provider: "openai",
@@ -129,7 +129,7 @@ describe("Switchyard thin compat adapters", () => {
     );
 
     const thin = await createClaudeCodeThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     }).messages({
       model: "anthropic/claude-sonnet-4",
@@ -140,7 +140,7 @@ describe("Switchyard thin compat adapters", () => {
       lane: "byok",
     });
     const legacyAdapter = createClaudeCodeCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     });
     const legacy = await legacyAdapter.invokeMessages({
@@ -183,7 +183,7 @@ describe("Switchyard thin compat adapters", () => {
         return new Response(
           JSON.stringify({
             bootstrap: {
-              serviceName: "switchyard-service",
+              serviceName: "webai-bridge-service",
             },
           }),
           {
@@ -228,12 +228,12 @@ describe("Switchyard thin compat adapters", () => {
     );
 
     const legacyAdapter = createOpenClawCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     });
     const bootstrap = await legacyAdapter.bootstrapDelegation();
     const thin = await createOpenclawThinCompatAdapter({
-      baseUrl: "http://switchyard.test",
+      baseUrl: "http://webai-bridge.test",
       fetch: fetchMock as unknown as typeof fetch,
     }).delegateTurn({
       provider: "chatgpt",
@@ -260,7 +260,7 @@ describe("Switchyard thin compat adapters", () => {
     expect(bootstrap).toEqual(
       expect.objectContaining({
         bootstrap: expect.objectContaining({
-          serviceName: "switchyard-service",
+          serviceName: "webai-bridge-service",
         }),
       }),
     );

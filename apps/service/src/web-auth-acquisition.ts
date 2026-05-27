@@ -48,17 +48,17 @@ import type { SurfaceResponse } from "../../../packages/surfaces/http/src/http-s
 import {
   bootstrapLocalWebAuthBrowser,
   LEGACY_EXISTING_CHROME_PROFILE_MODE,
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
-  SWITCHYARD_BROWSER_MODE_ENV_NAME,
-  SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME,
-  SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME,
+  WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME,
+  WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME,
   DEFAULT_ISOLATED_CHROME_PROFILE_DIRECTORY,
-  SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL,
-  SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
-  SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME,
-  SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL,
+  WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
+  WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME,
+  WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME,
   type WebAuthBrowserBootstrapFailure,
   type WebAuthBrowserBootstrapMode,
   normalizeWebAuthBrowserBootstrapMode,
@@ -67,9 +67,9 @@ import {
   type WebAuthBrowserBootstrapRunner,
 } from "./browser-bootstrap.js";
 
-export const WEB_AUTH_CDP_URL_ENV_NAME = SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME;
-export const SWITCHYARD_WEB_AUTH_ACTIVE_MODE_ENV_NAME = "SWITCHYARD_WEB_AUTH_ACTIVE_MODE";
-const SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME = "SWITCHYARD_WEB_AUTH_USER_DATA_DIR";
+export const WEB_AUTH_CDP_URL_ENV_NAME = WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME;
+export const WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE";
+const WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR";
 const DEFAULT_MANAGED_PROFILE_DIRECTORY = "Default";
 const QWEN_SESSION_TOKEN_COOKIE_NAMES = [
   "token",
@@ -154,10 +154,10 @@ export interface WebAcquisitionModeDescriptor {
 
 export const WEB_ACQUISITION_MODE_OPTIONS: readonly WebAcquisitionModeDescriptor[] = [
   {
-    id: SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+    id: WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
     label: "Use Isolated Chrome Root",
     description:
-      "Reuse Switchyard's dedicated Chrome user-data root and single repo-owned profile, attaching to the same instance whenever it is already running.",
+      "Reuse WebaiBridge's dedicated Chrome user-data root and single repo-owned profile, attaching to the same instance whenever it is already running.",
     advanced: true,
     default: true,
   },
@@ -165,7 +165,7 @@ export const WEB_ACQUISITION_MODE_OPTIONS: readonly WebAcquisitionModeDescriptor
     id: "managed-browser",
     label: "Managed Browser",
     description:
-      "Let Switchyard launch or reattach its dedicated fallback onboarding browser for login and capture.",
+      "Let WebaiBridge launch or reattach its dedicated fallback onboarding browser for login and capture.",
     advanced: false,
     default: false,
   },
@@ -256,10 +256,10 @@ function resolveAcquisitionMode(
 ): WebAuthBrowserBootstrapMode {
   return (
     normalizeAcquisitionMode(request?.mode) ??
-    normalizeAcquisitionMode(env[SWITCHYARD_BROWSER_MODE_ENV_NAME]) ??
-    normalizeAcquisitionMode(env[SWITCHYARD_WEB_AUTH_ACTIVE_MODE_ENV_NAME]) ??
+    normalizeAcquisitionMode(env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]) ??
+    normalizeAcquisitionMode(env[WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE_ENV_NAME]) ??
     (!isCiEnvironment(env)
-      ? SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      ? WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
       : undefined) ??
     "managed-browser"
   );
@@ -278,12 +278,12 @@ function buildBrowserTargetFromMode(
   mode: WebAuthBrowserBootstrapMode,
 ): WebAuthBrowserBootstrapResult["browserTarget"] {
   switch (mode) {
-    case SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE:
+    case WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE:
       return {
         kind: "isolated-chrome-root",
         label: "Isolated Chrome root",
         summary:
-          "Reuse Switchyard's dedicated Chrome user-data root and single repo-owned profile instead of the managed onboarding browser.",
+          "Reuse WebaiBridge's dedicated Chrome user-data root and single repo-owned profile instead of the managed onboarding browser.",
       };
     case "existing-browser-session":
       return {
@@ -295,9 +295,9 @@ function buildBrowserTargetFromMode(
     default:
       return {
         kind: "managed-onboarding-browser",
-        label: "Switchyard onboarding browser",
+        label: "WebaiBridge onboarding browser",
         summary:
-          "Let Switchyard manage a dedicated local onboarding browser for sign-in and capture.",
+          "Let WebaiBridge manage a dedicated local onboarding browser for sign-in and capture.",
       };
   }
 }
@@ -313,18 +313,18 @@ function buildCaptureProvenance(
 ): StoredBrowserCaptureProvenance {
   const normalizedMode =
     mode === LEGACY_EXISTING_CHROME_PROFILE_MODE
-      ? SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      ? WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
       : mode;
 
-  if (normalizedMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (normalizedMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     return {
       browserMode: normalizedMode,
       userDataDir:
-        env[SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME] ??
-        env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME],
+        env[WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME] ??
+        env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME],
       profileDirectory: DEFAULT_ISOLATED_CHROME_PROFILE_DIRECTORY,
       profileName:
-        env[SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME] ?? "switchyard",
+        env[WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME] ?? "webai-bridge",
       cdpUrl,
       capturedAt: nowIso(),
     };
@@ -334,8 +334,8 @@ function buildCaptureProvenance(
     return {
       browserMode: normalizedMode,
       userDataDir:
-        env[SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME] ??
-        `${process.cwd()}/.runtime-cache/switchyard-web-auth-browser`,
+        env[WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME] ??
+        `${process.cwd()}/.runtime-cache/webai-bridge-web-auth-browser`,
       profileDirectory: DEFAULT_MANAGED_PROFILE_DIRECTORY,
       profileName: DEFAULT_MANAGED_PROFILE_DIRECTORY,
       cdpUrl,
@@ -831,19 +831,19 @@ function buildAcquisitionRuntimeEnv(args: {
   request?: WebAcquisitionRequest;
 }): Record<string, string> {
   const runtimeEnv: Record<string, string> = {
-    [SWITCHYARD_BROWSER_MODE_ENV_NAME]: args.mode,
-    [SWITCHYARD_WEB_AUTH_ACTIVE_MODE_ENV_NAME]: args.mode,
+    [WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]: args.mode,
+    [WEBAI_BRIDGE_WEB_AUTH_ACTIVE_MODE_ENV_NAME]: args.mode,
   };
 
   if (args.cdpUrl) {
     runtimeEnv[WEB_AUTH_CDP_URL_ENV_NAME] = args.cdpUrl;
 
-    if (args.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
-      runtimeEnv[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME] = args.cdpUrl;
+    if (args.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
+      runtimeEnv[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME] = args.cdpUrl;
     }
 
     if (args.mode === "existing-browser-session") {
-      runtimeEnv[SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME] = args.cdpUrl;
+      runtimeEnv[WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME] = args.cdpUrl;
     }
 
     if (args.provider === "gemini") {
@@ -851,15 +851,15 @@ function buildAcquisitionRuntimeEnv(args: {
     }
   }
 
-  if (args.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE && args.request?.existingChromeProfile?.userDataDir) {
-    runtimeEnv[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME] =
+  if (args.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE && args.request?.existingChromeProfile?.userDataDir) {
+    runtimeEnv[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME] =
       args.request.existingChromeProfile.userDataDir;
-    runtimeEnv[SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME] =
+    runtimeEnv[WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME] =
       args.request.existingChromeProfile.userDataDir;
   }
 
-  if (args.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE && args.request?.existingChromeProfile?.profileName) {
-    runtimeEnv[SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME] =
+  if (args.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE && args.request?.existingChromeProfile?.profileName) {
+    runtimeEnv[WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME] =
       args.request.existingChromeProfile.profileName;
   }
 
@@ -871,7 +871,7 @@ function buildCaptureRequest(
   browser: WebAuthBrowserBootstrapResult,
   request: WebAcquisitionRequest | undefined,
 ): WebAcquisitionRequest {
-  if (mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     return {
       mode,
       existingChromeProfile: {
@@ -879,7 +879,7 @@ function buildCaptureRequest(
         cdpUrl:
           request?.existingChromeProfile?.cdpUrl ??
           browser.cdpUrl ??
-          SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL,
+          WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL,
         userDataDir: request?.existingChromeProfile?.userDataDir ?? browser.userDataDir,
         profileName:
           request?.existingChromeProfile?.profileName ?? browser.profileName,
@@ -895,7 +895,7 @@ function buildCaptureRequest(
         sessionUrl:
           request?.existingBrowserSession?.sessionUrl ??
           browser.cdpUrl ??
-          SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL,
+          WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL,
       },
     };
   }
@@ -913,33 +913,33 @@ function buildStartInstructions(args: {
 }): string {
   if (args.mode === "managed-browser") {
     return args.loginOpened
-      ? `Switch to the Switchyard onboarding browser, finish the ${args.providerDisplayName} sign-in there, then return here and click Capture Session.`
-      : `Switchyard attached the managed onboarding browser. If the ${args.providerDisplayName} page did not open automatically, open ${args.loginUrl} there before you click Capture Session.`;
+      ? `Switch to the WebaiBridge onboarding browser, finish the ${args.providerDisplayName} sign-in there, then return here and click Capture Session.`
+      : `WebaiBridge attached the managed onboarding browser. If the ${args.providerDisplayName} page did not open automatically, open ${args.loginUrl} there before you click Capture Session.`;
   }
 
-  if (args.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (args.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     return args.loginOpened
       ? `Switch to the repo-owned Chrome window that uses the isolated root, confirm ${args.providerDisplayName} is signed in there, then return and click Capture Session.`
-      : `Switchyard attached the isolated repo Chrome session. If the ${args.providerDisplayName} page is not already open, open ${args.loginUrl} in that same Chrome window before you click Capture Session.`;
+      : `WebaiBridge attached the isolated repo Chrome session. If the ${args.providerDisplayName} page is not already open, open ${args.loginUrl} in that same Chrome window before you click Capture Session.`;
   }
 
-  return `Switchyard attached your existing browser session. If ${args.providerDisplayName} is not already open there, open ${args.loginUrl} in that same browser session before you click Capture Session.`;
+  return `WebaiBridge attached your existing browser session. If ${args.providerDisplayName} is not already open there, open ${args.loginUrl} in that same browser session before you click Capture Session.`;
 }
 
 function resolveWebAuthCdpUrl(env: Record<string, string | undefined> = process.env) {
-  const browserMode = env[SWITCHYARD_BROWSER_MODE_ENV_NAME]?.trim();
+  const browserMode = env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]?.trim();
 
   return (
     env[WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
-    (browserMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
-      ? env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
-        SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
+    (browserMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
+      ? env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
+        WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
       : undefined) ||
     (browserMode === "existing-browser-session"
-      ? env[SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim()
+      ? env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim()
       : undefined) ||
     env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim() ||
-    SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL
+    WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL
   );
 }
 
@@ -961,25 +961,25 @@ function resolveCaptureCdpUrl(args: {
     return explicitProfileCdpUrl;
   }
 
-  if (args.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (args.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     return (
-      args.env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
+      args.env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
       (args.provider === "gemini"
         ? args.env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim()
         : undefined) ||
       args.env[WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
-      SWITCHYARD_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
+      WEBAI_BRIDGE_WEB_AUTH_DEFAULT_EXISTING_PROFILE_CDP_URL
     );
   }
 
   if (args.mode === "existing-browser-session") {
     return (
-      args.env[SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim() ||
+      args.env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim() ||
       args.env[WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
       (args.provider === "gemini"
         ? args.env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim()
         : undefined) ||
-      SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL
+      WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL
     );
   }
 
@@ -988,7 +988,7 @@ function resolveCaptureCdpUrl(args: {
       ? args.env[GEMINI_WEB_CDP_URL_ENV_NAME]?.trim()
       : undefined) ||
     args.env[WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
-    SWITCHYARD_WEB_AUTH_DEFAULT_CDP_URL
+    WEBAI_BRIDGE_WEB_AUTH_DEFAULT_CDP_URL
   );
 }
 
@@ -1042,7 +1042,7 @@ function buildStartBlocker(
 ): string {
   const code = getBootstrapFailureCode(error);
 
-  if (mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     switch (code) {
       case "credentialed-workstation-only":
         return `${provider}-credentialed-workstation-only`;
@@ -1082,7 +1082,7 @@ function buildCaptureBlocker(
   mode: WebAuthBrowserBootstrapMode,
   error: unknown,
 ): string {
-  if (mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     const code = getBootstrapFailureCode(error);
 
     switch (code) {
@@ -1124,27 +1124,27 @@ function buildCaptureFailureSummary(
   mode: WebAuthBrowserBootstrapMode,
   error: unknown,
 ): string {
-  if (mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE) {
+  if (mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE) {
     const code = getBootstrapFailureCode(error);
 
     if (code === "credentialed-workstation-only") {
-      return "Switchyard only allows credentialed browser login flows on a local workstation. Cloud CI must stay on repo-side gates only.";
+      return "WebaiBridge only allows credentialed browser login flows on a local workstation. Cloud CI must stay on repo-side gates only.";
     }
 
     if (code === "existing-profile-locked") {
-      return "Switchyard found your regular Chrome profile, but Chrome is still using it. Close Chrome first, or switch to Attach Existing Browser Session.";
+      return "WebaiBridge found your regular Chrome profile, but Chrome is still using it. Close Chrome first, or switch to Attach Existing Browser Session.";
     }
 
     if (code === "existing-profile-missing") {
-      return "Switchyard isolated Chrome root is not ready yet. Seed the dedicated Chrome root first, then retry.";
+      return "WebaiBridge isolated Chrome root is not ready yet. Seed the dedicated Chrome root first, then retry.";
     }
 
     if (code === "endpoint-not-devtools") {
-      return "Switchyard reached the requested Chrome profile endpoint, but it was not a reusable browser-debug session.";
+      return "WebaiBridge reached the requested Chrome profile endpoint, but it was not a reusable browser-debug session.";
     }
 
     if (isBrowserCdpUnavailableError(error)) {
-      return "Switchyard could not reopen your existing Chrome profile as a reusable browser session. Confirm the profile is not locked, then retry.";
+      return "WebaiBridge could not reopen your existing Chrome profile as a reusable browser session. Confirm the profile is not locked, then retry.";
     }
 
     return `${providerDisplayName} could not reuse the selected Chrome profile.`;
@@ -1154,22 +1154,22 @@ function buildCaptureFailureSummary(
     const code = getBootstrapFailureCode(error);
 
     if (code === "credentialed-workstation-only") {
-      return "Switchyard only allows credentialed browser login flows on a local workstation. Cloud CI must stay on repo-side gates only.";
+      return "WebaiBridge only allows credentialed browser login flows on a local workstation. Cloud CI must stay on repo-side gates only.";
     }
 
     if (code === "endpoint-not-devtools") {
-      return "Switchyard reached that browser session URL, but it is not a reusable browser-debug session.";
+      return "WebaiBridge reached that browser session URL, but it is not a reusable browser-debug session.";
     }
 
     if (isBrowserCdpUnavailableError(error) || code === "existing-browser-session-missing") {
-      return "Switchyard could not attach to the existing browser session. Confirm the browser is still running and sharing a reusable session URL, then retry.";
+      return "WebaiBridge could not attach to the existing browser session. Confirm the browser is still running and sharing a reusable session URL, then retry.";
     }
 
     return `${providerDisplayName} could not reuse the attached browser session.`;
   }
 
   return isBrowserCdpUnavailableError(error)
-    ? "Switchyard could not reach the managed local onboarding browser. Click Start Login first so it can launch or reattach the browser, then retry Capture Session."
+    ? "WebaiBridge could not reach the managed local onboarding browser. Click Start Login first so it can launch or reattach the browser, then retry Capture Session."
     : error instanceof Error
       ? error.message
       : `${providerDisplayName} acquisition failed unexpectedly.`;
@@ -1614,9 +1614,9 @@ async function captureChatgptAcquisition(
           cdpUrl,
           request,
         }),
-        SWITCHYARD_WEB_AUTH_CDP_URL: cdpUrl,
-        SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE: cookieBundle,
-        SWITCHYARD_WEB_CHATGPT_USER_AGENT: userAgent,
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: cdpUrl,
+        WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE: cookieBundle,
+        WEBAI_BRIDGE_WEB_CHATGPT_USER_AGENT: userAgent,
       };
       const liveProof = await runChatgptWebLiveProof(runtimeEnv, fetch);
 
@@ -1779,10 +1779,10 @@ async function captureGeminiAcquisition(
           cdpUrl,
           request,
         }),
-        SWITCHYARD_WEB_AUTH_CDP_URL: cdpUrl,
-        SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE: cookieBundle,
-        SWITCHYARD_WEB_GEMINI_USER_AGENT: userAgent,
-        SWITCHYARD_WEB_GEMINI_CDP_URL: cdpUrl,
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: cdpUrl,
+        WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE: cookieBundle,
+        WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT: userAgent,
+        WEBAI_BRIDGE_WEB_GEMINI_CDP_URL: cdpUrl,
       };
       const liveProof = await runGeminiWebLiveProof(runtimeEnv, fetch);
 
@@ -1908,9 +1908,9 @@ async function captureClaudeAcquisition(
           cdpUrl,
           request,
         }),
-        SWITCHYARD_WEB_AUTH_CDP_URL: cdpUrl,
-        SWITCHYARD_WEB_CLAUDE_COOKIE_BUNDLE: cookieBundle,
-        SWITCHYARD_WEB_CLAUDE_USER_AGENT: userAgent,
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: cdpUrl,
+        WEBAI_BRIDGE_WEB_CLAUDE_COOKIE_BUNDLE: cookieBundle,
+        WEBAI_BRIDGE_WEB_CLAUDE_USER_AGENT: userAgent,
       };
       const liveProof = await runClaudeWebLiveProof(runtimeEnv, fetch);
 
@@ -2057,9 +2057,9 @@ async function captureGrokAcquisition(
           cdpUrl,
           request,
         }),
-        SWITCHYARD_WEB_AUTH_CDP_URL: cdpUrl,
-        SWITCHYARD_WEB_GROK_COOKIE_BUNDLE: cookieBundle,
-        SWITCHYARD_WEB_GROK_USER_AGENT: userAgent,
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: cdpUrl,
+        WEBAI_BRIDGE_WEB_GROK_COOKIE_BUNDLE: cookieBundle,
+        WEBAI_BRIDGE_WEB_GROK_USER_AGENT: userAgent,
       };
       const captureProvenance = buildCaptureProvenance(
         mode,
@@ -2264,9 +2264,9 @@ async function captureQwenAcquisition(
           cdpUrl,
           request,
         }),
-        SWITCHYARD_WEB_AUTH_CDP_URL: cdpUrl,
-        SWITCHYARD_WEB_QWEN_COOKIE_BUNDLE: cookieBundle,
-        SWITCHYARD_WEB_QWEN_USER_AGENT: userAgent,
+        WEBAI_BRIDGE_WEB_AUTH_CDP_URL: cdpUrl,
+        WEBAI_BRIDGE_WEB_QWEN_COOKIE_BUNDLE: cookieBundle,
+        WEBAI_BRIDGE_WEB_QWEN_USER_AGENT: userAgent,
       };
       const httpLiveProof = await runQwenWebLiveProof(runtimeEnv, fetch);
       let liveProof = httpLiveProof;
@@ -2540,13 +2540,13 @@ async function createStartResult(
       summary:
         error instanceof Error
           ? error.message
-          : `Switchyard failed to prepare the managed onboarding browser for ${providerDisplayName}.`,
+          : `WebaiBridge failed to prepare the managed onboarding browser for ${providerDisplayName}.`,
       instructions:
         mode === "managed-browser"
-          ? "Confirm Chrome or Chromium is installed, then retry Start Login so Switchyard can launch or reattach the local onboarding browser for you."
-          : mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
-            ? "Switchyard could not safely reuse the isolated repo Chrome root. Reattach to the running instance, or fall back to the managed onboarding browser."
-            : "Switchyard could not attach to the requested browser session. Confirm the browser session is still shareable, or fall back to the managed onboarding browser.",
+          ? "Confirm Chrome or Chromium is installed, then retry Start Login so WebaiBridge can launch or reattach the local onboarding browser for you."
+          : mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
+            ? "WebaiBridge could not safely reuse the isolated repo Chrome root. Reattach to the running instance, or fall back to the managed onboarding browser."
+            : "WebaiBridge could not attach to the requested browser session. Confirm the browser session is still shareable, or fall back to the managed onboarding browser.",
     };
   }
 }

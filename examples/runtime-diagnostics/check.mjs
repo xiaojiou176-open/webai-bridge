@@ -17,10 +17,10 @@ if (!starter) {
   );
 }
 
-const provider = process.env.SWITCHYARD_RUNTIME_PROVIDER?.trim() || "chatgpt";
+const provider = process.env.WEBAI_BRIDGE_RUNTIME_PROVIDER?.trim() || "chatgpt";
 const encodedProvider = encodeRuntimePathSegment(
   provider,
-  "Switchyard runtime diagnostics provider",
+  "WebaiBridge runtime diagnostics provider",
 );
 const baseUrl = resolveRuntimeBaseUrl();
 

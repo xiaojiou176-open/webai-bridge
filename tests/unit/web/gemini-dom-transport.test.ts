@@ -34,8 +34,8 @@ describe("Gemini browser DOM transport", () => {
   });
 
   it("executes through Playwright CDP when browser session materials are present", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT", "WebaiBridgeTest/1.0");
 
     let evaluateCall = 0;
     const evaluate = vi.fn().mockImplementation(async () => {
@@ -55,7 +55,7 @@ describe("Gemini browser DOM transport", () => {
       }
 
       return {
-        assistantCandidates: ["Switchyard Gemini DOM transport ok."],
+        assistantCandidates: ["WebaiBridge Gemini DOM transport ok."],
         fallbackCandidates: [],
         structuredReply: "",
         isStreaming: false,
@@ -120,13 +120,13 @@ describe("Gemini browser DOM transport", () => {
 
     expect(connectOverCDP).toHaveBeenCalledWith("http://127.0.0.1:9338");
     expect(evaluate).toHaveBeenCalled();
-    expect(text).toContain("Switchyard Gemini DOM transport ok.");
+    expect(text).toContain("WebaiBridge Gemini DOM transport ok.");
     expect(close).toHaveBeenCalled();
   });
 
   it("keeps the default Playwright chromium binding intact", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT", "WebaiBridgeTest/1.0");
 
     let evaluateCall = 0;
     const evaluate = vi.fn().mockImplementation(async () => {
@@ -146,7 +146,7 @@ describe("Gemini browser DOM transport", () => {
       }
 
       return {
-        assistantCandidates: ["Switchyard Gemini DOM transport ok."],
+        assistantCandidates: ["WebaiBridge Gemini DOM transport ok."],
         fallbackCandidates: [],
         structuredReply: "",
         isStreaming: false,
@@ -214,13 +214,13 @@ describe("Gemini browser DOM transport", () => {
 
     expect(connectOverCDP).toHaveBeenCalledWith("http://127.0.0.1:9338");
     expect(evaluate).toHaveBeenCalled();
-    expect(text).toContain("Switchyard Gemini DOM transport ok.");
+    expect(text).toContain("WebaiBridge Gemini DOM transport ok.");
     expect(close).toHaveBeenCalled();
   });
 
   it("fails before sending when Gemini already shows a visible rate-limit gate", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT", "WebaiBridgeTest/1.0");
 
     let evaluateCall = 0;
     const evaluate = vi.fn().mockImplementation(async () => {
@@ -237,7 +237,7 @@ describe("Gemini browser DOM transport", () => {
       return {
         ok: false,
         error:
-          "Gemini attached browser is showing a visible rate-limit gate, so Switchyard must stop before sending another prompt.",
+          "Gemini attached browser is showing a visible rate-limit gate, so WebaiBridge must stop before sending another prompt.",
       };
     });
     const goto = vi.fn().mockResolvedValue(undefined);
@@ -303,8 +303,8 @@ describe("Gemini browser DOM transport", () => {
   });
 
   it("reuses an existing Gemini tab and does not close the user's page", async () => {
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
-    vi.stubEnv("SWITCHYARD_WEB_GEMINI_USER_AGENT", "SwitchyardTest/1.0");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_COOKIE_BUNDLE", "SID=abc; __Secure-1PSID=def");
+    vi.stubEnv("WEBAI_BRIDGE_WEB_GEMINI_USER_AGENT", "WebaiBridgeTest/1.0");
 
     let evaluateCall = 0;
     const pageClose = vi.fn().mockResolvedValue(undefined);
@@ -331,7 +331,7 @@ describe("Gemini browser DOM transport", () => {
       }
 
       return {
-        assistantCandidates: ["Switchyard Gemini DOM transport ok."],
+        assistantCandidates: ["WebaiBridge Gemini DOM transport ok."],
         fallbackCandidates: [],
         structuredReply: "",
         isStreaming: false,
@@ -391,7 +391,7 @@ describe("Gemini browser DOM transport", () => {
       vi.fn().mockResolvedValue(browser),
     );
 
-    expect(text).toContain("Switchyard Gemini DOM transport ok.");
+    expect(text).toContain("WebaiBridge Gemini DOM transport ok.");
     expect(page.bringToFront).toHaveBeenCalled();
     expect(page.goto).not.toHaveBeenCalled();
     expect(newPage).not.toHaveBeenCalled();

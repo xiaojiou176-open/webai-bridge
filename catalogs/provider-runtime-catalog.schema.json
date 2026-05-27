@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/catalogs/provider-runtime-catalog.schema.json",
-  "title": "Switchyard Provider Runtime Catalog",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/catalogs/provider-runtime-catalog.schema.json",
+  "title": "WebaiBridge Provider Runtime Catalog",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -74,7 +74,7 @@ export async function waitForVitestDrain(options = {}) {
   const lingering = listRepoOwnedVitestProcesses();
   if (lingering.length > 0) {
     throw new Error(
-      `Switchyard pre-push gate observed lingering repo-owned Vitest processes before coverage: ${lingering.join(" | ")}`,
+      `WebaiBridge pre-push gate observed lingering repo-owned Vitest processes before coverage: ${lingering.join(" | ")}`,
     );
   }
 }

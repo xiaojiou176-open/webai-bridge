@@ -18,7 +18,7 @@ import {
   DEFAULT_ISOLATED_CHROME_PROFILE_DIRECTORY,
   DEFAULT_SOURCE_CHROME_PROFILE_DIRECTORY,
   DEFAULT_SOURCE_CHROME_PROFILE_NAME,
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
   assertPathInsideAllowedRoots,
   resolveAllowedRuntimeArtifactRoots,
   resolveChromeProfileDirectory,
@@ -105,7 +105,7 @@ function detectDefaultChromeRootConflicts(sourceRoot) {
 
   if (result.error || result.status !== 0) {
     return [
-      "Switchyard could not verify whether the default Chrome root is idle before seeding.",
+      "WebaiBridge could not verify whether the default Chrome root is idle before seeding.",
     ];
   }
 
@@ -146,14 +146,14 @@ function ensureReadableSource(sourceRoot, sourceProfileDir) {
   if (!existsSync(localStatePath)) {
     throw createSeedError(
       "missing-source-local-state",
-      `Switchyard could not find Local State under ${sourceRoot}.`,
+      `WebaiBridge could not find Local State under ${sourceRoot}.`,
     );
   }
 
   if (!existsSync(profilePath)) {
     throw createSeedError(
       "missing-source-profile",
-      `Switchyard could not find source profile ${sourceProfileDir} under ${sourceRoot}.`,
+      `WebaiBridge could not find source profile ${sourceProfileDir} under ${sourceRoot}.`,
     );
   }
 
@@ -180,7 +180,7 @@ function ensureTargetReady(targetRoot, reseed) {
   if (!reseed) {
     throw createSeedError(
       "target-root-not-empty",
-      `Switchyard isolated Chrome root already exists at ${targetRoot}. Refusing to overwrite it without --reseed.`,
+      `WebaiBridge isolated Chrome root already exists at ${targetRoot}. Refusing to overwrite it without --reseed.`,
     );
   }
 
@@ -264,10 +264,10 @@ function resolveSeedSource(options, env = process.env) {
   const sourceSelection = resolveSourceChromeProfileSelection({
     ...env,
     ...(options.sourceRoot
-      ? { SWITCHYARD_SOURCE_CHROME_USER_DATA_DIR: options.sourceRoot }
+      ? { WEBAI_BRIDGE_SOURCE_CHROME_USER_DATA_DIR: options.sourceRoot }
       : {}),
     ...(options.sourceProfileName
-      ? { SWITCHYARD_SOURCE_CHROME_PROFILE_NAME: options.sourceProfileName }
+      ? { WEBAI_BRIDGE_SOURCE_CHROME_PROFILE_NAME: options.sourceProfileName }
       : {}),
   });
   const sourceProfileDirectory =
@@ -283,7 +283,7 @@ function resolveSeedSource(options, env = process.env) {
     userDataDir: assertPathInsideAllowedRoots(
       sourceSelection.userDataDir,
       [homedir()],
-      "Switchyard source Chrome root",
+      "WebaiBridge source Chrome root",
     ),
     profileName: sourceSelection.profileName || DEFAULT_SOURCE_CHROME_PROFILE_NAME,
     profileDirectory: sourceProfileDirectory,
@@ -307,7 +307,7 @@ export function planIsolatedChromeRootSeed(
         runtimeRoots.externalCacheRoot,
         runtimeRoots.protectedBrowserRoot,
       ],
-      "Switchyard isolated Chrome root",
+      "WebaiBridge isolated Chrome root",
     ),
   };
   const blockers = detectDefaultChromeRootConflicts(source.userDataDir);
@@ -325,7 +325,7 @@ export function seedIsolatedChromeRoot(options = {}, env = process.env) {
   if (plan.blockers.length > 0) {
     throw createSeedError(
       "source-root-busy",
-      `Switchyard will not seed from the default Chrome root while it is still active.\n${plan.blockers.join("\n")}`,
+      `WebaiBridge will not seed from the default Chrome root while it is still active.\n${plan.blockers.join("\n")}`,
     );
   }
 
@@ -349,12 +349,12 @@ export function seedIsolatedChromeRoot(options = {}, env = process.env) {
 
   const removedSingletons = removeSingletonFiles(plan.target.userDataDir);
   const sourceChatgptAudit = auditProviderPersistentArtifacts("chatgpt", {
-    mode: SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+    mode: WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
     existingProfileDir: plan.source.userDataDir,
     existingProfileDirectory: plan.source.profileDirectory,
   });
   const targetChatgptAudit = auditProviderPersistentArtifacts("chatgpt", {
-    mode: SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+    mode: WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
     existingProfileDir: plan.target.userDataDir,
     existingProfileDirectory: plan.target.profileDirectory,
   });
@@ -403,7 +403,7 @@ async function main() {
   }
 
   console.log(
-    `Seeded Switchyard isolated Chrome root: ${result.sourceProfileDirectory} -> ${result.targetProfileDirectory}`,
+    `Seeded WebaiBridge isolated Chrome root: ${result.sourceProfileDirectory} -> ${result.targetProfileDirectory}`,
   );
   console.log(`Root: ${result.targetRoot}`);
 }

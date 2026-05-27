@@ -8,8 +8,8 @@
       "templateShape": "responses-runtime-helper",
       "manifest": {
         "starterTarget": "codex",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target codex --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target codex --json",
         "invokeRoute": "/v1/runtime/invoke",
         "mode": "text-only runtime delegation",
         "safeClaims": [
@@ -30,8 +30,8 @@
       "templateShape": "message-runtime-helper",
       "manifest": {
         "starterTarget": "claude-code",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target claude-code --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target claude-code --json",
         "invokeRoute": "/v1/runtime/invoke",
         "mode": "message/runtime bridge",
         "safeClaims": [
@@ -53,8 +53,8 @@
       "templateShape": "delegated-runtime-helper",
       "manifest": {
         "starterTarget": "openclaw",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target openclaw --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target openclaw --json",
         "invokeRoute": "/v1/runtime/invoke",
         "mode": "delegation-first runtime bridge",
         "safeClaims": [
@@ -75,8 +75,8 @@
       "templateShape": "read-only-runtime-inspector",
       "manifest": {
         "starterTarget": "mcp",
-        "startupCommand": "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target mcp --json",
+        "startupCommand": "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target mcp --json",
         "mode": "read-only stdio runtime inspection",
         "safeClaims": [
           "partial read-only MCP surface",
@@ -98,7 +98,7 @@
       "templateShape": "read-only-runtime-diagnostics",
       "manifest": {
         "starterTarget": "runtime-diagnostics-pack",
-        "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
+        "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
         "safeClaims": [
           "read-only runtime diagnostics starter",
           "provider triage helper",
@@ -118,7 +118,7 @@
       "templateShape": "truth-sync-and-discoverability",
       "manifest": {
         "starterTarget": "docs-seo-sync-pack",
-        "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json",
+        "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json",
         "safeClaims": [
           "docs truth-sync starter",
           "discoverability helper",

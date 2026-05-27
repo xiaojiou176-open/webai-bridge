@@ -1,25 +1,25 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.xiaojiou176-open/switchyard-mcp",
-  "title": "Switchyard MCP",
-  "description": "Read-only MCP surface for Switchyard runtime truth, BYOK/Web-Login catalogs, and safe diagnostics.",
+  "name": "io.github.xiaojiou176-open/webai-bridge-mcp",
+  "title": "WebaiBridge MCP",
+  "description": "Read-only MCP surface for WebaiBridge runtime truth, BYOK/Web-Login catalogs, and safe diagnostics.",
   "repository": {
-    "url": "https://github.com/xiaojiou176-open/Switchyard",
+    "url": "https://github.com/xiaojiou176-open/webai-bridge",
     "source": "github"
   },
   "version": "0.1.0",
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "@switchyard/surface-mcp",
+      "identifier": "@webai-bridge/surface-mcp",
       "version": "0.1.0",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
-          "name": "SWITCHYARD_RUNTIME_BASE_URL",
-          "description": "Base URL for the Switchyard service runtime. Defaults to http://127.0.0.1:4010 when omitted.",
+          "name": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+          "description": "Base URL for the WebaiBridge service runtime. Defaults to http://127.0.0.1:4010 when omitted.",
           "isRequired": false,
           "format": "string",
           "isSecret": false

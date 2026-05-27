@@ -38,21 +38,21 @@ describe("package-ready public distribution surfaces", () => {
     const mcpManifest = readJson<{ homepage: string }>("packages/surfaces/mcp/package.json");
     const issueTemplateConfig = read(".github/ISSUE_TEMPLATE/config.yml");
 
-    expect(rootManifest.homepage).toBe("https://xiaojiou176-open.github.io/Switchyard/");
+    expect(rootManifest.homepage).toBe("https://xiaojiou176-open.github.io/webai-bridge/");
     expect(codexManifest.homepage).toBe(
-      "https://xiaojiou176-open.github.io/Switchyard/compat/codex.md",
+      "https://xiaojiou176-open.github.io/webai-bridge/compat/codex.md",
     );
     expect(claudeManifest.homepage).toBe(
-      "https://xiaojiou176-open.github.io/Switchyard/compat/claude-code.md",
+      "https://xiaojiou176-open.github.io/webai-bridge/compat/claude-code.md",
     );
     expect(openclawManifest.homepage).toBe(
-      "https://xiaojiou176-open.github.io/Switchyard/compat/openclaw.md",
+      "https://xiaojiou176-open.github.io/webai-bridge/compat/openclaw.md",
     );
     expect(mcpManifest.homepage).toBe(
-      "https://xiaojiou176-open.github.io/Switchyard/mcp.md",
+      "https://xiaojiou176-open.github.io/webai-bridge/mcp.md",
     );
     expect(issueTemplateConfig).toContain(
-      "https://xiaojiou176-open.github.io/Switchyard/public-proof-pack.md",
+      "https://xiaojiou176-open.github.io/webai-bridge/public-proof-pack.md",
     );
   });
 
@@ -61,25 +61,25 @@ describe("package-ready public distribution surfaces", () => {
       {
         path: "packages/consumers/codex/package.json",
         readme: "packages/consumers/codex/README.md",
-        name: "@switchyard/consumer-codex",
+        name: "@webai-bridge/consumer-codex",
         main: "./dist/packages/consumers/codex/src/index.js",
       },
       {
         path: "packages/consumers/claude-code/package.json",
         readme: "packages/consumers/claude-code/README.md",
-        name: "@switchyard/consumer-claude-code",
+        name: "@webai-bridge/consumer-claude-code",
         main: "./dist/packages/consumers/claude-code/src/index.js",
       },
       {
         path: "packages/consumers/openclaw/package.json",
         readme: "packages/consumers/openclaw/README.md",
-        name: "@switchyard/consumer-openclaw",
+        name: "@webai-bridge/consumer-openclaw",
         main: "./dist/packages/consumers/openclaw/src/index.js",
       },
       {
         path: "packages/surfaces/mcp/package.json",
         readme: "packages/surfaces/mcp/README.md",
-        name: "@switchyard/surface-mcp",
+        name: "@webai-bridge/surface-mcp",
         main: "./dist/packages/surfaces/mcp/src/index.js",
       },
     ] as const;
@@ -112,25 +112,25 @@ describe("package-ready public distribution surfaces", () => {
     );
     expect(mcpManifest.bin).toEqual(
       expect.objectContaining({
-        "switchyard-mcp": "./dist/packages/surfaces/mcp/src/cli.js",
+        "webai-bridge-mcp": "./dist/packages/surfaces/mcp/src/cli.js",
       }),
     );
-    expect(mcpManifest.mcpName).toBe("io.github.xiaojiou176-open/switchyard-mcp");
+    expect(mcpManifest.mcpName).toBe("io.github.xiaojiou176-open/webai-bridge-mcp");
     expect(existsSync(resolve(repoRoot, "packages/surfaces/mcp/src/cli.ts"))).toBe(true);
     expect(existsSync(resolve(repoRoot, "packages/surfaces/mcp/server.json"))).toBe(true);
     expect(mcpServerJson).toEqual(
       expect.objectContaining({
-        name: "io.github.xiaojiou176-open/switchyard-mcp",
-        title: "Switchyard MCP",
+        name: "io.github.xiaojiou176-open/webai-bridge-mcp",
+        title: "WebaiBridge MCP",
         version: "0.1.0",
         repository: expect.objectContaining({
-          url: "https://github.com/xiaojiou176-open/Switchyard",
+          url: "https://github.com/xiaojiou176-open/webai-bridge",
           source: "github",
         }),
         packages: expect.arrayContaining([
           expect.objectContaining({
             registryType: "npm",
-            identifier: "@switchyard/surface-mcp",
+            identifier: "@webai-bridge/surface-mcp",
             version: "0.1.0",
             transport: expect.objectContaining({
               type: "stdio",
@@ -149,37 +149,37 @@ describe("package-ready public distribution surfaces", () => {
     expect(keywordTruth.entries).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          term: "@switchyard/consumer-codex",
+          term: "@webai-bridge/consumer-codex",
           truthStatus: "partial-with-label",
         }),
         expect.objectContaining({
-          term: "@switchyard/consumer-claude-code",
+          term: "@webai-bridge/consumer-claude-code",
           truthStatus: "partial-with-label",
         }),
         expect.objectContaining({
-          term: "@switchyard/consumer-openclaw",
+          term: "@webai-bridge/consumer-openclaw",
           truthStatus: "partial-with-label",
         }),
         expect.objectContaining({
-          term: "@switchyard/surface-mcp",
+          term: "@webai-bridge/surface-mcp",
           truthStatus: "partial-with-label",
         }),
         expect.objectContaining({
-          term: "@switchyard/consumer-codex available on npm now",
+          term: "@webai-bridge/consumer-codex available on npm now",
           truthStatus: "not-claimable",
         }),
         expect.objectContaining({
-          term: "@switchyard/surface-mcp available on npm now",
+          term: "@webai-bridge/surface-mcp available on npm now",
           truthStatus: "not-claimable",
         }),
       ]),
     );
 
     const distributionLedger = read("docs/public-distribution-ledger.md");
-    expect(distributionLedger).toContain("@switchyard/consumer-codex");
-    expect(distributionLedger).toContain("@switchyard/consumer-claude-code");
-    expect(distributionLedger).toContain("@switchyard/consumer-openclaw");
-    expect(distributionLedger).toContain("@switchyard/surface-mcp");
+    expect(distributionLedger).toContain("@webai-bridge/consumer-codex");
+    expect(distributionLedger).toContain("@webai-bridge/consumer-claude-code");
+    expect(distributionLedger).toContain("@webai-bridge/consumer-openclaw");
+    expect(distributionLedger).toContain("@webai-bridge/surface-mcp");
     expect(distributionLedger).toContain("no npm publish claimed yet");
     expect(distributionLedger).toContain("packages/surfaces/mcp/server.json");
   });
@@ -198,7 +198,7 @@ describe("package-ready public distribution surfaces", () => {
       required: string[];
     }>("catalogs/public-distribution-ledger.schema.json");
 
-    expect(schema.title).toBe("Switchyard Public Distribution Ledger");
+    expect(schema.title).toBe("WebaiBridge Public Distribution Ledger");
     expect(schema.required).toEqual(
       expect.arrayContaining(["ledgerVersion", "entries"]),
     );
@@ -246,33 +246,33 @@ describe("package-ready public distribution surfaces", () => {
       name: string;
       keywords: string[];
     }>(
-      "distribution/claude-marketplace/plugins/switchyard-builder-suite/.claude-plugin/plugin.json",
+      "distribution/claude-marketplace/plugins/webai-bridge-builder-suite/.claude-plugin/plugin.json",
     );
     const pluginReadme = read(
-      "distribution/claude-marketplace/plugins/switchyard-builder-suite/README.md",
+      "distribution/claude-marketplace/plugins/webai-bridge-builder-suite/README.md",
     );
     const runtimeSkill = read(
-      "distribution/claude-marketplace/plugins/switchyard-builder-suite/skills/runtime-diagnostics/SKILL.md",
+      "distribution/claude-marketplace/plugins/webai-bridge-builder-suite/skills/runtime-diagnostics/SKILL.md",
     );
     const docsSkill = read(
-      "distribution/claude-marketplace/plugins/switchyard-builder-suite/skills/docs-seo-sync/SKILL.md",
+      "distribution/claude-marketplace/plugins/webai-bridge-builder-suite/skills/docs-seo-sync/SKILL.md",
     );
 
     expect(marketplaceReadme.toLowerCase()).toContain("marketplace-compatible bundle");
     expect(marketplaceReadme.toLowerCase()).toContain("no official listing claimed yet");
-    expect(marketplace.name).toBe("switchyard-builder-marketplace");
+    expect(marketplace.name).toBe("webai-bridge-builder-marketplace");
     expect(marketplace.plugins).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          source: "./plugins/switchyard-builder-suite",
-          name: "switchyard-builder-suite",
+          source: "./plugins/webai-bridge-builder-suite",
+          name: "webai-bridge-builder-suite",
         }),
       ]),
     );
     expect(pluginManifest).toEqual(
       expect.objectContaining({
-        name: "switchyard-builder-suite",
-        keywords: expect.arrayContaining(["switchyard", "claude-code", "openclaw"]),
+        name: "webai-bridge-builder-suite",
+        keywords: expect.arrayContaining(["webai-bridge", "claude-code", "openclaw"]),
       }),
     );
     expect(pluginReadme.toLowerCase()).toContain("marketplace-compatible bundle artifact: yes");
@@ -289,13 +289,13 @@ describe("package-ready public distribution surfaces", () => {
     }>("packages/surfaces/mcp/server.json");
     const mcpReadme = read("packages/surfaces/mcp/README.md");
 
-    expect(mcpManifest.mcpName).toBe("io.github.xiaojiou176-open/switchyard-mcp");
-    expect(serverManifest.name).toBe("io.github.xiaojiou176-open/switchyard-mcp");
+    expect(mcpManifest.mcpName).toBe("io.github.xiaojiou176-open/webai-bridge-mcp");
+    expect(serverManifest.name).toBe("io.github.xiaojiou176-open/webai-bridge-mcp");
     expect(serverManifest.packages).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           registryType: "npm",
-          identifier: "@switchyard/surface-mcp",
+          identifier: "@webai-bridge/surface-mcp",
           transport: expect.objectContaining({
             type: "stdio",
           }),

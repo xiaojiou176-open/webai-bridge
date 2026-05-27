@@ -6,10 +6,10 @@ import {
   urlPathHasExtension,
 } from "../../shared/url-hosts.js";
 
-export const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
+export const SHARED_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
 export const EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-export const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+export const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
 export const CHATGPT_WEB_DEFAULT_CDP_URL = "http://127.0.0.1:39222";
 export const CHATGPT_WEB_DEFAULT_ISOLATED_CDP_URL = "http://127.0.0.1:9338";
 export const CHATGPT_WEB_APP_URL = "https://chatgpt.com/";
@@ -64,7 +64,7 @@ type ConnectOverCDP = (
 ) => ReturnType<typeof chromium.connectOverCDP>;
 
 function resolveChatgptCdpUrl(env: Record<string, string | undefined>) {
-  const browserMode = env[SWITCHYARD_BROWSER_MODE_ENV_NAME]?.trim();
+  const browserMode = env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME]?.trim();
 
   return (
     env[SHARED_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
@@ -136,7 +136,7 @@ function detectChatgptEmailVerification(pageText: string): string | undefined {
     return undefined;
   }
 
-  return `ChatGPT attached browser is currently blocked on OpenAI email verification (${matchedPattern}), so the end user must finish that verification before Switchyard can invoke ChatGPT.`;
+  return `ChatGPT attached browser is currently blocked on OpenAI email verification (${matchedPattern}), so the end user must finish that verification before WebaiBridge can invoke ChatGPT.`;
 }
 
 function detectChatgptLoggedOutWorkspace(pageText: string): string | undefined {
@@ -672,7 +672,7 @@ export async function invokeChatgptBrowserDomTransport(
   connectOverCDP: ConnectOverCDP = chromium.connectOverCDP.bind(chromium) as ConnectOverCDP,
 ): Promise<string> {
   const cdpUrl = resolveChatgptCdpUrl(env);
-  const cookieBundle = env.SWITCHYARD_WEB_CHATGPT_COOKIE_BUNDLE?.trim();
+  const cookieBundle = env.WEBAI_BRIDGE_WEB_CHATGPT_COOKIE_BUNDLE?.trim();
   const browser = await connectOverCDP(cdpUrl);
 
   try {

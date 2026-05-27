@@ -9,7 +9,7 @@
       "templateShape": "truth-sync-and-discoverability",
       "manifest": {
         "starterTarget": "docs-seo-sync-pack",
-        "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json",
+        "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json",
         "safeClaims": [
           "docs truth-sync starter",
           "discoverability helper",

@@ -1,13 +1,13 @@
 export {
-  createSwitchyardSdkClient,
-  SwitchyardSdkClient,
+  createWebaiBridgeSdkClient,
+  WebaiBridgeSdkClient,
   type GenerateTextRequest,
-  type SwitchyardSdkClientOptions,
+  type WebaiBridgeSdkClientOptions,
 } from './client.js';
 export {
-  createSwitchyardServiceClient,
+  createWebaiBridgeServiceClient,
   type ServiceProviderAttachTargetView,
-  SwitchyardServiceClient,
+  WebaiBridgeServiceClient,
   type ServiceProviderDiagnoseStepView,
   type ServiceProviderCurrentConsoleView,
   type ServiceProviderCurrentNetworkView,
@@ -21,5 +21,5 @@ export {
   type RuntimeInvokeRequest,
   type RuntimePlanRequest,
   type RuntimeInvokeResponse,
-  type SwitchyardServiceClientOptions,
+  type WebaiBridgeServiceClientOptions,
 } from './service-client.js';

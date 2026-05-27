@@ -1,6 +1,6 @@
-# Switchyard Copy-Ready Starter Packs
+# WebaiBridge Copy-Ready Starter Packs
 
-这里可以先把它理解成 `Switchyard` 的整包样板间。
+这里可以先把它理解成 `WebaiBridge` 的整包样板间。
 
 说得更直白一点：
 
@@ -21,7 +21,7 @@
 
 如果你现在最关心的是：
 
-> **“我先跑哪一条最短路径，才能确认 `Switchyard` 真的活着？”**
+> **“我先跑哪一条最短路径，才能确认 `WebaiBridge` 真的活着？”**
 
 先看：
 
@@ -39,12 +39,12 @@
 或者直接用：
 
 ```bash
-pnpm run switchyard:cli -- starter-pack-index
-pnpm run switchyard:cli -- starter-pack-index-schema
-pnpm run switchyard:cli -- starter-pack-entry --target codex
-pnpm run switchyard:cli -- starter-pack-entry --target runtime-diagnostics-pack
-pnpm run switchyard:cli -- starter-pack-chooser
-pnpm run switchyard:cli -- starter-pack-scenario --target codex-builder
+pnpm run webai-bridge:cli -- starter-pack-index
+pnpm run webai-bridge:cli -- starter-pack-index-schema
+pnpm run webai-bridge:cli -- starter-pack-entry --target codex
+pnpm run webai-bridge:cli -- starter-pack-entry --target runtime-diagnostics-pack
+pnpm run webai-bridge:cli -- starter-pack-chooser
+pnpm run webai-bridge:cli -- starter-pack-scenario --target codex-builder
 ```
 
 ## 当前 pack 一览
@@ -94,7 +94,7 @@ pnpm run start:service-local
 如果 runtime 不在默认 `127.0.0.1:4010`，再额外设置：
 
 ```bash
-export SWITCHYARD_RUNTIME_BASE_URL=http://host:port
+export WEBAI_BRIDGE_RUNTIME_BASE_URL=http://host:port
 ```
 
 ## 重要边界

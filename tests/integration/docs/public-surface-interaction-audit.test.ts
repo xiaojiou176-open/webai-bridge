@@ -12,47 +12,47 @@ const routeChecks = [
   {
     href: "./README.md",
     urlSuffix: "/README.md",
-    snippet: "Switchyard Public Docs",
+    snippet: "WebaiBridge Public Docs",
   },
   {
     href: "./media/30-second-overview.md",
     urlSuffix: "/media/30-second-overview.md",
-    snippet: "Switchyard 30-Second Overview",
+    snippet: "WebaiBridge 30-Second Overview",
   },
   {
     href: "./first-success.md",
     urlSuffix: "/first-success.md",
-    snippet: "Switchyard Default First Success",
+    snippet: "WebaiBridge Default First Success",
   },
   {
     href: "./public-proof-pack.md",
     urlSuffix: "/public-proof-pack.md",
-    snippet: "Switchyard Public Proof Pack",
+    snippet: "WebaiBridge Public Proof Pack",
   },
   {
     href: "./public-distribution-ledger.md",
     urlSuffix: "/public-distribution-ledger.md",
-    snippet: "Switchyard Public Distribution Ledger",
+    snippet: "WebaiBridge Public Distribution Ledger",
   },
   {
     href: "./public-surface-support-matrix.md",
     urlSuffix: "/public-surface-support-matrix.md",
-    snippet: "Switchyard Public Surface Support Matrix",
+    snippet: "WebaiBridge Public Surface Support Matrix",
   },
   {
     href: "./runbooks/dev-bootstrap.md",
     urlSuffix: "/runbooks/dev-bootstrap.md",
-    snippet: "Switchyard Dev Bootstrap",
+    snippet: "WebaiBridge Dev Bootstrap",
   },
   {
     href: "./api/service-http-reference.md",
     urlSuffix: "/api/service-http-reference.md",
-    snippet: "Switchyard Service HTTP Reference",
+    snippet: "WebaiBridge Service HTTP Reference",
   },
   {
     href: "./api/error-diagnostics-reference.md",
     urlSuffix: "/api/error-diagnostics-reference.md",
-    snippet: "Switchyard Error and Diagnostics Reference",
+    snippet: "WebaiBridge Error and Diagnostics Reference",
   },
 ] as const;
 
@@ -60,8 +60,8 @@ describe("public surface interaction audit", () => {
   it(
     "keeps first-row docs interactions working from both root-path and project-site front doors",
     async () => {
-      const tempRoot = mkdtempSync(resolve(tmpdir(), "switchyard-public-ui-"));
-      const projectRoot = resolve(tempRoot, "Switchyard");
+      const tempRoot = mkdtempSync(resolve(tmpdir(), "webai-bridge-public-ui-"));
+      const projectRoot = resolve(tempRoot, "WebaiBridge");
       symlinkSync(repoRoot, projectRoot, "dir");
 
       const { startDocsStaticServer } = await import("../../../scripts/start-local-experience.mjs");
@@ -94,7 +94,7 @@ describe("public surface interaction audit", () => {
 
           for (const [baseUrl, prefix] of [
             [`http://127.0.0.1:${rootAddress.port}/`, ""],
-            [`http://127.0.0.1:${projectAddress.port}/Switchyard/`, "/Switchyard"],
+            [`http://127.0.0.1:${projectAddress.port}/WebaiBridge/`, "/WebaiBridge"],
           ] as const) {
             for (const route of routeChecks) {
               await page.goto(baseUrl, { waitUntil: "networkidle" });

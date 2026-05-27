@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { createDefaultByokRegistry } from '../../../packages/lanes/byok/src/index.js';
-import { createSwitchyardSdkClient } from '../../../packages/sdk/src/index.js';
+import { createWebaiBridgeSdkClient } from '../../../packages/sdk/src/index.js';
 
 describe('BYOK capability alignment', () => {
   test('keeps provider registrations inside official API semantics', () => {
@@ -37,7 +37,7 @@ describe('BYOK capability alignment', () => {
   });
 
   test('descriptor providers fail fast on missing credentials instead of pretending they are ready', () => {
-    const client = createSwitchyardSdkClient({
+    const client = createWebaiBridgeSdkClient({
       env: {},
     });
 

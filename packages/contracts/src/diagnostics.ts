@@ -166,7 +166,7 @@ export function createDiagnosticRecord(input: CreateDiagnosticRecordInput): Diag
   });
 }
 
-export class SwitchyardContractError extends Error {
+export class WebaiBridgeContractError extends Error {
   readonly diagnostic: DiagnosticRecord;
 
   constructor(
@@ -175,7 +175,7 @@ export class SwitchyardContractError extends Error {
     options: Omit<CreateDiagnosticRecordInput, 'code' | 'message'> = {}
   ) {
     super(message);
-    this.name = 'SwitchyardContractError';
+    this.name = 'WebaiBridgeContractError';
     this.diagnostic = createDiagnosticRecord({
       code,
       message,

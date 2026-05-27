@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 const ALLOWED_PROFILE_ROOT = join(
   homedir(),
   ".cache",
-  "switchyard",
+  "webai-bridge",
   "tests",
   "chatgpt-profile",
 );
@@ -79,7 +79,7 @@ describe("web auth browser bootstrap", () => {
       loginUrl: "https://chatgpt.com",
       env: {},
       existingProfileDir: ALLOWED_PROFILE_ROOT,
-      profileName: "switchyard",
+      profileName: "webai-bridge",
       browserPath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
       cdpUrl: "http://127.0.0.1:9338",
     });
@@ -117,14 +117,14 @@ describe("web auth browser bootstrap", () => {
           cdpUrl: "http://127.0.0.1:9338",
           browserPath: "/Applications/Google Chrome.app",
           userDataDir: ALLOWED_PROFILE_ROOT,
-          profileName: "switchyard",
+          profileName: "webai-bridge",
           profileDirectory: "Profile 1",
           browserTarget: {
             kind: "isolated-chrome-root",
             label: "Isolated Chrome root",
-            summary: "Reuse Switchyard's dedicated Chrome root and single repo-owned profile.",
+            summary: "Reuse WebaiBridge's dedicated Chrome root and single repo-owned profile.",
           },
-          summary: "Switchyard attached or launched the isolated repo Chrome root.",
+          summary: "WebaiBridge attached or launched the isolated repo Chrome root.",
         },
       }),
       stderr: "",
@@ -144,7 +144,7 @@ describe("web auth browser bootstrap", () => {
         mode: "existing-chrome-profile",
         existingChromeProfile: {
           userDataDir: ALLOWED_PROFILE_ROOT,
-          profileName: "switchyard",
+          profileName: "webai-bridge",
           browserPath: "/Applications/Google Chrome.app",
           cdpUrl: "http://127.0.0.1:9222",
         },
@@ -157,7 +157,7 @@ describe("web auth browser bootstrap", () => {
         mode: "isolated-chrome-root",
         cdpUrl: "http://127.0.0.1:9338",
         userDataDir: ALLOWED_PROFILE_ROOT,
-        profileName: "switchyard",
+        profileName: "webai-bridge",
         profileDirectory: "Profile 1",
       }),
     );
@@ -175,7 +175,7 @@ describe("web auth browser bootstrap", () => {
         "--existing-profile-dir",
         ALLOWED_PROFILE_ROOT,
         "--profile-name",
-        "switchyard",
+        "webai-bridge",
         "--browser-path",
         "/Applications/Google Chrome.app",
         "--cdp-url",
@@ -198,7 +198,7 @@ describe("web auth browser bootstrap", () => {
         ok: false,
         error: {
           code: "cdp-unreachable",
-          message: "Switchyard could not reach the requested CDP endpoint.",
+          message: "WebaiBridge could not reach the requested CDP endpoint.",
         },
       }),
       stderr: "",
@@ -218,7 +218,7 @@ describe("web auth browser bootstrap", () => {
       }),
     ).rejects.toMatchObject({
       code: "cdp-unreachable",
-      message: "Switchyard could not reach the requested CDP endpoint.",
+      message: "WebaiBridge could not reach the requested CDP endpoint.",
     });
   });
 
@@ -281,7 +281,7 @@ describe("web auth browser bootstrap", () => {
       provider: "qwen",
       loginUrl: "https://chat.qwen.ai",
       env: {
-        SWITCHYARD_WEB_AUTH_USER_DATA_DIR: join(
+        WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR: join(
           process.cwd(),
           ".runtime-cache",
           "tests",

@@ -1,6 +1,6 @@
-# @switchyard/consumer-codex
+# @webai-bridge/consumer-codex
 
-`@switchyard/consumer-codex` 是 `Switchyard` 给 `Codex` 形状工作流准备的 **thin compat adapter**。
+`@webai-bridge/consumer-codex` 是 `WebaiBridge` 给 `Codex` 形状工作流准备的 **thin compat adapter**。
 
 最重要的一句真话是：
 
@@ -15,7 +15,7 @@
 
 当前它解决的是：
 
-- 把 Codex 风格的文本请求转成 `Switchyard` runtime invoke
+- 把 Codex 风格的文本请求转成 `WebaiBridge` runtime invoke
 - 保留 provider / lane 选择
 - 对 tool / MCP / worktree / shell parity 继续 fail-closed
 
@@ -47,7 +47,7 @@
 ## Local Workspace Usage
 
 ```ts
-import { createCodexCompatAdapter } from "@switchyard/consumer-codex";
+import { createCodexCompatAdapter } from "@webai-bridge/consumer-codex";
 
 const adapter = createCodexCompatAdapter({
   baseUrl: "http://127.0.0.1:4010",

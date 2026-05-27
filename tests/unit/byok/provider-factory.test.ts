@@ -126,14 +126,14 @@ describe("BYOK provider factory", () => {
     expect(resolveCredentialValue({ A: "  value  " }, ["B", "A"])).toBe("value");
     expect(
       resolveTransportBaseUrl(
-        { SWITCHYARD_BASE_URL: "https://runtime.internal/" },
+        { WEBAI_BRIDGE_BASE_URL: "https://runtime.internal/" },
         "https://default.internal/",
-        ["SWITCHYARD_BASE_URL"],
+        ["WEBAI_BRIDGE_BASE_URL"],
       ),
     ).toEqual({
       value: "https://runtime.internal",
       source: "env",
-      envName: "SWITCHYARD_BASE_URL",
+      envName: "WEBAI_BRIDGE_BASE_URL",
     });
   });
 

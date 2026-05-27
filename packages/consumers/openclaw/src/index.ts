@@ -7,7 +7,7 @@ import {
 import type {
   RuntimeHealthResponse,
   RuntimeInvokeRequest,
-  SwitchyardServiceClientOptions,
+  WebaiBridgeServiceClientOptions,
 } from "../../../surfaces/sdk-client/src/index.js";
 import {
   buildThinCompatInvokeRequest,
@@ -221,7 +221,7 @@ class OpenClawBuilderWedgeClient {
   readonly #headers: Record<string, string>;
   readonly #routes: ServiceRuntimeRouteCatalog;
 
-  constructor(options: SwitchyardServiceClientOptions) {
+  constructor(options: WebaiBridgeServiceClientOptions) {
     this.#fetch = options.fetch ?? fetch;
     this.#headers = options.headers ?? {};
     this.#routes = buildServiceRouteCatalog(options.baseUrl);

@@ -495,12 +495,12 @@ export async function runServiceLiveVerification(options = {}) {
     moduleUrl.searchParams.set("ts", `${Date.now()}`);
     const loaded = await import(moduleUrl.href);
 
-    if (typeof loaded.startSwitchyardService !== "function") {
-      throw new Error("Missing startSwitchyardService export in compiled service module.");
+    if (typeof loaded.startWebaiBridgeService !== "function") {
+      throw new Error("Missing startWebaiBridgeService export in compiled service module.");
     }
 
-    const service = await loaded.startSwitchyardService({
-      serviceName: "switchyard-service-live-proof",
+    const service = await loaded.startWebaiBridgeService({
+      serviceName: "webai-bridge-service-live-proof",
     });
 
     const results = [];
@@ -646,7 +646,7 @@ export async function runServiceLiveVerification(options = {}) {
 async function main() {
   if (isCiEnvironment(process.env)) {
     throw new Error(
-      "Switchyard verify:service-live is credentialed-workstation only and must not run inside CI.",
+      "WebaiBridge verify:service-live is credentialed-workstation only and must not run inside CI.",
     );
   }
 

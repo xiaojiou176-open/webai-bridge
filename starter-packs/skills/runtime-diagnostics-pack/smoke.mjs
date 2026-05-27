@@ -11,10 +11,10 @@ const exampleDocument = readPackJson(import.meta.url, "./example.json");
 const starter = exampleDocument.skillExamples[0];
 const routeDocument = readRepoJson("catalogs/skill-pack-routes.json");
 const route = routeDocument.routes.find((entry) => entry.id === "runtime-diagnostics-pack");
-const provider = process.env.SWITCHYARD_RUNTIME_PROVIDER?.trim() || "chatgpt";
+const provider = process.env.WEBAI_BRIDGE_RUNTIME_PROVIDER?.trim() || "chatgpt";
 const encodedProvider = encodeRuntimePathSegment(
   provider,
-  "Switchyard runtime diagnostics provider",
+  "WebaiBridge runtime diagnostics provider",
 );
 const baseUrl = resolveRuntimeBaseUrl();
 

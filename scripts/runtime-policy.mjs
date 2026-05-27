@@ -11,7 +11,7 @@ export const repoRoot = resolve(scriptDir, "..");
 export const runtimeCacheRoot = join(repoRoot, ".runtime-cache");
 export const managedBrowserProfileDir = join(
   runtimeCacheRoot,
-  "switchyard-web-auth-browser",
+  "webai-bridge-web-auth-browser",
 );
 export const browserDebugDir = join(runtimeCacheRoot, "browser-debug");
 export const browserDebugBundlesDir = join(browserDebugDir, "bundles");
@@ -24,41 +24,41 @@ export const localWebAuthStorePath = join(
 export const realityGateOutputPath = join(runtimeCacheRoot, "reality-gate.out");
 export const realityGateExitPath = join(runtimeCacheRoot, "reality-gate.exit");
 
-export const SWITCHYARD_BROWSER_MODE_ENV_NAME = "SWITCHYARD_BROWSER_MODE";
-export const SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME =
-  "SWITCHYARD_CHROME_USER_DATA_DIR";
-export const SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME =
-  "SWITCHYARD_CHROME_PROFILE_NAME";
-export const SWITCHYARD_EXTERNAL_CACHE_ROOT_ENV_NAME =
-  "SWITCHYARD_EXTERNAL_CACHE_ROOT";
-export const SWITCHYARD_CACHE_TTL_DAYS_ENV_NAME =
-  "SWITCHYARD_CACHE_TTL_DAYS";
-export const SWITCHYARD_CACHE_MAX_BYTES_ENV_NAME =
-  "SWITCHYARD_CACHE_MAX_BYTES";
-export const SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_USER_DATA_DIR";
-export const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR";
-export const SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH_ENV_NAME =
-  "SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH";
-export const SWITCHYARD_REALITY_GATE_ARTIFACT_DIR_ENV_NAME =
-  "SWITCHYARD_REALITY_GATE_ARTIFACT_DIR";
-export const SWITCHYARD_REALITY_GATE_OUTPUT_PATH_ENV_NAME =
-  "SWITCHYARD_REALITY_GATE_OUTPUT_PATH";
-export const SWITCHYARD_REALITY_GATE_EXIT_PATH_ENV_NAME =
-  "SWITCHYARD_REALITY_GATE_EXIT_PATH";
+export const WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME = "WEBAI_BRIDGE_BROWSER_MODE";
+export const WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_CHROME_USER_DATA_DIR";
+export const WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME =
+  "WEBAI_BRIDGE_CHROME_PROFILE_NAME";
+export const WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT_ENV_NAME =
+  "WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT";
+export const WEBAI_BRIDGE_CACHE_TTL_DAYS_ENV_NAME =
+  "WEBAI_BRIDGE_CACHE_TTL_DAYS";
+export const WEBAI_BRIDGE_CACHE_MAX_BYTES_ENV_NAME =
+  "WEBAI_BRIDGE_CACHE_MAX_BYTES";
+export const WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR";
+export const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR";
+export const WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH_ENV_NAME =
+  "WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH";
+export const WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR";
+export const WEBAI_BRIDGE_REALITY_GATE_OUTPUT_PATH_ENV_NAME =
+  "WEBAI_BRIDGE_REALITY_GATE_OUTPUT_PATH";
+export const WEBAI_BRIDGE_REALITY_GATE_EXIT_PATH_ENV_NAME =
+  "WEBAI_BRIDGE_REALITY_GATE_EXIT_PATH";
 
-export const SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE = "isolated-chrome-root";
+export const WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE = "isolated-chrome-root";
 export const LEGACY_EXISTING_PROFILE_MODE = "existing-chrome-profile";
 export const MANAGED_BROWSER_MODE = "managed-browser";
 export const EXISTING_BROWSER_SESSION_MODE = "existing-browser-session";
 export const DISABLED_FOR_LIVE_MODE = "disabled-for-live";
 
-export const DEFAULT_BROWSER_MODE = SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE;
+export const DEFAULT_BROWSER_MODE = WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE;
 export const DEFAULT_EXTERNAL_CACHE_ROOT = join(
   homedir(),
   ".cache",
-  "switchyard",
+  "webai-bridge",
 );
 export const DEFAULT_CACHE_TTL_DAYS = 7;
 export const DEFAULT_CACHE_MAX_BYTES = 8 * 1024 * 1024 * 1024;
@@ -68,7 +68,7 @@ export const DEFAULT_ISOLATED_CHROME_USER_DATA_DIR = join(
   "chrome-user-data",
 );
 export const DEFAULT_ISOLATED_CHROME_PROFILE_DIRECTORY = "Profile 1";
-export const DEFAULT_ISOLATED_CHROME_PROFILE_NAME = "switchyard";
+export const DEFAULT_ISOLATED_CHROME_PROFILE_NAME = "webai-bridge";
 export const DEFAULT_SOURCE_CHROME_USER_DATA_DIR = join(
   homedir(),
   "Library",
@@ -76,7 +76,7 @@ export const DEFAULT_SOURCE_CHROME_USER_DATA_DIR = join(
   "Google",
   "Chrome",
 );
-export const DEFAULT_SOURCE_CHROME_PROFILE_NAME = "switchyard";
+export const DEFAULT_SOURCE_CHROME_PROFILE_NAME = "webai-bridge";
 export const DEFAULT_SOURCE_CHROME_PROFILE_DIRECTORY = "Profile 30";
 
 function parsePositiveInteger(value, fallback) {
@@ -184,13 +184,13 @@ export function resolveExternalCacheRoot(
   customRepoRoot = repoRoot,
 ) {
   const configured =
-    env[SWITCHYARD_EXTERNAL_CACHE_ROOT_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_EXTERNAL_CACHE_ROOT_ENV_NAME]?.trim() ||
     DEFAULT_EXTERNAL_CACHE_ROOT;
   const resolved = normalizeRoot(configured);
 
   if (isPathInsideRoot(customRepoRoot, resolved)) {
     throw new Error(
-      `Switchyard external cache root must live outside the repo worktree. Refusing ${resolved}.`,
+      `WebaiBridge external cache root must live outside the repo worktree. Refusing ${resolved}.`,
     );
   }
 
@@ -199,14 +199,14 @@ export function resolveExternalCacheRoot(
 
 export function resolveCacheTtlDays(env = process.env) {
   return parsePositiveInteger(
-    env[SWITCHYARD_CACHE_TTL_DAYS_ENV_NAME],
+    env[WEBAI_BRIDGE_CACHE_TTL_DAYS_ENV_NAME],
     DEFAULT_CACHE_TTL_DAYS,
   );
 }
 
 export function resolveCacheMaxBytes(env = process.env) {
   return parsePositiveInteger(
-    env[SWITCHYARD_CACHE_MAX_BYTES_ENV_NAME],
+    env[WEBAI_BRIDGE_CACHE_MAX_BYTES_ENV_NAME],
     DEFAULT_CACHE_MAX_BYTES,
   );
 }
@@ -229,12 +229,12 @@ export function normalizeBrowserMode(value) {
 
   switch (normalized) {
     case MANAGED_BROWSER_MODE:
-    case SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE:
+    case WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE:
     case EXISTING_BROWSER_SESSION_MODE:
     case DISABLED_FOR_LIVE_MODE:
       return normalized;
     case LEGACY_EXISTING_PROFILE_MODE:
-      return SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE;
+      return WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE;
     default:
       return undefined;
   }
@@ -244,7 +244,7 @@ function readChromeLocalState(userDataDir) {
   const safeUserDataDir = assertPathInsideAllowedRoots(
     userDataDir,
     resolveKnownBrowserFilesystemRoots(process.env, repoRoot),
-    "Switchyard Chrome user-data root",
+    "WebaiBridge Chrome user-data root",
   );
   const localStatePath = join(safeUserDataDir, "Local State");
 
@@ -277,7 +277,7 @@ export function resolveChromeProfileDirectory(
   const infoCache = localState?.profile?.info_cache;
   let profileDirectory = assertSafePathSegment(
     fallbackDirectory,
-    "Switchyard Chrome profile directory",
+    "WebaiBridge Chrome profile directory",
   );
 
   if (infoCache && typeof infoCache === "object") {
@@ -297,7 +297,7 @@ export function resolveChromeProfileDirectory(
       if (candidates.includes(wanted)) {
         profileDirectory = assertSafePathSegment(
           directoryName,
-          "Switchyard Chrome profile directory",
+          "WebaiBridge Chrome profile directory",
         );
         break;
       }
@@ -309,20 +309,20 @@ export function resolveChromeProfileDirectory(
 
 export function resolveIsolatedChromeUserDataDir(env = process.env) {
   const userDataDir = assertPathInsideAllowedRoots(
-    env[SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME]?.trim() ||
-      env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME]?.trim() ||
+      env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME]?.trim() ||
       DEFAULT_ISOLATED_CHROME_USER_DATA_DIR,
     [
       join(repoRoot, ".runtime-cache"),
       resolveExternalCacheRoot(env, repoRoot),
       tmpdir(),
     ],
-    "Switchyard isolated Chrome user-data root",
+    "WebaiBridge isolated Chrome user-data root",
   );
 
   if (isPathInsideRoot(DEFAULT_SOURCE_CHROME_USER_DATA_DIR, userDataDir)) {
     throw new Error(
-      `Switchyard steady-state browser root must not live inside the default Chrome root ${DEFAULT_SOURCE_CHROME_USER_DATA_DIR}. Seed the isolated root first, then point SWITCHYARD_CHROME_USER_DATA_DIR there instead of reusing the default Chrome root.`,
+      `WebaiBridge steady-state browser root must not live inside the default Chrome root ${DEFAULT_SOURCE_CHROME_USER_DATA_DIR}. Seed the isolated root first, then point WEBAI_BRIDGE_CHROME_USER_DATA_DIR there instead of reusing the default Chrome root.`,
     );
   }
 
@@ -331,7 +331,7 @@ export function resolveIsolatedChromeUserDataDir(env = process.env) {
 
 export function resolveIsolatedChromeProfileDisplayName(env = process.env) {
   return (
-    env[SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME]?.trim() ||
     DEFAULT_ISOLATED_CHROME_PROFILE_NAME
   );
 }
@@ -351,9 +351,9 @@ export function resolveIsolatedChromeProfileConfig(env = process.env) {
     profileDirectory,
     profileDir: join(userDataDir, profileDirectory),
     source:
-      env[SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME]?.trim() ||
-      env[SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME]?.trim()
-        ? `${SWITCHYARD_CHROME_USER_DATA_DIR_ENV_NAME}+${SWITCHYARD_CHROME_PROFILE_NAME_ENV_NAME}`
+      env[WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME]?.trim() ||
+      env[WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME]?.trim()
+        ? `${WEBAI_BRIDGE_CHROME_USER_DATA_DIR_ENV_NAME}+${WEBAI_BRIDGE_CHROME_PROFILE_NAME_ENV_NAME}`
         : "default",
   };
 }
@@ -364,7 +364,7 @@ export function resolveRealChromeProfileConfig(env = process.env) {
 
 export function resolveCredentialedBrowserMode(env = process.env) {
   const configuredMode = normalizeBrowserMode(
-    env[SWITCHYARD_BROWSER_MODE_ENV_NAME],
+    env[WEBAI_BRIDGE_BROWSER_MODE_ENV_NAME],
   );
 
   if (configuredMode) {
@@ -378,15 +378,15 @@ export function resolveCredentialedBrowserMode(env = process.env) {
   return DEFAULT_BROWSER_MODE;
 }
 
-export function resolveSwitchyardCacheTtlDays(env = process.env) {
+export function resolveWebaiBridgeCacheTtlDays(env = process.env) {
   return resolveCacheTtlDays(env);
 }
 
-export function resolveSwitchyardCacheMaxBytes(env = process.env) {
+export function resolveWebaiBridgeCacheMaxBytes(env = process.env) {
   return resolveCacheMaxBytes(env);
 }
 
-export function resolveSwitchyardCacheRoots(
+export function resolveWebaiBridgeCacheRoots(
   customRepoRoot = repoRoot,
   env = process.env,
 ) {
@@ -409,13 +409,13 @@ export function resolveManagedBrowserUserDataDir(
 ) {
   const repoRuntimeCacheRoot = join(customRepoRoot, ".runtime-cache");
   const configured =
-    env[SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME]?.trim() ||
-    join(repoRuntimeCacheRoot, "switchyard-web-auth-browser");
+    env[WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME]?.trim() ||
+    join(repoRuntimeCacheRoot, "webai-bridge-web-auth-browser");
 
   return assertPathInsideRoot(
     configured,
     repoRuntimeCacheRoot,
-    "Switchyard managed browser profile",
+    "WebaiBridge managed browser profile",
   );
 }
 
@@ -425,13 +425,13 @@ export function resolveLocalWebAuthStoreArtifactPath(
 ) {
   const repoRuntimeCacheRoot = join(customRepoRoot, ".runtime-cache");
   const configured =
-    env[SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH_ENV_NAME]?.trim() ||
     join(repoRuntimeCacheRoot, "local-web-auth-store.json");
 
   return assertPathInsideRoot(
     configured,
     repoRuntimeCacheRoot,
-    "Switchyard local web auth store",
+    "WebaiBridge local web auth store",
   );
 }
 
@@ -441,22 +441,22 @@ export function resolveRealityGateArtifactPaths(
 ) {
   const repoRuntimeCacheRoot = join(customRepoRoot, ".runtime-cache");
   const artifactRoot = assertPathInsideRoot(
-    env[SWITCHYARD_REALITY_GATE_ARTIFACT_DIR_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_REALITY_GATE_ARTIFACT_DIR_ENV_NAME]?.trim() ||
       repoRuntimeCacheRoot,
     repoRuntimeCacheRoot,
-    "Switchyard reality gate artifact root",
+    "WebaiBridge reality gate artifact root",
   );
   const outputPath = assertPathInsideRoot(
-    env[SWITCHYARD_REALITY_GATE_OUTPUT_PATH_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_REALITY_GATE_OUTPUT_PATH_ENV_NAME]?.trim() ||
       join(artifactRoot, "reality-gate.out"),
     repoRuntimeCacheRoot,
-    "Switchyard reality gate output artifact",
+    "WebaiBridge reality gate output artifact",
   );
   const exitPath = assertPathInsideRoot(
-    env[SWITCHYARD_REALITY_GATE_EXIT_PATH_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_REALITY_GATE_EXIT_PATH_ENV_NAME]?.trim() ||
       join(artifactRoot, "reality-gate.exit"),
     repoRuntimeCacheRoot,
-    "Switchyard reality gate exit artifact",
+    "WebaiBridge reality gate exit artifact",
   );
 
   return {
@@ -513,13 +513,13 @@ export function resolveDefaultChromeSourceRoot() {
 
 export function resolveSourceChromeProfileSelection(env = process.env) {
   const userDataDir = assertPathInsideAllowedRoots(
-    env.SWITCHYARD_SOURCE_CHROME_USER_DATA_DIR?.trim() ||
+    env.WEBAI_BRIDGE_SOURCE_CHROME_USER_DATA_DIR?.trim() ||
       DEFAULT_SOURCE_CHROME_USER_DATA_DIR,
     resolveKnownBrowserFilesystemRoots(env, repoRoot),
-    "Switchyard source Chrome user-data root",
+    "WebaiBridge source Chrome user-data root",
   );
   const profileName =
-    env.SWITCHYARD_SOURCE_CHROME_PROFILE_NAME?.trim() ||
+    env.WEBAI_BRIDGE_SOURCE_CHROME_PROFILE_NAME?.trim() ||
     DEFAULT_SOURCE_CHROME_PROFILE_NAME;
   const profileDirectory = resolveChromeProfileDirectory(
     userDataDir,

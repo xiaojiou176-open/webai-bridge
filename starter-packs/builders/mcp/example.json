@@ -7,10 +7,10 @@
       "status": "partial",
       "exampleShape": "read-only-runtime-inspector",
       "example": {
-        "name": "switchyard-mcp-client-example",
-        "startupCommand": "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
+        "name": "webai-bridge-mcp-client-example",
+        "startupCommand": "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
         "toolCall": {
-          "name": "switchyard.runtime.health",
+          "name": "webai-bridge.runtime.health",
           "arguments": {}
         }
       },

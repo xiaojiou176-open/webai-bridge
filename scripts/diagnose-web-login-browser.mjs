@@ -12,7 +12,7 @@ import {
   mergeProviderArtifactStates,
 } from "./browser-session-coherence.mjs";
 import {
-  SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE,
+  WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE,
   assertPathInsideAllowedRoots,
   isCiEnvironment,
   resolveAllowedRuntimeArtifactRoots,
@@ -29,7 +29,7 @@ const repoRoot = resolve(scriptDir, "..");
 const defaultManagedBrowserDir = resolve(
   repoRoot,
   ".runtime-cache",
-  "switchyard-web-auth-browser",
+  "webai-bridge-web-auth-browser",
 );
 const defaultSupportBundleDir = resolve(
   repoRoot,
@@ -37,18 +37,18 @@ const defaultSupportBundleDir = resolve(
   "browser-support",
 );
 
-const SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_AUTH_CDP_URL";
-const SWITCHYARD_WEB_AUTH_USER_DATA_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_USER_DATA_DIR";
-const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_DIR";
-const SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
-const SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME =
-  "SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL";
-const SWITCHYARD_WEB_GEMINI_CDP_URL_ENV_NAME = "SWITCHYARD_WEB_GEMINI_CDP_URL";
-const SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH_ENV_NAME =
-  "SWITCHYARD_LOCAL_WEB_AUTH_STORE_PATH";
+const WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_AUTH_CDP_URL";
+const WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_USER_DATA_DIR";
+const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_DIR";
+const WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL";
+const WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME =
+  "WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL";
+const WEBAI_BRIDGE_WEB_GEMINI_CDP_URL_ENV_NAME = "WEBAI_BRIDGE_WEB_GEMINI_CDP_URL";
+const WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH_ENV_NAME =
+  "WEBAI_BRIDGE_LOCAL_WEB_AUTH_STORE_PATH";
 
 const providerHosts = {
   chatgpt: ["chatgpt.com", "openai.com", "auth.openai.com"],
@@ -263,7 +263,7 @@ export function resolveCanonicalAttachTarget(provider, env = process.env, stored
       const storedMode = normalizeBrowserMode(storedSession?.acquisitionMode);
 
       if (
-        preferredMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE &&
+        preferredMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE &&
         storedMode === "managed-browser"
       ) {
         return preferredMode;
@@ -273,13 +273,13 @@ export function resolveCanonicalAttachTarget(provider, env = process.env, stored
     })();
   const configuredRealProfile = resolveOptionalExistingChromeProfileRoot(env);
   const isolatedRootCdpUrl =
-    env[SWITCHYARD_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
+    env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_PROFILE_CDP_URL_ENV_NAME]?.trim() ||
     "http://127.0.0.1:9338";
   const geminiSharedCdp =
-    acquisitionMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+    acquisitionMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
       ? isolatedRootCdpUrl
-      : env[SWITCHYARD_WEB_GEMINI_CDP_URL_ENV_NAME]?.trim() ||
-        env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
+      : env[WEBAI_BRIDGE_WEB_GEMINI_CDP_URL_ENV_NAME]?.trim() ||
+        env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
         "http://127.0.0.1:39222";
 
   if (provider === "gemini") {
@@ -290,7 +290,7 @@ export function resolveCanonicalAttachTarget(provider, env = process.env, stored
       userDataDir: resolveManagedBrowserUserDataDir(env, repoRoot),
       sessionUrl:
         acquisitionMode === "existing-browser-session"
-          ? env[SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim() ||
+          ? env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim() ||
             geminiSharedCdp
           : undefined,
       existingProfileDir: configuredRealProfile?.userDataDir,
@@ -304,15 +304,15 @@ export function resolveCanonicalAttachTarget(provider, env = process.env, stored
     mode: acquisitionMode ?? "managed-browser",
     source: acquisitionMode ? "stored-session" : "default-env",
     cdpUrl:
-      acquisitionMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      acquisitionMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
         ? isolatedRootCdpUrl
-        : env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
+        : env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
           "http://127.0.0.1:39222",
     userDataDir: resolveManagedBrowserUserDataDir(env, repoRoot),
     sessionUrl:
       acquisitionMode === "existing-browser-session"
-        ? env[SWITCHYARD_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim() ||
-          env[SWITCHYARD_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
+        ? env[WEBAI_BRIDGE_WEB_AUTH_EXISTING_BROWSER_SESSION_URL_ENV_NAME]?.trim() ||
+          env[WEBAI_BRIDGE_WEB_AUTH_CDP_URL_ENV_NAME]?.trim() ||
           "http://127.0.0.1:39222"
         : undefined,
     existingProfileDir: configuredRealProfile?.userDataDir,
@@ -328,7 +328,7 @@ export function buildAttachHelper(provider, target) {
   const diagnose = `pnpm exec node scripts/diagnose-web-login-browser.mjs --provider ${provider} --reload --json`;
   const normalizedMode =
     target.mode === "existing-chrome-profile"
-      ? SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      ? WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
       : target.mode;
 
   return {
@@ -339,9 +339,9 @@ export function buildAttachHelper(provider, target) {
     canonicalTargetHint:
       normalizedMode === "existing-browser-session"
         ? `Attach to ${target.sessionUrl ?? target.cdpUrl}`
-        : normalizedMode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+        : normalizedMode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
           ? `Attach to the isolated repo Chrome root ${target.existingProfileName ?? "(missing profile name)"} at ${target.existingProfileDir ?? "(missing profile dir)"}.`
-          : `Use Switchyard managed browser at ${target.userDataDir ?? "(missing user data dir)"}.`,
+          : `Use WebaiBridge managed browser at ${target.userDataDir ?? "(missing user data dir)"}.`,
   };
 }
 
@@ -397,7 +397,7 @@ export function classifyLiveWorkspace(provider, currentPage, context = {}) {
       liveReady: false,
       classification: "missing-page",
       reason:
-        "Switchyard could not resolve a provider page after attaching, so store-ready cannot be promoted to live-ready.",
+        "WebaiBridge could not resolve a provider page after attaching, so store-ready cannot be promoted to live-ready.",
     };
   }
 
@@ -618,8 +618,8 @@ export function buildDiagnoseLadder(provider, target, storeStatus, workspaceStat
       detail:
         target.mode === "existing-browser-session"
           ? `Connect to ${target.sessionUrl ?? target.cdpUrl}.`
-          : target.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
-            ? `Attach the isolated repo Chrome root ${target.existingProfileName ?? "switchyard"} at ${target.existingProfileDir ?? "(missing user data dir)"} over ${target.existingProfileCdpUrl}.`
+          : target.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
+            ? `Attach the isolated repo Chrome root ${target.existingProfileName ?? "webai-bridge"} at ${target.existingProfileDir ?? "(missing user data dir)"} over ${target.existingProfileCdpUrl}.`
             : `Use the managed browser at ${target.userDataDir} over ${target.cdpUrl}.`,
     },
     {
@@ -661,7 +661,7 @@ function resolveBundlePath(bundlePath, env = process.env) {
   return assertPathInsideAllowedRoots(
     targetPath,
     [allowedRoots.repoRuntimeCacheRoot, allowedRoots.externalCacheRoot],
-    "Switchyard browser support bundle",
+    "WebaiBridge browser support bundle",
   );
 }
 
@@ -708,7 +708,7 @@ export async function collectBrowserEvidence(provider, target, options) {
   const connectUrl =
     target.mode === "existing-browser-session"
       ? target.sessionUrl ?? target.cdpUrl
-      : target.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+      : target.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
         ? target.existingProfileCdpUrl ?? target.cdpUrl
         : target.cdpUrl;
 
@@ -722,7 +722,7 @@ export async function collectBrowserEvidence(provider, target, options) {
         ok: false,
         attachUrl: connectUrl,
         error:
-          "Switchyard attached to the browser target, but no reusable provider page was found.",
+          "WebaiBridge attached to the browser target, but no reusable provider page was found.",
       };
     }
 
@@ -916,7 +916,7 @@ export async function runWebLoginBrowserDiagnosis(options) {
       attachUrl:
         canonicalAttachTarget.mode === "existing-browser-session"
           ? canonicalAttachTarget.sessionUrl ?? canonicalAttachTarget.cdpUrl
-          : canonicalAttachTarget.mode === SWITCHYARD_ISOLATED_BROWSER_ROOT_MODE
+          : canonicalAttachTarget.mode === WEBAI_BRIDGE_ISOLATED_BROWSER_ROOT_MODE
             ? canonicalAttachTarget.existingProfileCdpUrl ??
               canonicalAttachTarget.cdpUrl
             : canonicalAttachTarget.cdpUrl,
@@ -1009,7 +1009,7 @@ export async function runWebLoginBrowserDiagnosis(options) {
 async function main() {
   if (isCiEnvironment(process.env)) {
     throw new Error(
-      "Switchyard diagnose:web-login-browser is credentialed-workstation only and must not run inside CI.",
+      "WebaiBridge diagnose:web-login-browser is credentialed-workstation only and must not run inside CI.",
     );
   }
 

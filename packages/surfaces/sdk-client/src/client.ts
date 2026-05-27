@@ -11,10 +11,10 @@ import {
 import {
   getProviderProfile,
   listProviderProfiles,
-  type SwitchyardProviderProfile,
+  type WebaiBridgeProviderProfile,
 } from '../../../sdk/src/providers.js';
 
-export interface SwitchyardSdkClientOptions {
+export interface WebaiBridgeSdkClientOptions {
   registry?: ByokProviderRegistry;
   env?: Record<string, string | undefined>;
   fetch?: typeof fetch;
@@ -24,12 +24,12 @@ export interface GenerateTextRequest extends TextGenerationInput {
   model: string | ModelReference;
 }
 
-export class SwitchyardSdkClient {
+export class WebaiBridgeSdkClient {
   readonly registry: ByokProviderRegistry;
   readonly #env: Record<string, string | undefined>;
   readonly #fetch: typeof fetch;
 
-  constructor(options: SwitchyardSdkClientOptions = {}) {
+  constructor(options: WebaiBridgeSdkClientOptions = {}) {
     this.registry = options.registry ?? createDefaultByokRegistry();
     this.#env = options.env ?? process.env;
     this.#fetch = options.fetch ?? fetch;
@@ -43,13 +43,13 @@ export class SwitchyardSdkClient {
     return this.registry.get(provider);
   }
 
-  listProviderProfiles(): readonly SwitchyardProviderProfile[] {
+  listProviderProfiles(): readonly WebaiBridgeProviderProfile[] {
     return listProviderProfiles(this.registry);
   }
 
   getProviderProfile(
     provider: ByokProviderId,
-  ): SwitchyardProviderProfile | undefined {
+  ): WebaiBridgeProviderProfile | undefined {
     return getProviderProfile(this.registry, provider);
   }
 
@@ -116,8 +116,8 @@ export class SwitchyardSdkClient {
   }
 }
 
-export function createSwitchyardSdkClient(
-  options: SwitchyardSdkClientOptions = {},
+export function createWebaiBridgeSdkClient(
+  options: WebaiBridgeSdkClientOptions = {},
 ) {
-  return new SwitchyardSdkClient(options);
+  return new WebaiBridgeSdkClient(options);
 }

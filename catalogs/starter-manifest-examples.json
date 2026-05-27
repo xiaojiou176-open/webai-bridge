@@ -8,8 +8,8 @@
       "exampleShape": "responses-runtime-helper",
       "example": {
         "name": "codex-runtime-helper-example",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target codex --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target codex --json",
         "request": {
           "provider": "chatgpt",
           "model": "gpt-4o",
@@ -29,8 +29,8 @@
       "exampleShape": "message-runtime-helper",
       "example": {
         "name": "claude-code-runtime-helper-example",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target claude-code --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target claude-code --json",
         "request": {
           "provider": "claude",
           "model": "claude-sonnet-4-6",
@@ -55,8 +55,8 @@
       "exampleShape": "delegated-runtime-helper",
       "example": {
         "name": "openclaw-runtime-helper-example",
-        "runtimeBaseUrlEnv": "SWITCHYARD_RUNTIME_BASE_URL",
-        "catalogCommand": "pnpm run switchyard:cli -- builder-kit --target openclaw --json",
+        "runtimeBaseUrlEnv": "WEBAI_BRIDGE_RUNTIME_BASE_URL",
+        "catalogCommand": "pnpm run webai-bridge:cli -- builder-kit --target openclaw --json",
         "request": {
           "provider": "chatgpt",
           "model": "gpt-4o",
@@ -75,10 +75,10 @@
       "status": "partial",
       "exampleShape": "read-only-runtime-inspector",
       "example": {
-        "name": "switchyard-mcp-client-example",
-        "startupCommand": "pnpm run switchyard:mcp -- --base-url http://127.0.0.1:4010",
+        "name": "webai-bridge-mcp-client-example",
+        "startupCommand": "pnpm run webai-bridge:mcp -- --base-url http://127.0.0.1:4010",
         "toolCall": {
-          "name": "switchyard.runtime.health",
+          "name": "webai-bridge.runtime.health",
           "arguments": {}
         }
       },
@@ -96,12 +96,12 @@
       "exampleShape": "read-only-runtime-diagnostics",
       "example": {
         "name": "runtime-diagnostics-pack-example",
-        "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
+        "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
         "steps": [
-          "pnpm run switchyard:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
-          "pnpm run switchyard:cli -- provider-status --provider chatgpt --json",
-          "pnpm run switchyard:cli -- provider-diagnose --provider chatgpt --json",
-          "pnpm run switchyard:cli -- provider-support-bundle --provider chatgpt --json"
+          "pnpm run webai-bridge:cli -- skill-pack-route --target runtime-diagnostics-pack --json",
+          "pnpm run webai-bridge:cli -- provider-status --provider chatgpt --json",
+          "pnpm run webai-bridge:cli -- provider-diagnose --provider chatgpt --json",
+          "pnpm run webai-bridge:cli -- provider-support-bundle --provider chatgpt --json"
         ]
       },
       "safeClaims": [
@@ -116,11 +116,11 @@
       "exampleShape": "truth-sync-and-discoverability",
       "example": {
         "name": "docs-seo-sync-pack-example",
-        "catalogCommand": "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json",
+        "catalogCommand": "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json",
         "steps": [
-          "pnpm run switchyard:cli -- skill-pack-route --target docs-seo-sync-pack --json",
-          "pnpm run switchyard:cli -- surface-catalog --json",
-          "pnpm run switchyard:cli -- keyword-truth --json",
+          "pnpm run webai-bridge:cli -- skill-pack-route --target docs-seo-sync-pack --json",
+          "pnpm run webai-bridge:cli -- surface-catalog --json",
+          "pnpm run webai-bridge:cli -- keyword-truth --json",
           "cat docs/discoverability-keyword-truth.md",
           "cat docs/public-surface-support-matrix.md"
         ]
@@ -140,8 +140,8 @@
         "catalogCommand": "pnpm exec node starter-packs/skills/chat-app-runtime-pack/smoke.mjs",
         "steps": [
           "pnpm exec node starter-packs/skills/chat-app-runtime-pack/smoke.mjs",
-          "pnpm run switchyard:cli -- surface-catalog --json",
-          "pnpm run switchyard:cli -- provider-catalog --json",
+          "pnpm run webai-bridge:cli -- surface-catalog --json",
+          "pnpm run webai-bridge:cli -- provider-catalog --json",
           "cat docs/api/service-http-reference.md",
           "cat docs/api/sdk-quickstart.md"
         ]
@@ -161,9 +161,9 @@
         "catalogCommand": "pnpm exec node starter-packs/skills/research-copilot-pack/smoke.mjs",
         "steps": [
           "pnpm exec node starter-packs/skills/research-copilot-pack/smoke.mjs",
-          "pnpm run switchyard:cli -- surface-catalog --json",
-          "pnpm run switchyard:cli -- compat-targets --json",
-          "pnpm run switchyard:cli -- keyword-truth --json",
+          "pnpm run webai-bridge:cli -- surface-catalog --json",
+          "pnpm run webai-bridge:cli -- compat-targets --json",
+          "pnpm run webai-bridge:cli -- keyword-truth --json",
           "cat docs/public-surface-support-matrix.md"
         ]
       },
@@ -182,9 +182,9 @@
         "catalogCommand": "pnpm exec node starter-packs/skills/compare-runtime-pack/smoke.mjs",
         "steps": [
           "pnpm exec node starter-packs/skills/compare-runtime-pack/smoke.mjs",
-          "pnpm run switchyard:cli -- starter-pack-comparison --json",
-          "pnpm run switchyard:cli -- starter-pack-filter --target thin-runtime-bridges",
-          "pnpm run switchyard:cli -- starter-pack-filter --target read-only-truth",
+          "pnpm run webai-bridge:cli -- starter-pack-comparison --json",
+          "pnpm run webai-bridge:cli -- starter-pack-filter --target thin-runtime-bridges",
+          "pnpm run webai-bridge:cli -- starter-pack-filter --target read-only-truth",
           "cat docs/faq.md"
         ]
       },
@@ -203,8 +203,8 @@
         "catalogCommand": "pnpm exec node starter-packs/skills/byok-first-safe-pack/smoke.mjs",
         "steps": [
           "pnpm exec node starter-packs/skills/byok-first-safe-pack/smoke.mjs",
-          "pnpm run switchyard:cli -- provider-catalog --json",
-          "pnpm run switchyard:cli -- surface-catalog --json",
+          "pnpm run webai-bridge:cli -- provider-catalog --json",
+          "pnpm run webai-bridge:cli -- surface-catalog --json",
           "cat docs/api/sdk-quickstart.md",
           "cat docs/api/service-http-reference.md"
         ]

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xiaojiou176-open/Switchyard/examples/hosts/index.schema.json",
-  "title": "Switchyard Host Integration Examples",
+  "$id": "https://github.com/xiaojiou176-open/webai-bridge/examples/hosts/index.schema.json",
+  "title": "WebaiBridge Host Integration Examples",
   "type": "object",
   "additionalProperties": false,
   "required": [
