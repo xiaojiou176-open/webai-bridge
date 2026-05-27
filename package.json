@@ -90,7 +90,7 @@
     "@types/node": "25.6.0",
     "@vitest/coverage-v8": "^4.1.2",
     "ajv": "^8.18.0",
-    "playwright-core": "1.59.1",
+    "playwright-core": "1.60.0",
     "simple-git-hooks": "2.13.1",
     "tsx": "^4.21.0",
     "typescript": "6.0.2",
