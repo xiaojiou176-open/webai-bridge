@@ -26,27 +26,27 @@ importers:
       '@stryker-mutator/vitest-runner':
         specifier: ^9.6.1
         version: 9.6.1(@stryker-mutator/core@9.6.1(@types/node@25.6.0))(vitest@4.1.2(@types/node@25.6.0)(vite@8.0.5(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.6.0)(esbuild@0.27.7)(tsx@4.21.0)))
-      '@switchyard/consumer-claude-code':
-        specifier: workspace:*
-        version: link:packages/consumers/claude-code
-      '@switchyard/consumer-codex':
-        specifier: workspace:*
-        version: link:packages/consumers/codex
-      '@switchyard/consumer-compat-shared':
-        specifier: workspace:*
-        version: link:packages/consumers/shared
-      '@switchyard/consumer-openclaw':
-        specifier: workspace:*
-        version: link:packages/consumers/openclaw
       '@types/node':
         specifier: 25.6.0
         version: 25.6.0
       '@vitest/coverage-v8':
         specifier: ^4.1.2
         version: 4.1.2(vitest@4.1.2(@types/node@25.6.0)(vite@8.0.5(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.6.0)(esbuild@0.27.7)(tsx@4.21.0)))
+      '@webai-bridge/consumer-claude-code':
+        specifier: workspace:*
+        version: link:packages/consumers/claude-code
+      '@webai-bridge/consumer-codex':
+        specifier: workspace:*
+        version: link:packages/consumers/codex
+      '@webai-bridge/consumer-compat-shared':
+        specifier: workspace:*
+        version: link:packages/consumers/shared
+      '@webai-bridge/consumer-openclaw':
+        specifier: workspace:*
+        version: link:packages/consumers/openclaw
       ajv:
-        specifier: ^8.18.0
-        version: 8.18.0
+        specifier: ^8.20.0
+        version: 8.20.0
       playwright-core:
         specifier: 1.59.1
         version: 1.59.1
@@ -815,6 +815,9 @@ packages:
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
 
+  ajv@8.20.0:
+    resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
+
   angular-html-parser@10.4.0:
     resolution: {integrity: sha512-++nLNyZwRfHqFh7akH5Gw/JYizoFlMRz0KRigfwfsLqV8ZqlcVRb1LkPEWdYvEKDnbktknM2J4BXaYUGrQZPww==}
     engines: {node: '>= 14'}
@@ -1020,6 +1023,9 @@ packages:
 
   fast-uri@3.1.0:
     resolution: {integrity: sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==}
+
+  fast-uri@3.1.2:
+    resolution: {integrity: sha512-rVjf7ArG3LTk+FS6Yw81V1DLuZl1bRbNrev6Tmd/9RaroeeRRJhAt7jg/6YFxbvAQXUCavSoZhPPj6oOx+5KjQ==}
 
   fast-wrap-ansi@0.2.0:
     resolution: {integrity: sha512-rLV8JHxTyhVmFYhBJuMujcrHqOT2cnO5Zxj37qROj23CP39GXubJRBUFF0z8KFK77Uc0SukZUf7JZhsVEQ6n8w==}
@@ -2405,6 +2411,13 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
+  ajv@8.20.0:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-uri: 3.1.2
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+
   angular-html-parser@10.4.0: {}
 
   assertion-error@2.0.1: {}
@@ -2638,6 +2651,8 @@ snapshots:
       fast-string-truncated-width: 3.0.3
 
   fast-uri@3.1.0: {}
+
+  fast-uri@3.1.2: {}
 
   fast-wrap-ansi@0.2.0:
     dependencies:
