@@ -99,7 +99,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm run hook:pre-commit",
